@@ -9,20 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var forms_1 = require('@angular/forms');
-var daterangepicker_component_1 = require('./daterangepicker-component');
-var DaterangepickerModule = (function () {
-    function DaterangepickerModule() {
+var AppComponent = (function () {
+    function AppComponent() {
+        this.title = "DateRangepicker";
     }
-    DaterangepickerModule = __decorate([
-        core_1.NgModule({
-            imports: [forms_1.FormsModule],
-            exports: [daterangepicker_component_1.DaterangepickerComponent],
-            declarations: [daterangepicker_component_1.DaterangepickerComponent],
-            bootstrap: [daterangepicker_component_1.DaterangepickerComponent]
+    AppComponent.prototype.demo = function (event, start) {
+        debugger;
+    };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: "my-app",
+            template: "\n\t\t<h1>{{title}}</h1>\n\t\t<date-range-picker [fromDate]=\"'04/01/2017'\" [toDate]=\"'04/02/2017'\" [format]=\"'DD/MM/YYYY'\" (datesSelected)=\"demo($event, start)\"></date-range-picker>\n\t"
         }), 
         __metadata('design:paramtypes', [])
-    ], DaterangepickerModule);
-    return DaterangepickerModule;
+    ], AppComponent);
+    return AppComponent;
 }());
-exports.DaterangepickerModule = DaterangepickerModule;
+exports.AppComponent = AppComponent;
