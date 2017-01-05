@@ -22,14 +22,14 @@
   },
   "homepage": "https://github.com/nikhil-001mehta/angular-2-daterangepicker#readme",
   "dependencies": {
-    "@angular/core": "^2.4.1",
-    "@angular/forms": "^2.4.1",
-    "@angular/platform-browser-dynamic": "^2.4.1",
     "@types/daterangepicker": "^2.1.6",
     "@types/jquery": "^2.0.39",
     "bootstrap-daterangepicker": "^2.1.24"
   },
   "devDependencies": {
+	"@angular/core": "^2.4.1",
+    "@angular/forms": "^2.4.1",
+    "@angular/platform-browser-dynamic": "^2.4.1",
     "concurrently": "^3.1.0",
     "core-js": "^2.4.1",
     "jquery": "^3.1.1",
