@@ -8,21 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var forms_1 = require('@angular/forms');
-var daterangepicker_component_1 = require('./daterangepicker-component');
+var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var daterangepicker_component_1 = require("./daterangepicker-component");
 var DaterangepickerModule = (function () {
     function DaterangepickerModule() {
     }
-    DaterangepickerModule = __decorate([
-        core_1.NgModule({
-            imports: [forms_1.FormsModule],
-            exports: [daterangepicker_component_1.DaterangepickerComponent],
-            declarations: [daterangepicker_component_1.DaterangepickerComponent],
-            bootstrap: [daterangepicker_component_1.DaterangepickerComponent]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], DaterangepickerModule);
     return DaterangepickerModule;
 }());
+DaterangepickerModule = __decorate([
+    core_1.NgModule({
+        imports: [forms_1.FormsModule],
+        exports: [daterangepicker_component_1.DaterangepickerComponent],
+        declarations: [daterangepicker_component_1.DaterangepickerComponent],
+        bootstrap: [daterangepicker_component_1.DaterangepickerComponent]
+    }),
+    __metadata("design:paramtypes", [])
+], DaterangepickerModule);
 exports.DaterangepickerModule = DaterangepickerModule;

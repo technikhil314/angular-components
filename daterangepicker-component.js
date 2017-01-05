@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 //var $ = require('jquery');
 //import * as moment from 'moment';
 var drp = require('bootstrap-daterangepicker');
@@ -33,29 +33,29 @@ var DaterangepickerComponent = (function () {
             });
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DaterangepickerComponent.prototype, "fromDate", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DaterangepickerComponent.prototype, "toDate", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DaterangepickerComponent.prototype, "format", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], DaterangepickerComponent.prototype, "datesSelected", void 0);
-    DaterangepickerComponent = __decorate([
-        core_1.Component({
-            selector: 'date-range-picker',
-            template: "\n\t\t<input type=\"text\"/>\n\t"
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], DaterangepickerComponent);
     return DaterangepickerComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], DaterangepickerComponent.prototype, "fromDate", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], DaterangepickerComponent.prototype, "toDate", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], DaterangepickerComponent.prototype, "format", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], DaterangepickerComponent.prototype, "datesSelected", void 0);
+DaterangepickerComponent = __decorate([
+    core_1.Component({
+        selector: 'date-range-picker',
+        template: "\n\t\t<input type=\"text\"/>\n\t"
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], DaterangepickerComponent);
 exports.DaterangepickerComponent = DaterangepickerComponent;
