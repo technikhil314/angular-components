@@ -1,6 +1,6 @@
 {
   "name": "angular-2-daterangepicker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Boot strap Daterange picker for anular2",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "bootstrap-daterangepicker": "^2.1.24"
   },
   "devDependencies": {
-	"@angular/core": "^2.4.1",
+    "@angular/core": "^2.4.1",
     "@angular/forms": "^2.4.1",
     "@angular/platform-browser-dynamic": "^2.4.1",
     "concurrently": "^3.1.0",
