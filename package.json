@@ -26,5 +26,19 @@
     "@types/jquery": "^2.0.39",
     "bootstrap-daterangepicker": "^2.1.24",
     "jquery": "^3.1.1"
+  },
+  "devDependencies": {
+    "@angular/core": "^2.4.1",
+    "@angular/forms": "^2.4.1",
+    "@angular/platform-browser-dynamic": "^2.4.1",
+    "concurrently": "^3.1.0",
+    "core-js": "^2.4.1",
+    "jquery": "^3.1.1",
+    "lite-server": "^2.2.2",
+    "moment": "^2.17.1",
+    "reflect-metadata": "^0.1.8",
+    "rimraf": "^2.5.4",
+    "systemjs": "0.19.40",
+    "typescript": "~2.0.10"
   }
 }
