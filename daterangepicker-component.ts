@@ -6,12 +6,11 @@ import {
 	Output,
 	EventEmitter 	} 
 from '@angular/core';
-declare var require: any;
-declare var $:JQueryStatic;
-import * as daterangepicker from '@types/daterangepicker';
-//var $ = require('jquery');
-//import * as moment from 'moment';
-var drp = require('bootstrap-daterangepicker');
+
+declare var $:any;
+declare var moment: any;
+declare var daterangepicker: any;
+
 @Component({
 	selector: 'date-range-picker',
 	template: `

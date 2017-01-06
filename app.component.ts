@@ -5,11 +5,13 @@ import { Location } from '@angular/common';
 	selector: "my-app",
 	template: `
 		<h1>{{title}}</h1>
-		<date-range-picker [fromDate]="'04/01/2017'" [toDate]="'04/02/2017'" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event, start)"></date-range-picker>
+		<date-range-picker [fromDate]="startDate" [toDate]="toDate" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event, start)"></date-range-picker>
 	`
 })
 export class AppComponent {
-	title = "DateRangepicker";
+	title: string = "DateRangepicker";
+	startDate: string = '04/01/2017';
+	toDate: string = '04/02/2017'
 	demo(event, start){
 		debugger;
 	}
