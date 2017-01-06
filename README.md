@@ -21,17 +21,19 @@ Use this as:
 </pre>
 
 currently only three options are made available
-
+<pre>
 1. format
 	Use this to configure date format which you want. If not provided it defaults to YYYY-MM-DD
 2. fromDate and
 3. toDate
 	Both dates are supposed to be string and are accepted in format provided.
 	If not provided then both dates defaults to current date in provided format
-	
+</pre>
 To get selected dates subscribe to datesSelected event
 which passes a javascript object in following format
+<pre>
 {
 	fromDate: contains a moement object, format it as per your needs,
 	toDate: contains a moement object, format it as per your needs
 }
+</pre>
