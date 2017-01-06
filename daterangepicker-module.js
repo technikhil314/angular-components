@@ -11,12 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var daterangepicker_component_1 = require('./daterangepicker-component');
+var common_1 = require('@angular/common');
 var DaterangepickerModule = (function () {
     function DaterangepickerModule() {
     }
     DaterangepickerModule = __decorate([
         core_1.NgModule({
-            imports: [forms_1.FormsModule],
+            imports: [forms_1.FormsModule, common_1.CommonModule],
             exports: [daterangepicker_component_1.DaterangepickerComponent],
             declarations: [daterangepicker_component_1.DaterangepickerComponent],
             bootstrap: [daterangepicker_component_1.DaterangepickerComponent]

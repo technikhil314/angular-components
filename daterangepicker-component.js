@@ -9,47 +9,66 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var moment = require('moment');
+var options = (function () {
+    function options() {
+        this.startDate = moment().startOf('day');
+        this.endDate = moment().endOf('day');
+        this.minDate = false;
+        this.maxDate = false;
+        this.dateLimit = false;
+        this.autoApply = false;
+        this.singleDatePicker = false;
+        this.showDropdowns = false;
+        this.showWeekNumbers = false;
+        this.showISOWeekNumbers = false;
+        this.showCustomRangeLabel = true;
+        this.timePicker = false;
+        this.timePicker24Hour = false;
+        this.timePickerIncrement = 1;
+        this.timePickerSeconds = false;
+        this.linkedCalendars = true;
+        this.autoUpdateInput = true;
+        this.alwaysShowCalendars = false;
+        this.ranges = {};
+    }
+    return options;
+}());
 var DaterangepickerComponent = (function () {
     function DaterangepickerComponent(elem) {
         this.elem = elem;
-        this.datesSelected = new core_1.EventEmitter();
+        this.showCalendars = false;
     }
-    DaterangepickerComponent.prototype.ngOnInit = function () {
-        var that = this;
-        $(this.elem.nativeElement)
-            .daterangepicker({
-            locale: {
-                format: this.format || 'YYYY-MM-DD'
-            },
-            startDate: this.fromDate || new Date(),
-            endDate: this.toDate || new Date()
-        }, function (start, end, label) {
-            that.datesSelected.emit({
-                fromDate: start,
-                toDate: end
-            });
-        });
+    DaterangepickerComponent.prototype.handleOutsideClick = function (event) {
+        var current = event.target;
+        var host = this.elem.nativeElement;
+        do {
+            if (current === host) {
+                this.showCalendars = true;
+                return;
+            }
+            current = current.parentNode;
+        } while (current);
+        this.showCalendars = false;
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', String)
-    ], DaterangepickerComponent.prototype, "fromDate", void 0);
+        __metadata('design:type', options)
+    ], DaterangepickerComponent.prototype, "options", void 0);
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DaterangepickerComponent.prototype, "toDate", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DaterangepickerComponent.prototype, "format", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], DaterangepickerComponent.prototype, "datesSelected", void 0);
+        core_1.HostListener('document:click', ['$event']),
+        core_1.HostListener('document:mousedown', ['$event']),
+        core_1.HostListener('document:mouseup', ['$event']), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], DaterangepickerComponent.prototype, "handleOutsideClick", null);
     DaterangepickerComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'date-range-picker',
-            template: "\n\t\t<input type=\"text\"/>\n\t"
+            templateUrl: './daterangepicker-component.html',
+            styleUrls: ['./daterangepicker-component.css']
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], DaterangepickerComponent);
