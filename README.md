@@ -16,7 +16,9 @@ This is still a work in progress and I am on my way to remove dependancy on boot
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
 Use this as: 
-	<date-range-picker [fromDate]="'04/01/2017'" [toDate]="'04/02/2017'" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event)"></date-range-picker>
+<pre>
+	&lt;date-range-picker [fromDate]="'04/01/2017'" [toDate]="'04/02/2017'" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event)"&gt; &lt;/date-range-picker&gt;
+</pre>
 
 currently only three options are made available
 
