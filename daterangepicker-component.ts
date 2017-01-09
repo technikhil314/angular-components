@@ -1,6 +1,6 @@
 declare var require: any;
 
-import { Component, ElementRef, OnInit, Input, Output, EventEmitter, HostBinding, HostListener, NgZone } from '@angular/core';
+import { Component, ElementRef, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
 import { DetectOutsideClick } from './detect-outside-click-directive';
 import * as moment from 'moment';
 
@@ -33,14 +33,41 @@ class options {
 	styleUrls: ['./daterangepicker-component.css']
 })
 export class DaterangepickerComponent {
-	constructor(private zone: NgZone){
-		
-	}
 	@Input() options: options;
-	showCalendars: boolean = true;
+	fromDate: string;
+	toDate: string;
+	showCalendars: boolean;
+	selectedMonth = moment().get('month');
+	selectedYear = moment().get('year');
+	toMonth: number;
+	fromMonth: number;
+	constructor(){
+		this.toMonth = moment([this.selectedYear, this.selectedMonth]).add(1, 'months').get('month');
+		this.fromMonth = moment([this.selectedYear, this.selectedMonth]).get('month');
+	}
 	showHideCalendars(value){
-		this.zone.run(() => {
-			this.showCalendars = value;
-		});
+		this.showCalendars = value;
 	};
+	dateChanged(data){
+		if(data.changed === 'left'){
+			this.fromDate = data.value.format("YYYY-MM-DD");
+		} else {
+			this.toDate = data.value.format("YYYY-MM-DD");
+		}
+	}
+	monthChanged(data){
+		if(data.changed === 'left'){
+			let temp = moment([this.selectedYear, this.fromMonth]).subtract(1,
+			'months');
+			this.fromMonth = temp.get('month');
+			this.selectedYear = temp.get('year');
+			this.toMonth = moment([this.selectedYear, this.toMonth]).subtract(1, 'months').get('month')
+		} else {
+			let temp = moment([this.selectedYear, this.toMonth]).add(1, 'months')
+			this.fromMonth = moment([this.selectedYear, this.fromMonth]).add(1,
+			'months').get('month');
+			this.toMonth = temp.get('month');
+			this.selectedYear = temp.get('year');
+		}
+	}
 }

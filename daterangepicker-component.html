@@ -1,30 +1,27 @@
-<div detect-outside-click (outsideClick)="showHideCalendars($event)" class="demo">
+<div detect-outside-click (outsideClick)="showHideCalendars($event)">
 	<input class="rangePicker" type="text">
-	<div [ngClass]="{'daterangepicker dropdown-menu': true}" [class.hidden]="!showCalendars">
+	<div [ngClass]="{'daterangepicker': true}" [class.hidden]="!showCalendars">
 		<div class="calendar left">
 			<div class="daterangepicker_input">
-			  <input class="input-mini form-control" type="text" name="daterangepicker_start" value=""/>
-			  <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+			  <input class="input-mini form-control" [ngModel]="fromDate" type="text" name="daterangepicker_start"/>
 			  <div class="calendar-time">
 				<div></div>
 			  </div>
 			</div>
-			<div class="calendar-table"></div>
+			<calendar [isLeft]="true" [month]="fromMonth" [year]="selectedYear" (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)"></calendar>
 		</div>
 		<div class="calendar right">
 			<div class="daterangepicker_input">
-			  <input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />
-			  <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+			  <input class="input-mini form-control" [ngModel]="toDate" type="text" name="daterangepicker_end"/>
 			  <div class="calendar-time">
 				<div></div>
 			  </div>
 			</div>
-			<div class="calendar-table"></div>
+			<calendar [month]="toMonth" [year]="selectedYear" (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)"></calendar>
 		</div>
 		<div class="ranges">
 			<div class="range_inputs">
-				<button class="applyBtn" disabled="disabled" type="button"></button> 
-				<button class="cancelBtn" type="button"></button>
+				<button class="applyBtn btn btn-sm btn-success" ngDisabled="disableApply" type="button">Apply</button>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,22 @@
+
+<button *ngIf="isLeft" class="btn btn-link" (click)="monthSelected()">&lt;</button>
+{{monthText}} {{year}}
+<button *ngIf="!isLeft" class="btn btn-link" (click)="monthSelected()">&gt;</button>
+<table class="table table-responsive">
+	<thead>
+		<th>S</th>
+		<th>M</th>
+		<th>T</th>
+		<th>W</th>
+		<th>T</th>
+		<th>F</th>
+		<th>S</th>
+	</thead>
+	<tbody>
+		<tr *ngFor="let week of weekList; let i = index">
+			<td *ngFor="let day of weekList[i]">
+				<button class="btn btn-link" (click)="dateSelected(day)">{{ day.format('D') }}</button>
+			</td>				
+		</tr>
+	</tbody>
+<table>

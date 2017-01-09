@@ -35,17 +35,38 @@ var options = (function () {
     return options;
 }());
 var DaterangepickerComponent = (function () {
-    function DaterangepickerComponent(zone) {
-        this.zone = zone;
-        this.showCalendars = true;
+    function DaterangepickerComponent() {
+        this.selectedMonth = moment().get('month');
+        this.selectedYear = moment().get('year');
+        this.toMonth = moment([this.selectedYear, this.selectedMonth]).add(1, 'months').get('month');
+        this.fromMonth = moment([this.selectedYear, this.selectedMonth]).get('month');
     }
     DaterangepickerComponent.prototype.showHideCalendars = function (value) {
-        var _this = this;
-        this.zone.run(function () {
-            _this.showCalendars = value;
-        });
+        this.showCalendars = value;
     };
     ;
+    DaterangepickerComponent.prototype.dateChanged = function (data) {
+        if (data.changed === 'left') {
+            this.fromDate = data.value.format("YYYY-MM-DD");
+        }
+        else {
+            this.toDate = data.value.format("YYYY-MM-DD");
+        }
+    };
+    DaterangepickerComponent.prototype.monthChanged = function (data) {
+        if (data.changed === 'left') {
+            var temp = moment([this.selectedYear, this.fromMonth]).subtract(1, 'months');
+            this.fromMonth = temp.get('month');
+            this.selectedYear = temp.get('year');
+            this.toMonth = moment([this.selectedYear, this.toMonth]).subtract(1, 'months').get('month');
+        }
+        else {
+            var temp = moment([this.selectedYear, this.toMonth]).add(1, 'months');
+            this.fromMonth = moment([this.selectedYear, this.fromMonth]).add(1, 'months').get('month');
+            this.toMonth = temp.get('month');
+            this.selectedYear = temp.get('year');
+        }
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', options)
@@ -57,7 +78,7 @@ var DaterangepickerComponent = (function () {
             templateUrl: './daterangepicker-component.html',
             styleUrls: ['./daterangepicker-component.css']
         }), 
-        __metadata('design:paramtypes', [core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], DaterangepickerComponent);
     return DaterangepickerComponent;
 }());

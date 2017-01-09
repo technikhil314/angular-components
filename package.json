@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/nikhil-001mehta/angular-2-daterangepicker#readme",
   "dependencies": {
-    "moment": "^2.17.1"
+    "moment": "^2.17.1",
+    "moment-range": "^2.2.0"
   },
   "devDependencies": {
     "@angular/common": "^2.4.1",
