@@ -1,6 +1,7 @@
 declare var require: any;
 
-import { Component, ElementRef, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
+import { Component, ElementRef, OnInit, Input, Output, EventEmitter, HostBinding, HostListener, NgZone } from '@angular/core';
+import { DetectOutsideClick } from './detect-outside-click-directive';
 import * as moment from 'moment';
 
 class options {
@@ -32,24 +33,14 @@ class options {
 	styleUrls: ['./daterangepicker-component.css']
 })
 export class DaterangepickerComponent {
+	constructor(private zone: NgZone){
+		
+	}
 	@Input() options: options;
-	showCalendars: boolean = false;
-	constructor(private elem: ElementRef){
-	}
-	
-	@HostListener('document:click', ['$event'])
-	@HostListener('document:mousedown', ['$event'])
-	@HostListener('document:mouseup', ['$event'])
-	handleOutsideClick(event) {
-		var current = event.target;
-		var host = this.elem.nativeElement;
-		do {
-			if ( current === host ) {
-				this.showCalendars = true;
-				return;
-			}
-			current = current.parentNode;
-		} while ( current );
-		this.showCalendars = false;
-	}
+	showCalendars: boolean = true;
+	showHideCalendars(value){
+		this.zone.run(() => {
+			this.showCalendars = value;
+		});
+	};
 }

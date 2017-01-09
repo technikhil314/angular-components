@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var daterangepicker_component_1 = require('./daterangepicker-component');
 var common_1 = require('@angular/common');
+var detect_outside_click_directive_1 = require('./detect-outside-click-directive');
 var DaterangepickerModule = (function () {
     function DaterangepickerModule() {
     }
@@ -19,7 +20,7 @@ var DaterangepickerModule = (function () {
         core_1.NgModule({
             imports: [forms_1.FormsModule, common_1.CommonModule],
             exports: [daterangepicker_component_1.DaterangepickerComponent],
-            declarations: [daterangepicker_component_1.DaterangepickerComponent],
+            declarations: [daterangepicker_component_1.DaterangepickerComponent, detect_outside_click_directive_1.DetectOutsideClick],
             bootstrap: [daterangepicker_component_1.DaterangepickerComponent]
         }), 
         __metadata('design:paramtypes', [])

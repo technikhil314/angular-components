@@ -35,34 +35,21 @@ var options = (function () {
     return options;
 }());
 var DaterangepickerComponent = (function () {
-    function DaterangepickerComponent(elem) {
-        this.elem = elem;
-        this.showCalendars = false;
+    function DaterangepickerComponent(zone) {
+        this.zone = zone;
+        this.showCalendars = true;
     }
-    DaterangepickerComponent.prototype.handleOutsideClick = function (event) {
-        var current = event.target;
-        var host = this.elem.nativeElement;
-        do {
-            if (current === host) {
-                this.showCalendars = true;
-                return;
-            }
-            current = current.parentNode;
-        } while (current);
-        this.showCalendars = false;
+    DaterangepickerComponent.prototype.showHideCalendars = function (value) {
+        var _this = this;
+        this.zone.run(function () {
+            _this.showCalendars = value;
+        });
     };
+    ;
     __decorate([
         core_1.Input(), 
         __metadata('design:type', options)
     ], DaterangepickerComponent.prototype, "options", void 0);
-    __decorate([
-        core_1.HostListener('document:click', ['$event']),
-        core_1.HostListener('document:mousedown', ['$event']),
-        core_1.HostListener('document:mouseup', ['$event']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], DaterangepickerComponent.prototype, "handleOutsideClick", null);
     DaterangepickerComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -70,7 +57,7 @@ var DaterangepickerComponent = (function () {
             templateUrl: './daterangepicker-component.html',
             styleUrls: ['./daterangepicker-component.css']
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        __metadata('design:paramtypes', [core_1.NgZone])
     ], DaterangepickerComponent);
     return DaterangepickerComponent;
 }());

@@ -1,6 +1,6 @@
-<div class="demo">
+<div detect-outside-click (outsideClick)="showHideCalendars($event)" class="demo">
 	<input class="rangePicker" type="text">
-	<div [ngClass]="{'daterangepicker dropdown-menu': true, 'hidden':!showCalendars}">
+	<div [ngClass]="{'daterangepicker dropdown-menu': true}" [class.hidden]="!showCalendars">
 		<div class="calendar left">
 			<div class="daterangepicker_input">
 			  <input class="input-mini form-control" type="text" name="daterangepicker_start" value=""/>
