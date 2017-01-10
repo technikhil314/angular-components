@@ -1,22 +1,23 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
-var moment = require("moment");
+var moment = require('moment');
 require('moment-range');
-declare var moment: any;
 
 @Component({
 	moduleId: module.id,
 	selector: 'calendar',
 	templateUrl: './calendar-component.html',
-	styleUrls: ['./calendar-component.css']
+	styleUrls: ['./daterangepicker-component.css']
 })
 export class CalendarComponent implements OnChanges{
 	@Input() month: string;
 	@Input() year: string;
 	@Input() selectedDate: string;
 	@Input() isLeft: boolean;
+	@Input() format: string;
 	get monthText(){
-		return moment(this.month+1, 'MM').format('MMMM');
+		let months = moment.monthsShort()
+		return months[this.month];
 	}
 	@Output() dateChanged = new EventEmitter();
 	@Output() monthChanged = new EventEmitter();
@@ -29,14 +30,14 @@ export class CalendarComponent implements OnChanges{
 		let month = this.month;
 		let startDate = moment([year, month]);
 		let firstDay = moment(startDate).startOf('month');
-		let endDay = moment(startDate).endOf('month');
+		let endDay = moment(startDate).add(60, 'd');
 		let monthRange = moment.range(firstDay, endDay);
 		
 		let weeks = [];
 
 		monthRange.by('days', function(moment) {
 		  var ref;
-		  if (ref = moment.week(), indexOf.call(weeks, ref) < 0) {
+		  if (weeks.length < 6 && (ref = moment.week(), indexOf.call(weeks, ref)) < 0) {
 			return weeks.push(moment.week());
 		  }
 		});
@@ -47,8 +48,6 @@ export class CalendarComponent implements OnChanges{
 		  let week = weeks[i];
 		  let firstWeekDay, lastWeekDay;
 		  if (i > 0 && week < weeks[i-1]){
-			// We have switched to the next year
-			
 			firstWeekDay = moment([year, month]).add(1, "year").week(week).day(0);
 			lastWeekDay = moment([year, month]).add(1, "year").week(week).day(6);
 		  }
@@ -73,12 +72,12 @@ export class CalendarComponent implements OnChanges{
 		if(this.isLeft){
 			this.dateChanged.emit({
 				changed: 'left',
-				value: day
+				value: day.format(this.format)
 			});
 		}else{
 			this.dateChanged.emit({
 				changed: 'right',
-				value: day
+				value: day.format(this.format)
 			});
 		}
 	}

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var moment = require("moment");
+var moment = require('moment');
 require('moment-range');
 var CalendarComponent = (function () {
     function CalendarComponent() {
@@ -18,7 +18,8 @@ var CalendarComponent = (function () {
     }
     Object.defineProperty(CalendarComponent.prototype, "monthText", {
         get: function () {
-            return moment(this.month + 1, 'MM').format('MMMM');
+            var months = moment.monthsShort();
+            return months[this.month];
         },
         enumerable: true,
         configurable: true
@@ -32,12 +33,12 @@ var CalendarComponent = (function () {
         var month = this.month;
         var startDate = moment([year, month]);
         var firstDay = moment(startDate).startOf('month');
-        var endDay = moment(startDate).endOf('month');
+        var endDay = moment(startDate).add(60, 'd');
         var monthRange = moment.range(firstDay, endDay);
         var weeks = [];
         monthRange.by('days', function (moment) {
             var ref;
-            if (ref = moment.week(), indexOf.call(weeks, ref) < 0) {
+            if (weeks.length < 6 && (ref = moment.week(), indexOf.call(weeks, ref)) < 0) {
                 return weeks.push(moment.week());
             }
         });
@@ -46,7 +47,6 @@ var CalendarComponent = (function () {
             var week = weeks[i];
             var firstWeekDay = void 0, lastWeekDay = void 0;
             if (i > 0 && week < weeks[i - 1]) {
-                // We have switched to the next year
                 firstWeekDay = moment([year, month]).add(1, "year").week(week).day(0);
                 lastWeekDay = moment([year, month]).add(1, "year").week(week).day(6);
             }
@@ -71,13 +71,13 @@ var CalendarComponent = (function () {
         if (this.isLeft) {
             this.dateChanged.emit({
                 changed: 'left',
-                value: day
+                value: day.format(this.format)
             });
         }
         else {
             this.dateChanged.emit({
                 changed: 'right',
-                value: day
+                value: day.format(this.format)
             });
         }
     };
@@ -110,6 +110,10 @@ var CalendarComponent = (function () {
         __metadata('design:type', Boolean)
     ], CalendarComponent.prototype, "isLeft", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "format", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], CalendarComponent.prototype, "dateChanged", void 0);
@@ -122,7 +126,7 @@ var CalendarComponent = (function () {
             moduleId: module.id,
             selector: 'calendar',
             templateUrl: './calendar-component.html',
-            styleUrls: ['./calendar-component.css']
+            styleUrls: ['./daterangepicker-component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], CalendarComponent);

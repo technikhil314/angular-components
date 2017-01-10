@@ -9,20 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var daterangepicker_module_1 = require('./daterangepicker-module');
-var app_component_1 = require('./app-component');
-var AppModule = (function () {
-    function AppModule() {
+var daterangepicker_options_1 = require('./daterangepicker-options');
+var AppComponent = (function () {
+    function AppComponent() {
+        this.daterangepickerOptions = new daterangepicker_options_1.Options();
+        this.daterangepickerOptions.startDate = '09/01/2017';
+        this.daterangepickerOptions.endDate = '09/02/2017';
+        this.daterangepickerOptions.format = 'DD/MM/YYYY';
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, daterangepicker_module_1.DaterangepickerModule],
-            declarations: [app_component_1.AppComponent],
-            bootstrap: [app_component_1.AppComponent]
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: "my-app",
+            template: "\n\t\t<div class=\"col-md-6\">\n\t\t\t<date-range-picker class=\"col-md-11\" [options]=\"daterangepickerOptions\">\n\t\t\t</date-range-picker>\n\t\t</div>\n\t",
+            styleUrls: ['./daterangepicker-component.css']
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], AppComponent);
+    return AppComponent;
 }());
-exports.AppModule = AppModule;
+exports.AppComponent = AppComponent;

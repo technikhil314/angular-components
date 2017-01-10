@@ -1,9 +1,10 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DaterangepickerComponent } from './daterangepicker-component'
 import { DaterangepickerModule } from './daterangepicker-module'
+import { AppComponent } from './app-component';
 @NgModule({
   imports: [ BrowserModule, DaterangepickerModule ],
-  bootstrap: [ DaterangepickerComponent ]
+  declarations: [AppComponent],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { } 

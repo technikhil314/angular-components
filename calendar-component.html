@@ -1,22 +1,35 @@
-
-<button *ngIf="isLeft" class="btn btn-link" (click)="monthSelected()">&lt;</button>
-{{monthText}} {{year}}
-<button *ngIf="!isLeft" class="btn btn-link" (click)="monthSelected()">&gt;</button>
-<table class="table table-responsive">
-	<thead>
-		<th>S</th>
-		<th>M</th>
-		<th>T</th>
-		<th>W</th>
-		<th>T</th>
-		<th>F</th>
-		<th>S</th>
-	</thead>
-	<tbody>
-		<tr *ngFor="let week of weekList; let i = index">
-			<td *ngFor="let day of weekList[i]">
-				<button class="btn btn-link" (click)="dateSelected(day)">{{ day.format('D') }}</button>
-			</td>				
-		</tr>
-	</tbody>
-<table>
+<div class="col-md-12 text-center">
+	<div *ngIf="isLeft" class="col-md-2">
+		<button class="col-md-12 btn btn-flat flush" (click)="monthSelected()">
+			<i class="fa fa-chevron-left glyphicon glyphicon-chevron-left"></i>
+		</button>
+	</div>
+	<span class="col-md-10 float-left text-center nudge-top">
+		<strong> {{monthText}} {{year}} </strong>
+	</span>
+	<div *ngIf="!isLeft" class="col-md-2">
+		<button class="col-md-12 btn btn-flat pull-right flush" (click)="monthSelected()">
+			<i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i>
+		</button>
+	</div>
+</div>
+<div class="col-md-12">
+	<table class="table table-condensed">
+		<thead>
+			<th>Su</th>
+			<th>Mo</th>
+			<th>Tu</th>
+			<th>We</th>
+			<th>Th</th>
+			<th>Fr</th>
+			<th>Sa</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let week of weekList; let i = index">
+				<td *ngFor="let day of weekList[i]">
+					<button class="btn btn-flat" [class.off]="day.get('month') !== month" (click)="dateSelected(day)">{{ day.format('D') }}</button>
+				</td>				
+			</tr>
+		</tbody>
+	</table>
+</div>
