@@ -69,27 +69,13 @@ export class CalendarComponent implements OnChanges{
 		this.weekList = weekList;
 	}
 	dateSelected(day){
-		if(this.isLeft){
-			this.dateChanged.emit({
-				changed: 'left',
-				value: day.format(this.format)
-			});
-		}else{
-			this.dateChanged.emit({
-				changed: 'right',
-				value: day.format(this.format)
-			});
-		}
+		this.dateChanged.emit(day.format(this.format));
 	}
 	monthSelected(){
 		if(this.isLeft){
-			this.monthChanged.emit({
-				changed: 'left'
-			});
+			this.monthChanged.emit(-1);
 		}else{
-			this.monthChanged.emit({
-				changed: 'right'
-			});
+			this.monthChanged.emit(1);
 		}
 	}
 }

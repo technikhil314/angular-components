@@ -1,7 +1,7 @@
 import { ElementRef, Directive, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
-	selector: '.detect-outside-click'
+	selector: '[detect-outside-click]'
 })
 export class DetectOutsideClick {
 	constructor(private elem: ElementRef){

@@ -6,7 +6,7 @@ import { DetectOutsideClick } from './detect-outside-click-directive';
 import { CalendarComponent } from './calendar-component';
 @NgModule({
 	imports: [FormsModule, CommonModule],
-	exports: [DaterangepickerComponent],
+	exports: [DaterangepickerComponent, DetectOutsideClick],
 	declarations: [DaterangepickerComponent, DetectOutsideClick, CalendarComponent],
 	bootstrap: [DaterangepickerComponent]
 })

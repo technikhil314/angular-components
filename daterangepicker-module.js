@@ -20,7 +20,7 @@ var DaterangepickerModule = (function () {
     DaterangepickerModule = __decorate([
         core_1.NgModule({
             imports: [forms_1.FormsModule, common_1.CommonModule],
-            exports: [daterangepicker_component_1.DaterangepickerComponent],
+            exports: [daterangepicker_component_1.DaterangepickerComponent, detect_outside_click_directive_1.DetectOutsideClick],
             declarations: [daterangepicker_component_1.DaterangepickerComponent, detect_outside_click_directive_1.DetectOutsideClick, calendar_component_1.CalendarComponent],
             bootstrap: [daterangepicker_component_1.DaterangepickerComponent]
         }), 

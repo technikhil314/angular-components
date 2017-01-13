@@ -1,29 +1,19 @@
-<div class="col-md-12">
-	<div class="col-md-4">
-		<input class="col-md-4 input-mini form-control" type="text">
+<input class="{{class}}" type="text" [ngModel]="range">
+<div class="col-md-12 daterangepicker text-center flush" [class.hidden]="!showCalendars">
+	<div class="col-md-6 flush-bottom flush-left flush-half--right">
+		<div class="col-md-12 text-center">
+			<input class="input-mini form-control" [ngModel]="fromDate" type="text" name="daterangepicker_start"/>
+		</div>
+		<div class="col-md-12 flush">
+			<calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (dateChanged)="dateChanged($event)" [format]="format" (monthChanged)="monthChanged($event)"></calendar>
+		</div>
 	</div>
-	<div class="col-md-12 daterangepicker text-center" [class.hidden]="!showCalendars">
-		<div class="col-md-4">
-			<div class="col-md-11 text-center">
-				<input class="input-mini form-control" [ngModel]="fromDate" type="text" name="daterangepicker_start"/>
-			</div>
-			<div class="col-md-12 flush">
-				<calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (dateChanged)="dateChanged($event)" [format]="format" (monthChanged)="monthChanged($event)"></calendar>
-			</div>
+	<div class="col-md-6 flush-bottom flush-right flush-half--left">
+		<div class="col-md-12 text-center">
+			<input class="input-mini form-control" [ngModel]="toDate" type="text" name="daterangepicker_end"/>
 		</div>
-		<div class="col-md-4">
-			<div class="col-md-11 text-center">
-				<input class="input-mini form-control" [ngModel]="toDate" type="text" name="daterangepicker_end"/>
-			</div>
-			<div class="col-md-12 flush">
-				<calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)"></calendar>
-			</div>
+		<div class="col-md-12 flush">
+			<calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)"></calendar>
 		</div>
-		<div class="col-md-2">
-			<div class="range_inputs">
-				<button class="applyBtn btn btn-sm btn-success" ngDisabled="disableApply" type="button">Apply</button>
-			</div>
-		</div>
-		<div class="col-md-offset-2"></div>
 	</div>
 </div>

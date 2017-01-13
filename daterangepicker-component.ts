@@ -13,6 +13,9 @@ import * as moment from 'moment';
 })
 export class DaterangepickerComponent implements OnInit{
 	@Input() options: Options;
+	@Input() class: string;
+	@Output() rangeSelected = new EventEmitter();
+	className: string;
 	fromDate: string;
 	toDate: string;
 	showCalendars: boolean;
@@ -21,7 +24,7 @@ export class DaterangepickerComponent implements OnInit{
 	fromYear: number;
 	toYear: number;
 	format: string;
-	@ViewChild('rangeInput') input;
+	range: string = "";
 	@HostListener('document:click', ['$event'])
 	@HostListener('document:mousedown', ['$event'])
 	@HostListener('document:mouseup', ['$event'])
@@ -48,34 +51,31 @@ export class DaterangepickerComponent implements OnInit{
 		tDate = moment(this.options.startDate, this.options.format).add(1, 'months');
 		this.toMonth = tDate.get('month');
 		this.toYear = tDate.get('year');
+		this.fromDate = this.options.startDate;
+		this.toDate = this.options.endDate;
 		this.format = this.options.format;
+		this.range = this.options.startDate + " - " + this.options.endDate;
 	}
-	dateChanged(data){
-		if(data.changed === 'left'){
-			this.fromDate = data.value;
-		} else {
-			this.toDate = data.value;
+	dateChanged(value){
+		if((this.fromDate && this.toDate) || !(this.fromDate || this.toDate)){
+			this.fromDate = value;
+			this.toDate = void(0);
+		}else if(this.fromDate && !this.toDate) {
+			this.toDate = value;
+			this.showCalendars = false;
+			this.range = this.fromDate +" - "+ this.toDate;
+			this.rangeSelected.emit(this.range);
 		}
 	}
-	monthChanged(data){
+	monthChanged(value){
 		let temp;
-		if(data.changed === 'left'){
-			temp = moment([this.fromYear, this.fromMonth]).subtract(1,
-			'months');
-			this.fromMonth = temp.get('month');
-			this.fromYear = temp.get('year');
-			
-			temp = moment([this.toYear, this.toMonth]).subtract(1,
-			'months');
-			this.toMonth = temp.get('month');
-			this.toYear = temp.get('year');
-		} else {
-			temp = moment([this.toYear, this.toMonth]).add(1, 'months')
-			this.toMonth = temp.get('month');
-			this.toYear = temp.get('year');
-			temp = moment([this.fromYear, this.fromMonth]).add(1, 'months')
-			this.fromMonth = temp.get('month');
-			this.fromYear = temp.get('year');
-		}
+		temp = moment([this.fromYear, this.fromMonth]).add(value,
+		'months');
+		this.fromMonth = temp.get('month');
+		this.fromYear = temp.get('year');
+		temp = moment([this.toYear, this.toMonth]).add(value,
+		'months');
+		this.toMonth = temp.get('month');
+		this.toYear = temp.get('year');
 	}
 }

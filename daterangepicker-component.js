@@ -14,6 +14,8 @@ var moment = require('moment');
 var DaterangepickerComponent = (function () {
     function DaterangepickerComponent(elem) {
         this.elem = elem;
+        this.rangeSelected = new core_1.EventEmitter();
+        this.range = "";
         this.toMonth = moment([this.toYear, this.toMonth]).add(1, 'months').get('month');
         this.fromMonth = moment([this.fromYear, this.fromMonth]).get('month');
     }
@@ -36,43 +38,44 @@ var DaterangepickerComponent = (function () {
         tDate = moment(this.options.startDate, this.options.format).add(1, 'months');
         this.toMonth = tDate.get('month');
         this.toYear = tDate.get('year');
+        this.fromDate = this.options.startDate;
+        this.toDate = this.options.endDate;
         this.format = this.options.format;
+        this.range = this.options.startDate + " - " + this.options.endDate;
     };
-    DaterangepickerComponent.prototype.dateChanged = function (data) {
-        if (data.changed === 'left') {
-            this.fromDate = data.value;
+    DaterangepickerComponent.prototype.dateChanged = function (value) {
+        if ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate)) {
+            this.fromDate = value;
+            this.toDate = void (0);
         }
-        else {
-            this.toDate = data.value;
+        else if (this.fromDate && !this.toDate) {
+            this.toDate = value;
+            this.showCalendars = false;
+            this.range = this.fromDate + " - " + this.toDate;
+            this.rangeSelected.emit(this.range);
         }
     };
-    DaterangepickerComponent.prototype.monthChanged = function (data) {
+    DaterangepickerComponent.prototype.monthChanged = function (value) {
         var temp;
-        if (data.changed === 'left') {
-            temp = moment([this.fromYear, this.fromMonth]).subtract(1, 'months');
-            this.fromMonth = temp.get('month');
-            this.fromYear = temp.get('year');
-            temp = moment([this.toYear, this.toMonth]).subtract(1, 'months');
-            this.toMonth = temp.get('month');
-            this.toYear = temp.get('year');
-        }
-        else {
-            temp = moment([this.toYear, this.toMonth]).add(1, 'months');
-            this.toMonth = temp.get('month');
-            this.toYear = temp.get('year');
-            temp = moment([this.fromYear, this.fromMonth]).add(1, 'months');
-            this.fromMonth = temp.get('month');
-            this.fromYear = temp.get('year');
-        }
+        temp = moment([this.fromYear, this.fromMonth]).add(value, 'months');
+        this.fromMonth = temp.get('month');
+        this.fromYear = temp.get('year');
+        temp = moment([this.toYear, this.toMonth]).add(value, 'months');
+        this.toMonth = temp.get('month');
+        this.toYear = temp.get('year');
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', daterangepicker_options_1.Options)
     ], DaterangepickerComponent.prototype, "options", void 0);
     __decorate([
-        core_1.ViewChild('rangeInput'), 
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], DaterangepickerComponent.prototype, "class", void 0);
+    __decorate([
+        core_1.Output(), 
         __metadata('design:type', Object)
-    ], DaterangepickerComponent.prototype, "input", void 0);
+    ], DaterangepickerComponent.prototype, "rangeSelected", void 0);
     __decorate([
         core_1.HostListener('document:click', ['$event']),
         core_1.HostListener('document:mousedown', ['$event']),

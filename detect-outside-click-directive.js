@@ -40,7 +40,7 @@ var DetectOutsideClick = (function () {
     ], DetectOutsideClick.prototype, "handleOutsideClick", null);
     DetectOutsideClick = __decorate([
         core_1.Directive({
-            selector: '.detect-outside-click'
+            selector: '[detect-outside-click]'
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], DetectOutsideClick);
