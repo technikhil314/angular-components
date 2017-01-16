@@ -22,13 +22,27 @@ var DaterangepickerComponent = (function () {
     DaterangepickerComponent.prototype.handleOutsideClick = function (event) {
         var current = event.target;
         var host = this.elem.nativeElement;
-        do {
-            if (current === host) {
+        if (host.compareDocumentPosition) {
+            if (host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
                 this.showCalendars = true;
                 return;
             }
-            current = current.parentNode;
-        } while (current);
+        }
+        else if (host.contains) {
+            if (host.contains(current)) {
+                this.showCalendars = true;
+                return;
+            }
+        }
+        else {
+            do {
+                if (current === host) {
+                    this.showCalendars = true;
+                    return;
+                }
+                current = current.parentNode;
+            } while (current);
+        }
         this.showCalendars = false;
     };
     DaterangepickerComponent.prototype.ngOnInit = function () {
@@ -59,6 +73,7 @@ var DaterangepickerComponent = (function () {
         var temp;
         temp = moment([this.fromYear, this.fromMonth]).add(value, 'months');
         this.fromMonth = temp.get('month');
+        this.fromMonth = temp.get('month');
         this.fromYear = temp.get('year');
         temp = moment([this.toYear, this.toMonth]).add(value, 'months');
         this.toMonth = temp.get('month');
@@ -77,7 +92,6 @@ var DaterangepickerComponent = (function () {
         __metadata('design:type', Object)
     ], DaterangepickerComponent.prototype, "rangeSelected", void 0);
     __decorate([
-        core_1.HostListener('document:click', ['$event']),
         core_1.HostListener('document:mousedown', ['$event']),
         core_1.HostListener('document:mouseup', ['$event']), 
         __metadata('design:type', Function), 

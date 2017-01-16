@@ -26,8 +26,8 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let week of weekList; let i = index">
-				<td *ngFor="let day of weekList[i]">
-					<button class="btn btn-flat" [class.off]="day.get('month') !== month" (click)="dateSelected(day)">{{ day.format('D') }}</button>
+				<td *ngFor="let day of weekList[i]" [ngClass]= "{'off':day.get('month')!==month,'active':isSelectedDate(day)}">
+					<button class="btn btn-flat" [ngClass]= "{'off':day.get('month')!==month}" (click)="dateSelected(day)">{{ day.format('D') }}</button>
 				</td>				
 			</tr>
 		</tbody>

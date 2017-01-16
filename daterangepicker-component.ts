@@ -25,19 +25,30 @@ export class DaterangepickerComponent implements OnInit{
 	toYear: number;
 	format: string;
 	range: string = "";
-	@HostListener('document:click', ['$event'])
 	@HostListener('document:mousedown', ['$event'])
 	@HostListener('document:mouseup', ['$event'])
 	handleOutsideClick(event) {
-		var current = event.target;
-		var host = this.elem.nativeElement;
-		do {
-			if ( current === host ) {
+		let current: any = event.target;
+		let host: any = this.elem.nativeElement;
+		if (host.compareDocumentPosition) {
+			if(host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
 				this.showCalendars = true;
 				return;
 			}
-			current = current.parentNode;
-		} while ( current );
+		} else if(host.contains) {
+			if(host.contains(current)){
+				this.showCalendars = true;
+				return;
+			}
+		} else {
+			do {
+				if ( current === host ) {
+					this.showCalendars = true;
+					return;
+				}
+				current = current.parentNode;
+			} while ( current );
+		}
 		this.showCalendars = false;
 	}
 	constructor(private elem: ElementRef){
@@ -71,6 +82,7 @@ export class DaterangepickerComponent implements OnInit{
 		let temp;
 		temp = moment([this.fromYear, this.fromMonth]).add(value,
 		'months');
+		this.fromMonth = temp.get('month');
 		this.fromMonth = temp.get('month');
 		this.fromYear = temp.get('year');
 		temp = moment([this.toYear, this.toMonth]).add(value,

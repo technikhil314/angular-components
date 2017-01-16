@@ -24,25 +24,22 @@ var CalendarComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    CalendarComponent.prototype.ngOnChanges = function (changes) {
+    CalendarComponent.prototype.getWeekNumbers = function (monthRange) {
+        var weekNumbers = [];
         var indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) {
             if (i in this && this[i] === item)
                 return i;
         } return -1; };
-        var year = this.year;
-        var month = this.month;
-        var startDate = moment([year, month]);
-        var firstDay = moment(startDate).startOf('month');
-        var endDay = moment(startDate).add(60, 'd');
-        var monthRange = moment.range(firstDay, endDay);
-        var weeks = [];
         monthRange.by('days', function (moment) {
             var ref;
-            if (weeks.length < 6 && (ref = moment.week(), indexOf.call(weeks, ref)) < 0) {
-                return weeks.push(moment.week());
+            if (weekNumbers.length < 6 && (ref = moment.week(), indexOf.call(weekNumbers, ref)) < 0) {
+                return weekNumbers.push(moment.week());
             }
         });
-        var calendar = [];
+        return weekNumbers;
+    };
+    CalendarComponent.prototype.getWeeksRange = function (weeks, year, month) {
+        var weeksRange = [];
         for (var i = 0, len = weeks.length; i < len; i++) {
             var week = weeks[i];
             var firstWeekDay = void 0, lastWeekDay = void 0;
@@ -55,10 +52,21 @@ var CalendarComponent = (function () {
                 lastWeekDay = moment([year, month]).week(week).day(6);
             }
             var weekRange = moment.range(firstWeekDay, lastWeekDay);
-            calendar.push(weekRange);
+            weeksRange.push(weekRange);
         }
+        return weeksRange;
+    };
+    CalendarComponent.prototype.createCalendarGridData = function () {
+        var year = this.year;
+        var month = this.month;
+        var startDate = moment([year, month]);
+        var firstDay = moment(startDate).startOf('month');
+        var endDay = moment(startDate).add(60, 'd');
+        var monthRange = moment.range(firstDay, endDay);
+        var weeksRange = [];
+        weeksRange = this.getWeeksRange(this.getWeekNumbers(monthRange), year, month);
         var weekList = [];
-        calendar.map(function (week) {
+        weeksRange.map(function (week) {
             var daysList = [];
             week.by('days', function (day) {
                 daysList.push(day);
@@ -66,6 +74,14 @@ var CalendarComponent = (function () {
             weekList.push(daysList);
         });
         this.weekList = weekList;
+    };
+    CalendarComponent.prototype.ngOnChanges = function (changes) {
+        this.createCalendarGridData();
+    };
+    CalendarComponent.prototype.isSelectedDate = function (day) {
+        if (day.isSameOrAfter(moment(this.selectedFromDate, this.format)) && day.isSameOrBefore(moment(this.selectedToDate, this.format))) {
+            return true;
+        }
     };
     CalendarComponent.prototype.dateSelected = function (day) {
         this.dateChanged.emit(day.format(this.format));
@@ -89,7 +105,11 @@ var CalendarComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
-    ], CalendarComponent.prototype, "selectedDate", void 0);
+    ], CalendarComponent.prototype, "selectedFromDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "selectedToDate", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)

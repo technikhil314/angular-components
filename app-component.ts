@@ -4,7 +4,7 @@ import { Options } from './daterangepicker-options';
 @Component({
 	selector: "my-app",
 	template: `
-		<date-range-picker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)" class="col-md-6">
+		<date-range-picker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)" class="col-md-4">
 	`,
 	styleUrls: ['./daterangepicker-component.css']
 })
@@ -13,9 +13,8 @@ export class AppComponent{
 	constructor(){
 		this.daterangepickerOptions.startDate = '09/01/2017';
 		this.daterangepickerOptions.endDate = '09/02/2017';
-		this.daterangepickerOptions.format = 'MM/DD/YYYY';
+		this.daterangepickerOptions.format = 'DD/MM/YYYY';
 	}
 	rangeSelected(){
-		debugger;
 	}
 }

@@ -15,15 +15,14 @@ var AppComponent = (function () {
         this.daterangepickerOptions = new daterangepicker_options_1.Options();
         this.daterangepickerOptions.startDate = '09/01/2017';
         this.daterangepickerOptions.endDate = '09/02/2017';
-        this.daterangepickerOptions.format = 'MM/DD/YYYY';
+        this.daterangepickerOptions.format = 'DD/MM/YYYY';
     }
     AppComponent.prototype.rangeSelected = function () {
-        debugger;
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: "my-app",
-            template: "\n\t\t<date-range-picker [options]=\"daterangepickerOptions\" (rangeSelected)=\"rangeSelected($event)\" class=\"col-md-6\">\n\t",
+            template: "\n\t\t<date-range-picker [options]=\"daterangepickerOptions\" (rangeSelected)=\"rangeSelected($event)\" class=\"col-md-4\">\n\t",
             styleUrls: ['./daterangepicker-component.css']
         }), 
         __metadata('design:paramtypes', [])
