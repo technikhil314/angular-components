@@ -22,10 +22,7 @@
       // other libraries
       'rxjs':                      'npm:rxjs',
 	  'moment': 'npm:moment/moment.js',
-	  'jquery': 'npm:jquery/dist/jquery.js',
-	  'bootstrap-daterangepicker': 'npm:bootstrap-daterangepicker/daterangepicker.js',
-	  '@types/jquery': 'npm:@types/jquery/index.d.ts',
-	  '@types/daterangepicker': 'npm:@types/daterangepicker/index.d.ts',
+	  'moment-range': 'npm:moment-range/dist/moment-range.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

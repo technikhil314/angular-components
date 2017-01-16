@@ -1,0 +1,35 @@
+<div class="col-md-12 text-center flush">
+	<div *ngIf="isLeft" class="col-md-2 flush">
+		<button class="col-md-12 btn btn-link flush" (click)="monthSelected()">
+			Prev
+		</button>
+	</div>
+	<span class="col-md-10 float-left text-center nudge-top">
+		<strong> {{monthText}} {{year}} </strong>
+	</span>
+	<div *ngIf="!isLeft" class="col-md-2 flush">
+		<button class="col-md-12 btn btn-link pull-right flush" (click)="monthSelected()">
+			Next
+		</button>
+	</div>
+</div>
+<div class="col-md-12 flush">
+	<table class="table table-condensed flush">
+		<thead>
+			<th>Su</th>
+			<th>Mo</th>
+			<th>Tu</th>
+			<th>We</th>
+			<th>Th</th>
+			<th>Fr</th>
+			<th>Sa</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let week of weekList; let i = index">
+				<td *ngFor="let day of weekList[i]" [ngClass]= "{'off':day.get('month')!==month,'active':isSelectedDate(day)}">
+					<button class="btn btn-flat" [ngClass]= "{'off':day.get('month')!==month}" (click)="dateSelected(day)">{{ day.format('D') }}</button>
+				</td>				
+			</tr>
+		</tbody>
+	</table>
+</div>
