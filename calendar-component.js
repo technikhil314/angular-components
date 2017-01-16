@@ -130,8 +130,7 @@ var CalendarComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'calendar',
-            templateUrl: './calendar-component.html',
-            styleUrls: ['./daterangepicker-component.css']
+            templateUrl: './calendar-component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], CalendarComponent);

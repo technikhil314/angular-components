@@ -6,8 +6,7 @@ require('moment-range');
 @Component({
 	moduleId: module.id,
 	selector: 'calendar',
-	templateUrl: './calendar-component.html',
-	styleUrls: ['./daterangepicker-component.css']
+	templateUrl: './calendar-component.html'
 })
 export class CalendarComponent implements OnChanges{
 	@Input() month: string;

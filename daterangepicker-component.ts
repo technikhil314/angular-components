@@ -7,8 +7,7 @@ import * as moment from 'moment';
 @Component({
 	moduleId: module.id,
 	selector: 'date-range-picker',
-	templateUrl: './daterangepicker-component.html',
-	styleUrls: ['./daterangepicker-component.css']
+	templateUrl: './daterangepicker-component.html'
 })
 export class DaterangepickerComponent implements OnInit{
 	@Input() options: Options;

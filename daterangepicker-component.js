@@ -102,8 +102,7 @@ var DaterangepickerComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'date-range-picker',
-            templateUrl: './daterangepicker-component.html',
-            styleUrls: ['./daterangepicker-component.css']
+            templateUrl: './daterangepicker-component.html'
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], DaterangepickerComponent);
