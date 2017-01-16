@@ -17,35 +17,35 @@
 .applyBtn{
 	margin: 4px;
 }
-.flush {
+.daterangepicker  .flush {
 	padding: 0 !important;
 	margin: 0 !important;
 }
-.flush-bottom{
+.daterangepicker  .flush-bottom{
 	padding-bottom: 0 !important;
 }
-.flush-left {
+.daterangepicker  .flush-left {
 	padding-left: 0 !important;
 }
-.flush-right {
+.daterangepicker  .flush-right {
 	padding-right: 0 !important;
 }
-.flush-half--left {
+.daterangepicker  .flush-half--left {
 	padding-left: 4px !important;
 }
-.flush-half--right {
+.daterangepicker .flush-half--right {
 	padding-right: 4px !important;
 }
-.nudge-top {
+.daterangepicker .nudge-top {
 	top: 5px;
 }
-th {
+.daterangepicker th {
 	margin: 1px !important;
 	padding: 1px !important;
 	text-align: center;
 	border-radius: 4px !important;
 }
-td {
+.daterangepicker td {
 	height: 20px;
 	width: 20px;
 	text-align: center;
@@ -53,25 +53,25 @@ td {
 	margin: 1px !important;
 	border-radius: 4px !important;
 }
-.btn.btn-flat {
+.daterangepicker .btn.btn-flat {
 	border: none;
 	background: transparent;
 	margin: 3px !important;
 	padding: 1px !important;
 }
-.off {
+.daterangepicker .off {
 	color: #A2A2A2;
 }
 body {
 	font-family: "Helvetica Neue, Helvetica, Arial, sans-serif" !important;
 	font-size: 14px;
 }
-table {
+.daterangepicker table {
   border-spacing: 0;
   border-collapse: collapse;
 }
-td,
-th {
+.daterangepicker td,
+.daterangepicker th {
   padding: 0;
 }
 * {
@@ -85,162 +85,162 @@ th {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
-input,
-button,
-select,
-textarea {
+.daterangepicker input,
+.daterangepicker button,
+.daterangepicker select,
+.daterangepicker textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
-.text-center {
+.daterangepicker .text-center {
   text-align: center;
 }
-.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+.daterangepicker .col-md-1, .daterangepicker .col-md-2,.daterangepicker .col-md-3,.daterangepicker .col-md-4,.daterangepicker .col-md-5,.daterangepicker .col-md-6,.daterangepicker .col-md-7,.daterangepicker .col-md-8,.daterangepicker .col-md-9,.daterangepicker .col-md-10,.daterangepicker .col-md-11,.daterangepicker .col-md-12 {
 float: left;
 }
-.col-md-12 {
+.daterangepicker .col-md-12 {
 width: 100%;
 }
-.col-md-11 {
+.daterangepicker .col-md-11 {
 width: 91.66666667%;
 }
-.col-md-10 {
+.daterangepicker .col-md-10 {
 width: 83.33333333%;
 }
-.col-md-9 {
+.daterangepicker .col-md-9 {
 width: 75%;
 }
-.col-md-8 {
+.daterangepicker .col-md-8 {
 width: 66.66666667%;
 }
-.col-md-7 {
+.daterangepicker .col-md-7 {
 width: 58.33333333%;
 }
-.col-md-6 {
+.daterangepicker .col-md-6 {
 width: 50%;
 }
-.col-md-5 {
+.daterangepicker .col-md-5 {
 width: 41.66666667%;
 }
-.col-md-4 {
+.daterangepicker .col-md-4 {
 width: 33.33333333%;
 }
-.col-md-3 {
+.daterangepicker .col-md-3 {
 width: 25%;
 }
-.col-md-2 {
+.daterangepicker .col-md-2 {
 width: 16.66666667%;
 }
-.col-md-1 {
+.daterangepicker .col-md-1 {
 width: 8.33333333%;
 }
-table {
+.daterangepicker table {
   background-color: transparent;
 }
-th {
+.daterangepicker th {
   text-align: left;
 }
-.table {
+.daterangepicker .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
 }
-.table > thead > tr > th,
-.table > tbody > tr > th,
-.table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > td,
-.table > tfoot > tr > td {
+.daterangepicker .table > thead > tr > th,
+.daterangepicker .table > tbody > tr > th,
+.daterangepicker .table > tfoot > tr > th,
+.daterangepicker .table > thead > tr > td,
+.daterangepicker .table > tbody > tr > td,
+.daterangepicker .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #ddd;
 }
-.table > thead > tr > th {
+.daterangepicker .table > thead > tr > th {
   vertical-align: bottom;
   border-bottom: 2px solid #ddd;
 }
-.table > caption + thead > tr:first-child > th,
-.table > colgroup + thead > tr:first-child > th,
-.table > thead:first-child > tr:first-child > th,
-.table > caption + thead > tr:first-child > td,
-.table > colgroup + thead > tr:first-child > td,
-.table > thead:first-child > tr:first-child > td {
+.daterangepicker .table > caption + thead > tr:first-child > th,
+.daterangepicker .table > colgroup + thead > tr:first-child > th,
+.daterangepicker .table > thead:first-child > tr:first-child > th,
+.daterangepicker .table > caption + thead > tr:first-child > td,
+.daterangepicker .table > colgroup + thead > tr:first-child > td,
+.daterangepicker .table > thead:first-child > tr:first-child > td {
   border-top: 0;
 }
-.table > tbody + tbody {
+.daterangepicker .table > tbody + tbody {
   border-top: 2px solid #ddd;
 }
-.table .table {
+.daterangepicker .table .table {
   background-color: #fff;
 }
-.table-condensed > thead > tr > th,
-.table-condensed > tbody > tr > th,
-.table-condensed > tfoot > tr > th,
-.table-condensed > thead > tr > td,
-.table-condensed > tbody > tr > td,
-.table-condensed > tfoot > tr > td {
+.daterangepicker .table-condensed > thead > tr > th,
+.daterangepicker .table-condensed > tbody > tr > th,
+.daterangepicker .table-condensed > tfoot > tr > th,
+.daterangepicker .table-condensed > thead > tr > td,
+.daterangepicker .table-condensed > tbody > tr > td,
+.daterangepicker .table-condensed > tfoot > tr > td {
   padding: 5px;
 }
-.table-bordered {
+.daterangepicker .table-bordered {
   border: 1px solid #ddd;
 }
-.table-bordered > thead > tr > th,
-.table-bordered > tbody > tr > th,
-.table-bordered > tfoot > tr > th,
-.table-bordered > thead > tr > td,
-.table-bordered > tbody > tr > td,
-.table-bordered > tfoot > tr > td {
+.daterangepicker .table-bordered > thead > tr > th,
+.daterangepicker .table-bordered > tbody > tr > th,
+.daterangepicker .table-bordered > tfoot > tr > th,
+.daterangepicker .table-bordered > thead > tr > td,
+.daterangepicker .table-bordered > tbody > tr > td,
+.daterangepicker .table-bordered > tfoot > tr > td {
   border: 1px solid #ddd;
 }
-.table-bordered > thead > tr > th,
-.table-bordered > thead > tr > td {
+.daterangepicker .table-bordered > thead > tr > th,
+.daterangepicker .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
 }
-.table > thead > tr > td.active,
-.table > tbody > tr > td.active,
-.table > tfoot > tr > td.active,
-.table > thead > tr > th.active,
-.table > tbody > tr > th.active,
-.table > tfoot > tr > th.active,
-.table > thead > tr.active > td,
-.table > tbody > tr.active > td,
-.table > tfoot > tr.active > td,
-.table > thead > tr.active > th,
-.table > tbody > tr.active > th,
-.table > tfoot > tr.active > th {
+.daterangepicker .table > thead > tr > td.active,
+.daterangepicker .table > tbody > tr > td.active,
+.daterangepicker .table > tfoot > tr > td.active,
+.daterangepicker .table > thead > tr > th.active,
+.daterangepicker .table > tbody > tr > th.active,
+.daterangepicker .table > tfoot > tr > th.active,
+.daterangepicker .table > thead > tr.active > td,
+.daterangepicker .table > tbody > tr.active > td,
+.daterangepicker .table > tfoot > tr.active > td,
+.daterangepicker .table > thead > tr.active > th,
+.daterangepicker .table > tbody > tr.active > th,
+.daterangepicker .table > tfoot > tr.active > th {
   background-color: #f5f5f5;
 }
-.table-hover > tbody > tr > td.active:hover,
-.table-hover > tbody > tr > th.active:hover,
-.table-hover > tbody > tr.active:hover > td,
-.table-hover > tbody > tr:hover > .active,
-.table-hover > tbody > tr.active:hover > th {
+.daterangepicker .table-hover > tbody > tr > td.active:hover,
+.daterangepicker .table-hover > tbody > tr > th.active:hover,
+.daterangepicker .table-hover > tbody > tr.active:hover > td,
+.daterangepicker .table-hover > tbody > tr:hover > .active,
+.daterangepicker .table-hover > tbody > tr.active:hover > th {
   background-color: #e8e8e8;
 }
-.table > thead > tr > td.info,
-.table > tbody > tr > td.info,
-.table > tfoot > tr > td.info,
-.table > thead > tr > th.info,
-.table > tbody > tr > th.info,
-.table > tfoot > tr > th.info,
-.table > thead > tr.info > td,
-.table > tbody > tr.info > td,
-.table > tfoot > tr.info > td,
-.table > thead > tr.info > th,
-.table > tbody > tr.info > th,
-.table > tfoot > tr.info > th {
+.daterangepicker .table > thead > tr > td.info,
+.daterangepicker .table > tbody > tr > td.info,
+.daterangepicker .table > tfoot > tr > td.info,
+.daterangepicker .table > thead > tr > th.info,
+.daterangepicker .table > tbody > tr > th.info,
+.daterangepicker .table > tfoot > tr > th.info,
+.daterangepicker .table > thead > tr.info > td,
+.daterangepicker .table > tbody > tr.info > td,
+.daterangepicker .table > tfoot > tr.info > td,
+.daterangepicker .table > thead > tr.info > th,
+.daterangepicker .table > tbody > tr.info > th,
+.daterangepicker .table > tfoot > tr.info > th {
   background-color: #d9edf7;
 }
-.table-hover > tbody > tr > td.info:hover,
-.table-hover > tbody > tr > th.info:hover,
-.table-hover > tbody > tr.info:hover > td,
-.table-hover > tbody > tr:hover > .info,
-.table-hover > tbody > tr.info:hover > th {
+.daterangepicker .table-hover > tbody > tr > td.info:hover,
+.daterangepicker .table-hover > tbody > tr > th.info:hover,
+.daterangepicker .table-hover > tbody > tr.info:hover > td,
+.daterangepicker .table-hover > tbody > tr:hover > .info,
+.daterangepicker .table-hover > tbody > tr.info:hover > th {
   background-color: #c4e3f3;
 }
-.form-control {
+.daterangepicker .form-control {
   display: block;
   width: 100%;
   height: 34px;
@@ -258,33 +258,33 @@ th {
        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
-.form-control:focus {
+.daterangepicker .form-control:focus {
   border-color: #66afe9;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
           box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
 }
-.form-control::-moz-placeholder {
+.daterangepicker .form-control::-moz-placeholder {
   color: #999;
   opacity: 1;
 }
-.form-control:-ms-input-placeholder {
+.daterangepicker .form-control:-ms-input-placeholder {
   color: #999;
 }
-.form-control::-webkit-input-placeholder {
+.daterangepicker .form-control::-webkit-input-placeholder {
   color: #999;
 }
-.form-control[disabled],
-.form-control[readonly],
+.daterangepicker .form-control[disabled],
+.daterangepicker .form-control[readonly],
 fieldset[disabled] .form-control {
   background-color: #eee;
   opacity: 1;
 }
-.form-control[disabled],
+.daterangepicker .form-control[disabled],
 fieldset[disabled] .form-control {
   cursor: not-allowed;
 }
-.btn {
+.daterangepicker .btn {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -305,31 +305,31 @@ fieldset[disabled] .form-control {
   border: 1px solid transparent;
   border-radius: 4px;
 }
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn.active.focus {
+.daterangepicker .btn:focus,
+.daterangepicker .btn:active:focus,
+.daterangepicker .btn.active:focus,
+.daterangepicker .btn.focus,
+.daterangepicker .btn:active.focus,
+.daterangepicker .btn.active.focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-.btn:hover,
-.btn:focus,
-.btn.focus {
+.daterangepicker .btn:hover,
+.daterangepicker .btn:focus,
+.daterangepicker .btn.focus {
   color: #333;
   text-decoration: none;
 }
-.btn:active,
-.btn.active {
+.daterangepicker .btn:active,
+.daterangepicker .btn.active {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
           box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
-.btn.disabled,
-.btn[disabled],
+.daterangepicker .btn.disabled,
+.daterangepicker .btn[disabled],
 fieldset[disabled] .btn {
   pointer-events: none;
   cursor: not-allowed;
@@ -338,129 +338,129 @@ fieldset[disabled] .btn {
           box-shadow: none;
   opacity: .65;
 }
-.btn-default {
+.daterangepicker .btn-default {
   color: #333;
   background-color: #fff;
   border-color: #ccc;
 }
-.btn-default:hover,
-.btn-default:focus,
-.btn-default.focus,
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
+.daterangepicker .btn-default:hover,
+.daterangepicker .btn-default:focus,
+.daterangepicker .btn-default.focus,
+.daterangepicker .btn-default:active,
+.daterangepicker .btn-default.active,
+.daterangepicker .open > .dropdown-toggle.btn-default {
   color: #333;
   background-color: #e6e6e6;
   border-color: #adadad;
 }
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
+.daterangepicker .btn-default:active,
+.daterangepicker .btn-default.active,
+.daterangepicker .open > .dropdown-toggle.btn-default {
   background-image: none;
 }
-.btn-default.disabled,
-.btn-default[disabled],
-fieldset[disabled] .btn-default,
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
-.btn-default.disabled.focus,
-.btn-default[disabled].focus,
-fieldset[disabled] .btn-default.focus,
-.btn-default.disabled:active,
-.btn-default[disabled]:active,
-fieldset[disabled] .btn-default:active,
-.btn-default.disabled.active,
-.btn-default[disabled].active,
-fieldset[disabled] .btn-default.active {
+.daterangepicker .btn-default.disabled,
+.daterangepicker .btn-default[disabled],
+.daterangepicker fieldset[disabled] .btn-default,
+.daterangepicker .btn-default.disabled:hover,
+.daterangepicker .btn-default[disabled]:hover,
+.daterangepicker fieldset[disabled] .btn-default:hover,
+.daterangepicker .btn-default.disabled:focus,
+.daterangepicker .btn-default[disabled]:focus,
+.daterangepicker fieldset[disabled] .btn-default:focus,
+.daterangepicker .btn-default.disabled.focus,
+.daterangepicker .btn-default[disabled].focus,
+.daterangepicker fieldset[disabled] .btn-default.focus,
+.daterangepicker .btn-default.disabled:active,
+.daterangepicker .btn-default[disabled]:active,
+.daterangepicker fieldset[disabled] .btn-default:active,
+.daterangepicker .btn-default.disabled.active,
+.daterangepicker .btn-default[disabled].active,
+.daterangepicker fieldset[disabled] .btn-default.active {
   background-color: #fff;
   border-color: #ccc;
 }
-.btn-default .badge {
+.daterangepicker .btn-default .badge {
   color: #fff;
   background-color: #333;
 }
-.btn-success {
+.daterangepicker .btn-success {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-.btn-success:hover,
-.btn-success:focus,
-.btn-success.focus,
-.btn-success:active,
-.btn-success.active,
-.open > .dropdown-toggle.btn-success {
+.daterangepicker .btn-success:hover,
+.daterangepicker .btn-success:focus,
+.daterangepicker .btn-success.focus,
+.daterangepicker .btn-success:active,
+.daterangepicker .btn-success.active,
+.daterangepicker .open > .dropdown-toggle.btn-success {
   color: #fff;
   background-color: #449d44;
   border-color: #398439;
 }
-.btn-success:active,
-.btn-success.active,
-.open > .dropdown-toggle.btn-success {
+.daterangepicker .btn-success:active,
+.daterangepicker .btn-success.active,
+.daterangepicker .open > .dropdown-toggle.btn-success {
   background-image: none;
 }
-.btn-success.disabled,
-.btn-success[disabled],
-fieldset[disabled] .btn-success,
-.btn-success.disabled:hover,
-.btn-success[disabled]:hover,
-fieldset[disabled] .btn-success:hover,
-.btn-success.disabled:focus,
-.btn-success[disabled]:focus,
-fieldset[disabled] .btn-success:focus,
-.btn-success.disabled.focus,
-.btn-success[disabled].focus,
-fieldset[disabled] .btn-success.focus,
-.btn-success.disabled:active,
-.btn-success[disabled]:active,
-fieldset[disabled] .btn-success:active,
-.btn-success.disabled.active,
-.btn-success[disabled].active,
-fieldset[disabled] .btn-success.active {
+.daterangepicker .btn-success.disabled,
+.daterangepicker .btn-success[disabled],
+.daterangepicker fieldset[disabled] .btn-success,
+.daterangepicker .btn-success.disabled:hover,
+.daterangepicker .btn-success[disabled]:hover,
+.daterangepicker fieldset[disabled] .btn-success:hover,
+.daterangepicker .btn-success.disabled:focus,
+.daterangepicker .btn-success[disabled]:focus,
+.daterangepicker fieldset[disabled] .btn-success:focus,
+.daterangepicker .btn-success.disabled.focus,
+.daterangepicker .btn-success[disabled].focus,
+.daterangepicker fieldset[disabled] .btn-success.focus,
+.daterangepicker .btn-success.disabled:active,
+.daterangepicker .btn-success[disabled]:active,
+.daterangepicker fieldset[disabled] .btn-success:active,
+.daterangepicker .btn-success.disabled.active,
+.daterangepicker .btn-success[disabled].active,
+.daterangepicker fieldset[disabled] .btn-success.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-.btn-success .badge {
+.daterangepicker .btn-success .badge {
   color: #5cb85c;
   background-color: #fff;
 }
-.btn-link {
+.daterangepicker .btn-link {
   font-weight: normal;
   color: #337ab7;
   border-radius: 0;
 }
-.btn-link,
-.btn-link:active,
-.btn-link.active,
-.btn-link[disabled],
-fieldset[disabled] .btn-link {
+.daterangepicker .btn-link,
+.daterangepicker .btn-link:active,
+.daterangepicker .btn-link.active,
+.daterangepicker .btn-link[disabled],
+.daterangepicker fieldset[disabled] .btn-link {
   background-color: transparent;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
-.btn-link,
-.btn-link:hover,
-.btn-link:focus,
-.btn-link:active {
+.daterangepicker .btn-link,
+.daterangepicker .btn-link:hover,
+.daterangepicker .btn-link:focus,
+.daterangepicker .btn-link:active {
   border-color: transparent;
 }
-.btn-link:hover,
-.btn-link:focus {
+.daterangepicker .btn-link:hover,
+.daterangepicker .btn-link:focus {
   color: #23527c;
   text-decoration: underline;
   background-color: transparent;
 }
-.btn-link[disabled]:hover,
-fieldset[disabled] .btn-link:hover,
-.btn-link[disabled]:focus,
-fieldset[disabled] .btn-link:focus {
+.daterangepicker .btn-link[disabled]:hover,
+.daterangepicker fieldset[disabled] .btn-link:hover,
+.daterangepicker .btn-link[disabled]:focus,
+.daterangepicker fieldset[disabled] .btn-link:focus {
   color: #777;
   text-decoration: none;
 }
-.btn {
+.daterangepicker .btn {
 	outline: none;
 }
