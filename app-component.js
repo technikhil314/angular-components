@@ -9,19 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var daterangepicker_options_1 = require('./daterangepicker-options');
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = "DateRangepicker";
-        this.startDate = '04/01/2017';
-        this.toDate = '04/02/2017';
+        this.daterangepickerOptions = new daterangepicker_options_1.Options();
+        this.daterangepickerOptions.startDate = '09/01/2017';
+        this.daterangepickerOptions.endDate = '09/02/2017';
+        this.daterangepickerOptions.format = 'DD/MM/YYYY';
     }
-    AppComponent.prototype.demo = function (event, start) {
-        debugger;
+    AppComponent.prototype.rangeSelected = function () {
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: "my-app",
-            template: "\n\t\t<h1>{{title}}</h1>\n\t\t<date-range-picker [fromDate]=\"startDate\" [toDate]=\"toDate\" [format]=\"'DD/MM/YYYY'\" (datesSelected)=\"demo($event, start)\"></date-range-picker>\n\t"
+            template: "\n\t\t<date-range-picker [options]=\"daterangepickerOptions\" (rangeSelected)=\"rangeSelected($event)\" class=\"col-md-4\">\n\t",
+            styleUrls: ['./daterangepicker-component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
