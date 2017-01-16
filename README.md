@@ -38,7 +38,7 @@ currently only three options are made available
 	Both dates are supposed to be string and are accepted in format provided.
 	If not provided then both dates defaults to current date in provided format
 </pre>
-To get selected dates subscribe to datesSelected event
+To get selected dates subscribe to datesSelected event as shown above
 which passes a javascript object in following format
 <pre>
 {
@@ -51,8 +51,8 @@ which passes a javascript object in following format
 
 ### Depends on 
 [momennt.js](http://momentjs.com/) version greater than 2.17.1<br/>
-[momennt-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
-
+[moment-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
+also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
 I will suggest you to install dependancy modules before this module
 
 If you are using bootstrap.css then just include following styliing in your code <br/>
@@ -127,7 +127,7 @@ If you are using bootstrap.css then just include following styliing in your code
 
 if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
 
-see [this plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to see hot to configure it with system.js loader
+see [this plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to see how to configure it with system.js loader
 
 ###Usage
 Import DaterangepickerModule into your module as following
