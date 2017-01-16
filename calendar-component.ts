@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-
+declare var require: any;
 var moment = require('moment');
 require('moment-range');
 

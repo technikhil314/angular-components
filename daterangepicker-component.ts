@@ -1,7 +1,6 @@
 declare var require: any;
 
 import { Component, ElementRef, Input, Output, EventEmitter, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
-import { DetectOutsideClick } from './detect-outside-click-directive';
 import { Options } from './daterangepicker-options';
 import * as moment from 'moment';
 
