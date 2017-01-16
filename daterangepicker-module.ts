@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar-component';
 @NgModule({
 	imports: [FormsModule, CommonModule],
-	exports: [DaterangepickerComponent, DetectOutsideClick],
-	declarations: [DaterangepickerComponent, DetectOutsideClick, CalendarComponent],
+	exports: [DaterangepickerComponent],
+	declarations: [DaterangepickerComponent, CalendarComponent],
 	bootstrap: [DaterangepickerComponent]
 })
 export class DaterangepickerModule{
