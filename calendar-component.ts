@@ -15,8 +15,8 @@ export class CalendarComponent implements OnChanges {
     @Input() selectedToDate: string;
     @Input() isLeft: boolean;
     @Input() format: string;
-	@Input() minDate: string;
-	@Input() maxDate: string;
+    @Input() minDate: string;
+    @Input() maxDate: string;
     get monthText() {
         let months = moment.monthsShort()
         return months[this.month];
@@ -80,11 +80,11 @@ export class CalendarComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         this.createCalendarGridData();
     }
-	isDisabled(day){
-		if(day.isBefore(moment(this.minDate, this.format)) || day.isAfter(moment(this.maxDate, this.format))){
-			return true;
-		}
-	}
+    isDisabled(day) {
+        if (day.isBefore(moment(this.minDate, this.format)) || day.isAfter(moment(this.maxDate, this.format))) {
+            return true;
+        }
+    }
     isSelectedDate(day) {
         if (day.get('month') === this.month && day.isSameOrAfter(moment(this.selectedFromDate, this.format)) && day.isSameOrBefore(moment(this.selectedToDate, this.format))) {
             return true;

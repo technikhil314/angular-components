@@ -90,7 +90,7 @@ export class DaterangepickerComponent implements OnInit {
         } else if (this.fromDate && !this.toDate) {
             this.toDate = value;
             this.showCalendars = false;
-			this.setRange()
+            this.setRange()
             this.emitRangeSelected();
         }
     }
@@ -121,7 +121,7 @@ export class DaterangepickerComponent implements OnInit {
         }
         return momentValue;
     }
-	setRange(){
-		this.range = this.fromDate.format(this.format) + " - " + this.toDate.format(this.format);
-	}
+    setRange() {
+        this.range = this.fromDate.format(this.format) + " - " + this.toDate.format(this.format);
+    }
 }
