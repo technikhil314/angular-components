@@ -12,7 +12,7 @@ import * as moment from 'moment';
 export class DaterangepickerComponent implements OnInit {
     //inputs
     @Input() options: Options;
-    @Input() className: string;
+    @Input() class: string;
     //outputs
     @Output() rangeSelected = new EventEmitter();
     //variables

@@ -117,7 +117,7 @@ var DaterangepickerComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
-    ], DaterangepickerComponent.prototype, "className", void 0);
+    ], DaterangepickerComponent.prototype, "class", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
