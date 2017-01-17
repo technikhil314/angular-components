@@ -50,7 +50,7 @@ which passes a javascript object in following format
 ### if you are using this module with version greater than or equal 1.1.0 then installation goes as following
 
 ### Depends on 
-[momennt.js](http://momentjs.com/) version greater than 2.17.1<br/>
+[moment.js](http://momentjs.com/) version greater than 2.17.1<br/>
 [moment-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
 also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
 I will suggest you to install dependancy modules before this module
@@ -127,7 +127,7 @@ If you are using bootstrap.css then just include following styliing in your code
 
 if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
 
-see [this plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to see how to configure it with system.js loader
+see [this plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to see how to configure it with system.js loader and demo
 
 ###Usage
 Import DaterangepickerModule into your module as following
