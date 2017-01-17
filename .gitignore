@@ -35,3 +35,12 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+#example files
+app-component.js
+app-component.ts
+app-main.js
+app-main.ts
+app.module.js
+app.module.ts
+index.html
