@@ -149,10 +149,18 @@ export class AppModule {
 ###options
 Currently very minimum number of options are available but I will keep on developing and adding more and more options
 ```bash
+format: date format
 startDate: Default start date
 endDate: default end date
-format: date format
+minDate: default minimum date not including this date
+maxDate: default maximum date not including this date
 ```
+All dates are suppoesed to be string and in format as you are passing.
+You can also 
+```bash
+import { Options } from 'angular-2-daterangepicker';
+```
+class for passing options to the component.
 ###How pass options to the component
 The input box automatically takes class of the date-range-picker tag
 ```bash

@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var moment = require('moment');
 require('moment-range');
 var CalendarComponent = (function () {
@@ -78,13 +78,18 @@ var CalendarComponent = (function () {
     CalendarComponent.prototype.ngOnChanges = function (changes) {
         this.createCalendarGridData();
     };
+    CalendarComponent.prototype.isDisabled = function (day) {
+        if (day.isBefore(moment(this.minDate, this.format)) || day.isAfter(moment(this.maxDate, this.format))) {
+            return true;
+        }
+    };
     CalendarComponent.prototype.isSelectedDate = function (day) {
-        if (day.isSameOrAfter(moment(this.selectedFromDate, this.format)) && day.isSameOrBefore(moment(this.selectedToDate, this.format))) {
+        if (day.get('month') === this.month && day.isSameOrAfter(moment(this.selectedFromDate, this.format)) && day.isSameOrBefore(moment(this.selectedToDate, this.format))) {
             return true;
         }
     };
     CalendarComponent.prototype.dateSelected = function (day) {
-        this.dateChanged.emit(day.format(this.format));
+        this.dateChanged.emit(day);
     };
     CalendarComponent.prototype.monthSelected = function () {
         if (this.isLeft) {
@@ -94,46 +99,54 @@ var CalendarComponent = (function () {
             this.monthChanged.emit(1);
         }
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "month", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "year", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "selectedFromDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "selectedToDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], CalendarComponent.prototype, "isLeft", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "format", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "minDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "maxDate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CalendarComponent.prototype, "dateChanged", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CalendarComponent.prototype, "monthChanged", void 0);
+    CalendarComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'calendar',
+            templateUrl: './calendar-component.html'
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CalendarComponent);
     return CalendarComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "month", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "year", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "selectedFromDate", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "selectedToDate", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], CalendarComponent.prototype, "isLeft", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "format", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], CalendarComponent.prototype, "dateChanged", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], CalendarComponent.prototype, "monthChanged", void 0);
-CalendarComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'calendar',
-        templateUrl: './calendar-component.html'
-    }),
-    __metadata("design:paramtypes", [])
-], CalendarComponent);
 exports.CalendarComponent = CalendarComponent;
