@@ -63,11 +63,22 @@ If you are using bootstrap.css then just include following styliing in your code
 		visibility: false;
 	}
 
-	.daterangepicker {
-		z-index: 3000;
-		border-radius: 4px;
-		box-shadow: 0px 2px 2px 2px #888888;
-		max-width: 450px;
+	@media (min-width: 450px) {
+		.daterangepicker {
+			z-index: 3000;
+			border-radius: 4px;
+			box-shadow: 0px 2px 2px 2px #888888;
+			max-width: 450px;
+			min-width: 450px;
+		}
+	}
+	@media (max-width: 450px) {
+		.daterangepicker {
+			z-index: 3000;
+			border-radius: 4px;
+			box-shadow: 0px 2px 2px 2px #888888;
+			max-width: 450px;
+		}
 	}
 	.daterangepicker .calendar {
 		margin: 4px;
@@ -161,6 +172,19 @@ You can also
 import { Options } from 'angular-2-daterangepicker';
 ```
 class for passing options to the component.
+
+##Events
+Subscribe to rangeSelected event as 
+```bash
+<date-range-picker [class]="'col-md-12 form-control'" [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)"></date-range-picker>
+```
+the event listener will receive a javscript object conaining 
+```bash
+{
+	start: moment object representing start date selected by user
+	end: moment object representing end date selected by user
+}
+```
 ###How pass options to the component
 The input box automatically takes class of the date-range-picker tag
 ```bash
