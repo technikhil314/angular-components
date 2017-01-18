@@ -16,13 +16,13 @@ export class DaterangepickerComponent implements OnInit {
     //outputs
     @Output() rangeSelected = new EventEmitter();
     //variables
-	showCalendars: boolean;
-	range: string = "";
-	fromDate: any;
+    showCalendars: boolean;
+    range: string = "";
+    fromDate: any;
     toDate: any;
-	oldFromDate: any;
+    oldFromDate: any;
     oldToDate: any;
-	fromMonth: number;
+    fromMonth: number;
     toMonth: number;
     fromYear: number;
     toYear: number;
@@ -53,9 +53,9 @@ export class DaterangepickerComponent implements OnInit {
             } while (current);
         }
         this.showCalendars = false;
-		if(!this.fromDate || !this.toDate){
-			this.restoreOldDates();
-		}
+        if (!this.fromDate || !this.toDate) {
+            this.restoreOldDates();
+        }
         this.updateCalendar();
     }
     constructor(private elem: ElementRef) {
@@ -72,102 +72,102 @@ export class DaterangepickerComponent implements OnInit {
     }
     ngOnInit(): void {
         //get default options provided by user
-		this.setFormat();
-		this.validateMinMaxDates();
-		this.setFromDate(this.options.startDate);
-		this.setToDate(this.options.endDate);
-		//update calendar grid
+        this.setFormat();
+        this.validateMinMaxDates();
+        this.setFromDate(this.options.startDate);
+        this.setToDate(this.options.endDate);
+        //update calendar grid
         this.updateCalendar();
     }
-	setFormat(){
-		if(this.options){
-			this.format = this.options.format || "YYYY-MM-DD";
-		} else {
-			this.format = "YYYY-MM-DD"
-		}
-	}
-	validateMinMaxDates(){
-		if(this.options){
-			//only mindate is suppplied
-			if(this.options.minDate && !this.options.maxDate){
-				this.options.minDate = this.getMoment(this.options.minDate);
-			}
-			//only maxdate is supplied
-			if(!this.options.minDate && this.options.maxDate){
-				this.options.maxDate = this.getMoment(this.options.maxDate);
-			}
-			//both min and max dates are supplied
-			if(this.options.minDate && this.options.maxDate){
-				this.options.minDate = this.getMoment(this.options.minDate);
-				this.options.maxDate = this.getMoment(this.options.maxDate);
-				if(this.options.maxDate.isBefore(this.options.minDate)){
-					this.options.minDate = "";
-					this.options.maxDate = "";
-					console.warn("supplied minDate is after maxDate. Discarding options for minDate and maxDate");
-				}
-			}
-			
-		}
-	}
-	setFromDate(value){
-		this.fromDate = moment();
-		this.fromDate = this.getValidateMoment(value);
-		if(!this.fromDate){
-			console.warn("supplied startDate option is not in " + this.options.format + " format falling back to default startDate");
-			this.fromDate = moment();
-		}
-		if(this.options && this.options.minDate){
-			if(this.fromDate.isBefore(this.options.minDate)) {
-				this.fromDate = this.options.minDate.clone();
-			}
-		} 
-		if(this.options && this.options.maxDate){
-			if(this.fromDate.isAfter(this.options.maxDate)) {
-				this.fromDate = this.options.maxDate.clone();
-			}
-		}
-	}
-	setToDate(value){
-		this.toDate = moment();
-		this.toDate = this.getValidateMoment(value);
-		if(!this.toDate){
-			console.warn("supplied endDate option is not in " + this.options.format + " format falling back to default endDate");
-			this.toDate = moment();
-		}
-		if(this.options && this.options.maxDate){
-			if(this.toDate.isAfter(this.options.maxDate)) {
-				this.toDate = this.options.maxDate.clone();
-			}
-		}
-		if(this.toDate.isBefore(this.fromDate)) {
-			this.toDate = this.fromDate.clone();
-		}
-	}
+    setFormat() {
+        if (this.options) {
+            this.format = this.options.format || "YYYY-MM-DD";
+        } else {
+            this.format = "YYYY-MM-DD"
+        }
+    }
+    validateMinMaxDates() {
+        if (this.options) {
+            //only mindate is suppplied
+            if (this.options.minDate && !this.options.maxDate) {
+                this.options.minDate = this.getMoment(this.options.minDate);
+            }
+            //only maxdate is supplied
+            if (!this.options.minDate && this.options.maxDate) {
+                this.options.maxDate = this.getMoment(this.options.maxDate);
+            }
+            //both min and max dates are supplied
+            if (this.options.minDate && this.options.maxDate) {
+                this.options.minDate = this.getMoment(this.options.minDate);
+                this.options.maxDate = this.getMoment(this.options.maxDate);
+                if (this.options.maxDate.isBefore(this.options.minDate)) {
+                    this.options.minDate = "";
+                    this.options.maxDate = "";
+                    console.warn("supplied minDate is after maxDate. Discarding options for minDate and maxDate");
+                }
+            }
+
+        }
+    }
+    setFromDate(value) {
+        this.fromDate = moment();
+        this.fromDate = this.getValidateMoment(value);
+        if (!this.fromDate) {
+            console.warn("supplied startDate option is not in " + this.options.format + " format falling back to default startDate");
+            this.fromDate = moment();
+        }
+        if (this.options && this.options.minDate) {
+            if (this.fromDate.isBefore(this.options.minDate)) {
+                this.fromDate = this.options.minDate.clone();
+            }
+        }
+        if (this.options && this.options.maxDate) {
+            if (this.fromDate.isAfter(this.options.maxDate)) {
+                this.fromDate = this.options.maxDate.clone();
+            }
+        }
+    }
+    setToDate(value) {
+        this.toDate = moment();
+        this.toDate = this.getValidateMoment(value);
+        if (!this.toDate) {
+            console.warn("supplied endDate option is not in " + this.options.format + " format falling back to default endDate");
+            this.toDate = moment();
+        }
+        if (this.options && this.options.maxDate) {
+            if (this.toDate.isAfter(this.options.maxDate)) {
+                this.toDate = this.options.maxDate.clone();
+            }
+        }
+        if (this.toDate.isBefore(this.fromDate)) {
+            this.toDate = this.fromDate.clone();
+        }
+    }
     dateChanged(value) {
-		if ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate)) {
-			//if both dates are empty
-			this.storeOldDates();
+        if ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate)) {
+            //if both dates are empty
+            this.storeOldDates();
             this.setFromDate(value.format(this.format));
-			this.toDate = void(0);
-        } else if(value.isBefore(this.fromDate)){
-			//if current selected date is before previously selected date
-			this.setFromDate(value.format(this.format));
-		} else if (this.fromDate && !this.toDate) {
-			//if fromdate is selected and todate is not
+            this.toDate = void (0);
+        } else if (value.isBefore(this.fromDate)) {
+            //if current selected date is before previously selected date
+            this.setFromDate(value.format(this.format));
+        } else if (this.fromDate && !this.toDate) {
+            //if fromdate is selected and todate is not
             this.setToDate(value.format(this.format));
             this.showCalendars = false;
             this.setRange()
             this.emitRangeSelected();
         }
     }
-	storeOldDates(){
-		this.oldFromDate = this.fromDate;
-		this.oldToDate = this.toDate;
-	}
-	restoreOldDates(){
-		this.fromDate = this.oldFromDate;
-		this.toDate = this.oldToDate;
-	}
+    storeOldDates() {
+        this.oldFromDate = this.fromDate;
+        this.oldToDate = this.toDate;
+    }
+    restoreOldDates() {
+        this.fromDate = this.oldFromDate;
+        this.toDate = this.oldToDate;
+    }
     emitRangeSelected() {
         this.rangeSelected.emit({
             start: this.getMoment(this.fromDate),
