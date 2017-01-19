@@ -1,6 +1,6 @@
 declare var require: any;
 
-import { Component, ElementRef, Input, Output, EventEmitter, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, Output, EventEmitter, HostBinding, HostListener, OnInit } from '@angular/core';
 import { Options } from './daterangepicker-options';
 import * as moment from 'moment';
 
@@ -27,6 +27,7 @@ export class DaterangepickerComponent implements OnInit {
     fromYear: number;
     toYear: number;
     format: string;
+    fromDateSelected: boolean;
     //handle outside/inside click to show rangepicker
     @HostListener('document:mousedown', ['$event'])
     @HostListener('document:mouseup', ['$event'])
@@ -53,9 +54,6 @@ export class DaterangepickerComponent implements OnInit {
             } while (current);
         }
         this.showCalendars = false;
-        if (!this.fromDate || !this.toDate) {
-            this.restoreOldDates();
-        }
         this.updateCalendar();
     }
     constructor(private elem: ElementRef) {
@@ -106,12 +104,14 @@ export class DaterangepickerComponent implements OnInit {
                     console.warn("supplied minDate is after maxDate. Discarding options for minDate and maxDate");
                 }
             }
-
         }
     }
     setFromDate(value) {
+        let temp;
         this.fromDate = moment();
-        this.fromDate = this.getValidateMoment(value);
+        if (temp = this.getValidateMoment(value)) {
+            this.fromDate = temp;
+        }
         if (!this.fromDate) {
             console.warn("supplied startDate option is not in " + this.options.format + " format falling back to default startDate");
             this.fromDate = moment();
@@ -126,10 +126,18 @@ export class DaterangepickerComponent implements OnInit {
                 this.fromDate = this.options.maxDate.clone();
             }
         }
+        setTimeout(() => {
+            let temp = this.fromDate;
+            this.fromDate = "";
+            this.fromDate = temp;
+        }, 0)
     }
     setToDate(value) {
+        let temp;
         this.toDate = moment();
-        this.toDate = this.getValidateMoment(value);
+        if (temp = this.getValidateMoment(value)) {
+            this.toDate = temp;
+        }
         if (!this.toDate) {
             console.warn("supplied endDate option is not in " + this.options.format + " format falling back to default endDate");
             this.toDate = moment();
@@ -142,31 +150,33 @@ export class DaterangepickerComponent implements OnInit {
         if (this.toDate.isBefore(this.fromDate)) {
             this.toDate = this.fromDate.clone();
         }
+        setTimeout(() => {
+            let temp = this.toDate;
+            this.toDate = "";
+            this.toDate = temp;
+        }, 0)
     }
+    //detects which date to set from or to
     dateChanged(value) {
-        if ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate)) {
+        if (!this.fromDateSelected && ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate))) {
             //if both dates are empty
-            this.storeOldDates();
             this.setFromDate(value.format(this.format));
-            this.toDate = void (0);
-        } else if (value.isBefore(this.fromDate)) {
-            //if current selected date is before previously selected date
+            this.fromDateSelected = true;
+            this.toDate = this.fromDate.clone();
+        } else if (this.fromDateSelected && value.isBefore(this.fromDate)) {
+            //if current selected date is before previously selected fromdate
             this.setFromDate(value.format(this.format));
-        } else if (this.fromDate && !this.toDate) {
-            //if fromdate is selected and todate is not
+            this.toDate = this.fromDate.clone();
+            this.fromDateSelected = true;
+        } else if (this.fromDateSelected && this.fromDate.isSameOrBefore(value)) {
+            //if fromdate is selected and todate is not and fromdate is before todate
             this.setToDate(value.format(this.format));
+            this.fromDateSelected = false;
             this.showCalendars = false;
             this.setRange()
             this.emitRangeSelected();
         }
-    }
-    storeOldDates() {
-        this.oldFromDate = this.fromDate;
-        this.oldToDate = this.toDate;
-    }
-    restoreOldDates() {
-        this.fromDate = this.oldFromDate;
-        this.toDate = this.oldToDate;
+        this.updateCalendar();
     }
     emitRangeSelected() {
         this.rangeSelected.emit({
@@ -197,5 +207,17 @@ export class DaterangepickerComponent implements OnInit {
     }
     setRange() {
         this.range = this.fromDate.format(this.format) + " - " + this.toDate.format(this.format);
+    }
+    formatFromDate(event) {
+        if (event.target.value !== this.fromDate.format(this.format)) {
+            this.fromDateSelected = false;
+            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+        }
+    }
+    formatToDate(event) {
+        if (event.target.value !== this.toDate.format(this.format)) {
+            this.fromDateSelected = true;
+            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+        }
     }
 }

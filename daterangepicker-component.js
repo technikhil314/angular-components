@@ -44,9 +44,6 @@ var DaterangepickerComponent = (function () {
             } while (current);
         }
         this.showCalendars = false;
-        if (!this.fromDate || !this.toDate) {
-            this.restoreOldDates();
-        }
         this.updateCalendar();
     };
     DaterangepickerComponent.prototype.updateCalendar = function () {
@@ -99,8 +96,12 @@ var DaterangepickerComponent = (function () {
         }
     };
     DaterangepickerComponent.prototype.setFromDate = function (value) {
+        var _this = this;
+        var temp;
         this.fromDate = moment();
-        this.fromDate = this.getValidateMoment(value);
+        if (temp = this.getValidateMoment(value)) {
+            this.fromDate = temp;
+        }
         if (!this.fromDate) {
             console.warn("supplied startDate option is not in " + this.options.format + " format falling back to default startDate");
             this.fromDate = moment();
@@ -115,10 +116,19 @@ var DaterangepickerComponent = (function () {
                 this.fromDate = this.options.maxDate.clone();
             }
         }
+        setTimeout(function () {
+            var temp = _this.fromDate;
+            _this.fromDate = "";
+            _this.fromDate = temp;
+        }, 0);
     };
     DaterangepickerComponent.prototype.setToDate = function (value) {
+        var _this = this;
+        var temp;
         this.toDate = moment();
-        this.toDate = this.getValidateMoment(value);
+        if (temp = this.getValidateMoment(value)) {
+            this.toDate = temp;
+        }
         if (!this.toDate) {
             console.warn("supplied endDate option is not in " + this.options.format + " format falling back to default endDate");
             this.toDate = moment();
@@ -131,33 +141,35 @@ var DaterangepickerComponent = (function () {
         if (this.toDate.isBefore(this.fromDate)) {
             this.toDate = this.fromDate.clone();
         }
+        setTimeout(function () {
+            var temp = _this.toDate;
+            _this.toDate = "";
+            _this.toDate = temp;
+        }, 0);
     };
+    //detects which date to set from or to
     DaterangepickerComponent.prototype.dateChanged = function (value) {
-        if ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate)) {
+        if (!this.fromDateSelected && ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate))) {
             //if both dates are empty
-            this.storeOldDates();
             this.setFromDate(value.format(this.format));
-            this.toDate = void (0);
+            this.fromDateSelected = true;
+            this.toDate = this.fromDate.clone();
         }
-        else if (value.isBefore(this.fromDate)) {
-            //if current selected date is before previously selected date
+        else if (this.fromDateSelected && value.isBefore(this.fromDate)) {
+            //if current selected date is before previously selected fromdate
             this.setFromDate(value.format(this.format));
+            this.toDate = this.fromDate.clone();
+            this.fromDateSelected = true;
         }
-        else if (this.fromDate && !this.toDate) {
-            //if fromdate is selected and todate is not
+        else if (this.fromDateSelected && this.fromDate.isSameOrBefore(value)) {
+            //if fromdate is selected and todate is not and fromdate is before todate
             this.setToDate(value.format(this.format));
+            this.fromDateSelected = false;
             this.showCalendars = false;
             this.setRange();
             this.emitRangeSelected();
         }
-    };
-    DaterangepickerComponent.prototype.storeOldDates = function () {
-        this.oldFromDate = this.fromDate;
-        this.oldToDate = this.toDate;
-    };
-    DaterangepickerComponent.prototype.restoreOldDates = function () {
-        this.fromDate = this.oldFromDate;
-        this.toDate = this.oldToDate;
+        this.updateCalendar();
     };
     DaterangepickerComponent.prototype.emitRangeSelected = function () {
         this.rangeSelected.emit({
@@ -186,6 +198,18 @@ var DaterangepickerComponent = (function () {
     };
     DaterangepickerComponent.prototype.setRange = function () {
         this.range = this.fromDate.format(this.format) + " - " + this.toDate.format(this.format);
+    };
+    DaterangepickerComponent.prototype.formatFromDate = function (event) {
+        if (event.target.value !== this.fromDate.format(this.format)) {
+            this.fromDateSelected = false;
+            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+        }
+    };
+    DaterangepickerComponent.prototype.formatToDate = function (event) {
+        if (event.target.value !== this.toDate.format(this.format)) {
+            this.fromDateSelected = true;
+            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+        }
     };
     __decorate([
         core_1.Input(), 
