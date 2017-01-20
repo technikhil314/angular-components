@@ -8,4 +8,6 @@ export class Options {
     dateLimit = false;
     singleDatePicker = false;
     format;
+    inactiveBeforeStart = false;
+	autoApply: boolean;
 }

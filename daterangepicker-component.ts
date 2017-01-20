@@ -2,6 +2,7 @@ declare var require: any;
 
 import { Component, ElementRef, Input, Output, EventEmitter, HostBinding, HostListener, OnInit } from '@angular/core';
 import { Options } from './daterangepicker-options';
+import { Defaults } from './daterangepicker-default-ranges';
 import * as moment from 'moment';
 
 @Component({
@@ -18,6 +19,8 @@ export class DaterangepickerComponent implements OnInit {
     //variables
     showCalendars: boolean;
     range: string = "";
+	enableApplyButton: boolean = false;
+	areOldDatesStored: boolean = false;
     fromDate: any;
     toDate: any;
     oldFromDate: any;
@@ -27,7 +30,7 @@ export class DaterangepickerComponent implements OnInit {
     fromYear: number;
     toYear: number;
     format: string;
-    fromDateSelected: boolean;
+	defaultRanges: {};
     //handle outside/inside click to show rangepicker
     @HostListener('document:mousedown', ['$event'])
     @HostListener('document:mouseup', ['$event'])
@@ -36,34 +39,45 @@ export class DaterangepickerComponent implements OnInit {
         let host: any = this.elem.nativeElement;
         if (host.compareDocumentPosition) {
             if (host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
-                this.showCalendars = true;
-                return;
+				this.storeOldDates();
+				return this.toggleCalendars(true);
             }
         } else if (host.contains) {
             if (host.contains(current)) {
-                this.showCalendars = true;
-                return;
+				this.storeOldDates();
+				return this.toggleCalendars(true);
             }
         } else {
             do {
                 if (current === host) {
-                    this.showCalendars = true;
-                    return;
+					this.storeOldDates();
+                    return this.toggleCalendars(true);
                 }
                 current = current.parentNode;
             } while (current);
         }
-        this.showCalendars = false;
-        this.updateCalendar();
+		if(this.showCalendars){
+			if(!this.options.autoApply){
+				this.restoreOldDates();
+			}
+			this.toggleCalendars(false);
+		}
     }
     constructor(private elem: ElementRef) {
     }
+	toggleCalendars(value){
+		this.showCalendars = value;
+		if(!value){
+			this.areOldDatesStored = false;
+			this.updateCalendar();
+		}
+	}
     updateCalendar() {
         //get month and year to show calendar
         let tDate = moment(this.fromDate, this.format);
         this.fromMonth = tDate.get('month');
         this.fromYear = tDate.get('year');
-        tDate = moment(this.fromDate, this.format).add(1, 'months');
+        tDate = moment(this.toDate, this.format);
         this.toMonth = tDate.get('month');
         this.toYear = tDate.get('year');
         this.setRange()
@@ -74,6 +88,7 @@ export class DaterangepickerComponent implements OnInit {
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
         this.setToDate(this.options.endDate);
+		this.defaultRanges = Defaults.ranges;
         //update calendar grid
         this.updateCalendar();
     }
@@ -108,92 +123,48 @@ export class DaterangepickerComponent implements OnInit {
     }
     setFromDate(value) {
         let temp;
-        this.fromDate = moment();
         if (temp = this.getValidateMoment(value)) {
             this.fromDate = temp;
-        }
-        if (!this.fromDate) {
-            console.warn("supplied startDate option is not in " + this.options.format + " format falling back to default startDate");
+        } else {
             this.fromDate = moment();
         }
-        if (this.options && this.options.minDate) {
-            if (this.fromDate.isBefore(this.options.minDate)) {
-                this.fromDate = this.options.minDate.clone();
-            }
-        }
-        if (this.options && this.options.maxDate) {
-            if (this.fromDate.isAfter(this.options.maxDate)) {
-                this.fromDate = this.options.maxDate.clone();
-            }
-        }
-        setTimeout(() => {
-            let temp = this.fromDate;
-            this.fromDate = "";
-            this.fromDate = temp;
-        }, 0)
     }
     setToDate(value) {
         let temp;
-        this.toDate = moment();
         if (temp = this.getValidateMoment(value)) {
             this.toDate = temp;
-        }
-        if (!this.toDate) {
-            console.warn("supplied endDate option is not in " + this.options.format + " format falling back to default endDate");
+        } else {
             this.toDate = moment();
         }
-        if (this.options && this.options.maxDate) {
-            if (this.toDate.isAfter(this.options.maxDate)) {
-                this.toDate = this.options.maxDate.clone();
+    }
+    //detects which date to set from or to and validates
+    dateChanged(data) {
+        let value = data.day;
+        let isLeft = data.isLeft;
+        if (isLeft) {
+            this.setFromDate(value.format(this.format));
+            if (value.isAfter(this.toDate)) {
+                this.toDate = this.fromDate.clone();
+            }
+        } else {
+            this.setToDate(value.format(this.format));
+            if (value.isBefore(this.fromDate)) {
+                this.fromDate = this.toDate.clone();
             }
         }
-        if (this.toDate.isBefore(this.fromDate)) {
-            this.toDate = this.fromDate.clone();
-        }
-        setTimeout(() => {
-            let temp = this.toDate;
-            this.toDate = "";
-            this.toDate = temp;
-        }, 0)
-    }
-    //detects which date to set from or to
-    dateChanged(value) {
-        if (!this.fromDateSelected && ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate))) {
-            //if both dates are empty
-            this.setFromDate(value.format(this.format));
-            this.fromDateSelected = true;
-            this.toDate = this.fromDate.clone();
-        } else if (this.fromDateSelected && value.isBefore(this.fromDate)) {
-            //if current selected date is before previously selected fromdate
-            this.setFromDate(value.format(this.format));
-            this.toDate = this.fromDate.clone();
-            this.fromDateSelected = true;
-        } else if (this.fromDateSelected && this.fromDate.isSameOrBefore(value)) {
-            //if fromdate is selected and todate is not and fromdate is before todate
-            this.setToDate(value.format(this.format));
-            this.fromDateSelected = false;
-            this.showCalendars = false;
-            this.setRange()
-            this.emitRangeSelected();
-        }
-        this.updateCalendar();
+        if(this.options.autoApply){
+			!isLeft ? this.toggleCalendars(false) : this.toggleCalendars(true);
+			this.setRange()
+			this.emitRangeSelected();
+		} else {
+			this.enableApplyButton = true;
+		}
     }
     emitRangeSelected() {
         this.rangeSelected.emit({
             start: this.getMoment(this.fromDate),
             end: this.getMoment(this.toDate)
         });
-    }
-    monthChanged(value) {
-        let temp;
-        temp = moment([this.fromYear, this.fromMonth]).add(value,
-            'months');
-        this.fromMonth = temp.get('month');
-        this.fromYear = temp.get('year');
-        temp = moment([this.toYear, this.toMonth]).add(value,
-            'months');
-        this.toMonth = temp.get('month');
-        this.toYear = temp.get('year');
     }
     getMoment(value) {
         return moment(value, this.format);
@@ -210,14 +181,53 @@ export class DaterangepickerComponent implements OnInit {
     }
     formatFromDate(event) {
         if (event.target.value !== this.fromDate.format(this.format)) {
-            this.fromDateSelected = false;
-            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+            this.dateChanged({
+                day: event.target.value ? this.getMoment(event.target.value) : moment(),
+                isLeft: true
+            });
         }
     }
     formatToDate(event) {
         if (event.target.value !== this.toDate.format(this.format)) {
-            this.fromDateSelected = true;
-            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+            this.dateChanged({
+                day: event.target.value ? this.getMoment(event.target.value) : moment(),
+                isLeft: false
+            });
         }
     }
+    monthChanged(data) {
+        let temp;
+        if (data.isLeft) {
+            temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'months');
+            this.fromMonth = temp.get('month');
+            this.fromYear = temp.get('year');
+        } else {
+            temp = moment([this.toYear, this.toMonth]).add(data.value, 'months');
+            this.toMonth = temp.get('month');
+            this.toYear = temp.get('year');
+        }
+    }
+	storeOldDates(){
+		if(!this.areOldDatesStored){
+			this.oldFromDate = this.fromDate;
+			this.oldToDate = this.toDate;
+			this.areOldDatesStored = true;
+		}
+	}
+	restoreOldDates(){
+		this.fromDate = this.oldFromDate;
+		this.toDate = this.oldToDate;
+	}
+	apply(){
+		this.toggleCalendars(false);
+	}
+	cancel(){
+		this.restoreOldDates();
+		this.toggleCalendars(false);
+	}
+	applyPredefinedRange(data){
+		this.setFromDate(data.value.start);
+		this.setToDate(data.value.end);
+		this.toggleCalendars(false);
+	}
 }
