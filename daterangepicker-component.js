@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var daterangepicker_options_1 = require('./daterangepicker-options');
+var daterangepicker_default_ranges_1 = require('./daterangepicker-default-ranges');
 var moment = require('moment');
 var DaterangepickerComponent = (function () {
     function DaterangepickerComponent(elem) {
@@ -17,6 +18,8 @@ var DaterangepickerComponent = (function () {
         //outputs
         this.rangeSelected = new core_1.EventEmitter();
         this.range = "";
+        this.enableApplyButton = false;
+        this.areOldDatesStored = false;
     }
     //handle outside/inside click to show rangepicker
     DaterangepickerComponent.prototype.handleOutsideClick = function (event) {
@@ -24,34 +27,45 @@ var DaterangepickerComponent = (function () {
         var host = this.elem.nativeElement;
         if (host.compareDocumentPosition) {
             if (host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
-                this.showCalendars = true;
-                return;
+                this.storeOldDates();
+                return this.toggleCalendars(true);
             }
         }
         else if (host.contains) {
             if (host.contains(current)) {
-                this.showCalendars = true;
-                return;
+                this.storeOldDates();
+                return this.toggleCalendars(true);
             }
         }
         else {
             do {
                 if (current === host) {
-                    this.showCalendars = true;
-                    return;
+                    this.storeOldDates();
+                    return this.toggleCalendars(true);
                 }
                 current = current.parentNode;
             } while (current);
         }
-        this.showCalendars = false;
-        this.updateCalendar();
+        if (this.showCalendars) {
+            if (!this.options.autoApply) {
+                this.restoreOldDates();
+            }
+            this.toggleCalendars(false);
+        }
+    };
+    DaterangepickerComponent.prototype.toggleCalendars = function (value) {
+        this.showCalendars = value;
+        if (!value) {
+            this.areOldDatesStored = false;
+            this.updateCalendar();
+        }
     };
     DaterangepickerComponent.prototype.updateCalendar = function () {
         //get month and year to show calendar
         var tDate = moment(this.fromDate, this.format);
         this.fromMonth = tDate.get('month');
         this.fromYear = tDate.get('year');
-        tDate = moment(this.fromDate, this.format).add(1, 'months');
+        tDate = moment(this.toDate, this.format);
         this.toMonth = tDate.get('month');
         this.toYear = tDate.get('year');
         this.setRange();
@@ -62,6 +76,7 @@ var DaterangepickerComponent = (function () {
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
         this.setToDate(this.options.endDate);
+        this.defaultRanges = daterangepicker_default_ranges_1.Defaults.ranges;
         //update calendar grid
         this.updateCalendar();
     };
@@ -96,95 +111,53 @@ var DaterangepickerComponent = (function () {
         }
     };
     DaterangepickerComponent.prototype.setFromDate = function (value) {
-        var _this = this;
         var temp;
-        this.fromDate = moment();
         if (temp = this.getValidateMoment(value)) {
             this.fromDate = temp;
         }
-        if (!this.fromDate) {
-            console.warn("supplied startDate option is not in " + this.options.format + " format falling back to default startDate");
+        else {
             this.fromDate = moment();
         }
-        if (this.options && this.options.minDate) {
-            if (this.fromDate.isBefore(this.options.minDate)) {
-                this.fromDate = this.options.minDate.clone();
-            }
-        }
-        if (this.options && this.options.maxDate) {
-            if (this.fromDate.isAfter(this.options.maxDate)) {
-                this.fromDate = this.options.maxDate.clone();
-            }
-        }
-        setTimeout(function () {
-            var temp = _this.fromDate;
-            _this.fromDate = "";
-            _this.fromDate = temp;
-        }, 0);
     };
     DaterangepickerComponent.prototype.setToDate = function (value) {
-        var _this = this;
         var temp;
-        this.toDate = moment();
         if (temp = this.getValidateMoment(value)) {
             this.toDate = temp;
         }
-        if (!this.toDate) {
-            console.warn("supplied endDate option is not in " + this.options.format + " format falling back to default endDate");
+        else {
             this.toDate = moment();
         }
-        if (this.options && this.options.maxDate) {
-            if (this.toDate.isAfter(this.options.maxDate)) {
-                this.toDate = this.options.maxDate.clone();
+    };
+    //detects which date to set from or to and validates
+    DaterangepickerComponent.prototype.dateChanged = function (data) {
+        var value = data.day;
+        var isLeft = data.isLeft;
+        if (isLeft) {
+            this.setFromDate(value.format(this.format));
+            if (value.isAfter(this.toDate)) {
+                this.toDate = this.fromDate.clone();
             }
         }
-        if (this.toDate.isBefore(this.fromDate)) {
-            this.toDate = this.fromDate.clone();
-        }
-        setTimeout(function () {
-            var temp = _this.toDate;
-            _this.toDate = "";
-            _this.toDate = temp;
-        }, 0);
-    };
-    //detects which date to set from or to
-    DaterangepickerComponent.prototype.dateChanged = function (value) {
-        if (!this.fromDateSelected && ((this.fromDate && this.toDate) || !(this.fromDate || this.toDate))) {
-            //if both dates are empty
-            this.setFromDate(value.format(this.format));
-            this.fromDateSelected = true;
-            this.toDate = this.fromDate.clone();
-        }
-        else if (this.fromDateSelected && value.isBefore(this.fromDate)) {
-            //if current selected date is before previously selected fromdate
-            this.setFromDate(value.format(this.format));
-            this.toDate = this.fromDate.clone();
-            this.fromDateSelected = true;
-        }
-        else if (this.fromDateSelected && this.fromDate.isSameOrBefore(value)) {
-            //if fromdate is selected and todate is not and fromdate is before todate
+        else {
             this.setToDate(value.format(this.format));
-            this.fromDateSelected = false;
-            this.showCalendars = false;
+            if (value.isBefore(this.fromDate)) {
+                this.fromDate = this.toDate.clone();
+            }
+        }
+        if (this.options.autoApply) {
+            !isLeft ? this.toggleCalendars(false) : this.toggleCalendars(true);
             this.setRange();
             this.emitRangeSelected();
         }
-        this.updateCalendar();
+        else {
+            this.enableApplyButton = true;
+        }
     };
     DaterangepickerComponent.prototype.emitRangeSelected = function () {
         this.rangeSelected.emit({
             start: this.getMoment(this.fromDate),
             end: this.getMoment(this.toDate)
         });
-    };
-    DaterangepickerComponent.prototype.monthChanged = function (value) {
-        var temp;
-        temp = moment([this.fromYear, this.fromMonth]).add(value, 'months');
-        this.fromMonth = temp.get('month');
-        this.fromYear = temp.get('year');
-        temp = moment([this.toYear, this.toMonth]).add(value, 'months');
-        this.toMonth = temp.get('month');
-        this.toYear = temp.get('year');
     };
     DaterangepickerComponent.prototype.getMoment = function (value) {
         return moment(value, this.format);
@@ -201,15 +174,55 @@ var DaterangepickerComponent = (function () {
     };
     DaterangepickerComponent.prototype.formatFromDate = function (event) {
         if (event.target.value !== this.fromDate.format(this.format)) {
-            this.fromDateSelected = false;
-            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+            this.dateChanged({
+                day: event.target.value ? this.getMoment(event.target.value) : moment(),
+                isLeft: true
+            });
         }
     };
     DaterangepickerComponent.prototype.formatToDate = function (event) {
         if (event.target.value !== this.toDate.format(this.format)) {
-            this.fromDateSelected = true;
-            this.dateChanged(event.target.value ? this.getMoment(event.target.value) : moment());
+            this.dateChanged({
+                day: event.target.value ? this.getMoment(event.target.value) : moment(),
+                isLeft: false
+            });
         }
+    };
+    DaterangepickerComponent.prototype.monthChanged = function (data) {
+        var temp;
+        if (data.isLeft) {
+            temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'months');
+            this.fromMonth = temp.get('month');
+            this.fromYear = temp.get('year');
+        }
+        else {
+            temp = moment([this.toYear, this.toMonth]).add(data.value, 'months');
+            this.toMonth = temp.get('month');
+            this.toYear = temp.get('year');
+        }
+    };
+    DaterangepickerComponent.prototype.storeOldDates = function () {
+        if (!this.areOldDatesStored) {
+            this.oldFromDate = this.fromDate;
+            this.oldToDate = this.toDate;
+            this.areOldDatesStored = true;
+        }
+    };
+    DaterangepickerComponent.prototype.restoreOldDates = function () {
+        this.fromDate = this.oldFromDate;
+        this.toDate = this.oldToDate;
+    };
+    DaterangepickerComponent.prototype.apply = function () {
+        this.toggleCalendars(false);
+    };
+    DaterangepickerComponent.prototype.cancel = function () {
+        this.restoreOldDates();
+        this.toggleCalendars(false);
+    };
+    DaterangepickerComponent.prototype.applyPredefinedRange = function (data) {
+        this.setFromDate(data.value.start);
+        this.setToDate(data.value.end);
+        this.toggleCalendars(false);
     };
     __decorate([
         core_1.Input(), 

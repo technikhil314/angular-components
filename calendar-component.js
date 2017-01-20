@@ -83,21 +83,31 @@ var CalendarComponent = (function () {
             return true;
         }
     };
+    CalendarComponent.prototype.isDateAvailable = function (day) {
+        if (day.get('month') !== this.month) {
+            return false;
+        }
+        if (this.inactiveBeforeStart && !this.isLeft && day.isBefore(this.selectedFromDate)) {
+            return false;
+        }
+        return true;
+    };
     CalendarComponent.prototype.isSelectedDate = function (day) {
-        if (day.get('month') === this.month && day.isSameOrAfter(moment(this.selectedFromDate, this.format)) && day.isSameOrBefore(moment(this.selectedToDate, this.format))) {
+        if (day.get('month') === this.month && day.isSameOrAfter(this.selectedFromDate, 'date') && day.isSameOrBefore(this.selectedToDate, 'date')) {
             return true;
         }
     };
     CalendarComponent.prototype.dateSelected = function (day) {
-        this.dateChanged.emit(day);
+        this.dateChanged.emit({
+            day: day,
+            isLeft: this.isLeft
+        });
     };
-    CalendarComponent.prototype.monthSelected = function () {
-        if (this.isLeft) {
-            this.monthChanged.emit(-1);
-        }
-        else {
-            this.monthChanged.emit(1);
-        }
+    CalendarComponent.prototype.monthSelected = function (value) {
+        this.monthChanged.emit({
+            value: value,
+            isLeft: this.isLeft
+        });
     };
     __decorate([
         core_1.Input(), 
@@ -131,6 +141,10 @@ var CalendarComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], CalendarComponent.prototype, "maxDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], CalendarComponent.prototype, "inactiveBeforeStart", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)

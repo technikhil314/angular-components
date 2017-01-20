@@ -1,16 +1,16 @@
 <div class="col-md-12 text-center flush">
-	<div *ngIf="isLeft" class="col-md-2 flush">
-		<button class="col-md-12 btn btn-link flush" (click)="monthSelected()">
+	<div class="col-md-2 flush">
+		<span class="col-md-12 flush clickable clickable-link" (click)="monthSelected(-1)">
 			Prev
-		</button>
+		</span>
 	</div>
-	<span class="col-md-10 float-left text-center nudge-top">
-		<strong> {{monthText}} {{year}} </strong>
+	<span class="col-md-8 float-left text-center nudge-top">
+		<label> {{monthText}} {{year}} </label>
 	</span>
-	<div *ngIf="!isLeft" class="col-md-2 flush">
-		<button class="col-md-12 btn btn-link pull-right flush" (click)="monthSelected()">
+	<div class="col-md-2 flush">
+		<span class="col-md-12 pull-right flush clickable clickable-link" (click)="monthSelected(1)">
 			Next
-		</button>
+		</span>
 	</div>
 </div>
 <div class="col-md-12 flush">
@@ -26,8 +26,8 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let week of weekList; let i = index">
-				<td *ngFor="let day of weekList[i]" [ngClass]= "{'off':day.get('month')!==month,'active':isSelectedDate(day)}">
-					<button class="btn btn-flat" [disabled]="isDisabled(day)" [ngClass]= "{'off':day.get('month')!==month}" (click)="dateSelected(day)">{{ day.format('D') }}</button>
+				<td *ngFor="let day of weekList[i]" (click)="dateSelected(day)" class="clickable" [ngClass]= "{'off':!isDateAvailable(day),'active':isSelectedDate(day),'disabled':isDisabled(day)}">
+					{{ day.format('D') }}
 				</td>				
 			</tr>
 		</tbody>

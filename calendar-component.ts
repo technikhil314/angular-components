@@ -17,6 +17,7 @@ export class CalendarComponent implements OnChanges {
     @Input() format: string;
     @Input() minDate: string;
     @Input() maxDate: string;
+    @Input() inactiveBeforeStart: boolean;
     get monthText() {
         let months = moment.monthsShort()
         return months[this.month];
@@ -85,19 +86,30 @@ export class CalendarComponent implements OnChanges {
             return true;
         }
     }
+	isDateAvailable(day){
+		if(day.get('month') !== this.month) {
+			return false;
+		} 
+		if (this.inactiveBeforeStart && !this.isLeft && day.isBefore(this.selectedFromDate)) {
+            return false;
+        }
+		return true;
+	}
     isSelectedDate(day) {
-        if (day.get('month') === this.month && day.isSameOrAfter(moment(this.selectedFromDate, this.format)) && day.isSameOrBefore(moment(this.selectedToDate, this.format))) {
+        if (day.get('month') === this.month && day.isSameOrAfter(this.selectedFromDate, 'date') && day.isSameOrBefore(this.selectedToDate, 'date')) {
             return true;
         }
     }
     dateSelected(day) {
-        this.dateChanged.emit(day);
+        this.dateChanged.emit({
+            day: day,
+            isLeft: this.isLeft
+        });
     }
-    monthSelected() {
-        if (this.isLeft) {
-            this.monthChanged.emit(-1);
-        } else {
-            this.monthChanged.emit(1);
-        }
+    monthSelected(value) {
+        this.monthChanged.emit({
+            value: value,
+            isLeft: this.isLeft
+        })
     }
 }

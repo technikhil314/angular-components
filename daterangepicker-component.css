@@ -1,18 +1,18 @@
-.hidden {
-	display: none;
-	visibility: false;
+.daterangepicker {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	font-size: 14px;
+	overflow: hidden
 }
-
-@media (min-width: 450px) {
+@media (min-width: 550px) {
 	.daterangepicker {
 		z-index: 3000;
 		border-radius: 4px;
 		box-shadow: 0px 2px 2px 2px #888888;
-		max-width: 450px;
-		min-width: 450px;
+		max-width: 550px;
+		min-width: 550px;
 	}
 }
-@media (max-width: 450px) {
+@media (max-width: 550px) {
 	.daterangepicker {
 		z-index: 3000;
 		border-radius: 4px;
@@ -22,10 +22,19 @@
 	.text-center .pull-right {
 		float: none !important;
 	}
+	.col-md-5 {
+		width: 100% !important;
+	}
+	.ranges{
+		display: none;
+	}
 }
-
+.hidden {
+	display: none !important;
+	visibility: false !important;
+}
 .daterangepicker .calendar {
-    margin: 4px;
+	margin: 4px;
 	float: left;
 	border-radius: 4px !important;
 }
@@ -61,12 +70,15 @@
 	border-radius: 4px !important;
 }
 .daterangepicker td {
+	font-size: 14px;
 	height: 20px;
 	width: 20px;
 	text-align: center;
-	padding: 1px !important;
+	padding: 2px !important;
 	margin: 1px !important;
 	border-radius: 4px !important;
+	white-space: nowrap;
+	text-align: center;
 }
 .daterangepicker .btn.btn-flat {
 	border: none;
@@ -77,10 +89,6 @@
 .daterangepicker .off {
 	color: #A2A2A2;
 }
-body {
-	font-family: "Helvetica Neue, Helvetica, Arial, sans-serif" !important;
-	font-size: 14px;
-}
 .daterangepicker table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -88,6 +96,32 @@ body {
 .daterangepicker td,
 .daterangepicker th {
   padding: 0;
+}
+.daterangepicker .clickable{
+	cursor: pointer;
+}
+.daterangepicker .clickable-link{
+	color: #337ab7;
+}
+.daterangepicker .clickable.disabled{
+	pointer-events: none;
+	color: #A2A2A2;
+}
+.ranges .clickable {
+	margin-top: 8px !important;
+}
+.daterangepicker label{
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 0px 5px 0px 5px!important;
+  font-size: 10px;
+  margin: 3px;
+  border-radius: 3px;
 }
 * {
   -webkit-box-sizing: border-box;
@@ -112,6 +146,7 @@ body {
   text-align: center;
 }
 .daterangepicker .col-md-1, .daterangepicker .col-md-2,.daterangepicker .col-md-3,.daterangepicker .col-md-4,.daterangepicker .col-md-5,.daterangepicker .col-md-6,.daterangepicker .col-md-7,.daterangepicker .col-md-8,.daterangepicker .col-md-9,.daterangepicker .col-md-10,.daterangepicker .col-md-11,.daterangepicker .col-md-12 {
+position: relative;
 float: left;
 }
 .daterangepicker .col-md-12 {
@@ -301,7 +336,6 @@ fieldset[disabled] .form-control {
 }
 .daterangepicker .btn {
   display: inline-block;
-  padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
