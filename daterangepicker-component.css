@@ -22,7 +22,10 @@
 	.text-center .pull-right {
 		float: none !important;
 	}
-	.col-md-5 {
+	.col-md-6 {
+		width: 100% !important;
+	}
+	.col-md-10 {
 		width: 100% !important;
 	}
 	.ranges{

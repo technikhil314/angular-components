@@ -58,11 +58,14 @@ I will suggest you to install dependancy modules before this module
 If you are using bootstrap.css then just include following styliing in your code <br/>
 ```bash
 <style>
-	.daterangepicker .hidden {
+	.daterangepicker {
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+		font-size: 14px;
+	}
+	.hidden {
 		display: none;
 		visibility: false;
 	}
-
 	@media (min-width: 450px) {
 		.daterangepicker {
 			z-index: 3000;
@@ -77,31 +80,38 @@ If you are using bootstrap.css then just include following styliing in your code
 			z-index: 3000;
 			border-radius: 4px;
 			box-shadow: 0px 2px 2px 2px #888888;
-			max-width: 450px;
+			max-width: 270px;
+		}
+		.text-center .pull-right {
+			float: none !important;
+		}
+		.ranges{
+			display: none;
 		}
 	}
+
 	.daterangepicker .calendar {
 		margin: 4px;
 		float: left;
 		border-radius: 4px !important;
 	}
-	.daterangepicker .applyBtn{
+	.applyBtn{
 		margin: 4px;
 	}
-	.daterangepicker .flush {
+	.daterangepicker  .flush {
 		padding: 0 !important;
 		margin: 0 !important;
 	}
-	.daterangepicker .flush-bottom{
+	.daterangepicker  .flush-bottom{
 		padding-bottom: 0 !important;
 	}
-	.daterangepicker .flush-left {
+	.daterangepicker  .flush-left {
 		padding-left: 0 !important;
 	}
-	.daterangepicker .flush-right {
+	.daterangepicker  .flush-right {
 		padding-right: 0 !important;
 	}
-	.daterangepicker .flush-half--left {
+	.daterangepicker  .flush-half--left {
 		padding-left: 4px !important;
 	}
 	.daterangepicker .flush-half--right {
@@ -117,12 +127,15 @@ If you are using bootstrap.css then just include following styliing in your code
 		border-radius: 4px !important;
 	}
 	.daterangepicker td {
+		font-size: 14px;
 		height: 20px;
 		width: 20px;
 		text-align: center;
-		padding: 1px !important;
+		padding: 2px !important;
 		margin: 1px !important;
 		border-radius: 4px !important;
+		white-space: nowrap;
+		text-align: center;
 	}
 	.daterangepicker .btn.btn-flat {
 		border: none;
@@ -132,6 +145,33 @@ If you are using bootstrap.css then just include following styliing in your code
 	}
 	.daterangepicker .off {
 		color: #A2A2A2;
+	}
+	.daterangepicker table {
+	  border-spacing: 0;
+	  border-collapse: collapse;
+	}
+	.daterangepicker td,
+	.daterangepicker th {
+	  padding: 0;
+	}
+	.daterangepicker .clickable{
+		cursor: pointer;
+	}
+	.daterangepicker .clickable-link{
+		color: #337ab7;
+	}
+	.daterangepicker .clickable.disabled{
+		pointer-events: none;
+		color: #A2A2A2;
+	}
+	.daterangepicker label{
+		display: inline-block;
+		max-width: 100%;
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+	.daterangepicker .btn-link {
+		padding: 1px 6px 1px 6px !important;
 	}
   </style>
 ```
@@ -165,6 +205,8 @@ startDate: Default start date
 endDate: default end date
 minDate: default minimum date not including this date
 maxDate: default maximum date not including this date
+inactiveBeforeStart: blurs all dates before selected start date
+autoApply: removes apply and cancel buttons and applies as soon as user selects end date
 ```
 All dates are suppoesed to be string and in format as you are passing.
 You can also 
