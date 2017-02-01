@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 declare var require: any;
 var moment = require('moment');
-require('moment-range');
+var momentRange = require('moment-range');
 
 @Component({
     moduleId: module.id,
@@ -64,7 +64,7 @@ export class CalendarComponent implements OnChanges {
         let startDate = moment([year, month]);
         let firstDay = moment(startDate).startOf('month');
         let endDay = moment(startDate).add(60, 'd');
-        let monthRange = moment.range(firstDay, endDay);
+        let monthRange = new momentRange.DateRange(firstDay, endDay);
         let weeksRange = [];
         weeksRange = this.getWeeksRange(this.getWeekNumbers(monthRange), year, month);
 
