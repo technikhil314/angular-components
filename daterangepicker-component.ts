@@ -6,9 +6,8 @@ import { Defaults } from './daterangepicker-default-ranges';
 import * as moment from 'moment';
 
 @Component({
-    moduleId: module.id,
     selector: 'date-range-picker',
-    templateUrl: './daterangepicker-component.html'
+    templateUrl: require('./daterangepicker-component.html')
 })
 export class DaterangepickerComponent implements OnInit {
     //inputs
