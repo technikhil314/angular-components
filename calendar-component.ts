@@ -4,9 +4,8 @@ var moment = require('moment');
 require('moment-range');
 
 @Component({
-    moduleId: module.id,
     selector: 'calendar',
-    templateUrl: './calendar-component.html'
+    template: require('./calendar-component.html')
 })
 export class CalendarComponent implements OnChanges {
     @Input() month: string;
