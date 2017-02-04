@@ -10,4 +10,5 @@ export class Options {
     format;
     inactiveBeforeStart = false;
 	autoApply: boolean;
+    timePicker: boolean;
 }
