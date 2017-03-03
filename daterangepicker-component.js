@@ -214,6 +214,8 @@ var DaterangepickerComponent = (function () {
     };
     DaterangepickerComponent.prototype.apply = function () {
         this.toggleCalendars(false);
+        this.setRange();
+        this.emitRangeSelected();
     };
     DaterangepickerComponent.prototype.cancel = function () {
         this.restoreOldDates();
