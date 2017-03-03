@@ -153,7 +153,7 @@ export class DaterangepickerComponent implements OnInit {
         }
         if (this.options.autoApply) {
             !isLeft ? this.toggleCalendars(false) : this.toggleCalendars(true);
-            this.setRange()
+            this.setRange();
             this.emitRangeSelected();
         } else {
             this.enableApplyButton = true;
@@ -219,7 +219,7 @@ export class DaterangepickerComponent implements OnInit {
     }
     apply() {
         this.toggleCalendars(false);
-        this.setRange()
+        this.setRange();
         this.emitRangeSelected();
     }
     cancel() {
