@@ -18,8 +18,8 @@ export class DaterangepickerComponent implements OnInit {
     //variables
     showCalendars: boolean;
     range: string = "";
-	enableApplyButton: boolean = false;
-	areOldDatesStored: boolean = false;
+    enableApplyButton: boolean = false;
+    areOldDatesStored: boolean = false;
     fromDate: any;
     toDate: any;
     oldFromDate: any;
@@ -29,7 +29,7 @@ export class DaterangepickerComponent implements OnInit {
     fromYear: number;
     toYear: number;
     format: string;
-	defaultRanges: {};
+    defaultRanges: {};
     //handle outside/inside click to show rangepicker
     @HostListener('document:mousedown', ['$event'])
     @HostListener('document:mouseup', ['$event'])
@@ -38,39 +38,39 @@ export class DaterangepickerComponent implements OnInit {
         let host: any = this.elem.nativeElement;
         if (host.compareDocumentPosition) {
             if (host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
-				this.storeOldDates();
-				return this.toggleCalendars(true);
+                this.storeOldDates();
+                return this.toggleCalendars(true);
             }
         } else if (host.contains) {
             if (host.contains(current)) {
-				this.storeOldDates();
-				return this.toggleCalendars(true);
+                this.storeOldDates();
+                return this.toggleCalendars(true);
             }
         } else {
             do {
                 if (current === host) {
-					this.storeOldDates();
+                    this.storeOldDates();
                     return this.toggleCalendars(true);
                 }
                 current = current.parentNode;
             } while (current);
         }
-		if(this.showCalendars){
-			if(!this.options.autoApply){
-				this.restoreOldDates();
-			}
-			this.toggleCalendars(false);
-		}
+        if (this.showCalendars) {
+            if (!this.options.autoApply) {
+                this.restoreOldDates();
+            }
+            this.toggleCalendars(false);
+        }
     }
     constructor(private elem: ElementRef) {
     }
-	toggleCalendars(value){
-		this.showCalendars = value;
-		if(!value){
-			this.areOldDatesStored = false;
-			this.updateCalendar();
-		}
-	}
+    toggleCalendars(value) {
+        this.showCalendars = value;
+        if (!value) {
+            this.areOldDatesStored = false;
+            this.updateCalendar();
+        }
+    }
     updateCalendar() {
         //get month and year to show calendar
         let tDate = moment(this.fromDate, this.format);
@@ -87,7 +87,7 @@ export class DaterangepickerComponent implements OnInit {
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
         this.setToDate(this.options.endDate);
-		this.defaultRanges = Defaults.ranges;
+        this.defaultRanges = Defaults.ranges;
         //update calendar grid
         this.updateCalendar();
     }
@@ -151,13 +151,13 @@ export class DaterangepickerComponent implements OnInit {
                 this.fromDate = this.toDate.clone();
             }
         }
-        if(this.options.autoApply){
-			!isLeft ? this.toggleCalendars(false) : this.toggleCalendars(true);
-			this.setRange()
-			this.emitRangeSelected();
-		} else {
-			this.enableApplyButton = true;
-		}
+        if (this.options.autoApply) {
+            !isLeft ? this.toggleCalendars(false) : this.toggleCalendars(true);
+            this.setRange()
+            this.emitRangeSelected();
+        } else {
+            this.enableApplyButton = true;
+        }
     }
     emitRangeSelected() {
         this.rangeSelected.emit({
@@ -206,27 +206,29 @@ export class DaterangepickerComponent implements OnInit {
             this.toYear = temp.get('year');
         }
     }
-	storeOldDates(){
-		if(!this.areOldDatesStored){
-			this.oldFromDate = this.fromDate;
-			this.oldToDate = this.toDate;
-			this.areOldDatesStored = true;
-		}
-	}
-	restoreOldDates(){
-		this.fromDate = this.oldFromDate;
-		this.toDate = this.oldToDate;
-	}
-	apply(){
-		this.toggleCalendars(false);
-	}
-	cancel(){
-		this.restoreOldDates();
-		this.toggleCalendars(false);
-	}
-	applyPredefinedRange(data){
-		this.setFromDate(data.value.start);
-		this.setToDate(data.value.end);
-		this.toggleCalendars(false);
-	}
+    storeOldDates() {
+        if (!this.areOldDatesStored) {
+            this.oldFromDate = this.fromDate;
+            this.oldToDate = this.toDate;
+            this.areOldDatesStored = true;
+        }
+    }
+    restoreOldDates() {
+        this.fromDate = this.oldFromDate;
+        this.toDate = this.oldToDate;
+    }
+    apply() {
+        this.toggleCalendars(false);
+        this.setRange()
+        this.emitRangeSelected();
+    }
+    cancel() {
+        this.restoreOldDates();
+        this.toggleCalendars(false);
+    }
+    applyPredefinedRange(data) {
+        this.setFromDate(data.value.start);
+        this.setToDate(data.value.end);
+        this.toggleCalendars(false);
+    }
 }

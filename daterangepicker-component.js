@@ -245,9 +245,8 @@ var DaterangepickerComponent = (function () {
     ], DaterangepickerComponent.prototype, "handleOutsideClick", null);
     DaterangepickerComponent = __decorate([
         core_1.Component({
-            moduleId: module.id,
             selector: 'date-range-picker',
-            templateUrl: './daterangepicker-component.html'
+            templateUrl: require('./daterangepicker-component.html')
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], DaterangepickerComponent);

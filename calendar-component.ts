@@ -85,15 +85,15 @@ export class CalendarComponent implements OnChanges {
             return true;
         }
     }
-	isDateAvailable(day){
-		if(day.get('month') !== this.month) {
-			return false;
-		} 
-		if (this.inactiveBeforeStart && !this.isLeft && day.isBefore(this.selectedFromDate)) {
+    isDateAvailable(day) {
+        if (day.get('month') !== this.month) {
             return false;
         }
-		return true;
-	}
+        if (this.inactiveBeforeStart && !this.isLeft && day.isBefore(this.selectedFromDate)) {
+            return false;
+        }
+        return true;
+    }
     isSelectedDate(day) {
         if (day.get('month') === this.month && day.isSameOrAfter(this.selectedFromDate, 'date') && day.isSameOrBefore(this.selectedToDate, 'date')) {
             return true;

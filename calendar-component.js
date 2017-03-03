@@ -155,9 +155,8 @@ var CalendarComponent = (function () {
     ], CalendarComponent.prototype, "monthChanged", void 0);
     CalendarComponent = __decorate([
         core_1.Component({
-            moduleId: module.id,
             selector: 'calendar',
-            templateUrl: './calendar-component.html'
+            template: require('./calendar-component.html')
         }), 
         __metadata('design:paramtypes', [])
     ], CalendarComponent);
