@@ -9,5 +9,6 @@ export class Options {
     singleDatePicker = false;
     format;
     inactiveBeforeStart = false;
-	autoApply: boolean;
+    autoApply: boolean;
+    timePicker: boolean;
 }

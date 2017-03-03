@@ -4,9 +4,8 @@ var moment = require('moment');
 require('moment-range');
 
 @Component({
-    moduleId: module.id,
     selector: 'calendar',
-    templateUrl: './calendar-component.html'
+    template: require('./calendar-component.html')
 })
 export class CalendarComponent implements OnChanges {
     @Input() month: string;
@@ -86,15 +85,15 @@ export class CalendarComponent implements OnChanges {
             return true;
         }
     }
-	isDateAvailable(day){
-		if(day.get('month') !== this.month) {
-			return false;
-		} 
-		if (this.inactiveBeforeStart && !this.isLeft && day.isBefore(this.selectedFromDate)) {
+    isDateAvailable(day) {
+        if (day.get('month') !== this.month) {
             return false;
         }
-		return true;
-	}
+        if (this.inactiveBeforeStart && !this.isLeft && day.isBefore(this.selectedFromDate)) {
+            return false;
+        }
+        return true;
+    }
     isSelectedDate(day) {
         if (day.get('month') === this.month && day.isSameOrAfter(this.selectedFromDate, 'date') && day.isSameOrBefore(this.selectedToDate, 'date')) {
             return true;
