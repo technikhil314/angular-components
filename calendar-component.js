@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var moment = require('moment');
 require('moment-range');
 var CalendarComponent = (function () {
@@ -109,56 +109,58 @@ var CalendarComponent = (function () {
             isLeft: this.isLeft
         });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "month", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "year", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "selectedFromDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "selectedToDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], CalendarComponent.prototype, "isLeft", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "format", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "minDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], CalendarComponent.prototype, "maxDate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], CalendarComponent.prototype, "inactiveBeforeStart", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CalendarComponent.prototype, "dateChanged", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CalendarComponent.prototype, "monthChanged", void 0);
+    CalendarComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'calendar',
+            template: "\n        <div class=\"col-md-12 text-center flush\">\n            <div class=\"col-md-2 flush\">\n                <span class=\"col-md-12 flush clickable clickable-link\" (click)=\"monthSelected(-1)\">\n                    Prev\n                </span>\n            </div>\n            <span class=\"col-md-8 float-left text-center nudge-top\">\n                <label> {{monthText}} {{year}} </label>\n            </span>\n            <div class=\"col-md-2 flush\">\n                <span class=\"col-md-12 pull-right flush clickable clickable-link\" (click)=\"monthSelected(1)\">\n                    Next\n                </span>\n            </div>\n        </div>\n        <div class=\"col-md-12 flush\">\n            <table class=\"table table-condensed flush\">\n                <thead>\n                    <th>Su</th>\n                    <th>Mo</th>\n                    <th>Tu</th>\n                    <th>We</th>\n                    <th>Th</th>\n                    <th>Fr</th>\n                    <th>Sa</th>\n                </thead>\n                <tbody>\n                    <tr *ngFor=\"let week of weekList; let i = index\">\n                        <td *ngFor=\"let day of weekList[i]\" (click)=\"dateSelected(day)\" class=\"clickable\" [ngClass]=\"{'off':!isDateAvailable(day),'active':isSelectedDate(day),'disabled':isDisabled(day)}\">\n                            {{ day.format('D') }}\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n    "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CalendarComponent);
     return CalendarComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "month", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "year", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "selectedFromDate", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "selectedToDate", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], CalendarComponent.prototype, "isLeft", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "format", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "minDate", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], CalendarComponent.prototype, "maxDate", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], CalendarComponent.prototype, "inactiveBeforeStart", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], CalendarComponent.prototype, "dateChanged", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], CalendarComponent.prototype, "monthChanged", void 0);
-CalendarComponent = __decorate([
-    core_1.Component({
-        selector: 'calendar',
-        template: require('./calendar-component.html')
-    })
-], CalendarComponent);
 exports.CalendarComponent = CalendarComponent;

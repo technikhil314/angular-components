@@ -4,8 +4,45 @@ var moment = require('moment');
 require('moment-range');
 
 @Component({
+    moduleId: module.id,
     selector: 'calendar',
-    template: require('./calendar-component.html')
+    template: `
+        <div class="col-md-12 text-center flush">
+            <div class="col-md-2 flush">
+                <span class="col-md-12 flush clickable clickable-link" (click)="monthSelected(-1)">
+                    Prev
+                </span>
+            </div>
+            <span class="col-md-8 float-left text-center nudge-top">
+                <label> {{monthText}} {{year}} </label>
+            </span>
+            <div class="col-md-2 flush">
+                <span class="col-md-12 pull-right flush clickable clickable-link" (click)="monthSelected(1)">
+                    Next
+                </span>
+            </div>
+        </div>
+        <div class="col-md-12 flush">
+            <table class="table table-condensed flush">
+                <thead>
+                    <th>Su</th>
+                    <th>Mo</th>
+                    <th>Tu</th>
+                    <th>We</th>
+                    <th>Th</th>
+                    <th>Fr</th>
+                    <th>Sa</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let week of weekList; let i = index">
+                        <td *ngFor="let day of weekList[i]" (click)="dateSelected(day)" class="clickable" [ngClass]="{'off':!isDateAvailable(day),'active':isSelectedDate(day),'disabled':isDisabled(day)}">
+                            {{ day.format('D') }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    `
 })
 export class CalendarComponent implements OnChanges {
     @Input() month: string;

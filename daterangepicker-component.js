@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var daterangepicker_options_1 = require("./daterangepicker-options");
-var daterangepicker_default_ranges_1 = require("./daterangepicker-default-ranges");
-var moment = require("moment");
+var core_1 = require('@angular/core');
+var daterangepicker_options_1 = require('./daterangepicker-options');
+var daterangepicker_default_ranges_1 = require('./daterangepicker-default-ranges');
+var moment = require('moment');
 var DaterangepickerComponent = (function () {
     function DaterangepickerComponent(elem) {
         this.elem = elem;
@@ -226,32 +226,33 @@ var DaterangepickerComponent = (function () {
         this.setToDate(data.value.end);
         this.toggleCalendars(false);
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', daterangepicker_options_1.Options)
+    ], DaterangepickerComponent.prototype, "options", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], DaterangepickerComponent.prototype, "class", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], DaterangepickerComponent.prototype, "rangeSelected", void 0);
+    __decorate([
+        core_1.HostListener('document:mousedown', ['$event']),
+        core_1.HostListener('document:mouseup', ['$event']), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], DaterangepickerComponent.prototype, "handleOutsideClick", null);
+    DaterangepickerComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'date-range-picker',
+            template: "\n        <input class=\"{{class}}\" type=\"text\" [ngModel]=\"range\">\n        <div class=\"daterangepicker col-md-12 text-center flush\" [class.hidden]=\"!showCalendars\">\n            <div class=\"col-md-12 flush text-center\">\n                <div class=\"col-md-6 flush-bottom text-center flush-left flush-half--right\">\n                    <div class=\"col-md-12 flush-bottom flush-left flush-half--right\">\n                        <input class=\"input-mini form-control\" [ngModel]=\"fromDate | formatMomentDate: format\" (blur)=\"formatFromDate($event)\" type=\"text\" name=\"daterangepicker_start\" />\n                    </div>\n                    <div class=\"col-md-12 flush\">\n                        <calendar class=\"col-md-12 flush\" [isLeft]=\"true\" [month]=\"fromMonth\" [year]=\"fromYear\" (monthChanged)=monthChanged($event) (dateChanged)=\"dateChanged($event)\" [format]=\"format\" [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\"\n                            [maxDate]=\"options.maxDate\" [inactiveBeforeStart]=\"options.inactiveBeforeStart\"></calendar>\n                    </div>\n                </div>\n                <div class=\"col-md-6 flush-bottom flush-right flush-half--left\">\n                    <div class=\"col-md-12 flush-bottom text-center flush-right flush-half--left\">\n                        <input class=\"input-mini form-control\" [ngModel]=\"toDate | formatMomentDate: format\" (blur)=\"formatToDate($event)\" name=\"daterangepicker_end\" />\n                    </div>\n                    <div class=\"col-md-12 flush\">\n                        <calendar class=\"col-md-12 flush\" [month]=\"toMonth\" [year]=\"toYear\" [format]=\"format\" (dateChanged)=\"dateChanged($event)\" (monthChanged)=monthChanged($event) [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\" [maxDate]=\"options.maxDate\"\n                            [inactiveBeforeStart]=\"options.inactiveBeforeStart\"></calendar>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-md-12 flush text-center ranges\">\n                <button [class.hidden]=\"options.autoApply\" class=\"btn btn-success btn-sm\" [disabled]=\"!enableApplyButton\" (click)=\"apply()\">Apply</button>\n                <button [class.hidden]=\"options.autoApply\" class=\"btn btn-default btn-sm\" (click)=\"cancel()\">Cancel</button>\n                <div class=\"col-md-12 flush text-center\">\n                    <button *ngFor=\"let range of defaultRanges\" class=\"btn btn-link\" (click)=\"applyPredefinedRange(range)\">{{range.name}}</button>\n                </div>\n            </div>\n        </div>\n    "
+        }), 
+        __metadata('design:paramtypes', [core_1.ElementRef])
+    ], DaterangepickerComponent);
     return DaterangepickerComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", daterangepicker_options_1.Options)
-], DaterangepickerComponent.prototype, "options", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], DaterangepickerComponent.prototype, "class", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], DaterangepickerComponent.prototype, "rangeSelected", void 0);
-__decorate([
-    core_1.HostListener('document:mousedown', ['$event']),
-    core_1.HostListener('document:mouseup', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], DaterangepickerComponent.prototype, "handleOutsideClick", null);
-DaterangepickerComponent = __decorate([
-    core_1.Component({
-        selector: 'date-range-picker',
-        templateUrl: require('./daterangepicker-component.html')
-    }),
-    __metadata("design:paramtypes", [core_1.ElementRef])
-], DaterangepickerComponent);
 exports.DaterangepickerComponent = DaterangepickerComponent;
