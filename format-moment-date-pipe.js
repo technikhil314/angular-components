@@ -15,7 +15,7 @@ var FormatMomentDatePipe = (function () {
     FormatMomentDatePipe.prototype.transform = function (value, format) {
         if (value)
             return value.format(format);
-        return null;
+        return "";
     };
     FormatMomentDatePipe = __decorate([
         core_1.Pipe({ name: 'formatMomentDate' }), 

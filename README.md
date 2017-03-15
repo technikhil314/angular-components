@@ -207,6 +207,9 @@ minDate: default minimum date not including this date
 maxDate: default maximum date not including this date
 inactiveBeforeStart: blurs all dates before selected start date
 autoApply: removes apply and cancel buttons and applies as soon as user selects end date
+showRanges: set to true if you want to see the predefine ranges
+preDefinedRanges: custom ranges if you want to define your own ranges
+noDefaultRangeSelected: if set to true all input boxes will be blank when the rangepicker is loaded
 ```
 All dates are suppoesed to be string and in format as you are passing.
 You can also 

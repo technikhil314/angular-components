@@ -1,5 +1,15 @@
 import * as moment from 'moment';
 
+class DateRange {
+    start: any;
+    end: any;
+}
+
+class DefinedDateRange {
+    name: string;
+    value: DateRange;
+}
+
 export class Options {
     startDate;
     endDate;
@@ -11,4 +21,7 @@ export class Options {
     inactiveBeforeStart = false;
     autoApply: boolean;
     timePicker: boolean;
+    preDefinedRanges: DefinedDateRange[];
+    noDefaultRangeSelected: boolean;
+    showRanges: boolean;
 }
