@@ -4,6 +4,7 @@
     "description": "Bootstrap Daterange picker for angular2",
     "main": "index.js",
     "scripts": {
+        "preinstall": "npm install -g typescript typescript-formatter lite-server concurrently rimraf",
         "start": "tsfmt -r daterangepicker-component.ts calendar-component.ts daterangepicker-module.ts index.ts daterangepicker-options.ts index.d.ts && rimraf ./dist && tsc && concurrently \"tsc -w\" \"lite-server\" ",
         "tsFormatter": "tsfmt -r daterangepicker-component.ts calendar-component.ts daterangepicker-module.ts index.ts daterangepicker-options.ts index.d.ts"
     },
