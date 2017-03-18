@@ -313,10 +313,10 @@ export class DaterangepickerComponent implements OnInit {
             if (range.value.start.isAfter(range.value.end, 'date')) {
                 return false;
             }
-            if (this.options.minDate && range.value.start.isBefore(this.options.minDate)) {
+            if (this.options.minDate && range.value.start.isBefore(this.options.minDate, 'date')) {
                 return false;
             }
-            if (this.options.maxDate && range.value.end.isAfter(this.options.maxDate)) {
+            if (this.options.maxDate && range.value.end.isAfter(this.options.maxDate, 'date')) {
                 return false;
             }
             return true;

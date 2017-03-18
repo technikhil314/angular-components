@@ -283,10 +283,10 @@ var DaterangepickerComponent = (function () {
             if (range.value.start.isAfter(range.value.end, 'date')) {
                 return false;
             }
-            if (_this.options.minDate && range.value.start.isBefore(_this.options.minDate)) {
+            if (_this.options.minDate && range.value.start.isBefore(_this.options.minDate, 'date')) {
                 return false;
             }
-            if (_this.options.maxDate && range.value.end.isAfter(_this.options.maxDate)) {
+            if (_this.options.maxDate && range.value.end.isAfter(_this.options.maxDate, 'date')) {
                 return false;
             }
             return true;
