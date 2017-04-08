@@ -4,7 +4,6 @@ var moment = require('moment');
 require('moment-range');
 
 @Component({
-    moduleId: module.id,
     selector: 'calendar',
     template: `
         <div class="col-md-12 text-center flush">
@@ -74,7 +73,6 @@ export class CalendarComponent implements OnChanges {
         });
         return weekNumbers;
     }
-
     getWeeksRange(weeks: any, year: any, month: any) {
         let weeksRange = [];
 

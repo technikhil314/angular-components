@@ -6,7 +6,6 @@ import { Defaults } from './daterangepicker-default-ranges';
 import * as moment from 'moment';
 
 @Component({
-    moduleId: module.id,
     selector: 'date-range-picker',
     template: `
         <input class="{{class}}" type="text" [ngModel]="range">
