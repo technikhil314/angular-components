@@ -6,7 +6,7 @@ This module is strictly intended to work on browsers only and not in node/browse
 
 This is a work in progress and you are always welcome to help me going forward with this project.
 
-###Installation
+### Installation
 
 ```bash
 # NPM
@@ -15,6 +15,7 @@ npm install angular-2-daterangepicker
 ### Version less than or equal 1.0.10
 ### if you are using this module with version less than or equal 1.0.10 then installation goes as following
 
+```html
 	<!-- Include Required Prerequisites -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -23,29 +24,31 @@ npm install angular-2-daterangepicker
 	<!-- Include Date Range Picker -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+```
 
 Use this as: 
-<pre>
-	&lt;date-range-picker [fromDate]="'04/01/2017'" [toDate]="'04/02/2017'" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event)"&gt; &lt;/date-range-picker&gt;
-</pre>
+```html
+	<date-range-picker [fromDate]="'04/01/2017'" [toDate]="'04/02/2017'" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event)"></date-range-picker>
+```
 
 currently only three options are made available
-<pre>
-1. format
+
+1. `format`
 	Use this to configure date format which you want. If not provided it defaults to YYYY-MM-DD
-2. fromDate and
-3. toDate
+2. `fromDate` and
+3. `toDate`
 	Both dates are supposed to be string and are accepted in format provided.
 	If not provided then both dates defaults to current date in provided format
-</pre>
+
 To get selected dates subscribe to datesSelected event as shown above
 which passes a javascript object in following format
-<pre>
+
+```js
 {
-	fromDate: contains a moement object, format it as per your needs,
-	toDate: contains a moement object, format it as per your needs
+	fromDate: 'contains a moement object, format it as per your needs'
+	toDate: 'contains a moement object, format it as per your needs'
 }
-</pre>
+```
 
 ### if you are using this module with version greater than or equal 1.1.0 then installation goes as following
 
@@ -56,7 +59,8 @@ also you should have installed @types/node or [see here](http://stackoverflow.co
 I will suggest you to install dependancy modules before this module
 
 If you are using bootstrap.css then just include following styliing in your code <br/>
-```bash
+
+```html
 <style>
 	.daterangepicker {
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
@@ -180,9 +184,10 @@ if you do not want to include whole bootstrap.css then include [this css](https:
 
 see [this plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to see how to configure it with system.js loader and demo
 
-###Usage
+### Usage
 Import DaterangepickerModule into your module as following
-```bash
+
+```ts
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -197,42 +202,51 @@ export class AppModule {
 }
 ```
 
-###options
+### options
 Currently very minimum number of options are available but I will keep on developing and adding more and more options
-```bash
-format: date format
-startDate: Default start date
-endDate: default end date
-minDate: default minimum date not including this date
-maxDate: default maximum date not including this date
-inactiveBeforeStart: blurs all dates before selected start date
-autoApply: removes apply and cancel buttons and applies as soon as user selects end date
-showRanges: set to true if you want to see the predefine ranges
-preDefinedRanges: custom ranges if you want to define your own ranges
-noDefaultRangeSelected: if set to true all input boxes will be blank when the rangepicker is loaded
+
+```js
+{
+	format: 'date format'
+	startDate: 'Default start date'
+	endDate: 'default end date'
+	minDate: 'default minimum date not including this date'
+	maxDate: 'default maximum date not including this date'
+	inactiveBeforeStart: 'blurs all dates before selected start date'
+	autoApply: 'removes apply and cancel buttons and applies as soon as user selects end date'
+	showRanges: 'set to true if you want to see the predefine ranges'
+	preDefinedRanges: 'custom ranges if you want to define your own ranges'
+	noDefaultRangeSelected: 'if set to true all input boxes will be blank when the rangepicker is loaded'
+}
 ```
+
 All dates are suppoesed to be string and in format as you are passing.
 You can also 
-```bash
+
+```ts
 import { Options } from 'angular-2-daterangepicker';
 ```
 class for passing options to the component.
 
-##Events
+## Events
+
 Subscribe to rangeSelected event as 
-```bash
+
+```html
 <date-range-picker [class]="'col-md-12 form-control'" [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)"></date-range-picker>
 ```
 the event listener will receive a javscript object conaining 
-```bash
+```js
 {
-	start: moment object representing start date selected by user
-	end: moment object representing end date selected by user
+	start: 'moment object representing start date selected by user'
+	end: 'moment object representing end date selected by user'
 }
 ```
-###How pass options to the component
+
+### How pass options to the component
 The input box automatically takes class of the date-range-picker tag
-```bash
+
+```ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -251,4 +265,5 @@ export class AppComponent{
 }
 
 ```
+
 Please let me know if your are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues)
