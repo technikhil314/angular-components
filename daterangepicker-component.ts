@@ -11,26 +11,26 @@ import * as moment from 'moment';
         <input class="{{class}}" type="text" [ngModel]="range">
         <div class="daterangepicker col-md-12 text-center flush" [class.hidden]="!showCalendars">
             <div class="col-md-12 flush text-center">
-                <div class="col-md-6 flush-bottom text-center flush-left flush-half--right">
-                    <div class="col-md-12 flush-bottom flush-left flush-half--right">
+                <div class="col-md-6 flush-bottom text-center flush-left nudge-half--right">
+                    <div class="col-md-12 flush-bottom flush-left nudge-half--right">
                         <input class="input-mini form-control" [ngModel]="fromDate | formatMomentDate: format" (blur)="formatFromDate($event)" type="text" name="daterangepicker_start" />
                     </div>
                     <div class="col-md-12 flush">
-                        <calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (monthChanged)=monthChanged($event) (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
+                        <calendar class="col-md-12" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
                             [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
                     </div>
                 </div>
-                <div class="col-md-6 flush-bottom flush-right flush-half--left">
-                    <div class="col-md-12 flush-bottom text-center flush-right flush-half--left">
+                <div class="col-md-6 flush-bottom flush-right nudge-half--left">
+                    <div class="col-md-12 flush-bottom text-center flush-right nudge-half--left">
                         <input class="input-mini form-control" [ngModel]="toDate | formatMomentDate: format" (blur)="formatToDate($event)" name="daterangepicker_end" />
                     </div>
                     <div class="col-md-12 flush">
-                        <calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)=monthChanged($event) [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate" [maxDate]="options.maxDate"
+                        <calendar class="col-md-12" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate" [maxDate]="options.maxDate"
                             [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 flush text-center ranges">
+            <div class="flush text-center ranges">
                 <button [class.hidden]="options.autoApply" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
                 <button [class.hidden]="options.autoApply" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
                 <div class="col-md-12 flush text-center" *ngIf="options.showRanges">
@@ -278,6 +278,18 @@ export class DaterangepickerComponent implements OnInit {
             this.fromYear = temp.get('year');
         } else {
             temp = moment([this.toYear, this.toMonth]).add(data.value, 'months');
+            this.toMonth = temp.get('month');
+            this.toYear = temp.get('year');
+        }
+    }
+    yearChanged(data) {
+        let temp;
+        if (data.isLeft) {
+            temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'year');
+            this.fromMonth = temp.get('month');
+            this.fromYear = temp.get('year');
+        } else {
+            temp = moment([this.toYear, this.toMonth]).add(data.value, 'year');
             this.toMonth = temp.get('month');
             this.toYear = temp.get('year');
         }

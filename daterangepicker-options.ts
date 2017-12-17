@@ -21,6 +21,7 @@ export class Options {
     inactiveBeforeStart = false;
     autoApply: boolean;
     timePicker: boolean;
+    singleCalendar: boolean;
     preDefinedRanges: DefinedDateRange[];
     noDefaultRangeSelected: boolean;
     showRanges: boolean;
