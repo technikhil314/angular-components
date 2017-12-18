@@ -9,10 +9,10 @@ import * as moment from 'moment';
     selector: 'date-range-picker',
     template: `
         <input class="{{class}}" type="text" [ngModel]="range">
-        <div class="daterangepicker col-md-12 text-center flush" [class.hidden]="!showCalendars">
+        <div class="daterangepicker col-md-12 text-center flush" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
             <div class="col-md-12 flush text-center">
-                <div class="col-md-6 flush-bottom text-center flush-left nudge-half--right">
-                    <div class="col-md-12 flush-bottom flush-left nudge-half--right">
+                <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}">
+                    <div class="col-md-12 flush-bottom flush-left nudge-half--right" *ngIf="!options.singleCalendar">
                         <input class="input-mini form-control" [ngModel]="fromDate | formatMomentDate: format" (blur)="formatFromDate($event)" type="text" name="daterangepicker_start" />
                     </div>
                     <div class="col-md-12 flush">
@@ -20,7 +20,7 @@ import * as moment from 'moment';
                             [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
                     </div>
                 </div>
-                <div class="col-md-6 flush-bottom flush-right nudge-half--left">
+                <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
                     <div class="col-md-12 flush-bottom text-center flush-right nudge-half--left">
                         <input class="input-mini form-control" [ngModel]="toDate | formatMomentDate: format" (blur)="formatToDate($event)" name="daterangepicker_end" />
                     </div>
@@ -30,7 +30,7 @@ import * as moment from 'moment';
                     </div>
                 </div>
             </div>
-            <div class="flush text-center ranges">
+            <div class="flush text-center ranges" *ngIf="!options.singleCalendar">
                 <button [class.hidden]="options.autoApply" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
                 <button [class.hidden]="options.autoApply" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
                 <div class="col-md-12 flush text-center" *ngIf="options.showRanges">
@@ -223,8 +223,8 @@ export class DaterangepickerComponent implements OnInit {
                 this.fromDate = this.toDate.clone();
             }
         }
-        if (this.options.autoApply) {
-            !isLeft ? this.toggleCalendars(false) : this.toggleCalendars(true);
+        if (this.options.autoApply || this.options.singleCalendar) {
+            (!isLeft || this.options.singleCalendar) ? this.toggleCalendars(false) : this.toggleCalendars(true);
             this.setRange()
             this.emitRangeSelected();
         } else {
@@ -232,10 +232,18 @@ export class DaterangepickerComponent implements OnInit {
         }
     }
     emitRangeSelected() {
-        this.rangeSelected.emit({
-            start: this.getMoment(this.fromDate),
-            end: this.getMoment(this.toDate)
-        });
+        let data = {};
+        if (this.options.singleCalendar) {
+            data = {
+                start: this.getMoment(this.fromDate)
+            }
+        } else {
+            data = {
+                start: this.getMoment(this.fromDate),
+                end: this.getMoment(this.toDate)
+            }
+        }
+        this.rangeSelected.emit(data);
     }
     getMoment(value) {
         return moment(value, this.format);
@@ -248,7 +256,9 @@ export class DaterangepickerComponent implements OnInit {
         return momentValue;
     }
     setRange() {
-        if (this.fromDate && this.toDate) {
+        if (this.options.singleCalendar) {
+            this.range = this.fromDate.format(this.format);
+        } else if (this.fromDate && this.toDate) {
             this.range = this.fromDate.format(this.format) + " - " + this.toDate.format(this.format);
         } else {
             this.range = "";

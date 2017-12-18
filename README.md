@@ -145,7 +145,8 @@ If you are using bootstrap.css then just include following styliing in your code
 
 if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
 
-see [this plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to see how to configure it with system.js loader and demo
+see [Demo](https://nikhil-001mehta.github.io/angular-2-daterangepicker/)
+or [Plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to how to consume this module
 
 ### Usage
 Import DaterangepickerModule into your module as following

@@ -135,7 +135,7 @@ export class CalendarComponent implements OnChanges {
         if (day.get('month') !== this.month) {
             return false;
         }
-        if (this.inactiveBeforeStart && !this.isLeft && day.isBefore(this.selectedFromDate, 'date')) {
+        if (this.inactiveBeforeStart && this.isLeft && day.isBefore(this.selectedFromDate, 'date')) {
             return false;
         }
         return true;
