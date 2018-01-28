@@ -225,11 +225,12 @@ var DaterangepickerComponent = (function () {
         return momentValue;
     };
     DaterangepickerComponent.prototype.setRange = function () {
+        var displayFormat = this.options.displayFormat !== undefined ? this.options.displayFormat : this.format;
         if (this.options.singleCalendar) {
-            this.range = this.fromDate.format(this.format);
+            this.range = this.fromDate.format(displayFormat);
         }
         else if (this.fromDate && this.toDate) {
-            this.range = this.fromDate.format(this.format) + " - " + this.toDate.format(this.format);
+            this.range = this.fromDate.format(displayFormat) + " - " + this.toDate.format(displayFormat);
         }
         else {
             this.range = "";

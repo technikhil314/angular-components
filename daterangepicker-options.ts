@@ -18,6 +18,7 @@ export class Options {
     dateLimit = false;
     singleDatePicker = false;
     format;
+    displayFormat;
     inactiveBeforeStart = false;
     autoApply: boolean;
     timePicker: boolean;
