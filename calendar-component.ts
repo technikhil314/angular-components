@@ -75,8 +75,8 @@ export class CalendarComponent implements OnChanges {
 
     getWeekNumbers(monthRange: any) {
         let weekNumbers = [];
-        let indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-        monthRange.by('days', function (moment) {
+        let indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+        monthRange.by('days', function(moment) {
             let ref;
             if (weekNumbers.length < 6 && (ref = moment.week(), indexOf.call(weekNumbers, ref)) < 0) {
                 return weekNumbers.push(moment.week());
@@ -114,9 +114,9 @@ export class CalendarComponent implements OnChanges {
         weeksRange = this.getWeeksRange(this.getWeekNumbers(monthRange), year, month);
 
         let weekList = [];
-        weeksRange.map(function (week) {
+        weeksRange.map(function(week) {
             let daysList = [];
-            week.by('days', function (day) {
+            week.by('days', function(day) {
                 daysList.push(day);
             });
             weekList.push(daysList);
