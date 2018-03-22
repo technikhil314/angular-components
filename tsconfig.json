@@ -9,6 +9,9 @@
     "noImplicitAny": false,
 	"lib": [ "es2015", "dom" ]
   },
+  "include": [
+    "./*.ts"
+  ],
   "exclude": [
     "node_modules",
     "typings/main",
