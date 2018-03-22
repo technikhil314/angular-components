@@ -1,5 +1,5 @@
 # angular-2-daterangepicker
-<p>
+<div>
 	<a href="https://www.npmjs.com/package/angular-2-daterangepicker?activeTab=readme">
 		<img src="https://img.shields.io/badge/dynamic/json.svg?label=npm&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fnikhil-001mehta%2Fangular-2-daterangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
 	</a>
@@ -9,8 +9,8 @@
 	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
 
-</p>
-### Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
+</div>
+## Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
 
 This module is strictly intended to work on browsers only and not in node/browserless environments
 
