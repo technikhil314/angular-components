@@ -264,7 +264,7 @@ Please let me know if you are facing any issues [here](https://github.com/nikhil
 <ol>
 <li>Fork this repo</li>
 <li>npm install</li>
-<li>Copy all files from <a href="https://gist.github.com/nikhil-001mehta/7a43a4da53ed9809fd6682a340ede618" target="_blank">this gist</a> to your repo</li>
+<li>Copy all files from <a href="https://gist.github.com/nikhil-001mehta/7a43a4da53ed9809fd6682a340ede618" target="_blank">this gist</a> to your local folder. And do not add them to git index otherwise they will appear in your pull requests.</li>
 <li> run "npm install -g typescript typescript-formatter lite-server concurrently rimraf"</li>
 <li>run "npm start"</li>
 <li>open browser at <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a></li>
