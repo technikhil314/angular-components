@@ -10,11 +10,17 @@
 	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe> -->
 
 </div>
-## Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
 
+# About this package 
+<p>
+Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
+</p>
+<p>
 This module is strictly intended to work on browsers only and not in node/browserless environments
-
+</p>
+<p>
 This is a work in progress and you are always welcome to help me going forward with this project.
+</p>
 
 # Announcements
 <div style="background:grey;color:black">
