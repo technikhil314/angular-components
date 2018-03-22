@@ -19,9 +19,9 @@ npm install angular-2-daterangepicker
 [moment.js](http://momentjs.com/) version greater than 2.17.1<br/>
 [moment-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
 also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
-I will suggest you to install dependancy modules before this module
+I suggest installing all the dependencies before this module
 
-If you are using bootstrap.css then just include following styliing in your code <br/>
+If you are using bootstrap.css then just include the following styling in your code <br/>
 
 ```html
 <style>
@@ -167,24 +167,25 @@ export class AppModule {
 ```
 
 ### options
-Currently very minimum number of options are available but I will keep on developing and adding more and more options
+Currently, very minimum number of options are available but I will keep on developing and adding more and more options
 
 ```js
 {
 	format: 'date format'
+	displayFormat: 'display date format (customize the format of the dates displayed)'
 	startDate: 'Default start date'
 	endDate: 'default end date'
 	minDate: 'default minimum date not including this date'
 	maxDate: 'default maximum date not including this date'
 	inactiveBeforeStart: 'blurs all dates before selected start date'
 	autoApply: 'removes apply and cancel buttons and applies as soon as user selects end date'
-	showRanges: 'set to true if you want to see the predefine ranges'
+	showRanges: 'set to true if you want to see the default ranges'
 	preDefinedRanges: 'custom ranges if you want to define your own ranges'
 	noDefaultRangeSelected: 'if set to true all input boxes will be blank when the rangepicker is loaded'
 }
 ```
 
-All dates are suppoesed to be string and in format as you are passing.
+All dates are supposed to be string and in format as you are passing.
 You can also 
 
 ```ts
@@ -199,7 +200,7 @@ Subscribe to rangeSelected event as
 ```html
 <date-range-picker [class]="'col-md-12 form-control'" [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)"></date-range-picker>
 ```
-the event listener will receive a javscript object conaining 
+the event listener will receive a javascript object conaining 
 ```js
 {
 	start: 'moment object representing start date selected by user'
@@ -249,7 +250,7 @@ If you are using this module with version less than or equal 1.0.10 then install
 	<date-range-picker [fromDate]="'04/01/2017'" [toDate]="'04/02/2017'" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event)"></date-range-picker>
 ```
 
-###Options
+### Options
 currently only three options are made available
 
 1. `format`
@@ -264,8 +265,8 @@ which passes a javascript object in following format
 
 ```js
 {
-	fromDate: 'contains a moement object, format it as per your needs'
-	toDate: 'contains a moement object, format it as per your needs'
+	fromDate: 'contains a moment object, format it as per your needs'
+	toDate: 'contains a moment object, format it as per your needs'
 }
 ```
-Please let me know if your are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues)
+Please let me know if you are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues)
