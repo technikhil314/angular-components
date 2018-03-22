@@ -1,21 +1,127 @@
 # angular-2-daterangepicker
+<p>
+	<a href="https://www.npmjs.com/package/angular-2-daterangepicker?activeTab=readme">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=npm&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fnikhil-001mehta%2Fangular-2-daterangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+	</a>
+	<a href="https://unpkg.com/angular-2-daterangepicker/index.js">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=unpkg&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fnikhil-001mehta%2Fangular-2-daterangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+	</a>
+	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
 
-### This is a npm module for daterangepicker as [here](http://www.daterangepicker.com/). But the original daterangepicker requires bootstrap.css,bootstrap.js,jquery.js as dependancy which this module is trying to get rid of.
+</p>
+### Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
 
 This module is strictly intended to work on browsers only and not in node/browserless environments
 
 This is a work in progress and you are always welcome to help me going forward with this project.
 
-### Installation
+# Announcements
+<div style="background:grey;color:black">
+<ul>
+<li>Module less than version v1.0.10 is no longer supported</li>
+</div>
+
+# Getting Started
+## Install
+```bash
+$ npm install angular-2-daterangepicker 
+```
+or
 
 ```bash
-# NPM
-npm install angular-2-daterangepicker
+$ bower install angular-2-daterangepicker
 ```
 
-### if you are using this module with version greater than or equal 1.1.0 then installation goes as following
+## Demo
+see [Demo](https://nikhil-001mehta.github.io/angular-2-daterangepicker/)
+or [Plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to how to consume this module
 
-### Depends on 
+# Usage
+## How to make it work for you
+Import DaterangepickerModule into your module as following
+
+```ts
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { DaterangepickerModule } from 'angular-2-daterangepicker';
+@NgModule({
+	imports: [BrowserModule, DaterangepickerModule],
+	declarations: [ AppComponent ],
+	bootstrap: [AppComponent]
+})
+export class AppModule {
+	
+}
+```
+
+## Options
+Currently, very minimum number of options are available but I will keep on developing and adding more and more options
+
+```js
+{
+	format: 'date format'
+	displayFormat: 'display date format (customize the format of the dates displayed)'
+	startDate: 'Default start date'
+	endDate: 'default end date'
+	minDate: 'default minimum date not including this date'
+	maxDate: 'default maximum date not including this date'
+	inactiveBeforeStart: 'blurs all dates before selected start date'
+	autoApply: 'removes apply and cancel buttons and applies as soon as user selects end date'
+	showRanges: 'set to true if you want to see the default ranges'
+	preDefinedRanges: 'custom ranges if you want to define your own ranges'
+	noDefaultRangeSelected: 'if set to true all input boxes will be blank when the rangepicker is loaded'
+}
+```
+
+All dates are supposed to be string and in format as you are passing.
+You can also 
+
+```ts
+import { Options } from 'angular-2-daterangepicker';
+```
+class for passing options to the component.
+
+## Events
+
+Subscribe to rangeSelected event as 
+
+```html
+<date-range-picker [class]="'col-md-12 form-control'" [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)"></date-range-picker>
+```
+the event listener will receive a javascript object conaining 
+```js
+{
+	start: 'moment object representing start date selected by user'
+	end: 'moment object representing end date selected by user'
+}
+```
+
+## How pass options to the component
+The input box automatically takes class of the date-range-picker tag
+
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+	selector: "my-datepicker-demo",
+	template: `
+		<date-range-picker class="col-md-4" [options]="daterangepickerOptions" class="col-md-4">
+		</date-range-picker>
+	`
+})
+export class AppComponent{
+	daterangepickerOptions = {
+		startDate: '09/01/2017',
+		endDate: '09/02/2017',
+		format: 'DD/MM/YYYY'
+	}
+}
+
+```
+
+# Dependencies 
 [moment.js](http://momentjs.com/) version greater than 2.17.1<br/>
 [moment-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
 also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
@@ -145,128 +251,18 @@ If you are using bootstrap.css then just include the following styling in your c
 
 if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
 
-see [Demo](https://nikhil-001mehta.github.io/angular-2-daterangepicker/)
-or [Plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to how to consume this module
-
-### Usage
-Import DaterangepickerModule into your module as following
-
-```ts
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { DaterangepickerModule } from 'angular-2-daterangepicker';
-@NgModule({
-	imports: [BrowserModule, DaterangepickerModule],
-	declarations: [ AppComponent ],
-	bootstrap: [AppComponent]
-})
-export class AppModule {
-	
-}
-```
-
-### options
-Currently, very minimum number of options are available but I will keep on developing and adding more and more options
-
-```js
-{
-	format: 'date format'
-	displayFormat: 'display date format (customize the format of the dates displayed)'
-	startDate: 'Default start date'
-	endDate: 'default end date'
-	minDate: 'default minimum date not including this date'
-	maxDate: 'default maximum date not including this date'
-	inactiveBeforeStart: 'blurs all dates before selected start date'
-	autoApply: 'removes apply and cancel buttons and applies as soon as user selects end date'
-	showRanges: 'set to true if you want to see the default ranges'
-	preDefinedRanges: 'custom ranges if you want to define your own ranges'
-	noDefaultRangeSelected: 'if set to true all input boxes will be blank when the rangepicker is loaded'
-}
-```
-
-All dates are supposed to be string and in format as you are passing.
-You can also 
-
-```ts
-import { Options } from 'angular-2-daterangepicker';
-```
-class for passing options to the component.
-
-## Events
-
-Subscribe to rangeSelected event as 
-
-```html
-<date-range-picker [class]="'col-md-12 form-control'" [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)"></date-range-picker>
-```
-the event listener will receive a javascript object conaining 
-```js
-{
-	start: 'moment object representing start date selected by user'
-	end: 'moment object representing end date selected by user'
-}
-```
-
-### How pass options to the component
-The input box automatically takes class of the date-range-picker tag
-
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-	selector: "my-datepicker-demo",
-	template: `
-		<date-range-picker class="col-md-4" [options]="daterangepickerOptions" class="col-md-4">
-		</date-range-picker>
-	`
-})
-export class AppComponent{
-	daterangepickerOptions = {
-		startDate: '09/01/2017',
-		endDate: '09/02/2017',
-		format: 'DD/MM/YYYY'
-	}
-}
-
-```
-
-### Version less than or equal 1.0.10
-If you are using this module with version less than or equal 1.0.10 then installation goes as following
-
-```html
-	<!-- Include Required Prerequisites -->
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
-
-	<!-- Include Date Range Picker -->
-	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-```
-
-### Usage
-```html
-	<date-range-picker [fromDate]="'04/01/2017'" [toDate]="'04/02/2017'" [format]="'DD/MM/YYYY'" (datesSelected)="demo($event)"></date-range-picker>
-```
-
-### Options
-currently only three options are made available
-
-1. `format`
-	Use this to configure date format which you want. If not provided it defaults to YYYY-MM-DD
-2. `fromDate` and
-3. `toDate`
-	Both dates are supposed to be string and are accepted in format provided.
-	If not provided then both dates defaults to current date in provided format
-
-To get selected dates subscribe to datesSelected event as shown above
-which passes a javascript object in following format
-
-```js
-{
-	fromDate: 'contains a moment object, format it as per your needs'
-	toDate: 'contains a moment object, format it as per your needs'
-}
-```
+# Issues/Problems
 Please let me know if you are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues)
+
+# Want to contribute. You are welcome!!! :)
+<ol>
+<li>Fork this repo</li>
+<li>npm install</li>
+<li>Copy all files from <a href="https://gist.github.com/nikhil-001mehta/7a43a4da53ed9809fd6682a340ede618" target="_blank">this gist</a> to your repo</li>
+<li> run "npm install -g typescript typescript-formatter lite-server concurrently rimraf"</li>
+<li>run "npm start"</li>
+<li>open browser at <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a></li>
+<li>You are all set.</li>
+<li>Add features. Fix issues. Open Pull requests.</li>
+<li>Remember not to include files from gist in your pull requests</li>
+</ol>
