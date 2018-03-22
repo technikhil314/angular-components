@@ -6,10 +6,8 @@
 	<a href="https://unpkg.com/angular-2-daterangepicker/index.js">
 		<img src="https://img.shields.io/badge/dynamic/json.svg?label=unpkg&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fnikhil-001mehta%2Fangular-2-daterangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
 	</a>
-
-	[![Demo CountPages alpha](https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=star&count=true&size=large)](https://www.youtube.com/watch?v=ek1j272iAmc)
-	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
+	<!-- <iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe> -->
 
 </div>
 ## Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
