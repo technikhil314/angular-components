@@ -12,7 +12,7 @@ import * as moment from 'moment';
         <div class="daterangepicker col-md-12 text-center flush" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
             <div class="col-md-12 flush text-center">
                 <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}">
-                    <div class="col-md-12 flush-bottom flush-left nudge-half--right" *ngIf="!options.singleCalendar">
+                    <div class="col-md-12 flush-bottom" *ngIf="!options.singleCalendar">
                         <input class="input-mini form-control" [ngModel]="fromDate | formatMomentDate: format" (blur)="formatFromDate($event)" type="text" name="daterangepicker_start" />
                     </div>
                     <div class="col-md-12 flush">
@@ -21,7 +21,7 @@ import * as moment from 'moment';
                     </div>
                 </div>
                 <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
-                    <div class="col-md-12 flush-bottom text-center flush-right nudge-half--left">
+                    <div class="col-md-12 flush-bottom text-center">
                         <input class="input-mini form-control" [ngModel]="toDate | formatMomentDate: format" (blur)="formatToDate($event)" name="daterangepicker_end" />
                     </div>
                     <div class="col-md-12 flush">
@@ -33,7 +33,7 @@ import * as moment from 'moment';
             <div class="flush text-center ranges" *ngIf="!options.singleCalendar">
                 <button [class.hidden]="options.autoApply" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
                 <button [class.hidden]="options.autoApply" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
-                <div class="col-md-12 flush text-center" *ngIf="options.showRanges">
+                <div class="flush text-center" *ngIf="options.showRanges">
                     <button *ngFor="let range of defaultRanges" class="btn btn-link" (click)="applyPredefinedRange(range)">{{range.name}}</button>
                 </div>
             </div>

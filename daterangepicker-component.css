@@ -24,7 +24,7 @@
     .col-md-10 {
         width: 100% !important;
     }
-    .ranges {
+    .ranges > div {
         display: none;
     }
 }
@@ -87,6 +87,10 @@
     top: 5px;
 }
 
+.daterangepicker .push-bottom {
+    margin-bottom: 10px;
+}
+
 .daterangepicker th {
     margin: 1px !important;
     padding: 1px !important;
@@ -99,8 +103,8 @@
     height: 20px;
     width: 20px;
     text-align: center;
-    padding: 2px !important;
     margin: 1px !important;
+    padding: 3px !important;
     border-radius: 4px !important;
     white-space: nowrap;
     text-align: center;
@@ -251,10 +255,6 @@
 
 .daterangepicker table {
     background-color: transparent;
-}
-
-.daterangepicker th {
-    text-align: left;
 }
 
 .daterangepicker .table {

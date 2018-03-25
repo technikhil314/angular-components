@@ -16,6 +16,9 @@
 Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
 </p>
 <p>
+It is a fully responsive daterangepicker with or without bootstrap.css. See <a href="#responsive-css">responsive section </a> below for more details.
+</p>
+<p>
 This module is strictly intended to work on browsers only and not in node/browserless environments
 </p>
 <p>
@@ -26,15 +29,21 @@ This is a work in progress and you are always welcome to help me going forward w
 <div style="background:grey;color:black">
 <ul>
 <li>
-	Date: 20 Jan 2018
+	Date: 25 Mar 2018
 	<ul>
-		<li>Module less than version v1.0.10 is no longer supported</li>
+		<li>Made some changes in CSS and responsiveness in version v1.0.26</li>
 	</ul>
 </li>
 <li>
 	Date: 23 Mar 2018
 	<ul>
 		<li>New option for DisplayFormat added in version v1.0.25</li>
+	</ul>
+</li>
+<li>
+	Date: 20 Jan 2018clea
+	<ul>
+		<li>Module less than version v1.0.10 is no longer supported</li>
 	</ul>
 </li>
 </div>
@@ -144,126 +153,171 @@ export class AppComponent{
 also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
 I suggest installing all the dependencies before this module
 
-If you are using bootstrap.css then just include the following styling in your code <br/>
+# Responsive CSS
+
+If you are using bootstrap.css then just include the following styling in your code
 
 ```html
 <style>
-	.daterangepicker {
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-		font-size: 14px;
-	}
-	.hidden {
-		display: none;
-		visibility: false;
-	}
-	@media (min-width: 450px) {
-		.daterangepicker {
-			z-index: 3000;
-			border-radius: 4px;
-			box-shadow: 0px 2px 2px 2px #888888;
-			max-width: 450px;
-			min-width: 450px;
-		}
-	}
-	@media (max-width: 450px) {
-		.daterangepicker {
-			z-index: 3000;
-			border-radius: 4px;
-			box-shadow: 0px 2px 2px 2px #888888;
-			max-width: 270px;
-		}
-		.text-center .pull-right {
-			float: none !important;
-		}
-		.ranges{
-			display: none;
-		}
-	}
+        .daterangepicker {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            font-size: 14px;
+            float: left;
+        }
+        
+        .daterangepicker div[class*="col-md-"],
+        .daterangepicker span[class*="col-md-"] {
+            float: left;
+        }
+        
+        .hidden {
+            display: none;
+            visibility: false;
+        }
+        
+        @media (min-width: 450px) {
+            .daterangepicker {
+                min-width: 450px;
+            }
+            .daterangepicker.singledatepicker {
+                min-width: 220px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .text-center .pull-right {
+                float: none !important;
+            }
+        }
+        
+        @media (max-width: 450px) {
+            .daterangepicker {
+                max-width: 270px;
+            }
+        }
+        
+        .daterangepicker {
+            z-index: 3000;
+            border-radius: 4px;
+            box-shadow: 0px 2px 2px 2px #ddd;
+            border: 1px solid #aaa;
+            padding: 5px;
+        }
+        
+        .daterangepicker calendar {
+            padding: 4px;
+            float: left;
+            border-radius: 4px !important;
+            width: 100%
+        }
+        
+        .daterangepicker calendar>div {
+            width: 100%;
+        }
+        
+        .applyBtn {
+            margin: 4px;
+        }
+        
+        .daterangepicker .flush {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .daterangepicker .flush-bottom {
+            padding-bottom: 0 !important;
+        }
+        
+        .daterangepicker .flush-left {
+            padding-left: 0 !important;
+        }
+        
+        .daterangepicker .flush-right {
+            padding-right: 0 !important;
+        }
+        
+        .daterangepicker .nudge-half--left {
+            padding-left: 4px !important;
+        }
+        
+        .daterangepicker .nudge-half--right {
+            padding-right: 4px !important;
+        }
+        
+        .daterangepicker .nudge-top {
+            padding-top: 5px;
+        }
+        
+        .daterangepicker th {
+            margin: 1px !important;
+            padding: 1px !important;
+            text-align: center;
+            border-radius: 4px !important;
+        }
+        
+        .daterangepicker td {
+            font-size: 14px;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            padding: 2px !important;
+            margin: 1px !important;
+            border-radius: 4px !important;
+            white-space: nowrap;
+            text-align: center;
+        }
+        
+        .daterangepicker .btn.btn-flat {
+            border: none;
+            background: transparent;
+            margin: 3px !important;
+            padding: 1px !important;
+        }
+        
+        .daterangepicker table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        
+        .daterangepicker td,
+        .daterangepicker th {
+            padding: 0;
+        }
+        
+        .daterangepicker .clickable {
+            cursor: pointer;
+        }
+        
+        .daterangepicker .clickable-link {
+            color: #337ab7;
+        }
+        
+        .daterangepicker .clickable.disabled {
+            pointer-events: none;
+            color: #AAA;
+            cursor: not-allowed;
+        }
+        
+        .daterangepicker .off {
+            color: #666;
+        }
+        
+        .daterangepicker label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .daterangepicker .btn-link {
+            padding: 1px 6px 1px 6px !important;
+        }
 
-	.daterangepicker .calendar {
-		margin: 4px;
-		float: left;
-		border-radius: 4px !important;
-	}
-	.applyBtn{
-		margin: 4px;
-	}
-	.daterangepicker  .flush {
-		padding: 0 !important;
-		margin: 0 !important;
-	}
-	.daterangepicker  .flush-bottom{
-		padding-bottom: 0 !important;
-	}
-	.daterangepicker  .flush-left {
-		padding-left: 0 !important;
-	}
-	.daterangepicker  .flush-right {
-		padding-right: 0 !important;
-	}
-	.daterangepicker  .flush-half--left {
-		padding-left: 4px !important;
-	}
-	.daterangepicker .flush-half--right {
-		padding-right: 4px !important;
-	}
-	.daterangepicker .nudge-top {
-		top: 5px;
-	}
-	.daterangepicker th {
-		margin: 1px !important;
-		padding: 1px !important;
-		text-align: center;
-		border-radius: 4px !important;
-	}
-	.daterangepicker td {
-		font-size: 14px;
-		height: 20px;
-		width: 20px;
-		text-align: center;
-		padding: 2px !important;
-		margin: 1px !important;
-		border-radius: 4px !important;
-		white-space: nowrap;
-		text-align: center;
-	}
-	.daterangepicker .btn.btn-flat {
-		border: none;
-		background: transparent;
-		margin: 3px !important;
-		padding: 1px !important;
-	}
-	.daterangepicker .off {
-		color: #A2A2A2;
-	}
-	.daterangepicker table {
-	  border-spacing: 0;
-	  border-collapse: collapse;
-	}
-	.daterangepicker td,
-	.daterangepicker th {
-	  padding: 0;
-	}
-	.daterangepicker .clickable{
-		cursor: pointer;
-	}
-	.daterangepicker .clickable-link{
-		color: #337ab7;
-	}
-	.daterangepicker .clickable.disabled{
-		pointer-events: none;
-		color: #A2A2A2;
-	}
-	.daterangepicker label{
-		display: inline-block;
-		max-width: 100%;
-		margin-bottom: 5px;
-		font-weight: bold;
-	}
-	.daterangepicker .btn-link {
-		padding: 1px 6px 1px 6px !important;
-	}
-  </style>
+        .bootstrap-flush{
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    </style>
 ```
 
 if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
