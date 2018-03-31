@@ -6,14 +6,13 @@
 
 @media (min-width: 550px) {
     .daterangepicker {
-        max-width: 550px;
-        min-width: 550px;
+        width: 550px;
     }
 }
 
 @media (max-width: 550px) {
     .daterangepicker {
-        max-width: 270px;
+        width: 270px;
     }
     .text-center .pull-right {
         float: none !important;
@@ -27,6 +26,10 @@
     .ranges > div {
         display: none;
     }
+}
+
+.singledatepicker {
+    width: 225px;
 }
 
 .daterangepicker {

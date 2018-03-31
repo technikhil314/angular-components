@@ -176,17 +176,17 @@ For custom range, Pass options as below. For this you need to pass <a href="http
 ```js
         preDefinedRanges: [{
             name: 'Day After tomorrow',
-            value: {
-                start: moment().add(2, 'days'),
-                end: moment().add(2, 'days'),
-            }
-		},{
+                value: {
+                    start: moment().add(2, 'days'),
+                    end: moment().add(2, 'days'),
+                }
+		    },{
             name: 'This week',
             value: {
                 start: moment(),
                 end: moment().add(7, 'days'),
             }
-		}]
+        }]
 ```
 ```js
 {

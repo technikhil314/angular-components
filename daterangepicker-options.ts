@@ -15,13 +15,10 @@ export class Options {
     endDate;
     minDate;
     maxDate;
-    dateLimit = false;
-    singleDatePicker = false;
     format;
     displayFormat;
     inactiveBeforeStart = false;
     autoApply: boolean;
-    timePicker: boolean;
     singleCalendar: boolean;
     preDefinedRanges: DefinedDateRange[];
     noDefaultRangeSelected: boolean;
