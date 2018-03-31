@@ -255,7 +255,7 @@ I suggest installing all the dependencies before this module
 # Responsive CSS
 
 If you are using bootstrap.css then just include the following styling in your code
-
+if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
 ```html
 <style>
         .daterangepicker {
@@ -429,8 +429,6 @@ If you are using bootstrap.css then just include the following styling in your c
         }
     </style>
 ```
-
-if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
 
 # Issues/Problems
 Please let me know if you are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues)
