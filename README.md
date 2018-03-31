@@ -29,15 +29,21 @@ This is a work in progress and you are always welcome to help me going forward w
 <div style="background:grey;color:black">
 <ul>
 <li>
+	Date: 31 Mar 2018
+	<ul>
+		<li>New option for singleCalendar added in version 1.1.27</li>
+	</ul>
+</li>
+<li>
 	Date: 25 Mar 2018
 	<ul>
-		<li>Made some changes in CSS and responsiveness in version v1.0.26</li>
+		<li>Made some changes in CSS and responsiveness in version v1.1.26</li>
 	</ul>
 </li>
 <li>
 	Date: 23 Mar 2018
 	<ul>
-		<li>New option for DisplayFormat added in version v1.0.25</li>
+		<li>New option for DisplayFormat added in version v1.1.25</li>
 	</ul>
 </li>
 <li>
@@ -211,7 +217,12 @@ the event listener will receive a javascript object conaining
 	end: 'moment object representing end date selected by user'
 }
 ```
-
+and if you have set singleCalendar to true then the event listener will receive following
+```js
+{
+	start: 'moment object representing date selected by user'
+}
+```
 ## How pass options to the component
 The input box automatically takes class of the date-range-picker tag
 
