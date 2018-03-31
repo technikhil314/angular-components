@@ -85,6 +85,109 @@ export class AppModule {
 ## Options
 Currently, very minimum number of options are available but I will keep on developing and adding more and more options
 
+
+<table>
+    <thead>
+        <tr>
+            <th>Option Name</th>
+            <th>Type</th>
+            <th>Purpose</th>
+            <th>Default Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>format</td>
+            <td>string</td>
+            <td>format that this daterangepicker will use to communicate with your code</td>
+            <td>"YYYY-MM-DD"</td>
+        </tr>
+        <tr>
+            <td>displayFormat</td>
+            <td>string</td>
+            <td>format that will be displayed to end user</td>
+            <td>Same as format</td>
+        </tr>
+        <tr>
+            <td>startDate</td>
+            <td>string</td>
+            <td>Default start date when this components is rendered for first time. Format of this date should be in line with format option's value above</td>
+            <td>Current Systetm Date</td>
+        </tr>
+        <tr>
+            <td>endDate</td>
+            <td>string</td>
+            <td>Default end date when this components is rendered for first time. Format of this date should be in line with format option's value above</td>
+            <td>Current Systetm Date</td>
+        </tr>
+        <tr>
+            <td>minDate</td>
+            <td>string</td>
+            <td>Default minimum date not including this date. End user will not be able select all dates before this date. Format of this date should be in line with format option's value above</td>
+            <td>null</td>
+        </tr>
+        <tr>
+            <td>maxDate</td>
+            <td>string</td>
+            <td>Default maximum date not including this date. End user will not be able select all dates after this date. Format of this date should be in line with format option's value above</td>
+            <td>null</td>
+        </tr>
+        <tr>
+            <td>inactiveBeforeStart</td>
+            <td>boolean</td>
+            <td>Blurs all dates before selected start date. So end user can not select toDate to be before fromDate.</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>autoApply</td>
+            <td>boolean</td>
+            <td>Removes apply and cancel buttons and applies as soon as user selects end date</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>showRanges</td>
+            <td>boolean</td>
+            <td>Predefined ranges to show to end user. So end user has ready options instead of navingating through calendars.</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>preDefinedRanges</td>
+            <td> Array of object shown as <a href="#custom-range">below</a>.</td>
+            <td>Custom ranges if you want to define your own ranges. This is useful only if showRanges option is set to true.</td>
+            <td>see <a href="#custom-range">below</a> for more details</td>
+        </tr>
+        <tr>
+            <td>noDefaultRangeSelected</td>
+            <td>boolean</td>
+            <td>This option set the startDate and endDate options to blank on first render.This date range picker sets startDate and endDate to be current system date by dafault if no value is passed to startDate and endDate.</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>singleCalendar</td>
+            <td>boolean</td>
+            <td>Use only one calendar. So you do not need another datepicker for single month.</td>
+            <td>false</td>
+        </tr>
+    </tbody>
+</table>
+
+### Custom Range 
+For custom range, Pass options as below. For this you need to pass <a href="https://momentjs.com/">momentjs</a> objects.
+```js
+        preDefinedRanges: [{
+            name: 'Day After tomorrow',
+            value: {
+                start: moment().add(2, 'days'),
+                end: moment().add(2, 'days'),
+            }
+		},{
+            name: 'This week',
+            value: {
+                start: moment(),
+                end: moment().add(7, 'days'),
+            }
+		}]
+```
 ```js
 {
 	format: 'date format'
@@ -97,7 +200,8 @@ Currently, very minimum number of options are available but I will keep on devel
 	autoApply: 'removes apply and cancel buttons and applies as soon as user selects end date'
 	showRanges: 'set to true if you want to see the default ranges'
 	preDefinedRanges: 'custom ranges if you want to define your own ranges'
-	noDefaultRangeSelected: 'if set to true all input boxes will be blank when the rangepicker is loaded'
+    noDefaultRangeSelected: 'if set to true all input boxes will be blank when the rangepicker is loaded'
+    singleCalendar
 }
 ```
 
