@@ -188,22 +188,6 @@ For custom range, Pass options as below. For this you need to pass <a href="http
             }
         }]
 ```
-```js
-{
-	format: 'date format'
-	displayFormat: 'display date format (customize the format of the dates displayed)'
-	startDate: 'Default start date'
-	endDate: 'default end date'
-	minDate: 'default minimum date not including this date'
-	maxDate: 'default maximum date not including this date'
-	inactiveBeforeStart: 'blurs all dates before selected start date'
-	autoApply: 'removes apply and cancel buttons and applies as soon as user selects end date'
-	showRanges: 'set to true if you want to see the default ranges'
-	preDefinedRanges: 'custom ranges if you want to define your own ranges'
-    noDefaultRangeSelected: 'if set to true all input boxes will be blank when the rangepicker is loaded'
-    singleCalendar
-}
-```
 
 All dates are supposed to be string and in format as you are passing.
 You can also 
@@ -266,158 +250,169 @@ If you are using bootstrap.css then just include the following styling in your c
         .daterangepicker {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             font-size: 14px;
-            float: left;
+            overflow: hidden
         }
-        
-        .daterangepicker div[class*="col-md-"],
-        .daterangepicker span[class*="col-md-"] {
-            float: left;
-        }
-        
-        .hidden {
-            display: none;
-            visibility: false;
-        }
-        
-        @media (min-width: 450px) {
+
+        @media (min-width: 550px) {
             .daterangepicker {
-                min-width: 450px;
-            }
-            .daterangepicker.singledatepicker {
-                min-width: 220px;
+                width: 550px;
             }
         }
-        
-        @media (max-width: 992px) {
+
+        @media (max-width: 550px) {
+            .daterangepicker {
+                width: 270px;
+            }
             .text-center .pull-right {
                 float: none !important;
             }
-        }
-        
-        @media (max-width: 450px) {
-            .daterangepicker {
-                max-width: 270px;
+            .col-md-6 {
+                width: 100% !important;
+            }
+            .col-md-10 {
+                width: 100% !important;
+            }
+            .ranges > div {
+                display: none;
             }
         }
-        
+
+        .singledatepicker {
+            width: 225px;
+        }
+
         .daterangepicker {
             z-index: 3000;
             border-radius: 4px;
             box-shadow: 0px 2px 2px 2px #ddd;
             border: 1px solid #aaa;
-            padding: 5px;
+            padding: 10px;
         }
-        
-        .daterangepicker calendar {
-            padding: 4px;
+
+        .daterangepicker div[class*="col-md-"],
+        .daterangepicker span[class*="col-md-"] {
+            padding: 0 5px 0 5px;
+            ;
+        }
+
+        .hidden {
+            display: none !important;
+            visibility: false !important;
+        }
+
+        .daterangepicker .calendar {
+            margin: 4px;
             float: left;
             border-radius: 4px !important;
-            width: 100%
         }
-        
-        .daterangepicker calendar>div {
-            width: 100%;
-        }
-        
+
         .applyBtn {
             margin: 4px;
         }
-        
+
         .daterangepicker .flush {
             padding: 0 !important;
             margin: 0 !important;
         }
-        
+
         .daterangepicker .flush-bottom {
             padding-bottom: 0 !important;
         }
-        
+
         .daterangepicker .flush-left {
             padding-left: 0 !important;
         }
-        
+
         .daterangepicker .flush-right {
             padding-right: 0 !important;
         }
-        
+
         .daterangepicker .nudge-half--left {
             padding-left: 4px !important;
         }
-        
+
         .daterangepicker .nudge-half--right {
             padding-right: 4px !important;
         }
-        
+
         .daterangepicker .nudge-top {
-            padding-top: 5px;
+            top: 5px;
         }
-        
+
+        .daterangepicker .push-bottom {
+            margin-bottom: 10px;
+        }
+
         .daterangepicker th {
             margin: 1px !important;
             padding: 1px !important;
             text-align: center;
             border-radius: 4px !important;
         }
-        
+
         .daterangepicker td {
             font-size: 14px;
             height: 20px;
             width: 20px;
             text-align: center;
-            padding: 2px !important;
             margin: 1px !important;
+            padding: 3px !important;
             border-radius: 4px !important;
             white-space: nowrap;
             text-align: center;
         }
-        
+
         .daterangepicker .btn.btn-flat {
             border: none;
             background: transparent;
             margin: 3px !important;
             padding: 1px !important;
         }
-        
+
+        .daterangepicker .off {
+            color: #666;
+        }
+
         .daterangepicker table {
             border-spacing: 0;
             border-collapse: collapse;
         }
-        
+
         .daterangepicker td,
         .daterangepicker th {
             padding: 0;
         }
-        
+
         .daterangepicker .clickable {
             cursor: pointer;
         }
-        
+
         .daterangepicker .clickable-link {
             color: #337ab7;
         }
-        
+
         .daterangepicker .clickable.disabled {
             pointer-events: none;
             color: #AAA;
             cursor: not-allowed;
         }
-        
-        .daterangepicker .off {
-            color: #666;
+
+        .ranges .clickable {
+            margin-top: 8px !important;
         }
-        
+
         .daterangepicker label {
             display: inline-block;
             max-width: 100%;
             margin-bottom: 5px;
             font-weight: bold;
         }
-        
+
         .daterangepicker .btn-link {
             padding: 1px 6px 1px 6px !important;
         }
 
-        .bootstrap-flush{
+        .daterangepicker .bootstrap-flush{
             margin: 0 !important;
             padding: 0 !important;
         }
