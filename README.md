@@ -47,7 +47,7 @@ This is a work in progress and you are always welcome to help me going forward w
 	</ul>
 </li>
 <li>
-	Date: 20 Jan 2018clea
+	Date: 20 Jan 2018
 	<ul>
 		<li>Module less than version v1.0.10 is no longer supported</li>
 	</ul>
