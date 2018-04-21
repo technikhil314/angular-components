@@ -1,3 +1,10 @@
+<style>
+    table {
+        display: table;
+        table-layout: fixed;
+    }
+</style>
+
 # angular-2-daterangepicker
 <div>
 	<a href="https://www.npmjs.com/package/angular-2-daterangepicker?activeTab=readme">
@@ -97,7 +104,7 @@ Currently, very minimum number of options are available but I will keep on devel
         <tr>
             <th>Option Name</th>
             <th>Type</th>
-            <th>Purpose</th>
+            <th rowspan="2">Purpose</th>
             <th>Default Value</th>
         </tr>
     </thead>
