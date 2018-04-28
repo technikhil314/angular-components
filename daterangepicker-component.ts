@@ -329,6 +329,7 @@ export class DaterangepickerComponent implements OnInit {
         this.setFromDate(data.value.start);
         this.setToDate(data.value.end);
         this.toggleCalendars(false);
+        this.emitRangeSelected();
     }
     validatePredefinedRanges(ranges) {
         return ranges.filter(range => {

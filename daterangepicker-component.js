@@ -302,6 +302,7 @@ var DaterangepickerComponent = (function () {
         this.setFromDate(data.value.start);
         this.setToDate(data.value.end);
         this.toggleCalendars(false);
+        this.emitRangeSelected();
     };
     DaterangepickerComponent.prototype.validatePredefinedRanges = function (ranges) {
         var _this = this;
