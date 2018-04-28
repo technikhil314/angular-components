@@ -261,7 +261,8 @@ if you do not want to include whole bootstrap.css then include [this css](https:
         .daterangepicker {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             font-size: 14px;
-            overflow: hidden
+            position: absolute;
+            top: 34px;
         }
 
         @media (min-width: 550px) {
