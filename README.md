@@ -29,6 +29,12 @@ This is a work in progress and you are always welcome to help me going forward w
 <div style="background:grey;color:black">
 <ul>
 <li>
+	Date: 28 Apr 2018
+	<ul>
+		<li>Fixing a small CSS issue in version 1.1.28</li>
+	</ul>
+</li>
+<li>
 	Date: 31 Mar 2018
 	<ul>
 		<li>New option for singleCalendar added in version 1.1.27</li>
