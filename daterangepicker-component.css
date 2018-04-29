@@ -1,8 +1,70 @@
+.daterangepicker-wrapper{
+    position: relative;
+    border: none;
+}
+
 .daterangepicker {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 14px;
     position: absolute;
-    top: 34px;
+    top: 44px;
+    background: #fff;
+}
+
+.daterangepicker.open-right{
+    right: 0;
+}
+
+.daterangepicker.open-left{
+    left: 0;
+}
+
+.daterangepicker.open-center{
+    right: -50%;
+}
+
+.daterangepicker.tooltip-chevron:before{
+    content: '';
+    height: 0px;
+    width: 0px;
+    border: 10px solid transparent;
+    position: absolute;
+    border-bottom-color: #aaa; 
+    top: -20px;
+}
+
+ .daterangepicker.tooltip-chevron:after{
+    content: '';
+    height: 0px;
+    width: 0px;
+    border: 9px solid transparent;
+    position: absolute;
+    border-bottom-color: #fff;
+    top: -18px;
+}
+
+.daterangepicker.open-left.tooltip-chevron:before{
+    left: 10px;
+}
+
+.daterangepicker.open-left.tooltip-chevron:after{
+    left: 11px;
+}
+
+.daterangepicker.open-right.tooltip-chevron:before{
+    right: 10px;
+}
+
+.daterangepicker.open-right.tooltip-chevron:after{
+    right: 11px;
+}
+
+ .daterangepicker.open-center.tooltip-chevron:before{
+    left: 50%
+}
+
+.daterangepicker.open-center.tooltip-chevron:after{
+    left: 50%;
 }
 
 @media (min-width: 550px) {
@@ -43,7 +105,7 @@
 
 .daterangepicker div[class*="col-md-"],
 .daterangepicker span[class*="col-md-"] {
-    padding: 0 5px 0 5px;
+    padding: 0 15px 0 5px;
     ;
 }
 
@@ -157,6 +219,10 @@
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.daterangepicker .form-control{
+    margin: 5px;
 }
 
 .btn-sm,

@@ -23,4 +23,5 @@ export class Options {
     preDefinedRanges: DefinedDateRange[];
     noDefaultRangeSelected: boolean;
     showRanges: boolean;
+    position: string = 'left';
 }

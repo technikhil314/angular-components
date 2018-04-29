@@ -8,33 +8,35 @@ import * as moment from 'moment';
 @Component({
     selector: 'date-range-picker',
     template: `
-        <input class="{{class}}" type="text" [ngModel]="range">
-        <div class="daterangepicker col-md-12 text-center flush" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
-            <div class="col-md-12 flush text-center">
-                <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}">
-                    <div class="col-md-12 flush-bottom" *ngIf="!options.singleCalendar">
-                        <input class="input-mini form-control" [ngModel]="fromDate | formatMomentDate: format" (blur)="formatFromDate($event)" type="text" name="daterangepicker_start" />
+        <div class="daterangepicker-wrapper">
+            <input class="{{class}}" type="text" [ngModel]="range">
+            <div class="daterangepicker col-md-12 text-center flush tooltip-chevron {{positionClass}}" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
+                <div class="col-md-12 flush text-center">
+                    <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}">
+                        <div class="col-md-12 flush-bottom" *ngIf="!options.singleCalendar">
+                            <input class="input-mini form-control" [ngModel]="fromDate | formatMomentDate: format" (blur)="formatFromDate($event)" type="text" name="daterangepicker_start" />
+                        </div>
+                        <div class="col-md-12 flush">
+                            <calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
+                                [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
+                        </div>
                     </div>
-                    <div class="col-md-12 flush">
-                        <calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
-                            [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
-                    </div>
+                    <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
+                        <div class="col-md-12 flush-bottom text-center">
+                            <input class="input-mini form-control" [ngModel]="toDate | formatMomentDate: format" (blur)="formatToDate($event)" name="daterangepicker_end" />
+                        </div>
+                        <div class="col-md-12 flush">
+                            <calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate" [maxDate]="options.maxDate"
+                                [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
+                        </div>
+                    </div>  
                 </div>
-                <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
-                    <div class="col-md-12 flush-bottom text-center">
-                        <input class="input-mini form-control" [ngModel]="toDate | formatMomentDate: format" (blur)="formatToDate($event)" name="daterangepicker_end" />
+                <div class="flush text-center ranges" *ngIf="!options.singleCalendar">
+                    <button [class.hidden]="options.autoApply" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
+                    <button [class.hidden]="options.autoApply" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
+                    <div class="flush text-center" *ngIf="options.showRanges">
+                        <button *ngFor="let range of defaultRanges" class="btn btn-link" (click)="applyPredefinedRange(range)">{{range.name}}</button>
                     </div>
-                    <div class="col-md-12 flush">
-                        <calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate" [maxDate]="options.maxDate"
-                            [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
-                    </div>
-                </div>
-            </div>
-            <div class="flush text-center ranges" *ngIf="!options.singleCalendar">
-                <button [class.hidden]="options.autoApply" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
-                <button [class.hidden]="options.autoApply" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
-                <div class="flush text-center" *ngIf="options.showRanges">
-                    <button *ngFor="let range of defaultRanges" class="btn btn-link" (click)="applyPredefinedRange(range)">{{range.name}}</button>
                 </div>
             </div>
         </div>
@@ -63,6 +65,7 @@ export class DaterangepickerComponent implements OnInit {
     toYear: number;
     format: string;
     defaultRanges: {};
+    positionClass: string;
     //handle outside/inside click to show rangepicker
     @HostListener('document:mousedown', ['$event'])
     @HostListener('document:mouseup', ['$event'])
@@ -122,9 +125,21 @@ export class DaterangepickerComponent implements OnInit {
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
         this.setToDate(this.options.endDate);
+        this.setPositionClass();
         this.defaultRanges = this.validatePredefinedRanges(this.options.preDefinedRanges || Defaults.ranges);
         //update calendar grid
         this.updateCalendar();
+    }
+    setPositionClass(): void { 
+        if (!this.options.position || this.options.position === 'left') { 
+            this.positionClass = 'open-left';
+        }
+        if (this.options.position === 'right') { 
+            this.positionClass = 'open-right';
+        }
+        if (this.options.position === 'center') { 
+            this.positionClass = 'open-center';
+        }
     }
     setFormat() {
         if (this.options) {

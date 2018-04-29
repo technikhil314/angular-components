@@ -29,6 +29,12 @@ This is a work in progress and you are always welcome to help me going forward w
 <div style="background:grey;color:black">
 <ul>
 <li>
+	Date: 29 Apr 2018
+	<ul>
+		<li>Added option position to open flyout on left right or center in version 1.1.30</li>
+	</ul>
+</li>
+<li>
 	Date: 28 Apr 2018
 	<ul>
 		<li>Fixing a small CSS issue in version 1.1.28</li>
@@ -103,69 +109,80 @@ Currently, very minimum number of options are available but I will keep on devel
         <tr>
             <th>Option Name</th>
             <th>Type</th>
-            <th colspan="2">Purpose</th>
+            <th>Purpose</th>
             <th>Default Value</th>
+            <th>Possible Values</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>format</td>
             <td>string</td>
-            <td >format that this daterangepicker will use to communicate with your code</td>
+            <td>format that this daterangepicker will use to communicate with your code</td>
             <td>"YYYY-MM-DD"</td>
+            <td>As per <a href="https://momentjs.com/"> momentjs </a> standard formats</td>
         </tr>
         <tr>
             <td>displayFormat</td>
             <td>string</td>
             <td>format that will be displayed to end user</td>
             <td>Same as format</td>
+            <td>As per <a href="https://momentjs.com/"> momentjs </a> standard formats</td>
         </tr>
         <tr>
             <td>startDate</td>
             <td>string</td>
             <td>Default start date when this components is rendered for first time. Format of this date should be in line with format option's value above</td>
             <td>Current Systetm Date</td>
+            <td>date string in line with format option's value above</td>
         </tr>
         <tr>
             <td>endDate</td>
             <td>string</td>
             <td>Default end date when this components is rendered for first time. Format of this date should be in line with format option's value above</td>
             <td>Current Systetm Date</td>
+            <td>date string in line with format option's value above</td>
         </tr>
         <tr>
             <td>minDate</td>
             <td>string</td>
             <td>Default minimum date not including this date. End user will not be able select all dates before this date. Format of this date should be in line with format option's value above</td>
             <td>null</td>
+            <td>date string in line with format option's value above</td>
         </tr>
         <tr>
             <td>maxDate</td>
             <td>string</td>
             <td>Default maximum date not including this date. End user will not be able select all dates after this date. Format of this date should be in line with format option's value above</td>
             <td>null</td>
+            <td>date string in line with format option's value above</td>
         </tr>
         <tr>
             <td>inactiveBeforeStart</td>
             <td>boolean</td>
             <td>Blurs all dates before selected start date. So end user can not select toDate to be before fromDate.</td>
             <td>false</td>
+            <td>true,false</td>
         </tr>
         <tr>
             <td>autoApply</td>
             <td>boolean</td>
             <td>Removes apply and cancel buttons and applies as soon as user selects end date</td>
             <td>false</td>
+            <td>true,false</td>
         </tr>
         <tr>
             <td>showRanges</td>
             <td>boolean</td>
             <td>Predefined ranges to show to end user. So end user has ready options instead of navingating through calendars.</td>
             <td>false</td>
+            <td>true,false</td>
         </tr>
         <tr>
             <td>preDefinedRanges</td>
             <td> Array of object shown as <a href="#custom-range">below</a>.</td>
             <td>Custom ranges if you want to define your own ranges. This is useful only if showRanges option is set to true.</td>
+            <td>see <a href="#custom-range">below</a> for more details</td>
             <td>see <a href="#custom-range">below</a> for more details</td>
         </tr>
         <tr>
@@ -173,12 +190,21 @@ Currently, very minimum number of options are available but I will keep on devel
             <td>boolean</td>
             <td>This option set the startDate and endDate options to blank on first render.This date range picker sets startDate and endDate to be current system date by dafault if no value is passed to startDate and endDate.</td>
             <td>false</td>
+            <td>true,false</td>
         </tr>
         <tr>
             <td>singleCalendar</td>
             <td>boolean</td>
             <td>Use only one calendar. So you do not need another datepicker for single month.</td>
             <td>false</td>
+            <td>true,false</td>
+        </tr>
+        <tr>
+            <td>position</td>
+            <td>string</td>
+            <td>position of the flyout which will open. By default it opens on left edge of input box</td>
+            <td>'left'</td>
+            <td>'left','right','center'</td>
         </tr>
     </tbody>
 </table>
@@ -264,11 +290,73 @@ If you are using bootstrap.css then just include the following styling in your c
 if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
 ```html
 <style>
+        .daterangepicker-wrapper{
+            position: relative;
+            border: none;
+        }
+
         .daterangepicker {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             font-size: 14px;
             position: absolute;
-            top: 34px;
+            top: 44px;
+            background: #fff;
+        }
+
+        .daterangepicker.open-right{
+            right: 0;
+        }
+
+        .daterangepicker.open-left{
+            left: 0;
+        }
+
+        .daterangepicker.open-center{
+            right: -50%;
+        }
+
+        .daterangepicker.tooltip-chevron:before{
+            content: '';
+            height: 0px;
+            width: 0px;
+            border: 10px solid transparent;
+            position: absolute;
+            border-bottom-color: #aaa; 
+            top: -20px;
+        }
+
+         .daterangepicker.tooltip-chevron:after{
+            content: '';
+            height: 0px;
+            width: 0px;
+            border: 9px solid transparent;
+            position: absolute;
+            border-bottom-color: #fff;
+            top: -18px;
+        }
+        
+        .daterangepicker.open-left.tooltip-chevron:before{
+            left: 10px;
+        }
+
+        .daterangepicker.open-left.tooltip-chevron:after{
+            left: 11px;
+        }
+
+        .daterangepicker.open-right.tooltip-chevron:before{
+            right: 10px;
+        }
+
+        .daterangepicker.open-right.tooltip-chevron:after{
+            right: 11px;
+        }
+
+         .daterangepicker.open-center.tooltip-chevron:before{
+            left: 50%
+        }
+
+        .daterangepicker.open-center.tooltip-chevron:after{
+            left: 50%;
         }
 
         @media (min-width: 550px) {
@@ -309,8 +397,7 @@ if you do not want to include whole bootstrap.css then include [this css](https:
 
         .daterangepicker div[class*="col-md-"],
         .daterangepicker span[class*="col-md-"] {
-            padding: 0 5px 0 5px;
-            ;
+            padding: 0 15px 0 5px;
         }
 
         .hidden {
@@ -322,6 +409,7 @@ if you do not want to include whole bootstrap.css then include [this css](https:
             margin: 4px;
             float: left;
             border-radius: 4px !important;
+            padding: 0 5px 0 5px;
         }
 
         .applyBtn {
@@ -412,7 +500,6 @@ if you do not want to include whole bootstrap.css then include [this css](https:
         .daterangepicker .clickable.disabled {
             pointer-events: none;
             color: #AAA;
-            cursor: not-allowed;
         }
 
         .ranges .clickable {
@@ -424,6 +511,10 @@ if you do not want to include whole bootstrap.css then include [this css](https:
             max-width: 100%;
             margin-bottom: 5px;
             font-weight: bold;
+        }
+
+        .daterangepicker .form-control{
+            margin: 5px;
         }
 
         .daterangepicker .btn-link {
