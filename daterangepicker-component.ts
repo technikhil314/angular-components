@@ -10,7 +10,7 @@ import * as moment from 'moment';
     template: `
         <div class="daterangepicker-wrapper">
             <input class="{{class}}" type="text" [ngModel]="range">
-            <div class="daterangepicker col-md-12 text-center flush tooltip-chevron {{positionClass}}" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
+            <div class="daterangepicker col-md-12 text-center flush tooltip-chevron {{getPositionClass()}}" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
                 <div class="col-md-12 flush text-center">
                     <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}">
                         <div class="col-md-12 flush-bottom" *ngIf="!options.singleCalendar">
@@ -125,20 +125,19 @@ export class DaterangepickerComponent implements OnInit {
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
         this.setToDate(this.options.endDate);
-        this.setPositionClass();
         this.defaultRanges = this.validatePredefinedRanges(this.options.preDefinedRanges || Defaults.ranges);
         //update calendar grid
         this.updateCalendar();
     }
-    setPositionClass(): void { 
-        if (!this.options.position || this.options.position === 'left') { 
-            this.positionClass = 'open-left';
+    getPositionClass(): string {
+        if (!this.options.position || this.options.position === 'left') {
+            return 'open-left';
         }
-        if (this.options.position === 'right') { 
-            this.positionClass = 'open-right';
+        if (this.options.position === 'right') {
+            return 'open-right';
         }
-        if (this.options.position === 'center') { 
-            this.positionClass = 'open-center';
+        if (this.options.position === 'center') {
+            return 'open-center';
         }
     }
     setFormat() {
