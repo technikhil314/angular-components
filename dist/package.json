@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "rimraf ./dist && tsfmt -r daterangepicker-component.ts calendar-component.ts daterangepicker-module.ts index.ts daterangepicker-options.ts index.d.ts && rimraf ./dist && tsc -p ./tsconfig.dev.json && concurrently \"tsc -p ./tsconfig.dev.json -w\" \"lite-server\" ",
-    "build": "tsc -p ./tsconfig.prod.json && cp ./package.json ./dist"
+    "build": "tsc -p ./tsconfig.prod.json && cp ./package.json ./dist && cp ./README.md ./dist"
   },
   "repository": {
     "type": "git",
