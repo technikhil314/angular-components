@@ -24,4 +24,5 @@ export class Options {
     noDefaultRangeSelected: boolean;
     showRanges: boolean;
     position: string = 'left';
+    disabled: boolean = false;
 }

@@ -9,7 +9,7 @@ import * as moment from 'moment';
     selector: 'date-range-picker',
     template: `
         <div class="daterangepicker-wrapper">
-            <input class="{{class}}" type="text" [ngModel]="range">
+            <input class="{{class}} dateRangePicker-input" type="text" [ngModel]="range" [disabled]="options.disabled">
             <div class="daterangepicker col-md-12 text-center flush tooltip-chevron {{getPositionClass()}}" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
                 <div class="col-md-12 flush text-center">
                     <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}">
@@ -70,33 +70,35 @@ export class DaterangepickerComponent implements OnInit {
     @HostListener('document:mousedown', ['$event'])
     @HostListener('document:mouseup', ['$event'])
     handleOutsideClick(event) {
-        let current: any = event.target;
-        let host: any = this.elem.nativeElement;
-        if (host.compareDocumentPosition) {
-            if (host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
-                this.storeOldDates();
-                return this.toggleCalendars(true);
-            }
-        } else if (host.contains) {
-            if (host.contains(current)) {
-                this.storeOldDates();
-                return this.toggleCalendars(true);
-            }
-        } else {
-            do {
-                if (current === host) {
+        if (!this.options.disabled) {
+            let current: any = event.target;
+            let host: any = this.elem.nativeElement;
+            if (host.compareDocumentPosition) {
+                if (host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
                     this.storeOldDates();
                     return this.toggleCalendars(true);
                 }
-                current = current.parentNode;
-            } while (current);
-        }
-        if (this.showCalendars) {
-            if (!this.options.autoApply) {
-                this.restoreOldDates();
+            } else if (host.contains) {
+                if (host.contains(current)) {
+                    this.storeOldDates();
+                    return this.toggleCalendars(true);
+                }
+            } else {
+                do {
+                    if (current === host) {
+                        this.storeOldDates();
+                        return this.toggleCalendars(true);
+                    }
+                    current = current.parentNode;
+                } while (current);
             }
-            this.toggleCalendars(false);
-        }
+            if (this.showCalendars) {
+                if (!this.options.autoApply) {
+                    this.restoreOldDates();
+                }
+                this.toggleCalendars(false);
+            }
+        }    
     }
     constructor(private elem: ElementRef) {
     }

@@ -255,6 +255,10 @@
     line-height: inherit;
 }
 
+daterangepicker .dateRangePicker-input:disabled{
+    pointer-events: none;
+}
+
 .daterangepicker .text-center {
     text-align: center;
 }

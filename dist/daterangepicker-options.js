@@ -13,6 +13,7 @@ var Options = (function () {
     function Options() {
         this.inactiveBeforeStart = false;
         this.position = 'left';
+        this.disabled = false;
     }
     return Options;
 }());

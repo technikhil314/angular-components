@@ -206,6 +206,13 @@ Currently, very minimum number of options are available but I will keep on devel
             <td>'left'</td>
             <td>'left','right','center'</td>
         </tr>
+        <tr>
+            <td>disabled</td>
+            <td>boolean</td>
+            <td>Whether to disable the main input control</td>
+            <td>false</td>
+            <td>true,false</td>
+        </tr>
     </tbody>
 </table>
 
