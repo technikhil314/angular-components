@@ -29,6 +29,12 @@ This is a work in progress and you are always welcome to help me going forward w
 <div style="background:grey;color:black">
 <ul>
 <li>
+	Date: 5 May 2018
+	<ul>
+		<li>Added option disabled to enable/disable input box in version 1.1.35</li>
+	</ul>
+</li>
+<li>
 	Date: 29 Apr 2018
 	<ul>
 		<li>Added option position to open flyout on left right or center in version 1.1.30</li>
