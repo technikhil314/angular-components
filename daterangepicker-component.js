@@ -80,20 +80,22 @@ var DaterangepickerComponent = (function () {
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
         this.setToDate(this.options.endDate);
+        if (this.options.singleCalendar) {
+            this.options.autoApply = true;
+        }
         this.defaultRanges = this.validatePredefinedRanges(this.options.preDefinedRanges || daterangepicker_default_ranges_1.Defaults.ranges);
         //update calendar grid
         this.updateCalendar();
     };
     DaterangepickerComponent.prototype.getPositionClass = function () {
-        if (!this.options.position || this.options.position === 'left') {
-            return 'open-left';
-        }
+        var positionClass = 'open-left';
         if (this.options.position === 'right') {
-            return 'open-right';
+            positionClass = 'open-right';
         }
-        if (this.options.position === 'center') {
-            return 'open-center';
+        if (this.options.position === 'center' && !this.options.singleCalendar) {
+            positionClass = 'open-center';
         }
+        return positionClass;
     };
     DaterangepickerComponent.prototype.setFormat = function () {
         if (this.options) {
@@ -211,6 +213,8 @@ var DaterangepickerComponent = (function () {
         else {
             this.enableApplyButton = true;
         }
+        this.fromMonth = this.fromDate ? this.fromDate.get('month') : this.fromMonth;
+        this.toMonth = this.toDate ? this.toDate.get('month') : this.toMonth;
     };
     DaterangepickerComponent.prototype.emitRangeSelected = function () {
         var data = {};
@@ -269,7 +273,6 @@ var DaterangepickerComponent = (function () {
         var temp;
         if (data.isLeft) {
             temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'months');
-            this.fromMonth = temp.get('month');
             this.fromYear = temp.get('year');
         }
         else {

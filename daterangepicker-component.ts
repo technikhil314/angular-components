@@ -65,7 +65,6 @@ export class DaterangepickerComponent implements OnInit {
     toYear: number;
     format: string;
     defaultRanges: {};
-    positionClass: string;
     //handle outside/inside click to show rangepicker
     @HostListener('document:mousedown', ['$event'])
     @HostListener('document:mouseup', ['$event'])
@@ -98,7 +97,7 @@ export class DaterangepickerComponent implements OnInit {
                 }
                 this.toggleCalendars(false);
             }
-        }    
+        }
     }
     constructor(private elem: ElementRef) {
     }
@@ -132,15 +131,14 @@ export class DaterangepickerComponent implements OnInit {
         this.updateCalendar();
     }
     getPositionClass(): string {
-        if (!this.options.position || this.options.position === 'left') {
-            return 'open-left';
-        }
+        let positionClass = 'open-left';
         if (this.options.position === 'right') {
-            return 'open-right';
+            positionClass = 'open-right';
         }
-        if (this.options.position === 'center') {
-            return 'open-center';
+        if (this.options.position === 'center' && !this.options.singleCalendar) {
+            positionClass = 'open-center';
         }
+        return positionClass;
     }
     setFormat() {
         if (this.options) {
@@ -246,6 +244,8 @@ export class DaterangepickerComponent implements OnInit {
         } else {
             this.enableApplyButton = true;
         }
+        this.fromMonth = this.fromDate ? this.fromDate.get('month') : this.fromMonth;
+        this.toMonth = this.toDate ? this.toDate.get('month') : this.toMonth;
     }
     emitRangeSelected() {
         let data = {};
@@ -301,7 +301,6 @@ export class DaterangepickerComponent implements OnInit {
         let temp;
         if (data.isLeft) {
             temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'months');
-            this.fromMonth = temp.get('month');
             this.fromYear = temp.get('year');
         } else {
             temp = moment([this.toYear, this.toMonth]).add(data.value, 'months');

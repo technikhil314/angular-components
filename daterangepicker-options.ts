@@ -11,18 +11,18 @@ class DefinedDateRange {
 }
 
 export class Options {
-    startDate;
-    endDate;
-    minDate;
-    maxDate;
-    format;
-    displayFormat;
-    inactiveBeforeStart = false;
-    autoApply: boolean;
-    singleCalendar: boolean;
+    startDate: string | moment.Moment | any = null;
+    endDate: string | moment.Moment | any = null;
+    minDate: string | moment.Moment | any = null;
+    maxDate: string | moment.Moment | any = null;
+    format: string = "YYYY-MM-DD";
+    displayFormat: string = "YYYY-MM-DD";
+    inactiveBeforeStart: boolean = false;
+    autoApply: boolean = false;
+    singleCalendar: boolean = false;
     preDefinedRanges: DefinedDateRange[];
-    noDefaultRangeSelected: boolean;
-    showRanges: boolean;
+    noDefaultRangeSelected: boolean = false;
+    showRanges: boolean = false;
     position: string = 'left';
     disabled: boolean = false;
 }
