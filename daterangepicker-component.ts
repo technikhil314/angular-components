@@ -301,6 +301,7 @@ export class DaterangepickerComponent implements OnInit {
         let temp;
         if (data.isLeft) {
             temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'months');
+            this.fromMonth = temp.get('month');
             this.fromYear = temp.get('year');
         } else {
             temp = moment([this.toYear, this.toMonth]).add(data.value, 'months');

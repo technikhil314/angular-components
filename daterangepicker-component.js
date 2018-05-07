@@ -80,9 +80,6 @@ var DaterangepickerComponent = (function () {
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
         this.setToDate(this.options.endDate);
-        if (this.options.singleCalendar) {
-            this.options.autoApply = true;
-        }
         this.defaultRanges = this.validatePredefinedRanges(this.options.preDefinedRanges || daterangepicker_default_ranges_1.Defaults.ranges);
         //update calendar grid
         this.updateCalendar();
@@ -273,6 +270,7 @@ var DaterangepickerComponent = (function () {
         var temp;
         if (data.isLeft) {
             temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'months');
+            this.fromMonth = temp.get('month');
             this.fromYear = temp.get('year');
         }
         else {

@@ -270,6 +270,7 @@ var DaterangepickerComponent = (function () {
         var temp;
         if (data.isLeft) {
             temp = moment([this.fromYear, this.fromMonth]).add(data.value, 'months');
+            this.fromMonth = temp.get('month');
             this.fromYear = temp.get('year');
         }
         else {
