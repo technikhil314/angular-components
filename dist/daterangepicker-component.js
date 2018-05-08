@@ -125,7 +125,7 @@ var DaterangepickerComponent = (function () {
         }
     };
     DaterangepickerComponent.prototype.setFromDate = function (value) {
-        if (this.options.noDefaultRangeSelected) {
+        if (this.options.noDefaultRangeSelected && !value) {
             this.fromDate = "";
             this.tempFromDate = this.getActualFromDate(value);
         }
@@ -157,8 +157,7 @@ var DaterangepickerComponent = (function () {
         }
     };
     DaterangepickerComponent.prototype.setToDate = function (value) {
-        if (this.options.noDefaultRangeSelected) {
-            this.options.noDefaultRangeSelected = false;
+        if (this.options.noDefaultRangeSelected && !value) {
             this.toDate = "";
             this.tempToDate = this.getActualToDate(value);
         }
@@ -240,7 +239,7 @@ var DaterangepickerComponent = (function () {
     };
     DaterangepickerComponent.prototype.setRange = function () {
         var displayFormat = this.options.displayFormat !== undefined ? this.options.displayFormat : this.format;
-        if (this.options.singleCalendar) {
+        if (this.options.singleCalendar && this.fromDate) {
             this.range = this.fromDate.format(displayFormat);
         }
         else if (this.fromDate && this.toDate) {

@@ -170,7 +170,7 @@ export class DaterangepickerComponent implements OnInit {
         }
     }
     setFromDate(value) {
-        if (this.options.noDefaultRangeSelected) {
+        if (this.options.noDefaultRangeSelected && !value) {
             this.fromDate = "";
             this.tempFromDate = this.getActualFromDate(value);
         } else {
@@ -197,8 +197,7 @@ export class DaterangepickerComponent implements OnInit {
         }
     }
     setToDate(value) {
-        if (this.options.noDefaultRangeSelected) {
-            this.options.noDefaultRangeSelected = false;
+        if (this.options.noDefaultRangeSelected && !value) {
             this.toDate = "";
             this.tempToDate = this.getActualToDate(value);
         } else {
@@ -273,7 +272,7 @@ export class DaterangepickerComponent implements OnInit {
     }
     setRange() {
         const displayFormat = this.options.displayFormat !== undefined ? this.options.displayFormat : this.format
-        if (this.options.singleCalendar) {
+        if (this.options.singleCalendar && this.fromDate) {
             this.range = this.fromDate.format(displayFormat);
         } else if (this.fromDate && this.toDate) {
             this.range = this.fromDate.format(displayFormat) + " - " + this.toDate.format(displayFormat);
