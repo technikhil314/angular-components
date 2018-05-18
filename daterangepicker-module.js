@@ -14,6 +14,7 @@ var daterangepicker_component_1 = require('./daterangepicker-component');
 var common_1 = require('@angular/common');
 var calendar_component_1 = require('./calendar-component');
 var format_moment_date_pipe_1 = require('./format-moment-date-pipe');
+var time_picker_component_1 = require('./time-picker-component');
 var DaterangepickerModule = (function () {
     function DaterangepickerModule() {
     }
@@ -21,7 +22,7 @@ var DaterangepickerModule = (function () {
         core_1.NgModule({
             imports: [forms_1.FormsModule, common_1.CommonModule],
             exports: [daterangepicker_component_1.DaterangepickerComponent],
-            declarations: [daterangepicker_component_1.DaterangepickerComponent, calendar_component_1.CalendarComponent, format_moment_date_pipe_1.FormatMomentDatePipe],
+            declarations: [daterangepicker_component_1.DaterangepickerComponent, calendar_component_1.CalendarComponent, time_picker_component_1.TimePickerComponent, format_moment_date_pipe_1.FormatMomentDatePipe],
             bootstrap: [daterangepicker_component_1.DaterangepickerComponent]
         }), 
         __metadata('design:paramtypes', [])

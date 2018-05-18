@@ -25,4 +25,5 @@ export class Options {
     showRanges: boolean = false;
     position: string = 'left';
     disabled: boolean = false;
+    timePicker: any = null;
 }

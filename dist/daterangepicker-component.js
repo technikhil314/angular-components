@@ -75,7 +75,17 @@ var DaterangepickerComponent = (function () {
         this.setRange();
     };
     DaterangepickerComponent.prototype.ngOnInit = function () {
+        var _this = this;
         //get default options provided by user
+        setTimeout(function () {
+            if (_this.options.singleCalendar) {
+                _this.options.autoApply = true;
+                _this.options.showRanges = false;
+            }
+            if (_this.options.timePicker) {
+                _this.options.autoApply = false;
+            }
+        });
         this.setFormat();
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
@@ -122,6 +132,20 @@ var DaterangepickerComponent = (function () {
                     console.warn("supplied minDate is after maxDate. Discarding options for minDate and maxDate");
                 }
             }
+            if (this.options.minDate && this.options.minDate.format("HH:mm") === "00:00") {
+                this.options.minDate.set({
+                    hour: 0,
+                    minutes: 0,
+                    seconds: 0
+                });
+            }
+            if (this.options.maxDate && this.options.maxDate.format("HH:mm") === "00:00") {
+                this.options.maxDate.set({
+                    hour: 23,
+                    minutes: 59,
+                    seconds: 59
+                });
+            }
         }
     };
     DaterangepickerComponent.prototype.setFromDate = function (value) {
@@ -143,17 +167,33 @@ var DaterangepickerComponent = (function () {
         }
     };
     DaterangepickerComponent.prototype.getValidateFromDate = function (value) {
-        if (this.options.minDate && this.options.maxDate && value.isSameOrAfter(this.options.minDate, 'date') && value.isSameOrBefore(this.options.maxDate, 'date')) {
-            return value;
-        }
-        else if (this.options.minDate && !this.options.maxDate && value.isAfter(this.options.minDate, 'date')) {
-            return value;
-        }
-        else if (this.options.minDate) {
-            return this.options.minDate.clone();
+        if (!this.options.timePicker) {
+            if (this.options.minDate && this.options.maxDate && value.isSameOrAfter(this.options.minDate, 'date') && value.isSameOrBefore(this.options.maxDate, 'date')) {
+                return value;
+            }
+            else if (this.options.minDate && !this.options.maxDate && value.isAfter(this.options.minDate, 'date')) {
+                return value;
+            }
+            else if (this.options.minDate) {
+                return this.options.minDate.clone();
+            }
+            else {
+                return moment();
+            }
         }
         else {
-            return moment();
+            if (this.options.minDate && this.options.maxDate && value.isSameOrAfter(this.options.minDate, this.options.format) && value.isSameOrBefore(this.options.maxDate, this.options.format)) {
+                return value;
+            }
+            else if (this.options.minDate && !this.options.maxDate && value.isAfter(this.options.minDate, this.options.format)) {
+                return value;
+            }
+            else if (this.options.minDate) {
+                return this.options.minDate.clone();
+            }
+            else {
+                return moment();
+            }
         }
     };
     DaterangepickerComponent.prototype.setToDate = function (value) {
@@ -175,14 +215,27 @@ var DaterangepickerComponent = (function () {
         }
     };
     DaterangepickerComponent.prototype.getValidateToDate = function (value) {
-        if (this.options.maxDate && value.isSameOrAfter(this.fromDate, 'date'), value.isSameOrBefore(this.options.maxDate, 'date')) {
-            return value;
-        }
-        else if (this.options.maxDate) {
-            return this.options.maxDate.clone();
+        if (!this.options.timePicker) {
+            if (this.options.maxDate && value.isSameOrAfter(this.fromDate, 'date'), value.isSameOrBefore(this.options.maxDate, 'date')) {
+                return value;
+            }
+            else if (this.options.maxDate) {
+                return this.options.maxDate.clone();
+            }
+            else {
+                return moment();
+            }
         }
         else {
-            return moment();
+            if (this.options.maxDate && value.isSameOrAfter(this.fromDate, this.options.format), value.isSameOrBefore(this.options.maxDate, this.options.format)) {
+                return value;
+            }
+            else if (this.options.maxDate) {
+                return this.options.maxDate.clone();
+            }
+            else {
+                return moment();
+            }
         }
     };
     //detects which date to set from or to and validates
@@ -191,17 +244,38 @@ var DaterangepickerComponent = (function () {
         var isLeft = data.isLeft;
         if (isLeft) {
             this.setFromDate(value.format(this.format));
-            if (value.isAfter(this.toDate, 'date')) {
-                this.toDate = this.fromDate.clone();
+            if (!this.options.timePicker) {
+                if (value.isAfter(this.toDate, 'date')) {
+                    this.toDate = this.fromDate.clone();
+                }
+            }
+            else {
+                if (value.isAfter(this.toDate, this.options.format)) {
+                    this.toDate = this.fromDate.clone();
+                }
             }
         }
         else {
+            if (!this.options.timePicker) {
+                value.set({
+                    hour: 23,
+                    minute: 59,
+                    second: 59
+                });
+            }
             this.setToDate(value.format(this.format));
-            if (value.isBefore(this.fromDate, 'date')) {
-                this.fromDate = this.toDate.clone();
+            if (!this.options.timePicker) {
+                if (value.isBefore(this.fromDate, 'date')) {
+                    this.fromDate = this.toDate.clone();
+                }
+            }
+            else {
+                if (value.isBefore(this.fromDate, this.options.format)) {
+                    this.fromDate = this.toDate.clone();
+                }
             }
         }
-        if (this.options.autoApply || this.options.singleCalendar) {
+        if (this.options.autoApply) {
             (!isLeft || this.options.singleCalendar) ? this.toggleCalendars(false) : this.toggleCalendars(true);
             this.setRange();
             this.emitRangeSelected();
@@ -354,7 +428,7 @@ var DaterangepickerComponent = (function () {
     DaterangepickerComponent = __decorate([
         core_1.Component({
             selector: 'date-range-picker',
-            template: "\n        <div class=\"daterangepicker-wrapper\">\n            <input class=\"{{class}} dateRangePicker-input\" type=\"text\" [ngModel]=\"range\" [disabled]=\"options.disabled\">\n            <div class=\"daterangepicker col-md-12 text-center flush tooltip-chevron {{getPositionClass()}}\" [class.hidden]=\"!showCalendars\" [ngClass]=\"{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}\">\n                <div class=\"col-md-12 flush text-center\">\n                    <div class=\"flush-bottom text-center flush-left nudge-half--right\" [ngClass]=\"{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}\">\n                        <div class=\"col-md-12 flush-bottom\" *ngIf=\"!options.singleCalendar\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"fromDate | formatMomentDate: format\" (blur)=\"formatFromDate($event)\" type=\"text\" name=\"daterangepicker_start\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [isLeft]=\"true\" [month]=\"fromMonth\" [year]=\"fromYear\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)=\"dateChanged($event)\" [format]=\"format\" [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\"\n                                [maxDate]=\"options.maxDate\" [inactiveBeforeStart]=\"options.inactiveBeforeStart\"></calendar>\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 flush-bottom flush-right nudge-half--left\" *ngIf=\"!options.singleCalendar\">\n                        <div class=\"col-md-12 flush-bottom text-center\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"toDate | formatMomentDate: format\" (blur)=\"formatToDate($event)\" name=\"daterangepicker_end\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [month]=\"toMonth\" [year]=\"toYear\" [format]=\"format\" (dateChanged)=\"dateChanged($event)\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\" [maxDate]=\"options.maxDate\"\n                                [inactiveBeforeStart]=\"options.inactiveBeforeStart\"></calendar>\n                        </div>\n                    </div>  \n                </div>\n                <div class=\"flush text-center ranges\" *ngIf=\"!options.singleCalendar\">\n                    <button [class.hidden]=\"options.autoApply\" class=\"btn btn-success btn-sm\" [disabled]=\"!enableApplyButton\" (click)=\"apply()\">Apply</button>\n                    <button [class.hidden]=\"options.autoApply\" class=\"btn btn-default btn-sm\" (click)=\"cancel()\">Cancel</button>\n                    <div class=\"flush text-center\" *ngIf=\"options.showRanges\">\n                        <button *ngFor=\"let range of defaultRanges\" class=\"btn btn-link\" (click)=\"applyPredefinedRange(range)\">{{range.name}}</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    "
+            template: "\n        <div class=\"daterangepicker-wrapper\">\n            <input class=\"{{class}} dateRangePicker-input\" type=\"text\" [ngModel]=\"range\" [disabled]=\"options.disabled\">\n            <div class=\"daterangepicker col-md-12 text-center flush tooltip-chevron {{getPositionClass()}}\" [class.hidden]=\"!showCalendars\" [ngClass]=\"{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}\">\n                <div class=\"col-md-12 flush text-center\">\n                    <div class=\"flush-bottom text-center flush-left nudge-half--right\" [ngClass]=\"{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}\">\n                        <div class=\"col-md-12 flush-bottom\" *ngIf=\"!options.singleCalendar\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"fromDate | formatMomentDate: format\" (blur)=\"formatFromDate($event)\" type=\"text\" name=\"daterangepicker_start\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [isLeft]=\"true\" [month]=\"fromMonth\" [year]=\"fromYear\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)=\"dateChanged($event)\" [format]=\"format\" [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\"\n                                [maxDate]=\"options.maxDate\" [inactiveBeforeStart]=\"options.inactiveBeforeStart\" [timePicker]=\"options.timePicker\"></calendar>\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 flush-bottom flush-right nudge-half--left\" *ngIf=\"!options.singleCalendar\">\n                        <div class=\"col-md-12 flush-bottom text-center\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"toDate | formatMomentDate: format\" (blur)=\"formatToDate($event)\" name=\"daterangepicker_end\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [month]=\"toMonth\" [year]=\"toYear\" [format]=\"format\" (dateChanged)=\"dateChanged($event)\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\" [maxDate]=\"options.maxDate\"\n                                [inactiveBeforeStart]=\"options.inactiveBeforeStart\" [timePicker]=\"options.timePicker\"></calendar>\n                        </div>\n                    </div>  \n                </div>\n                <div class=\"flush text-center ranges\" *ngIf=\"!options.autoApply\">\n                    <button [class.hidden]=\"options.autoApply\" class=\"btn btn-success btn-sm\" [disabled]=\"!enableApplyButton\" (click)=\"apply()\">Apply</button>\n                    <button [class.hidden]=\"options.autoApply\" class=\"btn btn-default btn-sm\" (click)=\"cancel()\">Cancel</button>\n                    <div class=\"flush text-center\" *ngIf=\"options.showRanges\">\n                        <button *ngFor=\"let range of defaultRanges\" class=\"btn btn-link\" (click)=\"applyPredefinedRange(range)\">{{range.name}}</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], DaterangepickerComponent);

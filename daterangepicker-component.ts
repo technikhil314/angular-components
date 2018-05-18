@@ -18,7 +18,7 @@ import * as moment from 'moment';
                         </div>
                         <div class="col-md-12 flush">
                             <calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
-                                [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
+                                [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart" [timePicker]="options.timePicker"></calendar>
                         </div>
                     </div>
                     <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
@@ -27,11 +27,11 @@ import * as moment from 'moment';
                         </div>
                         <div class="col-md-12 flush">
                             <calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate" [maxDate]="options.maxDate"
-                                [inactiveBeforeStart]="options.inactiveBeforeStart"></calendar>
+                                [inactiveBeforeStart]="options.inactiveBeforeStart" [timePicker]="options.timePicker"></calendar>
                         </div>
                     </div>  
                 </div>
-                <div class="flush text-center ranges" *ngIf="!options.singleCalendar">
+                <div class="flush text-center ranges" *ngIf="!options.autoApply">
                     <button [class.hidden]="options.autoApply" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
                     <button [class.hidden]="options.autoApply" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
                     <div class="flush text-center" *ngIf="options.showRanges">
@@ -122,6 +122,15 @@ export class DaterangepickerComponent implements OnInit {
     }
     ngOnInit(): void {
         //get default options provided by user
+        setTimeout(() => {
+            if (this.options.singleCalendar) {
+                this.options.autoApply = true;
+                this.options.showRanges = false;
+            }
+            if (this.options.timePicker) {
+                this.options.autoApply = false;
+            }
+        });
         this.setFormat();
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
@@ -167,6 +176,20 @@ export class DaterangepickerComponent implements OnInit {
                     console.warn("supplied minDate is after maxDate. Discarding options for minDate and maxDate");
                 }
             }
+            if (this.options.minDate && this.options.minDate.format("HH:mm") === "00:00") {
+                this.options.minDate.set({
+                    hour: 0,
+                    minutes: 0,
+                    seconds: 0
+                });
+            }
+            if (this.options.maxDate && this.options.maxDate.format("HH:mm") === "00:00") {
+                this.options.maxDate.set({
+                    hour: 23,
+                    minutes: 59,
+                    seconds: 59
+                });
+            }
         }
     }
     setFromDate(value) {
@@ -186,14 +209,26 @@ export class DaterangepickerComponent implements OnInit {
         }
     }
     getValidateFromDate(value) {
-        if (this.options.minDate && this.options.maxDate && value.isSameOrAfter(this.options.minDate, 'date') && value.isSameOrBefore(this.options.maxDate, 'date')) {
-            return value;
-        } else if (this.options.minDate && !this.options.maxDate && value.isAfter(this.options.minDate, 'date')) {
-            return value;
-        } else if (this.options.minDate) {
-            return this.options.minDate.clone();
+        if (!this.options.timePicker) {
+            if (this.options.minDate && this.options.maxDate && value.isSameOrAfter(this.options.minDate, 'date') && value.isSameOrBefore(this.options.maxDate, 'date')) {
+                return value;
+            } else if (this.options.minDate && !this.options.maxDate && value.isAfter(this.options.minDate, 'date')) {
+                return value;
+            } else if (this.options.minDate) {
+                return this.options.minDate.clone();
+            } else {
+                return moment();
+            }
         } else {
-            return moment();
+            if (this.options.minDate && this.options.maxDate && value.isSameOrAfter(this.options.minDate, this.options.format) && value.isSameOrBefore(this.options.maxDate, this.options.format)) {
+                return value;
+            } else if (this.options.minDate && !this.options.maxDate && value.isAfter(this.options.minDate, this.options.format)) {
+                return value;
+            } else if (this.options.minDate) {
+                return this.options.minDate.clone();
+            } else {
+                return moment();
+            }
         }
     }
     setToDate(value) {
@@ -213,12 +248,22 @@ export class DaterangepickerComponent implements OnInit {
         }
     }
     getValidateToDate(value) {
-        if (this.options.maxDate && value.isSameOrAfter(this.fromDate, 'date'), value.isSameOrBefore(this.options.maxDate, 'date')) {
-            return value;
-        } else if (this.options.maxDate) {
-            return this.options.maxDate.clone();
+        if (!this.options.timePicker) {
+            if (this.options.maxDate && value.isSameOrAfter(this.fromDate, 'date'), value.isSameOrBefore(this.options.maxDate, 'date')) {
+                return value;
+            } else if (this.options.maxDate) {
+                return this.options.maxDate.clone();
+            } else {
+                return moment();
+            }
         } else {
-            return moment();
+            if (this.options.maxDate && value.isSameOrAfter(this.fromDate, this.options.format), value.isSameOrBefore(this.options.maxDate, this.options.format)) {
+                return value;
+            } else if (this.options.maxDate) {
+                return this.options.maxDate.clone();
+            } else {
+                return moment();
+            }
         }
     }
     //detects which date to set from or to and validates
@@ -227,16 +272,35 @@ export class DaterangepickerComponent implements OnInit {
         let isLeft = data.isLeft;
         if (isLeft) {
             this.setFromDate(value.format(this.format));
-            if (value.isAfter(this.toDate, 'date')) {
-                this.toDate = this.fromDate.clone();
+            if (!this.options.timePicker) {
+                if (value.isAfter(this.toDate, 'date')) {
+                    this.toDate = this.fromDate.clone();
+                }
+            } else {
+                if (value.isAfter(this.toDate, this.options.format)) {
+                    this.toDate = this.fromDate.clone();
+                }
             }
         } else {
+            if (!this.options.timePicker) {
+                value.set({
+                    hour: 23,
+                    minute: 59,
+                    second: 59
+                });
+            }
             this.setToDate(value.format(this.format));
-            if (value.isBefore(this.fromDate, 'date')) {
-                this.fromDate = this.toDate.clone();
+            if (!this.options.timePicker) {
+                if (value.isBefore(this.fromDate, 'date')) {
+                    this.fromDate = this.toDate.clone();
+                }
+            } else {
+                if (value.isBefore(this.fromDate, this.options.format)) {
+                    this.fromDate = this.toDate.clone();
+                }
             }
         }
-        if (this.options.autoApply || this.options.singleCalendar) {
+        if (this.options.autoApply) {
             (!isLeft || this.options.singleCalendar) ? this.toggleCalendars(false) : this.toggleCalendars(true);
             this.setRange()
             this.emitRangeSelected();

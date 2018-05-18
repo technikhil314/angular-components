@@ -51,6 +51,7 @@ require('moment-range');
                 </tbody>
             </table>
         </div>
+        <time-picker *ngIf="timePicker" [options]="timePicker" [selectedFromDate]="selectedFromDate" [selectedToDate]="selectedToDate" [minDate]="minDate" [maxDate]="maxDate" [format]="format" [isLeft]="isLeft" (timeChanged)="dateSelected($event)"></time-picker>
     `
 })
 export class CalendarComponent implements OnChanges {
@@ -63,6 +64,7 @@ export class CalendarComponent implements OnChanges {
     @Input() minDate: string;
     @Input() maxDate: string;
     @Input() inactiveBeforeStart: boolean;
+    @Input() timePicker: any;
     get monthText() {
         let months = moment.monthsShort()
         return months[this.month];

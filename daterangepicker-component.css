@@ -208,6 +208,7 @@
 .daterangepicker .clickable.disabled {
     pointer-events: none;
     color: #AAA;
+    opacity: 0.5;
 }
 
 .ranges .clickable {
@@ -325,6 +326,10 @@ daterangepicker .dateRangePicker-input:disabled{
 
 .daterangepicker .col-md-1 {
     width: 8.33333333%;
+}
+
+.daterangepicker .col-md-offset-4 {
+    margin-left: 33.333333333%;
 }
 
 .daterangepicker table {

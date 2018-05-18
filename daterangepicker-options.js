@@ -24,6 +24,7 @@ var Options = (function () {
         this.showRanges = false;
         this.position = 'left';
         this.disabled = false;
+        this.timePicker = null;
     }
     return Options;
 }());

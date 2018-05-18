@@ -29,6 +29,12 @@ This is a work in progress and you are always welcome to help me going forward w
 <div style="background:grey;color:black">
 <ul>
 <li>
+	Date: 19 May 2018
+	<ul>
+		<li>Added option timepicker to enable/disable timepicker in version 1.1.39</li>
+	</ul>
+</li>
+<li>
 	Date: 5 May 2018
 	<ul>
 		<li>Added option disabled to enable/disable input box in version 1.1.35</li>
@@ -219,6 +225,13 @@ Currently, very minimum number of options are available but I will keep on devel
             <td>false</td>
             <td>true,false</td>
         </tr>
+        <tr>
+            <td>timePicker</td>
+            <td>object</td>
+            <td>Whether to show timepicker</td>
+            <td>null</td>
+            <td>Object explained as <a href="#time-picker">below</a></td>
+        </tr>
     </tbody>
 </table>
 
@@ -247,6 +260,31 @@ You can also
 import { Options } from 'angular-2-daterangepicker';
 ```
 class for passing options to the component.
+
+### Time Picker
+
+Timepicker options expects an object containing following keys as timepicker options
+
+<table>
+    <thead>
+        <tr>
+            <th>Option Name</th>
+            <th>Type</th>
+            <th>Purpose</th>
+            <th>Default Value</th>
+            <th>Possible Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>minuteInterval</td>
+            <td>(integer)number</td>
+            <td>The interval by which minutes will increase/decrease when user changes minutes in timepicker</td>
+            <td>1</td>
+            <td>anything between 1 to 59. If you supply value greater or equal 60 then that value mod 60 is taken as actual value</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Events
 
