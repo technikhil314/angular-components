@@ -31,7 +31,7 @@ This is a work in progress and you are always welcome to help me going forward w
 <li>
 	Date: 19 May 2018
 	<ul>
-		<li>Added option timepicker to enable/disable timepicker in version 1.1.39</li>
+		<li>Added option timepicker to enable/disable timepicker in version 1.1.38</li>
 	</ul>
 </li>
 <li>
