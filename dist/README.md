@@ -480,6 +480,10 @@ if you do not want to include whole bootstrap.css then include [this css](https:
             margin: 0 !important;
         }
 
+        .daterangepicker .flussh {
+            padding: 0 !important;
+        }
+
         .daterangepicker .flush-bottom {
             padding-bottom: 0 !important;
         }
@@ -559,6 +563,8 @@ if you do not want to include whole bootstrap.css then include [this css](https:
         .daterangepicker .clickable.disabled {
             pointer-events: none;
             color: #AAA;
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .ranges .clickable {
@@ -583,6 +589,86 @@ if you do not want to include whole bootstrap.css then include [this css](https:
         .daterangepicker .bootstrap-flush{
             margin: 0 !important;
             padding: 0 !important;
+        }
+
+        .daterangepicker .time-picker span{
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+
+        .daterangepicker .time-picker .time-breadcrumb{
+            position: relative;
+            top: 22px;
+            font-weight: bolder;
+            font-size: 0.8em;
+        }
+
+        .daterangepicker .col-md-1,
+        .daterangepicker .col-md-2,
+        .daterangepicker .col-md-3,
+        .daterangepicker .col-md-4,
+        .daterangepicker .col-md-5,
+        .daterangepicker .col-md-6,
+        .daterangepicker .col-md-7,
+        .daterangepicker .col-md-8,
+        .daterangepicker .col-md-9,
+        .daterangepicker .col-md-10,
+        .daterangepicker .col-md-11,
+        .daterangepicker .col-md-12 {
+            position: relative;
+            float: left;
+        }
+
+        .daterangepicker .col-md-12 {
+            width: 100%;
+        }
+
+        .daterangepicker .col-md-11 {
+            width: 91.66666667%;
+        }
+
+        .daterangepicker .col-md-10 {
+            width: 83.33333333%;
+        }
+
+        .daterangepicker .col-md-9 {
+            width: 75%;
+        }
+
+        .daterangepicker .col-md-8 {
+            width: 66.66666667%;
+        }
+
+        .daterangepicker .col-md-7 {
+            width: 58.33333333%;
+        }
+
+        .daterangepicker .col-md-6 {
+            width: 50%;
+        }
+
+        .daterangepicker .col-md-5 {
+            width: 41.66666667%;
+        }
+
+        .daterangepicker .col-md-4 {
+            width: 33.33333333%;
+        }
+
+        .daterangepicker .col-md-3 {
+            width: 25%;
+        }
+
+        .daterangepicker .col-md-2 {
+            width: 16.66666667%;
+        }
+
+        .daterangepicker .col-md-1 {
+            width: 8.33333333%;
+        }
+
+        .daterangepicker .col-md-offset-4 {
+            margin-left: 33.333333333%;
         }
     </style>
 ```
