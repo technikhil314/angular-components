@@ -26,4 +26,5 @@ export class Options {
     position: string = 'left';
     disabled: boolean = false;
     timePicker: any = null;
+    disableBeforeStart: boolean = false;
 }

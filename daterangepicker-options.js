@@ -25,6 +25,7 @@ var Options = (function () {
         this.position = 'left';
         this.disabled = false;
         this.timePicker = null;
+        this.disableBeforeStart = false;
     }
     return Options;
 }());

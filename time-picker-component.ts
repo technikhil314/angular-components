@@ -7,14 +7,20 @@ require('moment-range');
     selector: 'time-picker',
     template: `
         <div class="col-md-offset-4 col-md-8 time-picker">
+            <div class="col-md-1 time-breadcrumb">
+                HH
+            </div>
             <div class="col-md-2 text-center">
                 <span class="clickable col-md-12" [ngClass]="{'disabled': !isValidToAddHour(1)}" (click)="addHour(1)"><img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDIyLjA2NCAyMi4wNjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDIyLjA2NCAyMi4wNjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNMjEuNDU2LDEzLjYwNWwtOC44MzUtOC44MzVjLTAuNDM0LTAuNDM1LTEuMDE3LTAuNjI4LTEuNTg5LTAuNTk4Yy0wLjU3MS0wLjAzLTEuMTU0LDAuMTYyLTEuNTg4LDAuNTk4bC04LjgzNiw4LjgzNSAgIGMtMC44MTIsMC44MS0wLjgxMiwyLjEzNSwwLDIuOTQ0bDAuNzM5LDAuNzM3YzAuODA4LDAuODEsMi4xMzQsMC44MSwyLjk0MiwwbDYuNzQyLTYuNzQybDYuNzQyLDYuNzQyICAgYzAuODA5LDAuODEsMi4xMzUsMC44MSwyLjk0MiwwbDAuNzM3LTAuNzM3QzIyLjI2NywxNS43NDEsMjIuMjY3LDE0LjQxNSwyMS40NTYsMTMuNjA1eiIgZmlsbD0iIzAwMDAwMCIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" /></span>
                 <span class="col-md-12"><b [innerHTML]="getCurrentHour()"></b></span>
                 <span class="clickable col-md-12" [ngClass]="{'disabled': !isValidToAddHour(-1)}" (click)="addHour(-1)"><img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQ0NC44MTkgNDQ0LjgxOSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQ0LjgxOSA0NDQuODE5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQzNC4yNTIsMTE0LjIwM2wtMjEuNDA5LTIxLjQxNmMtNy40MTktNy4wNC0xNi4wODQtMTAuNTYxLTI1Ljk3NS0xMC41NjFjLTEwLjA5NSwwLTE4LjY1NywzLjUyMS0yNS43LDEwLjU2MSAgIEwyMjIuNDEsMjMxLjU0OUw4My42NTMsOTIuNzkxYy03LjA0Mi03LjA0LTE1LjYwNi0xMC41NjEtMjUuNjk3LTEwLjU2MWMtOS44OTYsMC0xOC41NTksMy41MjEtMjUuOTc5LDEwLjU2MWwtMjEuMTI4LDIxLjQxNiAgIEMzLjYxNSwxMjEuNDM2LDAsMTMwLjA5OSwwLDE0MC4xODhjMCwxMC4yNzcsMy42MTksMTguODQyLDEwLjg0OCwyNS42OTNsMTg1Ljg2NCwxODUuODY1YzYuODU1LDcuMjMsMTUuNDE2LDEwLjg0OCwyNS42OTcsMTAuODQ4ICAgYzEwLjA4OCwwLDE4Ljc1LTMuNjE3LDI1Ljk3Ny0xMC44NDhsMTg1Ljg2NS0xODUuODY1YzcuMDQzLTcuMDQ0LDEwLjU2Ny0xNS42MDgsMTAuNTY3LTI1LjY5MyAgIEM0NDQuODE5LDEzMC4yODcsNDQxLjI5NSwxMjEuNjI5LDQzNC4yNTIsMTE0LjIwM3oiIGZpbGw9IiMwMDAwMDAiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" /></span>
             </div>
+            <div class="col-md-1 time-breadcrumb">
+                MM
+            </div>
             <div class="col-md-2 text-center">
                 <span class="clickable  col-md-12" [ngClass]="{'disabled': !isValidToAddMinute(options.minuteInterval)}" (click)="addMinute(options.minuteInterval)"><img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDIyLjA2NCAyMi4wNjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDIyLjA2NCAyMi4wNjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNMjEuNDU2LDEzLjYwNWwtOC44MzUtOC44MzVjLTAuNDM0LTAuNDM1LTEuMDE3LTAuNjI4LTEuNTg5LTAuNTk4Yy0wLjU3MS0wLjAzLTEuMTU0LDAuMTYyLTEuNTg4LDAuNTk4bC04LjgzNiw4LjgzNSAgIGMtMC44MTIsMC44MS0wLjgxMiwyLjEzNSwwLDIuOTQ0bDAuNzM5LDAuNzM3YzAuODA4LDAuODEsMi4xMzQsMC44MSwyLjk0MiwwbDYuNzQyLTYuNzQybDYuNzQyLDYuNzQyICAgYzAuODA5LDAuODEsMi4xMzUsMC44MSwyLjk0MiwwbDAuNzM3LTAuNzM3QzIyLjI2NywxNS43NDEsMjIuMjY3LDE0LjQxNSwyMS40NTYsMTMuNjA1eiIgZmlsbD0iIzAwMDAwMCIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" /></span>
-                <span class=" col-md-12"><b [innerHTML]="getCurrentMinute()"></b></span>
+                <span class=" col-md-12"><b [innerHTML]="getCurrentMinute()" (mouseWheelUp)="addMinute(options.minuteInterval)"></b></span>
                 <span class="clickable  col-md-12" [ngClass]="{'disabled': !isValidToAddMinute(-1 * options.minuteInterval)}" (click)="addMinute(-1 * options.minuteInterval)"><img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQ0NC44MTkgNDQ0LjgxOSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQ0LjgxOSA0NDQuODE5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQzNC4yNTIsMTE0LjIwM2wtMjEuNDA5LTIxLjQxNmMtNy40MTktNy4wNC0xNi4wODQtMTAuNTYxLTI1Ljk3NS0xMC41NjFjLTEwLjA5NSwwLTE4LjY1NywzLjUyMS0yNS43LDEwLjU2MSAgIEwyMjIuNDEsMjMxLjU0OUw4My42NTMsOTIuNzkxYy03LjA0Mi03LjA0LTE1LjYwNi0xMC41NjEtMjUuNjk3LTEwLjU2MWMtOS44OTYsMC0xOC41NTksMy41MjEtMjUuOTc5LDEwLjU2MWwtMjEuMTI4LDIxLjQxNiAgIEMzLjYxNSwxMjEuNDM2LDAsMTMwLjA5OSwwLDE0MC4xODhjMCwxMC4yNzcsMy42MTksMTguODQyLDEwLjg0OCwyNS42OTNsMTg1Ljg2NCwxODUuODY1YzYuODU1LDcuMjMsMTUuNDE2LDEwLjg0OCwyNS42OTcsMTAuODQ4ICAgYzEwLjA4OCwwLDE4Ljc1LTMuNjE3LDI1Ljk3Ny0xMC44NDhsMTg1Ljg2NS0xODUuODY1YzcuMDQzLTcuMDQ0LDEwLjU2Ny0xNS42MDgsMTAuNTY3LTI1LjY5MyAgIEM0NDQuODE5LDEzMC4yODcsNDQxLjI5NSwxMjEuNjI5LDQzNC4yNTIsMTE0LjIwM3oiIGZpbGw9IiMwMDAwMDAiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" /></span>
             </div>
             <div class="col-md-2 text-center" *ngIf="options.twentyFourHour">
@@ -25,7 +31,7 @@ require('moment-range');
         </div>
     `
 })
-export class TimePickerComponent implements OnInit,OnChanges {
+export class TimePickerComponent implements OnInit, OnChanges {
     @Input() options: any = null;
     @Input() selectedFromDate: any;
     @Input() selectedToDate: any;
@@ -35,7 +41,7 @@ export class TimePickerComponent implements OnInit,OnChanges {
     @Input() isLeft: boolean;
     @Output() timeChanged = new EventEmitter();
     ngOnInit(): void {
-        if (!this.options.minuteInterval || this.options.minuteInterval % 60 === 0) { 
+        if (!this.options.minuteInterval || this.options.minuteInterval % 60 === 0) {
             this.options.minuteInterval = 1;
         }
         this.options.minuteInterval = this.options.minuteInterval % 60;
@@ -66,7 +72,7 @@ export class TimePickerComponent implements OnInit,OnChanges {
         }
         this.triggerTimeChanged();
     }
-    addMinute(value) { 
+    addMinute(value) {
         if (this.isLeft) {
             this.selectedFromDate.set({
                 minute: (this.selectedFromDate.get('minute') + value) % 60
@@ -80,25 +86,25 @@ export class TimePickerComponent implements OnInit,OnChanges {
     }
     isValidToAddMinute(value) {
         let possibleNewValue;
-        if (this.isLeft) { 
+        if (this.isLeft) {
             possibleNewValue = (this.selectedFromDate.get('minute') + value)
         } else {
             possibleNewValue = (this.selectedToDate.get('minute') + value)
         }
         return possibleNewValue < 60 && possibleNewValue >= 0;
     }
-    isValidToAddHour(value) { 
+    isValidToAddHour(value) {
         let possibleNewValue;
-        if (this.isLeft) { 
+        if (this.isLeft) {
             possibleNewValue = (this.selectedFromDate.get('hour') + value);
         } else {
             possibleNewValue = (this.selectedToDate.get('hour') + value);
         }
         return possibleNewValue < 24 && possibleNewValue >= 0;
     }
-    triggerTimeChanged() { 
+    triggerTimeChanged() {
         this.isLeft ? this.timeChanged.emit(this.selectedFromDate) : this.timeChanged.emit(this.selectedToDate);
     }
-    toggleAMPM() { 
+    toggleAMPM() {
     }
 }

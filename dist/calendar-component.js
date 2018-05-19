@@ -80,15 +80,13 @@ var CalendarComponent = (function () {
         this.createCalendarGridData();
     };
     CalendarComponent.prototype.isDisabled = function (day) {
-        if (day.isBefore(moment(this.minDate, this.format)) || day.isAfter(moment(this.maxDate, this.format))) {
-            return true;
-        }
+        return (day.isBefore(moment(this.minDate, this.format)) || day.isAfter(moment(this.maxDate, this.format))) || (day.isBefore(moment(this.selectedFromDate, this.format)) && this.disableBeforeStart && !this.isLeft);
     };
     CalendarComponent.prototype.isDateAvailable = function (day) {
         if (day.get('month') !== this.month) {
             return false;
         }
-        if (this.inactiveBeforeStart && this.isLeft && day.isBefore(this.selectedFromDate, 'date')) {
+        if (this.inactiveBeforeStart && day.isBefore(this.selectedFromDate, 'date')) {
             return false;
         }
         return true;
@@ -152,6 +150,10 @@ var CalendarComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Boolean)
     ], CalendarComponent.prototype, "inactiveBeforeStart", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], CalendarComponent.prototype, "disableBeforeStart", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

@@ -64,6 +64,7 @@ export class CalendarComponent implements OnChanges {
     @Input() minDate: string;
     @Input() maxDate: string;
     @Input() inactiveBeforeStart: boolean;
+    @Input() disableBeforeStart: boolean;
     @Input() timePicker: any;
     get monthText() {
         let months = moment.monthsShort()
@@ -129,15 +130,13 @@ export class CalendarComponent implements OnChanges {
         this.createCalendarGridData();
     }
     isDisabled(day) {
-        if (day.isBefore(moment(this.minDate, this.format)) || day.isAfter(moment(this.maxDate, this.format))) {
-            return true;
-        }
+        return (day.isBefore(moment(this.minDate, this.format)) || day.isAfter(moment(this.maxDate, this.format))) || (day.isBefore(moment(this.selectedFromDate, this.format)) && this.disableBeforeStart && !this.isLeft)
     }
     isDateAvailable(day) {
         if (day.get('month') !== this.month) {
             return false;
         }
-        if (this.inactiveBeforeStart && this.isLeft && day.isBefore(this.selectedFromDate, 'date')) {
+        if (this.inactiveBeforeStart && day.isBefore(this.selectedFromDate, 'date')) {
             return false;
         }
         return true;

@@ -4,8 +4,9 @@
   "description": "Bootstrap Daterange picker for angular2 and 4",
   "main": "index.js",
   "scripts": {
-    "serve": "rimraf ./dist && tsfmt -r daterangepicker-component.ts calendar-component.ts daterangepicker-module.ts index.ts daterangepicker-options.ts index.d.ts && rimraf ./dist && tsc -p ./tsconfig.dev.json && concurrently \"tsc -p ./tsconfig.dev.json -w\" \"lite-server\" ",
-    "build": "tsc -p ./tsconfig.prod.json && cp ./package.json ./dist && cp ./README.md ./dist"
+    "formatter": "tsfmt -r daterangepicker-component.ts calendar-component.ts daterangepicker-module.ts index.ts daterangepicker-options.ts time-picker-component.ts index.d.ts",
+    "serve": "npm run formatter && rimraf ./dist && tsc -p ./tsconfig.dev.json && concurrently \"tsc -p ./tsconfig.dev.json -w\" \"lite-server\" ",
+    "build": "npm run formatter && tsc -p ./tsconfig.prod.json && cp ./package.json ./dist && cp ./README.md ./dist"
   },
   "repository": {
     "type": "git",

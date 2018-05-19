@@ -32,6 +32,7 @@ This is a work in progress and you are always welcome to help me going forward w
 	Date: 19 May 2018
 	<ul>
 		<li>Added option timepicker to enable/disable timepicker in version 1.1.38</li>
+        <li>Added option disableBeforeStart to enable/disable dates in right calendar that are before selected from date in version 1.1.39</li>
 	</ul>
 </li>
 <li>
@@ -231,6 +232,13 @@ Currently, very minimum number of options are available but I will keep on devel
             <td>Whether to show timepicker</td>
             <td>null</td>
             <td>Object explained as <a href="#time-picker">below</a></td>
+        </tr>
+        <tr>
+            <td>disableBeforeStart</td>
+            <td>boolean</td>
+            <td>Whether to disable dates that ar before selected start date in right calendar. This option applies to right calendar only</td>
+            <td>false</td>
+            <td>true,false</td>
         </tr>
     </tbody>
 </table>

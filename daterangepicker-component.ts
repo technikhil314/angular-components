@@ -18,7 +18,7 @@ import * as moment from 'moment';
                         </div>
                         <div class="col-md-12 flush">
                             <calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
-                                [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart" [timePicker]="options.timePicker"></calendar>
+                                [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart" [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"></calendar>
                         </div>
                     </div>
                     <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
@@ -27,13 +27,13 @@ import * as moment from 'moment';
                         </div>
                         <div class="col-md-12 flush">
                             <calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format" (dateChanged)="dateChanged($event)" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate" [maxDate]="options.maxDate"
-                                [inactiveBeforeStart]="options.inactiveBeforeStart" [timePicker]="options.timePicker"></calendar>
+                                [inactiveBeforeStart]="options.inactiveBeforeStart" [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"></calendar>
                         </div>
                     </div>  
                 </div>
-                <div class="flush text-center ranges" *ngIf="!options.autoApply">
-                    <button [class.hidden]="options.autoApply" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
-                    <button [class.hidden]="options.autoApply" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
+                <div class="flush text-center ranges" *ngIf="!options.autoApply || options.timePicker">
+                    <button [class.hidden]="options.autoApply && !options.timePicker" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
+                    <button [class.hidden]="options.autoApply && !options.timePicker" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
                     <div class="flush text-center" *ngIf="options.showRanges">
                         <button *ngFor="let range of defaultRanges" class="btn btn-link" (click)="applyPredefinedRange(range)">{{range.name}}</button>
                     </div>
