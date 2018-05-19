@@ -33,7 +33,7 @@
     top: -20px;
 }
 
- .daterangepicker.tooltip-chevron:after{
+    .daterangepicker.tooltip-chevron:after{
     content: '';
     height: 0px;
     width: 0px;
@@ -59,7 +59,7 @@
     right: 11px;
 }
 
- .daterangepicker.open-center.tooltip-chevron:before{
+    .daterangepicker.open-center.tooltip-chevron:before{
     left: 50%
 }
 
@@ -106,7 +106,6 @@
 .daterangepicker div[class*="col-md-"],
 .daterangepicker span[class*="col-md-"] {
     padding: 0 15px 0 5px;
-    ;
 }
 
 .hidden {
@@ -118,6 +117,7 @@
     margin: 4px;
     float: left;
     border-radius: 4px !important;
+    padding: 0 5px 0 5px;
 }
 
 .applyBtn {
@@ -127,6 +127,10 @@
 .daterangepicker .flush {
     padding: 0 !important;
     margin: 0 !important;
+}
+
+.daterangepicker .flussh {
+    padding: 0 !important;
 }
 
 .daterangepicker .flush-bottom {
@@ -209,6 +213,7 @@
     pointer-events: none;
     color: #AAA;
     opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .ranges .clickable {
@@ -226,42 +231,25 @@
     margin: 5px;
 }
 
-.btn-sm,
-.btn-group-sm>.btn {
-    padding: 0px 5px 0px 5px!important;
-    font-size: 10px;
-    margin: 3px;
-    border-radius: 3px;
+.daterangepicker .btn-link {
+    padding: 1px 6px 1px 6px !important;
 }
 
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+.daterangepicker .bootstrap-flush{
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-*:before,
-*:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+.daterangepicker .time-picker span{
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
-.daterangepicker input,
-.daterangepicker button,
-.daterangepicker select,
-.daterangepicker textarea {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-}
-
-daterangepicker .dateRangePicker-input:disabled{
-    pointer-events: none;
-}
-
-.daterangepicker .text-center {
-    text-align: center;
+.daterangepicker .time-picker .time-breadcrumb{
+    position: relative;
+    top: 22px;
+    font-weight: bolder;
+    font-size: 0.8em;
 }
 
 .daterangepicker .col-md-1,
