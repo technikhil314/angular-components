@@ -48,7 +48,7 @@ var DaterangepickerComponent = (function () {
                 } while (current);
             }
             if (this.showCalendars) {
-                if (!this.options.autoApply) {
+                if (!this.isAutoApply()) {
                     this.restoreOldDates();
                 }
                 this.toggleCalendars(false);
@@ -75,17 +75,7 @@ var DaterangepickerComponent = (function () {
         this.setRange();
     };
     DaterangepickerComponent.prototype.ngOnInit = function () {
-        var _this = this;
         //get default options provided by user
-        setTimeout(function () {
-            if (_this.options.singleCalendar) {
-                _this.options.autoApply = true;
-                _this.options.showRanges = false;
-            }
-            if (_this.options.timePicker) {
-                _this.options.autoApply = false;
-            }
-        });
         this.setFormat();
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
@@ -275,12 +265,15 @@ var DaterangepickerComponent = (function () {
                 }
             }
         }
-        if (this.options.autoApply) {
-            (!isLeft || this.options.singleCalendar) ? this.toggleCalendars(false) : this.toggleCalendars(true);
+        if (this.isAutoApply()) {
+            this.toggleCalendars(false);
             this.setRange();
             this.emitRangeSelected();
         }
-        else {
+        else if (!this.options.singleCalendar && !isLeft) {
+            this.enableApplyButton = true;
+        }
+        else if (this.options.singleCalendar) {
             this.enableApplyButton = true;
         }
         this.fromMonth = this.fromDate ? this.fromDate.get('month') : this.fromMonth;
@@ -406,6 +399,17 @@ var DaterangepickerComponent = (function () {
             return true;
         });
     };
+    DaterangepickerComponent.prototype.isAutoApply = function () {
+        if (this.options.timePicker) {
+            return false;
+        }
+        else if (this.options.singleCalendar) {
+            return true;
+        }
+        else {
+            return this.options.autoApply;
+        }
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', daterangepicker_options_1.Options)
@@ -428,7 +432,7 @@ var DaterangepickerComponent = (function () {
     DaterangepickerComponent = __decorate([
         core_1.Component({
             selector: 'date-range-picker',
-            template: "\n        <div class=\"daterangepicker-wrapper\">\n            <input class=\"{{class}} dateRangePicker-input\" type=\"text\" [ngModel]=\"range\" [disabled]=\"options.disabled\">\n            <div class=\"daterangepicker col-md-12 text-center flush tooltip-chevron {{getPositionClass()}}\" [class.hidden]=\"!showCalendars\" [ngClass]=\"{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}\">\n                <div class=\"col-md-12 flush text-center\">\n                    <div class=\"flush-bottom text-center flush-left nudge-half--right\" [ngClass]=\"{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}\">\n                        <div class=\"col-md-12 flush-bottom\" *ngIf=\"!options.singleCalendar\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"fromDate | formatMomentDate: format\" (blur)=\"formatFromDate($event)\" type=\"text\" name=\"daterangepicker_start\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [isLeft]=\"true\" [month]=\"fromMonth\" [year]=\"fromYear\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)=\"dateChanged($event)\" [format]=\"format\" [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\"\n                                [maxDate]=\"options.maxDate\" [inactiveBeforeStart]=\"options.inactiveBeforeStart\" [disableBeforeStart]=\"options.disableBeforeStart\" [timePicker]=\"options.timePicker\"></calendar>\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 flush-bottom flush-right nudge-half--left\" *ngIf=\"!options.singleCalendar\">\n                        <div class=\"col-md-12 flush-bottom text-center\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"toDate | formatMomentDate: format\" (blur)=\"formatToDate($event)\" name=\"daterangepicker_end\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [month]=\"toMonth\" [year]=\"toYear\" [format]=\"format\" (dateChanged)=\"dateChanged($event)\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\" [maxDate]=\"options.maxDate\"\n                                [inactiveBeforeStart]=\"options.inactiveBeforeStart\" [disableBeforeStart]=\"options.disableBeforeStart\" [timePicker]=\"options.timePicker\"></calendar>\n                        </div>\n                    </div>  \n                </div>\n                <div class=\"flush text-center ranges\" *ngIf=\"!options.autoApply || options.timePicker\">\n                    <button [class.hidden]=\"options.autoApply && !options.timePicker\" class=\"btn btn-success btn-sm\" [disabled]=\"!enableApplyButton\" (click)=\"apply()\">Apply</button>\n                    <button [class.hidden]=\"options.autoApply && !options.timePicker\" class=\"btn btn-default btn-sm\" (click)=\"cancel()\">Cancel</button>\n                    <div class=\"flush text-center\" *ngIf=\"options.showRanges\">\n                        <button *ngFor=\"let range of defaultRanges\" class=\"btn btn-link\" (click)=\"applyPredefinedRange(range)\">{{range.name}}</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    "
+            template: "\n        <div class=\"daterangepicker-wrapper\">\n            <input class=\"{{class}} dateRangePicker-input\" type=\"text\" [ngModel]=\"range\" [disabled]=\"options.disabled\">\n            <div class=\"daterangepicker col-md-12 text-center flush tooltip-chevron {{getPositionClass()}}\" [class.hidden]=\"!showCalendars\" [ngClass]=\"{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}\">\n                <div class=\"col-md-12 flush text-center\">\n                    <div class=\"flush-bottom text-center flush-left nudge-half--right\" [ngClass]=\"{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}\">\n                        <div class=\"col-md-12 flush-bottom\" *ngIf=\"!options.singleCalendar\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"fromDate | formatMomentDate: format\" (blur)=\"formatFromDate($event)\" type=\"text\" name=\"daterangepicker_start\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [isLeft]=\"true\" [month]=\"fromMonth\" [year]=\"fromYear\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)=\"dateChanged($event)\" [format]=\"format\" [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\"\n                                [maxDate]=\"options.maxDate\" [inactiveBeforeStart]=\"options.inactiveBeforeStart\" [disableBeforeStart]=\"options.disableBeforeStart\" [timePicker]=\"options.timePicker\"></calendar>\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 flush-bottom flush-right nudge-half--left\" *ngIf=\"!options.singleCalendar\">\n                        <div class=\"col-md-12 flush-bottom text-center\">\n                            <input class=\"input-mini form-control\" [ngModel]=\"toDate | formatMomentDate: format\" (blur)=\"formatToDate($event)\" name=\"daterangepicker_end\" />\n                        </div>\n                        <div class=\"col-md-12 flush\">\n                            <calendar class=\"col-md-12 flush\" [month]=\"toMonth\" [year]=\"toYear\" [format]=\"format\" (dateChanged)=\"dateChanged($event)\" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) [selectedFromDate]=\"fromDate\" [selectedToDate]=\"toDate\" [minDate]=\"options.minDate\" [maxDate]=\"options.maxDate\"\n                                [inactiveBeforeStart]=\"options.inactiveBeforeStart\" [disableBeforeStart]=\"options.disableBeforeStart\" [timePicker]=\"options.timePicker\"></calendar>\n                        </div>\n                    </div>  \n                </div>\n                <div class=\"flush text-center ranges\" *ngIf=\"!isAutoApply()\">\n                    <button [class.hidden]=\"isAutoApply()\" class=\"btn btn-success btn-sm\" [disabled]=\"!enableApplyButton\" (click)=\"apply()\">Apply</button>\n                    <button [class.hidden]=\"isAutoApply()\" class=\"btn btn-default btn-sm\" (click)=\"cancel()\">Cancel</button>\n                    <div class=\"flush text-center\" *ngIf=\"options.showRanges && !options.singleCalendar\">\n                        <button *ngFor=\"let range of defaultRanges\" class=\"btn btn-link\" (click)=\"applyPredefinedRange(range)\">{{range.name}}</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], DaterangepickerComponent);

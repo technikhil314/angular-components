@@ -31,10 +31,10 @@ import * as moment from 'moment';
                         </div>
                     </div>  
                 </div>
-                <div class="flush text-center ranges" *ngIf="!options.autoApply || options.timePicker">
-                    <button [class.hidden]="options.autoApply && !options.timePicker" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
-                    <button [class.hidden]="options.autoApply && !options.timePicker" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
-                    <div class="flush text-center" *ngIf="options.showRanges">
+                <div class="flush text-center ranges" *ngIf="!isAutoApply()">
+                    <button [class.hidden]="isAutoApply()" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
+                    <button [class.hidden]="isAutoApply()" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
+                    <div class="flush text-center" *ngIf="options.showRanges && !options.singleCalendar">
                         <button *ngFor="let range of defaultRanges" class="btn btn-link" (click)="applyPredefinedRange(range)">{{range.name}}</button>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ export class DaterangepickerComponent implements OnInit {
                 } while (current);
             }
             if (this.showCalendars) {
-                if (!this.options.autoApply) {
+                if (!this.isAutoApply()) {
                     this.restoreOldDates();
                 }
                 this.toggleCalendars(false);
@@ -122,15 +122,6 @@ export class DaterangepickerComponent implements OnInit {
     }
     ngOnInit(): void {
         //get default options provided by user
-        setTimeout(() => {
-            if (this.options.singleCalendar) {
-                this.options.autoApply = true;
-                this.options.showRanges = false;
-            }
-            if (this.options.timePicker) {
-                this.options.autoApply = false;
-            }
-        });
         this.setFormat();
         this.validateMinMaxDates();
         this.setFromDate(this.options.startDate);
@@ -300,11 +291,13 @@ export class DaterangepickerComponent implements OnInit {
                 }
             }
         }
-        if (this.options.autoApply) {
-            (!isLeft || this.options.singleCalendar) ? this.toggleCalendars(false) : this.toggleCalendars(true);
-            this.setRange()
+        if (this.isAutoApply()) {
+            this.toggleCalendars(false);
+            this.setRange();
             this.emitRangeSelected();
-        } else {
+        } else if (!this.options.singleCalendar && !isLeft) {
+            this.enableApplyButton = true;
+        } else if (this.options.singleCalendar) {
             this.enableApplyButton = true;
         }
         this.fromMonth = this.fromDate ? this.fromDate.get('month') : this.fromMonth;
@@ -423,5 +416,14 @@ export class DaterangepickerComponent implements OnInit {
             }
             return true;
         });
+    }
+    isAutoApply() {
+        if (this.options.timePicker) {
+            return false;
+        } else if (this.options.singleCalendar) {
+            return true;
+        } else {
+            return this.options.autoApply;
+        }
     }
 }
