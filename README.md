@@ -567,6 +567,10 @@ if you do not want to include whole bootstrap.css then include [this css](https:
             cursor: not-allowed;
         }
 
+        .ranges{
+            padding: 5px 0;
+        }
+
         .ranges .clickable {
             margin-top: 8px !important;
         }

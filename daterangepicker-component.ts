@@ -31,7 +31,7 @@ import * as moment from 'moment';
                         </div>
                     </div>  
                 </div>
-                <div class="flush text-center ranges" *ngIf="!isAutoApply()">
+                <div class="text-center ranges">
                     <button [class.hidden]="isAutoApply()" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
                     <button [class.hidden]="isAutoApply()" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
                     <div class="flush text-center" *ngIf="options.showRanges && !options.singleCalendar">
@@ -292,9 +292,11 @@ export class DaterangepickerComponent implements OnInit {
             }
         }
         if (this.isAutoApply()) {
-            this.toggleCalendars(false);
-            this.setRange();
-            this.emitRangeSelected();
+            if (this.options.singleCalendar || !isLeft) {
+                this.toggleCalendars(false);
+                this.setRange();
+                this.emitRangeSelected();
+            }
         } else if (!this.options.singleCalendar && !isLeft) {
             this.enableApplyButton = true;
         } else if (this.options.singleCalendar) {

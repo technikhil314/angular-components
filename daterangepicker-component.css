@@ -216,6 +216,10 @@
     cursor: not-allowed;
 }
 
+.ranges{
+    padding: 5px 0;
+}
+
 .ranges .clickable {
     margin-top: 8px !important;
 }
