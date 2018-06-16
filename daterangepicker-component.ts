@@ -262,7 +262,7 @@ export class DaterangepickerComponent implements OnInit {
         let value = data.day;
         let isLeft = data.isLeft;
         if (isLeft) {
-            this.setFromDate(value.format(this.format));
+            this.fromDate = value;
             if (!this.options.timePicker) {
                 if (value.isAfter(this.toDate, 'date')) {
                     this.toDate = this.fromDate.clone();
@@ -280,7 +280,8 @@ export class DaterangepickerComponent implements OnInit {
                     second: 59
                 });
             }
-            this.setToDate(value.format(this.format));
+            //this.setToDate(value.format(this.format));
+            this.toDate = value;
             if (!this.options.timePicker) {
                 if (value.isBefore(this.fromDate, 'date')) {
                     this.fromDate = this.toDate.clone();

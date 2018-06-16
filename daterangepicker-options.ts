@@ -10,6 +10,11 @@ class DefinedDateRange {
     value: DateRange;
 }
 
+export class Timepicker {
+    minuteInterval: number = 1;
+    twentyFourHourFormat: boolean = true;
+}
+
 export class Options {
     startDate: string | moment.Moment | any = null;
     endDate: string | moment.Moment | any = null;
@@ -25,6 +30,6 @@ export class Options {
     showRanges: boolean = false;
     position: string = 'left';
     disabled: boolean = false;
-    timePicker: any = null;
+    timePicker: Timepicker = null;
     disableBeforeStart: boolean = false;
 }

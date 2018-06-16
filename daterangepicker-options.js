@@ -9,6 +9,14 @@ var DefinedDateRange = (function () {
     }
     return DefinedDateRange;
 }());
+var Timepicker = (function () {
+    function Timepicker() {
+        this.minuteInterval = 1;
+        this.twentyFourHourFormat = true;
+    }
+    return Timepicker;
+}());
+exports.Timepicker = Timepicker;
 var Options = (function () {
     function Options() {
         this.startDate = null;

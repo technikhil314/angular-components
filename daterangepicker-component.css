@@ -1,4 +1,4 @@
-.daterangepicker-wrapper{
+.daterangepicker-wrapper {
     position: relative;
     border: none;
 }
@@ -11,29 +11,29 @@
     background: #fff;
 }
 
-.daterangepicker.open-right{
+.daterangepicker.open-right {
     right: 0;
 }
 
-.daterangepicker.open-left{
+.daterangepicker.open-left {
     left: 0;
 }
 
-.daterangepicker.open-center{
+.daterangepicker.open-center {
     right: -50%;
 }
 
-.daterangepicker.tooltip-chevron:before{
+.daterangepicker.tooltip-chevron:before {
     content: '';
     height: 0px;
     width: 0px;
     border: 10px solid transparent;
     position: absolute;
-    border-bottom-color: #aaa; 
+    border-bottom-color: #aaa;
     top: -20px;
 }
 
-    .daterangepicker.tooltip-chevron:after{
+.daterangepicker.tooltip-chevron:after {
     content: '';
     height: 0px;
     width: 0px;
@@ -43,27 +43,27 @@
     top: -18px;
 }
 
-.daterangepicker.open-left.tooltip-chevron:before{
+.daterangepicker.open-left.tooltip-chevron:before {
     left: 10px;
 }
 
-.daterangepicker.open-left.tooltip-chevron:after{
+.daterangepicker.open-left.tooltip-chevron:after {
     left: 11px;
 }
 
-.daterangepicker.open-right.tooltip-chevron:before{
+.daterangepicker.open-right.tooltip-chevron:before {
     right: 10px;
 }
 
-.daterangepicker.open-right.tooltip-chevron:after{
+.daterangepicker.open-right.tooltip-chevron:after {
     right: 11px;
 }
 
-    .daterangepicker.open-center.tooltip-chevron:before{
+.daterangepicker.open-center.tooltip-chevron:before {
     left: 50%
 }
 
-.daterangepicker.open-center.tooltip-chevron:after{
+.daterangepicker.open-center.tooltip-chevron:after {
     left: 50%;
 }
 
@@ -86,7 +86,7 @@
     .col-md-10 {
         width: 100% !important;
     }
-    .ranges > div {
+    .ranges>div {
         display: none;
     }
 }
@@ -189,6 +189,7 @@
 
 .daterangepicker .off {
     color: #666;
+    opacity: 0.7;
 }
 
 .daterangepicker table {
@@ -216,7 +217,7 @@
     cursor: not-allowed;
 }
 
-.ranges{
+.ranges {
     padding: 5px 0;
 }
 
@@ -231,7 +232,7 @@
     font-weight: bold;
 }
 
-.daterangepicker .form-control{
+.daterangepicker .form-control {
     margin: 5px;
 }
 
@@ -239,17 +240,17 @@
     padding: 1px 6px 1px 6px !important;
 }
 
-.daterangepicker .bootstrap-flush{
+.daterangepicker .bootstrap-flush {
     margin: 0 !important;
     padding: 0 !important;
 }
 
-.daterangepicker .time-picker span{
+.daterangepicker .time-picker span {
     padding-left: 4px;
     padding-right: 4px;
 }
 
-.daterangepicker .time-picker .time-breadcrumb{
+.daterangepicker .time-picker .time-breadcrumb {
     position: relative;
     top: 22px;
     font-weight: bolder;

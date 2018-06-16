@@ -233,7 +233,7 @@ var DaterangepickerComponent = (function () {
         var value = data.day;
         var isLeft = data.isLeft;
         if (isLeft) {
-            this.setFromDate(value.format(this.format));
+            this.fromDate = value;
             if (!this.options.timePicker) {
                 if (value.isAfter(this.toDate, 'date')) {
                     this.toDate = this.fromDate.clone();
@@ -253,7 +253,8 @@ var DaterangepickerComponent = (function () {
                     second: 59
                 });
             }
-            this.setToDate(value.format(this.format));
+            //this.setToDate(value.format(this.format));
+            this.toDate = value;
             if (!this.options.timePicker) {
                 if (value.isBefore(this.fromDate, 'date')) {
                     this.fromDate = this.toDate.clone();
