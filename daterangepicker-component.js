@@ -233,6 +233,13 @@ var DaterangepickerComponent = (function () {
         var value = data.day;
         var isLeft = data.isLeft;
         if (isLeft) {
+            if (!this.options.timePicker) {
+                value.set({
+                    hour: 0,
+                    minute: 0,
+                    second: 0
+                });
+            }
             this.fromDate = value;
             if (!this.options.timePicker) {
                 if (value.isAfter(this.toDate, 'date')) {
@@ -393,10 +400,10 @@ var DaterangepickerComponent = (function () {
             if (range.value.start.isAfter(range.value.end, 'date')) {
                 return false;
             }
-            if (_this.options.minDate && range.value.start.isBefore(_this.options.minDate, 'date')) {
+            if (_this.options.minDate && range.value.start.isBefore(_this.options.minDate, _this.options.format)) {
                 return false;
             }
-            if (_this.options.maxDate && range.value.end.isAfter(_this.options.maxDate, 'date')) {
+            if (_this.options.maxDate && range.value.end.isAfter(_this.options.maxDate, _this.options.format)) {
                 return false;
             }
             return true;

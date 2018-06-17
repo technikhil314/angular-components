@@ -114,12 +114,19 @@ export class CalendarComponent implements OnChanges {
         let endDay = moment(startDate).add(60, 'd');
         let monthRange = moment.range(firstDay, endDay);
         let weeksRange = [];
+        let that = this;
         weeksRange = this.getWeeksRange(this.getWeekNumbers(monthRange), year, month);
 
         let weekList = [];
         weeksRange.map(function(week) {
             let daysList = [];
             week.by('days', function(day) {
+                if (day.isSame(moment(that.minDate, that.format), 'date')) {
+                    day = moment(that.minDate, that.format);
+                };
+                if (day.isSame(moment(that.maxDate, that.format), 'date')) {
+                    day = moment(that.maxDate, that.format);
+                };
                 daysList.push(day);
             });
             weekList.push(daysList);

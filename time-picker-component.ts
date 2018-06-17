@@ -86,22 +86,40 @@ export class TimePickerComponent implements OnInit, OnChanges {
         this.triggerTimeChanged();
     }
     isValidToAddMinute(value) {
-        let possibleNewValue;
+        let possibleNewValue, possibleSelectedDate;
         if (this.isLeft) {
-            possibleNewValue = (this.selectedFromDate.get('minute') + value)
+            possibleNewValue = (this.selectedFromDate.get('minute') + value);
+            possibleSelectedDate = this.selectedFromDate.clone().add(value, 'minutes');
         } else {
-            possibleNewValue = (this.selectedToDate.get('minute') + value)
+            possibleNewValue = (this.selectedToDate.get('minute') + value);
+            possibleSelectedDate = this.selectedToDate.clone().add(value, 'minutes');
         }
-        return possibleNewValue < 60 && possibleNewValue >= 0;
+        let retValue = possibleNewValue < 60 && possibleNewValue > 0;
+        if (this.minDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrAfter(this.minDate);
+        }
+        if (this.maxDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrBefore(this.maxDate);
+        }
+        return retValue;
     }
     isValidToAddHour(value) {
-        let possibleNewValue;
+        let possibleNewValue, possibleSelectedDate;
         if (this.isLeft) {
             possibleNewValue = (this.selectedFromDate.get('hour') + value);
+            possibleSelectedDate = this.selectedFromDate.clone().add(value, 'hour');
         } else {
             possibleNewValue = (this.selectedToDate.get('hour') + value);
+            possibleSelectedDate = this.selectedToDate.clone().add(value, 'hour');
         }
-        return possibleNewValue < 24 && possibleNewValue >= 0;
+        let retValue = possibleNewValue < 24 && possibleNewValue > 0;
+        if (this.minDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrAfter(this.minDate)
+        }
+        if (this.maxDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrBefore(this.maxDate);
+        }
+        return retValue;
     }
     triggerTimeChanged() {
         this.isLeft ? this.timeChanged.emit(this.selectedFromDate) : this.timeChanged.emit(this.selectedToDate);

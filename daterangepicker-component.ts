@@ -262,6 +262,13 @@ export class DaterangepickerComponent implements OnInit {
         let value = data.day;
         let isLeft = data.isLeft;
         if (isLeft) {
+            if (!this.options.timePicker) {
+                value.set({
+                    hour: 0,
+                    minute: 0,
+                    second: 0
+                });
+            }
             this.fromDate = value;
             if (!this.options.timePicker) {
                 if (value.isAfter(this.toDate, 'date')) {
@@ -411,10 +418,10 @@ export class DaterangepickerComponent implements OnInit {
             if (range.value.start.isAfter(range.value.end, 'date')) {
                 return false;
             }
-            if (this.options.minDate && range.value.start.isBefore(this.options.minDate, 'date')) {
+            if (this.options.minDate && range.value.start.isBefore(this.options.minDate, this.options.format)) {
                 return false;
             }
-            if (this.options.maxDate && range.value.end.isAfter(this.options.maxDate, 'date')) {
+            if (this.options.maxDate && range.value.end.isAfter(this.options.maxDate, this.options.format)) {
                 return false;
             }
             return true;

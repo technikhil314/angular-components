@@ -65,11 +65,20 @@ var CalendarComponent = (function () {
         var endDay = moment(startDate).add(60, 'd');
         var monthRange = moment.range(firstDay, endDay);
         var weeksRange = [];
+        var that = this;
         weeksRange = this.getWeeksRange(this.getWeekNumbers(monthRange), year, month);
         var weekList = [];
         weeksRange.map(function (week) {
             var daysList = [];
             week.by('days', function (day) {
+                if (day.isSame(moment(that.minDate, that.format), 'date')) {
+                    day = moment(that.minDate, that.format);
+                }
+                ;
+                if (day.isSame(moment(that.maxDate, that.format), 'date')) {
+                    day = moment(that.maxDate, that.format);
+                }
+                ;
                 daysList.push(day);
             });
             weekList.push(daysList);

@@ -64,24 +64,42 @@ var TimePickerComponent = (function () {
         this.triggerTimeChanged();
     };
     TimePickerComponent.prototype.isValidToAddMinute = function (value) {
-        var possibleNewValue;
+        var possibleNewValue, possibleSelectedDate;
         if (this.isLeft) {
             possibleNewValue = (this.selectedFromDate.get('minute') + value);
+            possibleSelectedDate = this.selectedFromDate.clone().add(value, 'minutes');
         }
         else {
             possibleNewValue = (this.selectedToDate.get('minute') + value);
+            possibleSelectedDate = this.selectedToDate.clone().add(value, 'minutes');
         }
-        return possibleNewValue < 60 && possibleNewValue >= 0;
+        var retValue = possibleNewValue < 60 && possibleNewValue > 0;
+        if (this.minDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrAfter(this.minDate);
+        }
+        if (this.maxDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrBefore(this.maxDate);
+        }
+        return retValue;
     };
     TimePickerComponent.prototype.isValidToAddHour = function (value) {
-        var possibleNewValue;
+        var possibleNewValue, possibleSelectedDate;
         if (this.isLeft) {
             possibleNewValue = (this.selectedFromDate.get('hour') + value);
+            possibleSelectedDate = this.selectedFromDate.clone().add(value, 'hour');
         }
         else {
             possibleNewValue = (this.selectedToDate.get('hour') + value);
+            possibleSelectedDate = this.selectedToDate.clone().add(value, 'hour');
         }
-        return possibleNewValue < 24 && possibleNewValue >= 0;
+        var retValue = possibleNewValue < 24 && possibleNewValue > 0;
+        if (this.minDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrAfter(this.minDate);
+        }
+        if (this.maxDate.isValid()) {
+            retValue = retValue && possibleSelectedDate.isSameOrBefore(this.maxDate);
+        }
+        return retValue;
     };
     TimePickerComponent.prototype.triggerTimeChanged = function () {
         this.isLeft ? this.timeChanged.emit(this.selectedFromDate) : this.timeChanged.emit(this.selectedToDate);

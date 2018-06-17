@@ -92,7 +92,7 @@ $ bower install angular-2-daterangepicker
 
 ## Demo
 see [Demo](https://nikhil-001mehta.github.io/angular-2-daterangepicker/)
-or [Plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to how to consume this module
+or [Plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to how to consume this module or You can play around with the code on stackblitz <a href="https://stackblitz.com/edit/angular-daterangepicker">here</a>
 
 # Usage
 ## How to make it work for you
