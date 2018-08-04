@@ -34,6 +34,7 @@ import * as moment from 'moment';
                 <div class="text-center ranges">
                     <button [class.hidden]="isAutoApply()" class="btn btn-success btn-sm" [disabled]="!enableApplyButton" (click)="apply()">Apply</button>
                     <button [class.hidden]="isAutoApply()" class="btn btn-default btn-sm" (click)="cancel()">Cancel</button>
+                    <button [disabled]="!this.range" class="btn btn-default btn-link" (click)="clear()">Clear</button>
                     <div class="flush text-center" *ngIf="options.showRanges && !options.singleCalendar">
                         <button *ngFor="let range of defaultRanges" class="btn btn-link" (click)="applyPredefinedRange(range)">{{range.name}}</button>
                     </div>
@@ -406,6 +407,12 @@ export class DaterangepickerComponent implements OnInit {
     cancel() {
         this.restoreOldDates();
         this.toggleCalendars(false);
+    }
+    clear() {
+        this.fromDate = this.toDate = '';
+        this.apply();
+        this.enableApplyButton = false;
+        this.emitRangeSelected();
     }
     applyPredefinedRange(data) {
         this.setFromDate(data.value.start);
