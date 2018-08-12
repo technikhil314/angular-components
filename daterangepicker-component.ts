@@ -9,8 +9,8 @@ import * as moment from 'moment';
     selector: 'date-range-picker',
     template: `
         <div class="daterangepicker-wrapper">
-            <input class="{{class}} dateRangePicker-input" type="text" [ngModel]="range" [disabled]="options.disabled">
-            <div class="daterangepicker col-md-12 text-center flush tooltip-chevron {{getPositionClass()}}" [class.hidden]="!showCalendars" [ngClass]="{'hidden':!showCalendars, 'singledatepicker':options.singleCalendar}">
+            <input class="{{class}} dateRangePicker-input" type="text" [ngModel]="range" [disabled]="options.disabled" [ngClass]="{'hidden': options.alwaysOpen}">
+            <div class="daterangepicker col-md-12 text-center flush {{getPositionClass()}}" [ngClass]="{'hidden':!(showCalendars || options.alwaysOpen), 'singledatepicker':options.singleCalendar, 'tooltip-chevron': !options.alwaysOpen, 'always-open': options.alwaysOpen}">
                 <div class="col-md-12 flush text-center">
                     <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{'col-md-6':!options.singleCalendar,'col-md-12':options.singleCalendar}">
                         <div class="col-md-12 flush-bottom" *ngIf="!options.singleCalendar">

@@ -9,6 +9,16 @@
     position: absolute;
     top: 44px;
     background: #fff;
+    z-index: 3000;
+    border-radius: 4px;
+    box-shadow: 0px 2px 2px 2px #ddd;
+    border: 1px solid #aaa;
+    padding: 10px;
+}
+
+.daterangepicker.always-open{
+    top: 0;
+    box-shadow: none;
 }
 
 .daterangepicker.open-right {
@@ -91,16 +101,8 @@
     }
 }
 
-.singledatepicker {
+.daterangepicker.singledatepicker {
     width: 225px;
-}
-
-.daterangepicker {
-    z-index: 3000;
-    border-radius: 4px;
-    box-shadow: 0px 2px 2px 2px #ddd;
-    border: 1px solid #aaa;
-    padding: 10px;
 }
 
 .daterangepicker div[class*="col-md-"],

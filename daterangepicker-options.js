@@ -34,6 +34,7 @@ var Options = (function () {
         this.disabled = false;
         this.timePicker = null;
         this.disableBeforeStart = false;
+        this.alwaysOpen = false;
     }
     return Options;
 }());

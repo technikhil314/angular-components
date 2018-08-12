@@ -32,4 +32,5 @@ export class Options {
     disabled: boolean = false;
     timePicker: Timepicker = null;
     disableBeforeStart: boolean = false;
+    alwaysOpen: boolean = false;
 }
