@@ -29,6 +29,12 @@ This is a work in progress and you are always welcome to help me going forward w
 <div style="background:grey;color:black">
 <ul>
 <li>
+	Date: 12 Aug 2018
+	<ul>
+		<li>Added option alwaysOpen to keep the flyout open always 1.1.47</li>
+	</ul>
+</li>
+<li>
 	Date: 19 May 2018
 	<ul>
 		<li>Added option timepicker to enable/disable timepicker in version 1.1.38</li>
@@ -240,6 +246,13 @@ Currently, very minimum number of options are available but I will keep on devel
             <td>false</td>
             <td>true,false</td>
         </tr>
+        <tr>
+            <td>alwaysOpen</td>
+            <td>boolean</td>
+            <td>Whether to keep the calendars always open. This option removes the main input box where range is shown</td>
+            <td>false</td>
+            <td>true,false</td>
+        </tr>
     </tbody>
 </table>
 
@@ -360,6 +373,11 @@ if you do not want to include whole bootstrap.css then include [this css](https:
             position: absolute;
             top: 44px;
             background: #fff;
+        }
+
+        .daterangepicker.always-open{
+            top: 0;
+            box-shadow: none;
         }
 
         .daterangepicker.open-right{
