@@ -66,6 +66,7 @@ export class CalendarComponent implements OnChanges {
     @Input() inactiveBeforeStart: boolean;
     @Input() disableBeforeStart: boolean;
     @Input() timePicker: any;
+    @Input() singleCalendar: boolean = false;
     get monthText() {
         let months = moment.monthsShort()
         return months[this.month];
@@ -149,6 +150,9 @@ export class CalendarComponent implements OnChanges {
         return true;
     }
     isSelectedDate(day) {
+        if (day.get('month') === this.month && day.isSame(this.selectedFromDate, 'date')) {
+            return true;
+        }
         if (day.get('month') === this.month && day.isSameOrAfter(this.selectedFromDate, 'date') && day.isSameOrBefore(this.selectedToDate, 'date')) {
             return true;
         }

@@ -18,7 +18,7 @@ import * as moment from 'moment';
                         </div>
                         <div class="col-md-12 flush">
                             <calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (monthChanged)=monthChanged($event) (yearChanged)=yearChanged($event) (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
-                                [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart" [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"></calendar>
+                                [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart" [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker" [singleCalendar]="options.singleCalendar"></calendar>
                         </div>
                     </div>
                     <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">

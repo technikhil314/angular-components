@@ -13,6 +13,7 @@ var moment = require('moment');
 require('moment-range');
 var CalendarComponent = (function () {
     function CalendarComponent() {
+        this.singleCalendar = false;
         this.dateChanged = new core_1.EventEmitter();
         this.monthChanged = new core_1.EventEmitter();
         this.yearChanged = new core_1.EventEmitter();
@@ -101,6 +102,9 @@ var CalendarComponent = (function () {
         return true;
     };
     CalendarComponent.prototype.isSelectedDate = function (day) {
+        if (day.get('month') === this.month && day.isSame(this.selectedFromDate, 'date')) {
+            return true;
+        }
         if (day.get('month') === this.month && day.isSameOrAfter(this.selectedFromDate, 'date') && day.isSameOrBefore(this.selectedToDate, 'date')) {
             return true;
         }
@@ -167,6 +171,10 @@ var CalendarComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], CalendarComponent.prototype, "timePicker", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], CalendarComponent.prototype, "singleCalendar", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
