@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nikhil-001mehta/angular-2-daterangepicker.git"
+    "url": "git+https://github.com/technikhil314/angular-2-daterangepicker.git"
   },
   "keywords": [
     "angular2",
@@ -23,9 +23,9 @@
   "author": "nikhil.mehta",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues"
+    "url": "https://github.com/technikhil314/angular-2-daterangepicker/issues"
   },
-  "homepage": "https://nikhil-001mehta.github.io/angular-2-daterangepicker/",
+  "homepage": "https://technikhil314.github.io/angular-2-daterangepicker/",
   "dependencies": {
     "moment": "^2.17.1",
     "moment-range": "^2.2.0"
