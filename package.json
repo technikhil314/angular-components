@@ -1,6 +1,6 @@
 {
   "name": "angular-2-daterangepicker",
-  "version": "1.1.48",
+  "version": "1.1.49",
   "description": "Bootstrap Daterange picker for angular2 and 4",
   "main": "index.js",
   "scripts": {
