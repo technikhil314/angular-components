@@ -74,7 +74,7 @@ export class DaterangepickerComponent implements OnInit {
             let current: any = event.target;
             let host: any = this.elem.nativeElement;
             if (host.compareDocumentPosition) {
-                if (host.compareDocumentPosition(current) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
+                if (host.compareDocumentPosition(current) & window.Node.DOCUMENT_POSITION_CONTAINED_BY) {
                     this.storeOldDates();
                     return this.toggleCalendars(true);
                 }
