@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
-import * as moment from "moment";
+declare var require: any;
+var moment = require("moment");
+require("moment-range");
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
