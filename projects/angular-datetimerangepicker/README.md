@@ -3,14 +3,13 @@
 [//]: <> (start placeholder for auto-badger)
 
 ## About this package
-
 Date and time range picker for Angular v6 and above.
 <br/>
-It is a fully responsive date and time range picker with or without bootstrap.css. See <a href="#responsive-css">responsive section </a> below for more details.
+It is a fully responsive date and time range picker with or without bootstrap.css.
 <br/>
 The purpose of this project is to remove dependencies on bootstrap, jquery etc.
 <br/>
-No offence here. These are good libraries but with modern frameworks they add more footprint which is good to get rid of unless you don;t see any other alternative
+No offence here. These are good libraries but with modern frameworks they add more footprint hampering the performance
 
 ## Announcements
 
@@ -30,7 +29,16 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Demo
 
-Check the demo [here](angular-datetimerangepicker.surge.sh)
+Check the demo [here](https://angular-datetimerangepicker.surge.sh)
+
+## Roadmap
+
+1. Get rid of moment to minimise the package
+2. Add theme support
+3. Make touch friendly UI for touch devices
+4. Make style more robust. Use latest CSS features.
+
+
 
 ## Install
 
