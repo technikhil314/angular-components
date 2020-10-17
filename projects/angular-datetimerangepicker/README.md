@@ -99,10 +99,10 @@ if you do not want to include whole bootstrap.css then include following css in 
 
 ### from node_modules
 
-add following path to angular.json's style section if you are already using bootstrap <br/>
+add following path to `angular.json`'s style section if you are already using bootstrap <br/>
 `./node_modules/angular-datetimerangepicker/styles/with-bootstrap.css`
 
-or add following path to angular.json's style section if you dont want bootstrap <br/>
+or add following path to `angular.json`'s style section if you dont want bootstrap <br/>
 `./node_modules/angular-datetimerangepicker/styles/without-bootstrap.css`
 
 <br/>
@@ -398,10 +398,10 @@ Please let me know if you are facing any issues [here](https://github.com/nikhil
 Would :heart: to see any contributions.
 
 1. Fork this repo
-1. npm install
-1. npm install @angular/cli@6
-1. ng build angular-datetimerangepicker --watch
-1. Actual code for npm package lies in projects/angular-datetimerangepicker
-1. The code for demo which lies in src folder
-1. ng serve
+1. `npm install`
+1. `npm install @angular/cli@6`
+1. `ng build angular-datetimerangepicker --watch`
+1. Actual code for npm package lies in `projects/angular-datetimerangepicker`
+1. The code for demo which lies in `src` folder
+1. `ng serve`
 1. Make changes raise PR
