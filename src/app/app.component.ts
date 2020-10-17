@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import "angular-datetimerangepicker/styles/without-bootstrap.css";
 import * as moment from "moment";
 @Component({
   selector: "app-root",

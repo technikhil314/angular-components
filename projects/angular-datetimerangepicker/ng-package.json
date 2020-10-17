@@ -3,5 +3,9 @@
   "dest": "../../dist/angular-datetimerangepicker",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "moment",
+    "moment-range"
+  ]
 }

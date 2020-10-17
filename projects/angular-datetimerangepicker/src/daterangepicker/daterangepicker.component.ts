@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
+import { Defaults } from "../daterangepicker-default-ranges";
 declare var require: any;
 var moment = require("moment");
 require("moment-range");
@@ -16,7 +17,6 @@ declare var window: any;
 @Component({
   selector: "daterangepicker",
   templateUrl: "./daterangepicker.component.html",
-  styleUrls: ["./daterangepicker.component.css"],
 })
 export class DaterangepickerComponent implements OnInit {
   //inputs
@@ -105,7 +105,7 @@ export class DaterangepickerComponent implements OnInit {
     this.setFromDate(this.options.startDate);
     this.setToDate(this.options.endDate);
     this.defaultRanges = this.validatePredefinedRanges(
-      this.options.preDefinedRanges
+      this.options.preDefinedRanges || Defaults.ranges
     );
     //update calendar grid
     this.updateCalendar();

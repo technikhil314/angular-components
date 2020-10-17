@@ -1,0 +1,93 @@
+html {
+  display: table;
+  width: 100%;
+}
+
+body {
+  display: table-cell;
+  width: 100%;
+  position: relative;
+}
+
+html,
+body,
+.main {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.main {
+  padding: 25px;
+  float: left;
+  width: 100%;
+  margin-top: 65px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  margin-top: 50px;
+  background-color: white;
+  height: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.separator-right {
+  border-right: 1px solid #ddd;
+  height: 100%;
+}
+
+.separator-right--dark {
+  border-right: 1px solid #444;
+  height: 100%;
+}
+
+.separator-left--dark {
+  border-left: 1px solid #444;
+  height: 100%;
+}
+
+.header {
+  position: fixed;
+  height: 65px;
+  border-bottom: 1px solid black;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 0 5px 5px #ddd;
+  padding: 0 20px;
+}
+
+.header a {
+  line-height: 65px;
+  margin-right: 130px;
+}
+
+.flush {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.label {
+  color: black;
+}
+
+.float-right {
+  float: right;
+}
+
+.github-ribbon {
+  position: absolute;
+  top: 60px;
+  transform: rotate(45deg);
+  background: black;
+  color: white;
+  padding: 5px 91px;
+  right: -100px;
+  font-weight: bolder;
+  font-size: 16px;
+  line-height: 30px;
+}
