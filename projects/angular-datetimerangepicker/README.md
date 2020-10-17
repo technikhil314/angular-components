@@ -397,13 +397,11 @@ Please let me know if you are facing any issues [here](https://github.com/nikhil
 
 Would :heart: to see any contributions.
 
-<ol>
-<li>Fork this repo</li>
-<li>npm install</li>
-<li>npm install @angular/cli@6<li>
-<li>ng build angular-datetimerangepicker --watch</li>
-<li>Actual code for npm package lies in projects/angular-datetimerangepicker</li>
-<li>The code for demo which lies in src folder</li>
-<li>ng serve</li>
-<li>Make changes raise PR</li>
-</ol>
+1. Fork this repo
+1. npm install
+1. npm install @angular/cli@6
+1. ng build angular-datetimerangepicker --watch
+1. Actual code for npm package lies in projects/angular-datetimerangepicker
+1. The code for demo which lies in src folder
+1. ng serve
+1. Make changes raise PR
