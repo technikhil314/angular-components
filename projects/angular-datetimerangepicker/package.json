@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/technikhil314/angular-components/issues"
   },
-  "homepage": "https://github.com/technikhil314/angular-components/projects/angular-datetimerangepicker",
+  "homepage": "https://github.com/technikhil314/angular-components/tree/master/projects/angular-datetimerangepicker",
   "dependencies": {
     "moment": "^2.29.1",
     "moment-range": "^2.2.0"

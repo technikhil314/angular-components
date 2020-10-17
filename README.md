@@ -4,7 +4,7 @@
 
 Components are as follows
 
-- [angular-daterangepicker](https://github.com/technikhil314/angular-components/projects/angular-datetimerangepicker)
+- [angular-daterangepicker](https://github.com/technikhil314/angular-components/tree/master/projects/angular-datetimerangepicker)
 
 ## If you liked my work, show some :heart:
 
