@@ -367,10 +367,25 @@ I suggest installing all the dependencies before this module
 
 <br/>
 
-# Like my work. Help me keep working.
+## If you liked my work, show some :heart:
 
-<a href="https://www.buymeacoffee.com/technikhil314" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](paypal.me/technikhil314)
+### :star: the repo.
+
+Also you can appreciate by
+
+<p>
+  <table style="border-spacing: 5px 10px;">
+    <tr>
+      <td>
+        <a href="https://www.buymeacoffee.com/technikhil314"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="max-width:90%;" width="180"></a>
+      </td>
+      <td>
+        <a href="https://paypal.me/technikhil314"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" alt="PayPal Logo" style="max-width:90%;" width="180">
+      </td>
+    </tr>
+
+  </table>
+</p>
 
 # Issues/Problems
 
@@ -378,7 +393,9 @@ Please let me know if you are facing any issues [here](https://github.com/nikhil
 
 <br/>
 
-# Want to contribute. You are welcome!!! :)
+# Contributions
+
+Would :heart: to see any contributions.
 
 <ol>
 <li>Fork this repo</li>

@@ -6,5 +6,22 @@ Components are as follows
 
 - [angular-daterangepicker](https://github.com/technikhil314/angular-components/projects/angular-datetimerangepicker)
 
-<a href="https://www.buymeacoffee.com/technikhil314" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](paypal.me/technikhil314)
+## If you liked my work, show some :heart:
+
+### :star: the repo.
+
+Also you can appreciate by
+
+<p>
+  <table style="border-spacing: 5px 10px;">
+    <tr>
+      <td>
+        <a href="https://www.buymeacoffee.com/technikhil314"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="max-width:90%;" width="180"></a>
+      </td>
+      <td>
+        <a href="https://paypal.me/technikhil314"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" alt="PayPal Logo" style="max-width:90%;" width="180">
+      </td>
+    </tr>
+
+  </table>
+</p>
