@@ -1,8 +1,8 @@
-# angular-date and time range picker
+# angular-datetimerangepicker
 
 [//]: <> (start placeholder for auto-badger)
 
-# About this package
+## About this package
 
 Date and time range picker for Angular v6 and above.
 <br/>
@@ -12,77 +12,23 @@ The purpose of this project is to remove dependencies on bootstrap, jquery etc.
 <br/>
 No offence here. These are good libraries but with modern frameworks they add more footprint which is good to get rid of unless you don;t see any other alternative
 
-# Announcements
+## Announcements
 
 <div style="background:grey;color:black">
 <ul>
 <li>
 	Date: 17 Oct 2020
 	<ul>
-    <li>Published next major version. v2.0.0</li>
+    <li>This is a successor of this package located here (angular-2-daterangepicker)[https://www.npmjs.com/package/angular-2-daterangepicker]</li>
+    <li>Published next major version. v1.0.0</li>
 		<li>Fixed issue [#45](https://github.com/technikhil314/angular-components/issues/45)</li>
-    <li>If you want to use this module with angular < v6. Then install v1.1.52 of this package</li>
-    <li>Uses angular version 6</li>
-	</ul>
-</li>
-<li>
-	Date: 12 Aug 2018
-	<ul>
-		<li>Added option alwaysOpen to keep the flyout open always 1.1.47</li>
-	</ul>
-</li>
-<li>
-	Date: 19 May 2018
-	<ul>
-		<li>Added option timepicker to enable/disable timepicker in version 1.1.38</li>
-        <li>Added option disableBeforeStart to enable/disable dates in right calendar that are before selected from date in version 1.1.39</li>
-	</ul>
-</li>
-<li>
-	Date: 5 May 2018
-	<ul>
-		<li>Added option disabled to enable/disable input box in version 1.1.35</li>
-	</ul>
-</li>
-<li>
-	Date: 29 Apr 2018
-	<ul>
-		<li>Added option position to open flyout on left right or center in version 1.1.30</li>
-	</ul>
-</li>
-<li>
-	Date: 28 Apr 2018
-	<ul>
-		<li>Fixing a small CSS issue in version 1.1.28</li>
-	</ul>
-</li>
-<li>
-	Date: 31 Mar 2018
-	<ul>
-		<li>New option for singleCalendar added in version 1.1.27</li>
-	</ul>
-</li>
-<li>
-	Date: 25 Mar 2018
-	<ul>
-		<li>Made some changes in CSS and responsiveness in version v1.1.26</li>
-	</ul>
-</li>
-<li>
-	Date: 23 Mar 2018
-	<ul>
-		<li>New option for DisplayFormat added in version v1.1.25</li>
-	</ul>
-</li>
-<li>
-	Date: 20 Jan 2018
-	<ul>
-		<li>Module less than version v1.0.10 is no longer supported</li>
+    <li>If you want to use this module with angular < v6. Then install v1.1.52 of [this package]([https://www.npmjs.com/package/angular-2-daterangepicker])</li>
+    <li>This package uses angular version 6 or above</li>
 	</ul>
 </li>
 </div>
 
-# Getting Started
+## Demo
 
 ## Install
 
@@ -96,13 +42,7 @@ or
 $ yarn add angular-datetimerangepicker
 ```
 
-## Demo
-
-# Usage
-
-## How to make it work for you
-
-Import Date and time range pickerModule into your module as following
+## Usage
 
 ```ts
 import { NgModule } from "@angular/core";
@@ -120,6 +60,51 @@ import { FormsModule } from "@angular/forms";
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+```
+
+## Styling
+
+Styling is fully optional. You can override as per your choice
+
+#### Using Unpkg
+
+> If you are already using bootstrap.css then just include the following css in your code
+> This has minimal set of rules that inherits styles from bootstrap.css
+> <br> > [https://unpkg.com/angular-datetimerangepicker/styles/with-bootstrap.css](https://unpkg.com/angular-datetimerangepicker/styles/with-bootstrap.css)
+
+> if you do not want to include whole bootstrap.css then include following css in your code.
+> <br> > [https://unpkg.com/angular-datetimerangepicker/styles/without-bootstrap.css](https://unpkg.com/angular-datetimerangepicker/styles/without-bootstrap.css)
+
+#### from node_modules
+
+> or add following path to angular.json's style section if you are already using bootstrap
+> `./node_modules/angular-datetimerangepicker/styles/with-bootstrap.css`
+
+> or add following path to angular.json's style section if you dont want bootstrap
+> `./node_modules/angular-datetimerangepicker/styles/without-bootstrap.css`
+
+## How pass configuration to the component
+
+The input box automatically takes class of the date-range-picker tag
+
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+	selector: "my-datepicker-demo",
+	template: `
+		<date-range-picker class="col-md-4" [options]="date and time range pickerOptions" class="col-md-4">
+		</date-range-picker>
+	`
+})
+export class AppComponent{
+	date and time range pickerOptions = {
+		startDate: '09/01/2017',
+		endDate: '09/02/2017',
+		format: 'DD/MM/YYYY'
+	}
+}
+
 ```
 
 ## Options
@@ -259,7 +244,7 @@ Currently, these options are available but I will keep on developing and adding 
     </tbody>
 </table>
 
-### Custom Range
+### Custom Range Option
 
 For custom range, Pass options as below. For this you need to pass <a href="https://momentjs.com/">momentjs</a> objects.
 
@@ -291,7 +276,7 @@ import { Options } from "angular-datetimerangepicker";
 
 class for passing options to the component.
 
-### Time Picker
+### Time Picker Option
 
 Timepicker options expects an object containing following keys as timepicker options
 
@@ -345,47 +330,12 @@ and if you have set singleCalendar to true then the event listener will receive 
 }
 ```
 
-## How pass options to the component
-
-The input box automatically takes class of the date-range-picker tag
-
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-	selector: "my-datepicker-demo",
-	template: `
-		<date-range-picker class="col-md-4" [options]="date and time range pickerOptions" class="col-md-4">
-		</date-range-picker>
-	`
-})
-export class AppComponent{
-	date and time range pickerOptions = {
-		startDate: '09/01/2017',
-		endDate: '09/02/2017',
-		format: 'DD/MM/YYYY'
-	}
-}
-
-```
-
 # Dependencies
 
 [moment.js](http://momentjs.com/) version greater than 2.17.1<br/>
 [moment-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
 also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
 I suggest installing all the dependencies before this module
-
-# Styling
-
-Styling is fully optional. You can override as per your choice
-
-> If you are already using bootstrap.css then just include the following css in your code
-> This has minimal set of rules that inherits styles from bootstrap.css
-> <br> > [https://unpkg.com/angular-datetimerangepicker/styles/with-bootstrap.css](https://unpkg.com/angular-datetimerangepicker/styles/with-bootstrap.css)
-
-> if you do not want to include whole bootstrap.css then include following css in your code.
-> <br> > [https://unpkg.com/angular-datetimerangepicker/styles/without-bootstrap.css](https://unpkg.com/angular-datetimerangepicker/styles/without-bootstrap.css)
 
 # Issues/Problems
 

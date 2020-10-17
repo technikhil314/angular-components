@@ -1,7 +1,7 @@
 <div class="daterangepicker-wrapper">
   <input class="{{class}} dateRangePicker-input" type="text" [ngModel]="range" [disabled]="options.disabled"
     [ngClass]="{ hidden: options.alwaysOpen }" />
-  <div class="daterangepicker col-md-12 text-center flush {{getPositionClass()}}" [ngClass]="{
+  <div class="daterangepicker text-center flush {{getPositionClass()}}" [ngClass]="{
           hidden: !(showCalendars || options.alwaysOpen),
           singledatepicker: options.singleCalendar,
           'tooltip-chevron': !options.alwaysOpen,

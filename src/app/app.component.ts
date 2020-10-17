@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import "angular-datetimerangepicker/styles/without-bootstrap.css";
 import * as moment from "moment";
 @Component({
   selector: "app-root",
@@ -19,7 +18,7 @@ export class AppComponent {
     showRanges: true,
     preDefinedRanges: [
       {
-        name: "Day After tomorrow",
+        name: "Day After tomorow",
         value: {
           start: moment().add(2, "days"),
           end: moment().add(2, "days"),
