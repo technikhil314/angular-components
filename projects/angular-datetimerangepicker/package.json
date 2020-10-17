@@ -1,20 +1,26 @@
 {
   "name": "angular-datetimerangepicker",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/technikhil314/angular-components"
   },
   "description": "A Date and time range picker for angular6 and above",
   "keywords": [
-    "angular2",
-    "angular4",
-    "angular5",
-    "daterangepicker",
-    "bootstrap",
-    "angularX"
+    "angular 6",
+    "angular 7",
+    "angular 8",
+    "angular 9",
+    "angular X",
+    "angular component",
+    "date range picker",
+    "date picker",
+    "time picker",
+    "time range picker",
+    "range picker",
+    "bootstrap css"
   ],
-  "author": "nikhil.mehta",
+  "author": "Nikhil Mehta",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/technikhil314/angular-components/issues"
