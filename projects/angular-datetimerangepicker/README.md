@@ -30,6 +30,8 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Demo
 
+Check the demo [here](angular-datetimerangepicker.surge.sh)
+
 ## Install
 
 ```bash
