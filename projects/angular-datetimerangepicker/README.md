@@ -389,7 +389,7 @@ Also you can appreciate by
 
 # Issues/Problems
 
-Please let me know if you are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-date and time range picker/issues)
+Please let me know if you are facing any issues [here](https://github.com/technikhil314/angular-components/issues)
 
 <br/>
 
