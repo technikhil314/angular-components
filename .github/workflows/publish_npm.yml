@@ -1,0 +1,30 @@
+name: Publish angular-datetimerangepicker
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    name: Publish angular-datetimerangepicker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build
+        run: |
+          npm install -g @angular/cli@6
+          npm install
+          ng build angular-datetimerangepicker
+
+      - name: Publish
+        run: |
+          cp -r projects/angular-datetimerangepicker/src/styles dist/angular-datetimerangepicker
+          cd dist/angular-datetimerangepicker
+          npm publish
