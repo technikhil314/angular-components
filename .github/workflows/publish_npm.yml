@@ -1,4 +1,4 @@
-name: Publish angular-datetimerangepicker
+name: publish
 on:
   push:
     branches: [master]
