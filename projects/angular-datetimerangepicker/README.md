@@ -42,7 +42,7 @@
   - [Time Picker Option](#time-picker-option)
 - [Events](#events)
 - [Dependencies](#dependencies)
-* [Issues/Problems](#issues-problems)
+* [Facing problems](#facing-problems)
 * [Contributions](#contributions)
   - [How to contribute](#how-to-contribute)
 
@@ -429,7 +429,7 @@ Also you can appreciate by
   </table>
 </p>
 
-# Issues/Problems
+# Facing Problems
 
 Please let me know if you are facing any issues [here](https://github.com/technikhil314/angular-components/issues)
 
