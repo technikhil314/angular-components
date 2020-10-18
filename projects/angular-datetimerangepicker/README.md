@@ -42,8 +42,6 @@
   - [Time Picker Option](#time-picker-option)
 - [Events](#events)
 - [Dependencies](#dependencies)
-- [If you liked my work, show some :heart: :star: the repo.](#if-you-liked-my-work--show-some--heart---star--the-repo)
-
 * [Issues/Problems](#issues-problems)
 * [Contributions](#contributions)
   - [How to contribute](#how-to-contribute)
