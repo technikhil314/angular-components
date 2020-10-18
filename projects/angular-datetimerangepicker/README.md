@@ -2,7 +2,6 @@
 
 [//]: <> (start placeholder for auto-badger)
 
-
 [![version](https://img.shields.io/npm/v/angular-datetimerangepicker.svg?style=flat-square)](https://npmjs.org/angular-datetimerangepicker)
 [![min size](https://img.shields.io/bundlephobia/min/angular-datetimerangepicker)](https://bundlephobia.com/result?p=angular-datetimerangepicker)
 [![mingzip size](https://img.shields.io/bundlephobia/minzip/angular-datetimerangepicker)](https://bundlephobia.com/result?p=angular-datetimerangepicker)
@@ -22,6 +21,29 @@
 
 [//]: <> (end placeholder for auto-badger)
 
+## Table of contents
+
+- [About this package](#about-this-package)
+- [Announcements](#announcements)
+- [Demo](#demo)
+- [Roadmap](#roadmap)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Styling](#styling)
+  - [Styling the input](#styling-the-input)
+  - [Using Unpkg](#using-unpkg)
+  - [from node_modules](#from-node-modules)
+- [How to configure](#how-to-configure)
+- [Options](#options)
+  - [Custom Range Option](#custom-range-option)
+  - [Time Picker Option](#time-picker-option)
+- [Events](#events)
+- [Dependencies](#dependencies)
+- [If you liked my work, show some :heart: :star: the repo.](#if-you-liked-my-work--show-some--heart---star--the-repo)
+
+* [Issues/Problems](#issues-problems)
+* [Contributions](#contributions)
+  - [How to contribute](#how-to-contribute)
 
 <br/>
 
