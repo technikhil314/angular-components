@@ -7,8 +7,10 @@ import {
   SimpleChanges,
 } from "@angular/core";
 declare var require: any;
-var moment = require("moment");
-require("moment-range");
+import calendarize from "calendarize";
+const dayjs = require("dayjs");
+let moment = dayjs;
+import "../helpers/dayjs-range";
 
 @Component({
   selector: "calendar",
@@ -28,8 +30,7 @@ export class CalendarComponent implements OnChanges {
   @Input() timePicker: any;
   @Input() singleCalendar: boolean = false;
   get monthText() {
-    let months = moment.monthsShort();
-    return months[this.month];
+    return moment([+this.year, +this.month]).format("MMM");
   }
   @Output() dateChanged = new EventEmitter();
   @Output() monthChanged = new EventEmitter();
@@ -37,75 +38,66 @@ export class CalendarComponent implements OnChanges {
 
   weekList: any;
 
-  getWeekNumbers(monthRange: any) {
-    let weekNumbers = [];
-    let indexOf =
-      [].indexOf ||
-      function (item) {
-        for (var i = 0, l = this.length; i < l; i++) {
-          if (i in this && this[i] === item) return i;
-        }
-        return -1;
-      };
-    monthRange.by("days", function (moment) {
-      let ref;
-      if (
-        weekNumbers.length < 6 &&
-        ((ref = moment.week()), indexOf.call(weekNumbers, ref)) < 0
-      ) {
-        return weekNumbers.push(moment.week());
-      }
-    });
-    return weekNumbers;
-  }
-  getWeeksRange(weeks: any, year: any, month: any) {
-    let weeksRange = [];
-
-    for (let i = 0, len = weeks.length; i < len; i++) {
-      let week = weeks[i];
-      let firstWeekDay, lastWeekDay;
-      if (i > 0 && week < weeks[i - 1]) {
-        firstWeekDay = moment([year, month]).add(1, "year").week(week).day(0);
-        lastWeekDay = moment([year, month]).add(1, "year").week(week).day(6);
-      } else {
-        firstWeekDay = moment([year, month]).week(week).day(0);
-        lastWeekDay = moment([year, month]).week(week).day(6);
-      }
-      let weekRange = moment.range(firstWeekDay, lastWeekDay);
-      weeksRange.push(weekRange);
-    }
-    return weeksRange;
-  }
   createCalendarGridData(): void {
-    let year = this.year;
-    let month = this.month;
-    let startDate = moment([year, month]);
-    let firstDay = moment(startDate).startOf("month");
-    let endDay = moment(startDate).add(60, "d");
-    let monthRange = moment.range(firstDay, endDay);
-    let weeksRange = [];
-    let that = this;
-    weeksRange = this.getWeeksRange(
-      this.getWeekNumbers(monthRange),
-      year,
-      month
-    );
-
-    let weekList = [];
-    weeksRange.map(function (week) {
-      let daysList = [];
-      week.by("days", function (day) {
-        if (day.isSame(moment(that.minDate, that.format), "date")) {
-          day = moment(that.minDate, that.format);
-        }
-        if (day.isSame(moment(that.maxDate, that.format), "date")) {
-          day = moment(that.maxDate, that.format);
-        }
-        daysList.push(day);
+    let year = null;
+    let month = null;
+    const thisMonthStartDate = moment([this.year, this.month]).startOf("month");
+    const previousMonthStartDate = thisMonthStartDate
+      .subtract(1, "month")
+      .startOf("month");
+    const nextMonthStartDate = thisMonthStartDate
+      .add(1, "month")
+      .startOf("month");
+    year = previousMonthStartDate.get("year");
+    month = previousMonthStartDate.get("month");
+    const previousMonthLastWeek = calendarize(previousMonthStartDate.toDate())
+      .pop()
+      .filter(Boolean)
+      .map((day) => {
+        return dayjs([year, month, day, 0, 0, 0, 0]);
       });
-      weekList.push(daysList);
-    });
-    this.weekList = weekList;
+    year = thisMonthStartDate.get("year");
+    month = thisMonthStartDate.get("month");
+    const thisMonthweekList = calendarize(thisMonthStartDate.toDate()).map(
+      (week) => {
+        return week.filter(Boolean).map((day) => {
+          if (day === 0) {
+            return null;
+          }
+          return dayjs([year, month, day, 0, 0, 0, 0]);
+        });
+      }
+    );
+    year = nextMonthStartDate.get("year");
+    month = nextMonthStartDate.get("month");
+    const nextMonthFirstWeek = calendarize(nextMonthStartDate.toDate())
+      .shift()
+      .filter(Boolean)
+      .map((day) => {
+        return dayjs([year, month, day, 0, 0, 0, 0]);
+      });
+    if (thisMonthweekList[0].length < 7) {
+      thisMonthweekList[0] = previousMonthLastWeek.concat(thisMonthweekList[0]);
+    }
+    if (thisMonthweekList.slice(-1)[0].length < 7) {
+      thisMonthweekList[thisMonthweekList.length - 1] = thisMonthweekList
+        .slice(-1)[0]
+        .concat(nextMonthFirstWeek);
+    }
+    if (thisMonthweekList.length < 6) {
+      year = previousMonthStartDate.get("year");
+      month = previousMonthStartDate.get("month");
+      const previousMonthSecondLastWeek = calendarize(
+        previousMonthStartDate.toDate()
+      )
+        .slice(-2)[0]
+        .filter(Boolean)
+        .map((day) => {
+          return dayjs([year, month, day, 0, 0, 0, 0]);
+        });
+      thisMonthweekList.unshift(previousMonthSecondLastWeek);
+    }
+    this.weekList = thisMonthweekList;
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.createCalendarGridData();

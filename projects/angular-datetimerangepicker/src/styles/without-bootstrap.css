@@ -409,7 +409,7 @@
 .daterangepicker .table > thead > tr.active > th,
 .daterangepicker .table > tbody > tr.active > th,
 .daterangepicker .table > tfoot > tr.active > th {
-  background-color: #f0f0f0;
+  background-color: #dadada;
 }
 
 .daterangepicker .table-hover > tbody > tr > td.active:hover,
@@ -417,7 +417,7 @@
 .daterangepicker .table-hover > tbody > tr.active:hover > td,
 .daterangepicker .table-hover > tbody > tr:hover > .active,
 .daterangepicker .table-hover > tbody > tr.active:hover > th {
-  background-color: #f0f0f0;
+  background-color: #dadada;
 }
 
 .daterangepicker .table > thead > tr > td.info,

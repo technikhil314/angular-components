@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 declare var require: any;
-var moment = require("moment");
-require("moment-range");
+const dayjs = require("dayjs");
+var moment = dayjs;
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -10,11 +11,11 @@ require("moment-range");
 export class AppComponent {
   isTimePickerEnabled = true;
   daterangepickerOptions = {
-    startDate: null,
-    endDate: null,
+    startDate: moment(),
+    endDate: moment(),
     format: "DD.MM.YYYY HH:mm",
-    minDate: moment().add(-2, "months").format("DD.MM.YYYY HH:mm"),
-    maxDate: moment().add(2, "months").format("DD.MM.YYYY HH:mm"),
+    minDate: moment().add(-120, "months").format("DD.MM.YYYY HH:mm"),
+    maxDate: moment().add(120, "months").format("DD.MM.YYYY HH:mm"),
     inactiveBeforeStart: true,
     autoApply: true,
     showRanges: true,
@@ -61,10 +62,10 @@ export class AppComponent {
     alwaysOpen: false,
   };
   rangeSelected(data) {
-    debugger;
+    console.log(data);
   }
   singleCalendar(event) {
-    this.daterangepickerOptions.singleCalendar = event.target.checked;
+        this.daterangepickerOptions.singleCalendar = event.target.checked;
   }
   autoApply(event) {
     this.daterangepickerOptions.autoApply = event.target.checked;

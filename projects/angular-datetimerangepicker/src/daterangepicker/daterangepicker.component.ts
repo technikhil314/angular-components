@@ -9,8 +9,8 @@ import {
 } from "@angular/core";
 import { Defaults } from "../daterangepicker-default-ranges";
 declare var require: any;
-var moment = require("moment");
-require("moment-range");
+const dayjs = require("dayjs");
+let moment = dayjs;
 import { Options } from "../daterangepicker-options";
 declare var window: any;
 
@@ -327,6 +327,14 @@ export class DaterangepickerComponent implements OnInit {
       ? this.fromDate.get("month")
       : this.fromMonth;
     this.toMonth = this.toDate ? this.toDate.get("month") : this.toMonth;
+    this.fromYear = this.fromDate.get("year");
+    if (!this.toDate && this.fromDate) {
+      this.toYear = this.fromYear;
+      this.toMonth = this.fromMonth;
+    }
+    if (this.toYear < this.fromYear) {
+      this.toYear = this.fromYear;
+    }
   }
   emitRangeSelected() {
     let data = {};
@@ -433,6 +441,8 @@ export class DaterangepickerComponent implements OnInit {
     this.apply();
     this.enableApplyButton = false;
     this.emitRangeSelected();
+    this.fromYear = this.toYear = moment().get("year");
+    this.fromMonth = this.toMonth = moment().get("month");
   }
   applyPredefinedRange(data) {
     this.setFromDate(data.value.start);

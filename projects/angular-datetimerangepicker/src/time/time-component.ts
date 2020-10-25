@@ -8,8 +8,9 @@ import {
   SimpleChanges,
 } from "@angular/core";
 declare var require: any;
-var moment = require("moment");
-require("moment-range");
+const dayjs = require("dayjs");
+var moment = dayjs;
+
 import { Timepicker } from "../daterangepicker-options";
 
 @Component({
@@ -78,25 +79,31 @@ export class TimePickerComponent implements OnInit, OnChanges {
   }
   addHour(value) {
     if (this.isLeft) {
-      this.selectedFromDate.set({
-        hour: (this.selectedFromDate.get("hour") + value) % 24,
-      });
+      this.selectedFromDate = this.selectedFromDate.set(
+        "hour",
+        (+this.selectedFromDate.get("hour") + value) % 24
+      );
     } else {
-      this.selectedToDate.set({
-        hour: (this.selectedToDate.get("hour") + value) % 24,
-      });
+      this.selectedToDate = this.selectedToDate.set(
+        "hour",
+        (+this.selectedToDate.get("hour") + value) % 24
+      );
     }
     this.triggerTimeChanged();
   }
   addMinute(value) {
     if (this.isLeft) {
-      this.selectedFromDate.set({
-        minute: (this.selectedFromDate.get("minute") + value) % 60,
-      });
+      this.selectedFromDate = this.selectedFromDate.set(
+        "minute",
+        (this.selectedFromDate.get("minute") + value) % 60
+      );
+      console.log(this.selectedFromDate);
     } else {
-      this.selectedToDate.set({
-        minute: (this.selectedToDate.get("minute") + value) % 60,
-      });
+      this.selectedToDate = this.selectedToDate.set(
+        "minute",
+        (this.selectedToDate.get("minute") + value) % 60
+      );
+      console.log(this.selectedToDate);
     }
     this.triggerTimeChanged();
   }

@@ -220,6 +220,29 @@
   cursor: not-allowed;
 }
 
+.daterangepicker .table > thead > tr > td.active,
+.daterangepicker .table > tbody > tr > td.active,
+.daterangepicker .table > tfoot > tr > td.active,
+.daterangepicker .table > thead > tr > th.active,
+.daterangepicker .table > tbody > tr > th.active,
+.daterangepicker .table > tfoot > tr > th.active,
+.daterangepicker .table > thead > tr.active > td,
+.daterangepicker .table > tbody > tr.active > td,
+.daterangepicker .table > tfoot > tr.active > td,
+.daterangepicker .table > thead > tr.active > th,
+.daterangepicker .table > tbody > tr.active > th,
+.daterangepicker .table > tfoot > tr.active > th {
+  background-color: #dadada;
+}
+
+.daterangepicker .table-hover > tbody > tr > td.active:hover,
+.daterangepicker .table-hover > tbody > tr > th.active:hover,
+.daterangepicker .table-hover > tbody > tr.active:hover > td,
+.daterangepicker .table-hover > tbody > tr:hover > .active,
+.daterangepicker .table-hover > tbody > tr.active:hover > th {
+  background-color: #dadada;
+}
+
 .ranges {
   padding: 5px 0;
 }

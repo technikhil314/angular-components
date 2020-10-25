@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/technikhil314/angular-components/tree/master/projects/angular-datetimerangepicker",
   "dependencies": {
-    "moment": "^2.29.1",
-    "moment-range": "^2.2.0"
+    "calendarize": "^1.1.1",
+    "dayjs": "^1.9.3"
   },
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",

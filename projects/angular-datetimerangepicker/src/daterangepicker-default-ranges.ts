@@ -1,6 +1,7 @@
 declare var require: any;
-var moment = require("moment");
-require("moment-range");
+const dayjs = require('dayjs');
+var moment = dayjs
+
 
 export var Defaults = {
   ranges: [
