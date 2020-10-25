@@ -1,43 +1,41 @@
 declare var require: any;
-const dayjs = require('dayjs');
-var moment = dayjs
-
+const dayjs = require("dayjs");
 
 export var Defaults = {
   ranges: [
     {
       name: "Today",
       value: {
-        start: moment(),
-        end: moment(),
+        start: dayjs(),
+        end: dayjs(),
       },
     },
     {
       name: "Yesterday",
       value: {
-        start: moment().subtract(1, "days"),
-        end: moment().subtract(1, "days"),
+        start: dayjs().subtract(1, "days"),
+        end: dayjs().subtract(1, "days"),
       },
     },
     {
       name: "last 7 days",
       value: {
-        start: moment().subtract(6, "days"),
-        end: moment(),
+        start: dayjs().subtract(6, "days"),
+        end: dayjs(),
       },
     },
     {
       name: "This month",
       value: {
-        start: moment().startOf("month"),
-        end: moment().endOf("month"),
+        start: dayjs().startOf("month"),
+        end: dayjs().endOf("month"),
       },
     },
     {
       name: "Last Month",
       value: {
-        start: moment().subtract(1, "month").startOf("month"),
-        end: moment().subtract(1, "month").endOf("month"),
+        start: dayjs().subtract(1, "month").startOf("month"),
+        end: dayjs().subtract(1, "month").endOf("month"),
       },
     },
   ],

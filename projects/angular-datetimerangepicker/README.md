@@ -2,7 +2,6 @@
 
 [//]: <> (start placeholder for auto-badger)
 
-
 [![Build Status](https://img.shields.io/github/workflow/status/technikhil314/angular-components/build?style=flat-square&color=%23007a1f)](https://github.com/technikhil314/angular-components/actions)
 [![version](https://img.shields.io/npm/v/angular-datetimerangepicker.svg?style=flat-square)](https://npmjs.org/angular-datetimerangepicker)
 [![min size](https://img.shields.io/bundlephobia/min/angular-datetimerangepicker)](https://bundlephobia.com/result?p=angular-datetimerangepicker)
@@ -23,7 +22,6 @@
 
 [//]: <> (end placeholder for auto-badger)
 
-
 ## Table of contents
 
 - [About this package](#about-this-package)
@@ -42,6 +40,7 @@
   - [Time Picker Option](#time-picker-option)
 - [Events](#events)
 - [Dependencies](#dependencies)
+
 * [Facing problems](#facing-problems)
 * [Contributions](#contributions)
   - [How to contribute](#how-to-contribute)
@@ -64,6 +63,8 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
+- Date: 25 Oct 2020
+  1. Removed momentjs now using [dayjs](https://day.js.org/)
 - Date: 17 Oct 2020
   1. This is a successor of this package located here [angular-2-daterangepicker](https://www.npmjs.com/package/angular-2-daterangepicker)
   1. Published next major version. v1.0.0
@@ -81,7 +82,7 @@ Check the demo [here](https://angular-datetimerangepicker.surge.sh)
 
 ## Roadmap
 
-1. Get rid of moment to minimise the package
+1. Get rid of moment to minimise the package [:heavy_check_mark:]
 2. Add theme support
 3. Make touch friendly UI for touch devices
 4. Make style more robust. Use latest CSS features.
@@ -200,14 +201,14 @@ Currently, these options are available but I will keep on developing and adding 
             <td>string</td>
             <td>format that this date and time range picker will use to communicate with your code</td>
             <td>"YYYY-MM-DD"</td>
-            <td>As per <a href="https://momentjs.com/"> momentjs </a> standard formats</td>
+            <td>As per <a href="https://day.js.org/"> dayjs </a> standard formats</td>
         </tr>
         <tr>
             <td>displayFormat</td>
             <td>string</td>
             <td>format that will be displayed to end user</td>
             <td>Same as format</td>
-            <td>As per <a href="https://momentjs.com/"> momentjs </a> standard formats</td>
+            <td>As per <a href="https://day.js.org/"> dayjs </a> standard formats</td>
         </tr>
         <tr>
             <td>startDate</td>
@@ -319,22 +320,22 @@ Currently, these options are available but I will keep on developing and adding 
 
 ### Custom Range Option
 
-For custom range, Pass options as below. For this you need to pass <a href="https://momentjs.com/">momentjs</a> objects.
+For custom range, Pass options as below. For this you need to pass <a href="https://day.js.org/">dayjs</a> objects.
 
 ```js
 preDefinedRanges: [
   {
     name: "Day After tomorrow",
     value: {
-      start: moment().add(2, "days"),
-      end: moment().add(2, "days"),
+      start: dayjs().add(2, "days"),
+      end: dayjs().add(2, "days"),
     },
   },
   {
     name: "This week",
     value: {
-      start: moment(),
-      end: moment().add(7, "days"),
+      start: dayjs(),
+      end: dayjs().add(7, "days"),
     },
   },
 ];
@@ -387,8 +388,8 @@ the event listener will receive a javascript object conaining
 
 ```js
 {
-  start: "moment object representing start date selected by user";
-  end: "moment object representing end date selected by user";
+  start: "dayjs object representing start date selected by user";
+  end: "dayjs object representing end date selected by user";
 }
 ```
 
@@ -396,7 +397,7 @@ and if you have set singleCalendar to true then the event listener will receive 
 
 ```js
 {
-  start: "moment object representing date selected by user";
+  start: "dayjs object representing date selected by user";
 }
 ```
 
@@ -404,8 +405,8 @@ and if you have set singleCalendar to true then the event listener will receive 
 
 ## Dependencies
 
-[moment.js](http://momentjs.com/) version greater than 2.17.1<br/>
-[moment-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
+[dayjs](http://dayjs.org/) version greater than 1.9.3<br/>
+[calendarize](https://github.com/lukeed/calendarize) version 1.1.1 <br/>
 also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
 I suggest installing all the dependencies before this module
 

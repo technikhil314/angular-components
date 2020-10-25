@@ -4,13 +4,11 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges,
+  SimpleChanges
 } from "@angular/core";
-declare var require: any;
 import calendarize from "calendarize";
+declare var require: any;
 const dayjs = require("dayjs");
-let moment = dayjs;
-import "../helpers/dayjs-range";
 
 @Component({
   selector: "calendar",
@@ -30,7 +28,7 @@ export class CalendarComponent implements OnChanges {
   @Input() timePicker: any;
   @Input() singleCalendar: boolean = false;
   get monthText() {
-    return moment([+this.year, +this.month]).format("MMM");
+    return dayjs([+this.year, +this.month]).format("MMM");
   }
   @Output() dateChanged = new EventEmitter();
   @Output() monthChanged = new EventEmitter();
@@ -41,7 +39,7 @@ export class CalendarComponent implements OnChanges {
   createCalendarGridData(): void {
     let year = null;
     let month = null;
-    const thisMonthStartDate = moment([this.year, this.month]).startOf("month");
+    const thisMonthStartDate = dayjs([this.year, this.month]).startOf("month");
     const previousMonthStartDate = thisMonthStartDate
       .subtract(1, "month")
       .startOf("month");
@@ -104,9 +102,9 @@ export class CalendarComponent implements OnChanges {
   }
   isDisabled(day) {
     return (
-      day.isBefore(moment(this.minDate, this.format)) ||
-      day.isAfter(moment(this.maxDate, this.format)) ||
-      (day.isBefore(moment(this.selectedFromDate, this.format)) &&
+      day.isBefore(dayjs(this.minDate, this.format)) ||
+      day.isAfter(dayjs(this.maxDate, this.format)) ||
+      (day.isBefore(dayjs(this.selectedFromDate, this.format)) &&
         this.disableBeforeStart &&
         !this.isLeft)
     );

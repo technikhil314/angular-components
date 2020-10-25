@@ -5,7 +5,7 @@
     "entryFile": "src/public_api.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "moment",
-    "moment-range"
+    "calendarize",
+    "dayjs"
   ]
 }

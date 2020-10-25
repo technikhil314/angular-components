@@ -7,11 +7,9 @@ import {
   Output,
   SimpleChanges,
 } from "@angular/core";
+import { Timepicker } from "../daterangepicker-options";
 declare var require: any;
 const dayjs = require("dayjs");
-var moment = dayjs;
-
-import { Timepicker } from "../daterangepicker-options";
 
 @Component({
   selector: "time-picker",
@@ -45,16 +43,16 @@ export class TimePickerComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.selectedFromDate = changes["selectedFromDate"]
-      ? moment(changes["selectedFromDate"].currentValue, this.format)
+      ? dayjs(changes["selectedFromDate"].currentValue, this.format)
       : this["selectedFromDate"];
     this.selectedToDate = changes["selectedToDate"]
-      ? moment(changes["selectedToDate"].currentValue, this.format)
+      ? dayjs(changes["selectedToDate"].currentValue, this.format)
       : this["selectedToDate"];
     this.maxDate = changes["maxDate"]
-      ? moment(changes["maxDate"].currentValue, this.format)
+      ? dayjs(changes["maxDate"].currentValue, this.format)
       : this["maxDate"];
     this.minDate = changes["minDate"]
-      ? moment(changes["minDate"].currentValue, this.format)
+      ? dayjs(changes["minDate"].currentValue, this.format)
       : this["minDate"];
   }
   getCurrentHour() {

@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 declare var require: any;
 const dayjs = require("dayjs");
-var moment = dayjs;
 
 @Component({
   selector: "app-root",
@@ -11,11 +10,11 @@ var moment = dayjs;
 export class AppComponent {
   isTimePickerEnabled = true;
   daterangepickerOptions = {
-    startDate: moment(),
-    endDate: moment(),
+    startDate: dayjs(),
+    endDate: dayjs(),
     format: "DD.MM.YYYY HH:mm",
-    minDate: moment().add(-120, "months").format("DD.MM.YYYY HH:mm"),
-    maxDate: moment().add(120, "months").format("DD.MM.YYYY HH:mm"),
+    minDate: dayjs().add(-120, "months").format("DD.MM.YYYY HH:mm"),
+    maxDate: dayjs().add(120, "months").format("DD.MM.YYYY HH:mm"),
     inactiveBeforeStart: true,
     autoApply: true,
     showRanges: true,
@@ -23,29 +22,29 @@ export class AppComponent {
       {
         name: "Day After tomorow",
         value: {
-          start: moment().add(2, "days"),
-          end: moment().add(2, "days"),
+          start: dayjs().add(2, "days"),
+          end: dayjs().add(2, "days"),
         },
       },
       {
         name: "Today",
         value: {
-          start: moment(),
-          end: moment(),
+          start: dayjs(),
+          end: dayjs(),
         },
       },
       {
         name: "Tomorrow",
         value: {
-          start: moment().add(1, "days"),
-          end: moment().add(1, "days"),
+          start: dayjs().add(1, "days"),
+          end: dayjs().add(1, "days"),
         },
       },
       {
         name: "This week",
         value: {
-          start: moment(),
-          end: moment().add(7, "days"),
+          start: dayjs(),
+          end: dayjs().add(7, "days"),
         },
       },
     ],
@@ -65,7 +64,7 @@ export class AppComponent {
     console.log(data);
   }
   singleCalendar(event) {
-        this.daterangepickerOptions.singleCalendar = event.target.checked;
+    this.daterangepickerOptions.singleCalendar = event.target.checked;
   }
   autoApply(event) {
     this.daterangepickerOptions.autoApply = event.target.checked;

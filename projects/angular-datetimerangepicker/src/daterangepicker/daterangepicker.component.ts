@@ -8,10 +8,9 @@ import {
   Output,
 } from "@angular/core";
 import { Defaults } from "../daterangepicker-default-ranges";
+import { Options } from "../daterangepicker-options";
 declare var require: any;
 const dayjs = require("dayjs");
-let moment = dayjs;
-import { Options } from "../daterangepicker-options";
 declare var window: any;
 
 @Component({
@@ -90,10 +89,10 @@ export class DaterangepickerComponent implements OnInit {
     //get month and year to show calendar
     var fromDate = this.fromDate || this.tempFromDate;
     var toDate = this.toDate || this.tempToDate;
-    let tDate = moment(fromDate, this.format);
+    let tDate = dayjs(fromDate, this.format);
     this.fromMonth = tDate.get("month");
     this.fromYear = tDate.get("year");
-    tDate = moment(toDate, this.format);
+    tDate = dayjs(toDate, this.format);
     this.toMonth = tDate.get("month");
     this.toYear = tDate.get("year");
     this.setRange();
@@ -131,16 +130,16 @@ export class DaterangepickerComponent implements OnInit {
     if (this.options) {
       //only mindate is suppplied
       if (this.options.minDate && !this.options.maxDate) {
-        this.options.minDate = this.getMoment(this.options.minDate);
+        this.options.minDate = this.getDayjs(this.options.minDate);
       }
       //only maxdate is supplied
       if (!this.options.minDate && this.options.maxDate) {
-        this.options.maxDate = this.getMoment(this.options.maxDate);
+        this.options.maxDate = this.getDayjs(this.options.maxDate);
       }
       //both min and max dates are supplied
       if (this.options.minDate && this.options.maxDate) {
-        this.options.minDate = this.getMoment(this.options.minDate);
-        this.options.maxDate = this.getMoment(this.options.maxDate);
+        this.options.minDate = this.getDayjs(this.options.minDate);
+        this.options.maxDate = this.getDayjs(this.options.maxDate);
         if (this.options.maxDate.isBefore(this.options.minDate, "date")) {
           this.options.minDate = "";
           this.options.maxDate = "";
@@ -181,10 +180,10 @@ export class DaterangepickerComponent implements OnInit {
   }
   getActualFromDate(value) {
     let temp;
-    if ((temp = this.getValidateMoment(value))) {
+    if ((temp = this.getValidateDayjs(value))) {
       return this.getValidateFromDate(temp);
     } else {
-      return this.getValidateFromDate(moment());
+      return this.getValidateFromDate(dayjs());
     }
   }
   getValidateFromDate(value) {
@@ -205,7 +204,7 @@ export class DaterangepickerComponent implements OnInit {
       } else if (this.options.minDate) {
         return this.options.minDate.clone();
       } else {
-        return moment();
+        return dayjs();
       }
     } else {
       if (
@@ -224,7 +223,7 @@ export class DaterangepickerComponent implements OnInit {
       } else if (this.options.minDate) {
         return this.options.minDate.clone();
       } else {
-        return moment();
+        return dayjs();
       }
     }
   }
@@ -238,10 +237,10 @@ export class DaterangepickerComponent implements OnInit {
   }
   getActualToDate(value) {
     let temp;
-    if ((temp = this.getValidateMoment(value))) {
+    if ((temp = this.getValidateDayjs(value))) {
       return this.getValidateToDate(temp);
     } else {
-      return this.getValidateToDate(moment());
+      return this.getValidateToDate(dayjs());
     }
   }
   getValidateToDate(value) {
@@ -254,7 +253,7 @@ export class DaterangepickerComponent implements OnInit {
       } else if (this.options.maxDate) {
         return this.options.maxDate.clone();
       } else {
-        return moment();
+        return dayjs();
       }
     } else {
       if (
@@ -266,7 +265,7 @@ export class DaterangepickerComponent implements OnInit {
       } else if (this.options.maxDate) {
         return this.options.maxDate.clone();
       } else {
-        return moment();
+        return dayjs();
       }
     }
   }
@@ -340,25 +339,25 @@ export class DaterangepickerComponent implements OnInit {
     let data = {};
     if (this.options.singleCalendar) {
       data = {
-        start: this.getMoment(this.fromDate),
+        start: this.getDayjs(this.fromDate),
       };
     } else {
       data = {
-        start: this.getMoment(this.fromDate),
-        end: this.getMoment(this.toDate),
+        start: this.getDayjs(this.fromDate),
+        end: this.getDayjs(this.toDate),
       };
     }
     this.rangeSelected.emit(data);
   }
-  getMoment(value) {
-    return moment(value, this.format);
+  getDayjs(value) {
+    return dayjs(value, this.format);
   }
-  getValidateMoment(value) {
-    let momentValue = null;
-    if (moment(value, this.format, true).isValid()) {
-      momentValue = moment(value, this.format, true);
+  getValidateDayjs(value) {
+    let dayjsValue = null;
+    if (dayjs(value, this.format, true).isValid()) {
+      dayjsValue = dayjs(value, this.format, true);
     }
-    return momentValue;
+    return dayjsValue;
   }
   setRange() {
     const displayFormat =
@@ -379,7 +378,7 @@ export class DaterangepickerComponent implements OnInit {
   formatFromDate(event) {
     if (event.target.value !== this.fromDate.format(this.format)) {
       this.dateChanged({
-        day: event.target.value ? this.getMoment(event.target.value) : moment(),
+        day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
         isLeft: true,
       });
     }
@@ -387,7 +386,7 @@ export class DaterangepickerComponent implements OnInit {
   formatToDate(event) {
     if (event.target.value !== this.toDate.format(this.format)) {
       this.dateChanged({
-        day: event.target.value ? this.getMoment(event.target.value) : moment(),
+        day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
         isLeft: false,
       });
     }
@@ -395,11 +394,11 @@ export class DaterangepickerComponent implements OnInit {
   monthChanged(data) {
     let temp;
     if (data.isLeft) {
-      temp = moment([this.fromYear, this.fromMonth]).add(data.value, "months");
+      temp = dayjs([this.fromYear, this.fromMonth]).add(data.value, "months");
       this.fromMonth = temp.get("month");
       this.fromYear = temp.get("year");
     } else {
-      temp = moment([this.toYear, this.toMonth]).add(data.value, "months");
+      temp = dayjs([this.toYear, this.toMonth]).add(data.value, "months");
       this.toMonth = temp.get("month");
       this.toYear = temp.get("year");
     }
@@ -407,11 +406,11 @@ export class DaterangepickerComponent implements OnInit {
   yearChanged(data) {
     let temp;
     if (data.isLeft) {
-      temp = moment([this.fromYear, this.fromMonth]).add(data.value, "year");
+      temp = dayjs([this.fromYear, this.fromMonth]).add(data.value, "year");
       this.fromMonth = temp.get("month");
       this.fromYear = temp.get("year");
     } else {
-      temp = moment([this.toYear, this.toMonth]).add(data.value, "year");
+      temp = dayjs([this.toYear, this.toMonth]).add(data.value, "year");
       this.toMonth = temp.get("month");
       this.toYear = temp.get("year");
     }
@@ -441,8 +440,8 @@ export class DaterangepickerComponent implements OnInit {
     this.apply();
     this.enableApplyButton = false;
     this.emitRangeSelected();
-    this.fromYear = this.toYear = moment().get("year");
-    this.fromMonth = this.toMonth = moment().get("month");
+    this.fromYear = this.toYear = dayjs().get("year");
+    this.fromMonth = this.toMonth = dayjs().get("month");
   }
   applyPredefinedRange(data) {
     this.setFromDate(data.value.start);

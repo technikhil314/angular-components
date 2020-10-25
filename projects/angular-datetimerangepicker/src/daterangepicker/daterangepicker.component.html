@@ -13,7 +13,7 @@
               'col-md-12': options.singleCalendar
             }">
         <div class="col-md-12 flush-bottom" *ngIf="!options.singleCalendar">
-          <input class="input-mini form-control" [ngModel]="fromDate | formatMomentDate: format"
+          <input class="input-mini form-control" [ngModel]="fromDate | formatDate: format"
             (blur)="formatFromDate($event)" type="text" name="daterangepicker_start" />
         </div>
         <div class="col-md-12 flush">
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
         <div class="col-md-12 flush-bottom text-center">
-          <input class="input-mini form-control" [ngModel]="toDate | formatMomentDate: format"
+          <input class="input-mini form-control" [ngModel]="toDate | formatDate: format"
             (blur)="formatToDate($event)" name="daterangepicker_end" />
         </div>
         <div class="col-md-12 flush">
