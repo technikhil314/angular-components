@@ -27,4 +27,5 @@ jobs:
         run: |
           cp -r projects/angular-datetimerangepicker/src/styles dist/angular-datetimerangepicker
           cd dist/angular-datetimerangepicker
+          echo $NODE_AUTH_TOKEN
           npm publish
