@@ -84,12 +84,12 @@ Check the demo [here](https://angular-datetimerangepicker-demo.stackblitz.io)
 
 <br/>
 
-## Roadmap
+## Todos
 
 1. Get rid of moment to minimise the package [:heavy_check_mark:]
-2. Add theme support
-3. Make touch friendly UI for touch devices
-4. Make style more robust. Use latest CSS features.
+1. Make style more robust. Use latest CSS features.
+1. Add theme support 
+1. Make touch friendly UI for touch devices
 
 <br/>
 
