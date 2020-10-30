@@ -2,9 +2,7 @@ name: publish to npm
 on:
   push:
     tags:
-      - .*
-    branches:
-      - master
+      - "*"
 
 jobs:
   publish:
@@ -15,17 +13,20 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: install dependencies
         run: |
           npm ci
           npm install -g @angular/cli@6
       - name: build using angular cli
-        run: |
-          ng build angular-datetimerangepicker
-          cp -r projects/angular-datetimerangepicker/src/styles dist/angular-datetimerangepicker
-          cd dist/angular-datetimerangepicker
+        run: ng build angular-datetimerangepicker
+      - run: cp -r projects/angular-datetimerangepicker/src/styles dist/angular-datetimerangepicker
       - name: publish
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd dist/angular-datetimerangepicker
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
