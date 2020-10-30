@@ -76,9 +76,11 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Playground / configuration generator
 
-Check the demo [here](https://angular-datetimerangepicker.surge.sh)
+You can play around with all options [here](https://angular-datetimerangepicker.surge.sh)
 
 ## Demo
+
+Check the demo [here](https://angular-datetimerangepicker-demo.stackblitz.io)
 
 <br/>
 
