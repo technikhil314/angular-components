@@ -1,4 +1,4 @@
-name: build
+name: deploy to surge
 
 on:
   push:
