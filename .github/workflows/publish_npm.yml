@@ -1,32 +1,31 @@
-name: publish
+name: publish to npm
 on:
   push:
-    branches: [master]
+    tags:
+      - .*
+    branches:
+      - master
 
 jobs:
-  build:
-    name: Publish angular-datetimerangepicker
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: setup node
         uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Build
+          node-version: 12
+      - name: install dependencies
         run: |
+          npm ci
           npm install -g @angular/cli@6
-          npm install
-          ng build angular-datetimerangepicker
-
-      - name: Publish
+      - name: build using angular cli
         run: |
+          ng build angular-datetimerangepicker
           cp -r projects/angular-datetimerangepicker/src/styles dist/angular-datetimerangepicker
           cd dist/angular-datetimerangepicker
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: publish
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
