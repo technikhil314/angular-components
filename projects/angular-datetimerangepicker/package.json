@@ -20,6 +20,7 @@
     "range picker",
     "bootstrap css"
   ],
+  "sideEffects": true,
   "author": "Nikhil Mehta",
   "license": "MIT",
   "bugs": {

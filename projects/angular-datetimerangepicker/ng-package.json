@@ -2,7 +2,10 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/angular-datetimerangepicker",
   "lib": {
-    "entryFile": "src/public_api.ts"
+    "entryFile": "src/public_api.ts",
+    "umdModuleIds": {
+      "calendarize": "calendarize"
+    }
   },
   "whitelistedNonPeerDependencies": [
     "calendarize",
