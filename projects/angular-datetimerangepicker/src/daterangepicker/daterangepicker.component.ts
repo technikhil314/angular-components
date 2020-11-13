@@ -43,6 +43,7 @@ export class DaterangepickerComponent implements OnInit {
   //handle outside/inside click to show rangepicker
   @HostListener("document:mousedown", ["$event"])
   @HostListener("document:mouseup", ["$event"])
+  @HostListener("document:keyup", ["$event"])
   handleOutsideClick(event) {
     if (!this.options.disabled) {
       let current: any = event.target;
@@ -78,6 +79,9 @@ export class DaterangepickerComponent implements OnInit {
     }
   }
   constructor(private elem: ElementRef) {}
+  getThemeName() {
+    return this.options.theme === "dark";
+  }
   toggleCalendars(value) {
     this.showCalendars = value;
     if (!value) {

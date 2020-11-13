@@ -1,0 +1,237 @@
+.drp-wrapper {
+  --drp-input-height: 33px;
+  --drp-input-border-radius: 4px;
+  --drp-background: hsla(0, 0%, 98%);
+  --drp-foreground: hsla(0, 0%, 20%);
+  --drp-hover-color: hsla(0, 50%, 90%);
+  --drp-shadow-color: rgba(0, 0, 0, 0.2);
+  --drp-flyout-width: 500px;
+  --drp-link-color: hsl(240deg, 50%, 55%);
+  --drp-flyout-single-calendar-width: 250px;
+  --drp-input-border-color: #666;
+  --drp-input-disabled-color: #dedede;
+  position: relative;
+  border: none;
+}
+
+.drp-wrapper.dark {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* all input boxes */
+
+.drp-input,
+.drp-calendar-input {
+  padding: 0px 10px;
+  height: var(--drp-input-height);
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: var(--drp-input-border-radius);
+  border: 1px solid var(--drp-input-border-color);
+  cursor: text;
+  background: var(--drp-background);
+  color: var(--drp-foreground);
+}
+
+.drp-calendar-input[readonly],
+.drp-input[readonly],
+.drp-calendar-input[disabled],
+.drp-input[disabled] {
+  opacity: 0.7;
+  background: var(--drp-input-disabled-color);
+  cursor: not-allowed;
+}
+
+/* the flyout/popup */
+
+.drp-flyout {
+  font-size: 14px;
+  font-size: clamp(11px, 2.5vw, 16px);
+  position: absolute;
+  background: var(--drp-background);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 1px var(--drp-shadow-color);
+  border: 1px solid #aaa;
+  padding: 10px;
+}
+
+.drp-flyout.open-right {
+  right: 0;
+}
+
+.drp-flyout.open-left {
+  left: 0;
+}
+
+.drp-flyout.open-center {
+  left: -50%;
+}
+
+.drp-flyout.alwaysOpen {
+  top: 0;
+  left: 0;
+}
+
+.drp-flyout.tooltipChevron {
+  top: calc(var(--drp-input-height) + 10px);
+}
+
+.drp-flyout.tooltipChevron::after,
+.drp-flyout.tooltipChevron::before {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-style: solid;
+  transform: rotate(-45deg);
+}
+
+.drp-flyout.tooltipChevron::after {
+  border-color: var(--drp-background) var(--drp-background) transparent
+    transparent;
+  border-width: 10px;
+}
+
+.drp-flyout.tooltipChevron::before {
+  border-color: var(--drp-shadow-color) var(--drp-shadow-color) transparent
+    transparent;
+  border-width: 12px;
+}
+
+.drp-flyout.open-left.tooltipChevron::after {
+  top: -8px;
+  left: 15px;
+}
+
+.drp-flyout.open-left.tooltipChevron::before {
+  top: -10px;
+  left: 13px;
+}
+
+.drp-flyout.open-right.tooltipChevron::after {
+  top: -8px;
+  right: 15px;
+}
+
+.drp-flyout.open-right.tooltipChevron::before {
+  top: -10px;
+  right: 13px;
+}
+
+.drp-flyout.open-center.tooltipChevron::after {
+  top: -8px;
+  left: calc(50% - 12px);
+}
+
+.drp-flyout.open-center.tooltipChevron::before {
+  top: -10px;
+  left: calc(50% - 13px);
+}
+
+/* wrapper for both calendars */
+
+.drp-calendars-wrapper {
+  display: flex;
+}
+
+/* wrapper for each calendar and its input box */
+
+.drp-calendar-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* table tbody td */
+
+.drp-date {
+  text-align: center;
+  padding: 2px 0;
+}
+
+.drp-date.active {
+  background: var(--drp-hover-color);
+}
+
+.drp-date.off {
+  opacity: 0.6;
+}
+
+.drp-date:hover {
+  background: var(--drp-hover-color);
+}
+
+/* button in td */
+
+.drp-btn {
+  background: transparent;
+  border: none;
+  color: var(--foreground-color);
+}
+
+.drp-btn:hover {
+  cursor: pointer;
+}
+
+.drp-date.disabled,
+.drp-date.disabled .drp-btn {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* range button */
+
+.drp-link {
+  color: var(--drp-link-color);
+}
+
+.drp-link:hover {
+  text-decoration: underline;
+}
+
+/* main control buttons on bottom of flyout (not ranges) */
+
+.drp-control {
+  border-radius: 4px;
+  padding: 3px 10px;
+  margin: 0 5px;
+}
+
+.drp-control.apply {
+  color: white;
+  background: #129a90;
+  border: 1px solid #129a90;
+}
+
+.drp-control.cancel {
+  background: hsl(0, 0%, 90%);
+  border: 1px solid #129a90;
+}
+
+/* Utility classes */
+
+.hidden {
+  display: none !important;
+}
+
+.drp-flex {
+  margin: 10px 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drp-space-around {
+  justify-content: space-around;
+}
+
+.drp-column {
+  flex-direction: column;
+}
+
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}

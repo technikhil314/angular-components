@@ -18,6 +18,7 @@ export class AppComponent {
     inactiveBeforeStart: true,
     autoApply: true,
     showRanges: true,
+    theme: "light",
     preDefinedRanges: [
       {
         name: "Day After tomorow",

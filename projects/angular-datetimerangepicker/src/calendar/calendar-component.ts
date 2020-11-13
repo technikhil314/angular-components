@@ -4,7 +4,7 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges
+  SimpleChanges,
 } from "@angular/core";
 import calendarize from "calendarize";
 declare var require: any;
@@ -114,6 +114,7 @@ export class CalendarComponent implements OnChanges {
       return false;
     }
     if (
+      !this.singleCalendar &&
       this.inactiveBeforeStart &&
       day.isBefore(this.selectedFromDate, "date")
     ) {
@@ -129,12 +130,16 @@ export class CalendarComponent implements OnChanges {
       return true;
     }
     if (
+      !this.singleCalendar &&
       day.get("month") === this.month &&
       day.isSameOrAfter(this.selectedFromDate, "date") &&
       day.isSameOrBefore(this.selectedToDate, "date")
     ) {
       return true;
     }
+  }
+  getFormattedDate(day) {
+    return day.format(this.format);
   }
   dateSelected(day) {
     this.dateChanged.emit({

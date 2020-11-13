@@ -95,13 +95,11 @@ export class TimePickerComponent implements OnInit, OnChanges {
         "minute",
         (this.selectedFromDate.get("minute") + value) % 60
       );
-      console.log(this.selectedFromDate);
     } else {
       this.selectedToDate = this.selectedToDate.set(
         "minute",
         (this.selectedToDate.get("minute") + value) % 60
       );
-      console.log(this.selectedToDate);
     }
     this.triggerTimeChanged();
   }

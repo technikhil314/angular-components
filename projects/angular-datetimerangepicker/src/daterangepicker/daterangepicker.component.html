@@ -1,57 +1,47 @@
-<div class="daterangepicker-wrapper">
-  <input class="{{class}} dateRangePicker-input" type="text" [ngModel]="range" [disabled]="options.disabled"
-    [ngClass]="{ hidden: options.alwaysOpen }" />
-  <div class="daterangepicker text-center flush {{getPositionClass()}}" [ngClass]="{
+<div class="drp-wrapper" [ngClass]="{dark: getThemeName()}">
+  <input class="{{class}} drp-input" type="text" [ngModel]="range" [disabled]="options.disabled"
+    aria-label="Input your date range" [ngClass]="{ hidden: options.alwaysOpen }" />
+  <div class="drp-flyout {{getPositionClass()}}" [ngClass]="{
           hidden: !(showCalendars || options.alwaysOpen),
           singledatepicker: options.singleCalendar,
-          'tooltip-chevron': !options.alwaysOpen,
-          'always-open': options.alwaysOpen
+          tooltipChevron: !options.alwaysOpen,
+          alwaysOpen: options.alwaysOpen
         }">
-    <div class="col-md-12 flush text-center">
-      <div class="flush-bottom text-center flush-left nudge-half--right" [ngClass]="{
-              'col-md-6': !options.singleCalendar,
-              'col-md-12': options.singleCalendar
-            }">
-        <div class="col-md-12 flush-bottom" *ngIf="!options.singleCalendar">
-          <input class="input-mini form-control" [ngModel]="fromDate | formatDate: format"
-            (blur)="formatFromDate($event)" type="text" name="daterangepicker_start" />
-        </div>
-        <div class="col-md-12 flush">
-          <calendar class="col-md-12 flush" [isLeft]="true" [month]="fromMonth" [year]="fromYear"
-            (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)"
-            (dateChanged)="dateChanged($event)" [format]="format" [selectedFromDate]="fromDate"
-            [selectedToDate]="toDate" [minDate]="options.minDate" [maxDate]="options.maxDate"
-            [inactiveBeforeStart]="options.inactiveBeforeStart" [disableBeforeStart]="options.disableBeforeStart"
-            [timePicker]="options.timePicker" [singleCalendar]="options.singleCalendar"></calendar>
-        </div>
+    <div class="drp-flex drp-space-around">
+      <div class="drp-calendar-container">
+        <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: format" (blur)="formatFromDate($event)"
+          readonly type="text" name="daterangepicker_start" />
+        <calendar class="calender" [isLeft]="true" [month]="fromMonth" [year]="fromYear"
+          (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)" (dateChanged)="dateChanged($event)"
+          [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
+          [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"
+          [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"
+          [singleCalendar]="options.singleCalendar"></calendar>
       </div>
-      <div class="col-md-6 flush-bottom flush-right nudge-half--left" *ngIf="!options.singleCalendar">
-        <div class="col-md-12 flush-bottom text-center">
-          <input class="input-mini form-control" [ngModel]="toDate | formatDate: format"
-            (blur)="formatToDate($event)" name="daterangepicker_end" />
-        </div>
-        <div class="col-md-12 flush">
-          <calendar class="col-md-12 flush" [month]="toMonth" [year]="toYear" [format]="format"
-            (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)"
-            (yearChanged)="yearChanged($event)" [selectedFromDate]="fromDate" [selectedToDate]="toDate"
-            [minDate]="options.minDate" [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"
-            [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"></calendar>
-        </div>
+      <div class="drp-calendar-container" *ngIf="!options.singleCalendar">
+        <input class="drp-calendar-input" [ngModel]="toDate | formatDate: format" (blur)="formatToDate($event)" readonly
+          name="daterangepicker_end" />
+        <calendar class="calender" [month]="toMonth" [year]="toYear" [format]="format"
+          (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)"
+          [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
+          [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"
+          [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"></calendar>
       </div>
     </div>
-    <div class="text-center ranges">
-      <button [class.hidden]="isAutoApply()" class="btn btn-success btn-sm" [disabled]="!enableApplyButton"
-        (click)="apply()" type="button">
-        Apply
-      </button>
-      <button [class.hidden]="isAutoApply()" class="btn btn-default btn-sm" (click)="cancel()" type="button">
-        Cancel
-      </button>
-      <button [disabled]="!this.range" class="btn btn-default btn-link" (click)="clear()" type="button">
-        Clear
-      </button>
-      <div class="flush text-center" *ngIf="options.showRanges && !options.singleCalendar">
-        <button *ngFor="let range of defaultRanges" class="btn btn-link" (click)="applyPredefinedRange(range)"
+    <div class="my-0">
+      <div class="drp-flex"><button [class.hidden]="isAutoApply()" class="drp-control apply"
+          [disabled]="!enableApplyButton" (click)="apply()" type="button">
+          Apply
+        </button>
+        <button [class.hidden]="isAutoApply()" class="drp-control cancel" (click)="cancel()" type="button">
+          Cancel
+        </button>
+        <button [disabled]="!this.range" class="drp-control drp-btn drp-link" (click)="clear()" type="button">
+          Clear
+        </button>
+      </div>
+      <div class="drp-flex" *ngIf="options.showRanges && !options.singleCalendar">
+        <button *ngFor="let range of defaultRanges" class="drp-btn drp-link" (click)="applyPredefinedRange(range)"
           type="button">
           {{ range.name }}
         </button>

@@ -9,7 +9,8 @@
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link"
-          href="https://github.com/technikhil314/angular-components/tree/master/projects/angular-datetimerangepicker">Go to
+          href="https://github.com/technikhil314/angular-components/tree/master/projects/angular-datetimerangepicker">Go
+          to
           Documentation</a>
       </li>
     </ul>
@@ -31,46 +32,58 @@
       <div class="form-group">
         <input type="checkbox" name="singleCalendar" [(ngModel)]=daterangepickerOptions.singleCalendar
           id="singleCalendar">
-        <label class="label control-label" for="singleCalendar">Single Calendar</label>
+        <label class="label font-weight-bold control-label" for="singleCalendar">Single Calendar</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="autoApply" [(ngModel)]=daterangepickerOptions.autoApply id="autoApply">
-        <label class="label control-label" for="autoApply">Auto Apply</label>
+        <label class="label font-weight-bold control-label" for="autoApply">Auto Apply</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="inactiveBeforeStart" [(ngModel)]=daterangepickerOptions.inactiveBeforeStart
           id="inactiveBeforeStart">
-        <label class="label control-label" for="inactiveBeforeStart">Inactive Before Start</label>
+        <label class="label font-weight-bold control-label" for="inactiveBeforeStart">Inactive Before Start</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="disableBeforeStart" [(ngModel)]=daterangepickerOptions.disableBeforeStart
           id="disableBeforeStart">
-        <label class="label control-label" for="disableBeforeStart">Disable Before Start</label>
+        <label class="label font-weight-bold control-label" for="disableBeforeStart">Disable Before Start</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="disabled" [(ngModel)]=daterangepickerOptions.disabled id="disabled">
-        <label class="label control-label" for="disabled">Disabled</label>
+        <label class="label font-weight-bold control-label" for="disabled">Disabled</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="showRanges" [(ngModel)]="daterangepickerOptions.showRanges" id="showRanges">
-        <label class="label control-label" for="showRanges">Show Ranges</label>
+        <label class="label font-weight-bold control-label" for="showRanges">Show Ranges</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="noDefaultRangeSelected" [(ngModel)]="daterangepickerOptions.noDefaultRangeSelected"
           id="noDefaultRangeSelected">
-        <label class="label control-label" for="noDefaultRangeSelected">No Default Range Selected</label>
+        <label class="label font-weight-bold control-label" for="noDefaultRangeSelected">No Default Range
+          Selected</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="timepicker" [ngModel]="isTimePickerEnabled" (change)="setTimePicker($event)"
           id="timepicker">
-        <label class="label control-label" for="timepicker">TimePicker</label>
+        <label class="label font-weight-bold control-label" for="timepicker">TimePicker</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="alwaysOpen" [(ngModel)]="daterangepickerOptions.alwaysOpen" id="alwaysOpen">
-        <label class="label control-label" for="alwaysOpen">Always Open</label>
+        <label class="label font-weight-bold control-label" for="alwaysOpen">Always Open</label>
       </div>
       <div class="form-group">
-        <p>Position</p>
+        <p class="font-weight-bold">Theme</p>
+        <div class="form-group">
+          <input type="radio" name="theme" value="light" [(ngModel)]="daterangepickerOptions.theme" id="theme-light">
+          <label class="label control-label" for="theme-light">Light</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" name="theme" value="dark" [(ngModel)]="daterangepickerOptions.theme" id="theme-dark">
+          <label class="label control-label" for="theme-dark">Dark</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <p class="font-weight-bold">Position</p>
         <div class="form-group">
           <input type="radio" name="position" value="left" [(ngModel)]="daterangepickerOptions.position"
             id="position-left" [disabled]="daterangepickerOptions.alwaysOpen">
@@ -84,7 +97,7 @@
         <div class="form-group">
           <input type="radio" name="position" value="center" [(ngModel)]="daterangepickerOptions.position"
             id="position-center" [disabled]="daterangepickerOptions.alwaysOpen">
-          <label class="label control-label" for="position-left">Center</label>
+          <label class="label control-label" for="position-center">Center</label>
         </div>
       </div>
       <div class="col-md-12">
@@ -96,9 +109,13 @@
   <div class="col-md-5 col-lg-5">
     <h3>Live Demo</h3>
     <div class="col-md-6 flush">
-      <daterangepicker [class]="'col-md-12 col-lg-12 form-control'" [options]="daterangepickerOptions"
-        (rangeSelected)="rangeSelected($event)">
+      <daterangepicker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)">
       </daterangepicker>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem expedita porro neque doloremque repellendus,
+        eligendi ipsa ut provident cum deleniti molestias, in vero, voluptatum placeat. Distinctio iste quidem est
+        aliquam.
+      </p>
     </div>
   </div>
 </div>

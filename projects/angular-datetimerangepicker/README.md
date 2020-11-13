@@ -63,6 +63,11 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
+- Date: 13th Nov 2020
+  1. Using modern css (flexbox)
+  1. Removing dependency on bootstrap (now works without bootstrap too)
+  1. Adding option for theme
+  1. Added screen reader and keyboard accessibility
 - Date: 25 Oct 2020
   1. Removed momentjs now using [dayjs](https://day.js.org/)
 - Date: 17 Oct 2020
@@ -88,7 +93,7 @@ Check the demo [here](https://angular-datetimerangepicker-demo.stackblitz.io)
 
 1. Get rid of moment to minimise the package [:heavy_check_mark:]
 1. Make style more robust. Use latest CSS features.
-1. Add theme support 
+1. Add theme support
 1. Make touch friendly UI for touch devices
 
 <br/>
@@ -139,17 +144,12 @@ The input box automatically takes class of the daterangepicker tag
 
 ### Using Unpkg
 
-If you are already using bootstrap.css then just include the following css in your code
-This has minimal set of rules that inherits styles from bootstrap.css <br/>
-[https://unpkg.com/angular-datetimerangepicker/styles/with-bootstrap.css](https://unpkg.com/angular-datetimerangepicker/styles/with-bootstrap.css)
-
-if you do not want to include whole bootstrap.css then include following css in your code. <br/>
-[https://unpkg.com/angular-datetimerangepicker/styles/without-bootstrap.css](https://unpkg.com/angular-datetimerangepicker/styles/without-bootstrap.css)
+[https://unpkg.com/angular-datetimerangepicker/styles/styles.css](https://unpkg.com/angular-datetimerangepicker/styles/styles.css)
 
 ### from node_modules
 
 add following path to `angular.json`'s style section if you are already using bootstrap <br/>
-`./node_modules/angular-datetimerangepicker/styles/with-bootstrap.css`
+`./node_modules/angular-datetimerangepicker/styles/styles.css`
 
 or add following path to `angular.json`'s style section if you dont want bootstrap <br/>
 `./node_modules/angular-datetimerangepicker/styles/without-bootstrap.css`
@@ -290,6 +290,13 @@ Currently, these options are available but I will keep on developing and adding 
             <td>position of the flyout which will open. By default it opens on left edge of input box</td>
             <td>'left'</td>
             <td>'left','right','center'</td>
+        </tr>
+        <tr>
+            <td>theme</td>
+            <td>string</td>
+            <td>theme for overall component</td>
+            <td>'light'</td>
+            <td>'light','dark'</td>
         </tr>
         <tr>
             <td>disabled</td>
