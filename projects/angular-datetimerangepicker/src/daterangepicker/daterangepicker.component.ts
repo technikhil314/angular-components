@@ -331,6 +331,7 @@ export class DaterangepickerComponent implements OnInit {
       : this.fromMonth;
     this.toMonth = this.toDate ? this.toDate.get("month") : this.toMonth;
     this.fromYear = this.fromDate.get("year");
+    this.toYear = this.toDate.get("year");
     if (!this.toDate && this.fromDate) {
       this.toYear = this.fromYear;
       this.toMonth = this.fromMonth;
