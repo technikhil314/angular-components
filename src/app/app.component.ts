@@ -17,6 +17,7 @@ export class AppComponent {
     autoApply: true,
     showRanges: true,
     theme: "light",
+    required: false,
     preDefinedRanges: [
       {
         name: "Day After tomorow",

@@ -31,5 +31,6 @@ export class Options {
   timePicker: Timepicker = null;
   disableBeforeStart: boolean = false;
   alwaysOpen: boolean = false;
-  theme: string = "light"
+  theme: string = "light";
+  required: boolean = false;
 }

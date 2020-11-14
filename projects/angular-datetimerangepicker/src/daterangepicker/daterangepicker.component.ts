@@ -483,4 +483,18 @@ export class DaterangepickerComponent implements OnInit {
       return this.options.autoApply;
     }
   }
+  getAriaLabel() {
+    const displayFormat =
+      this.options.displayFormat !== undefined
+        ? this.options.displayFormat
+        : this.format;
+    if (this.fromDate && this.toDate) {
+      return (
+        this.fromDate.format(displayFormat) +
+        " to " +
+        this.toDate.format(displayFormat)
+      );
+    }
+    return "Please select a date range";
+  }
 }

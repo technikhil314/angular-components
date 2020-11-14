@@ -1,6 +1,6 @@
 <div class="drp-wrapper" [ngClass]="{dark: getThemeName()}">
   <input class="{{class}} drp-input" type="text" [ngModel]="range" [disabled]="options.disabled"
-    aria-label="Input your date range" [ngClass]="{ hidden: options.alwaysOpen }" />
+    [attr.aria-label]="getAriaLabel()" [ngClass]="{ hidden: options.alwaysOpen }" [attr.required]="options.required" />
   <div class="drp-flyout {{getPositionClass()}}" [ngClass]="{
           hidden: !(showCalendars || options.alwaysOpen),
           singledatepicker: options.singleCalendar,
