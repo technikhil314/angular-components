@@ -92,8 +92,8 @@ Check the demo [here](https://angular-datetimerangepicker-demo.stackblitz.io)
 ## Todos
 
 1. Get rid of moment to minimise the package [:heavy_check_mark:]
-1. Make style more robust. Use latest CSS features.
-1. Add theme support
+1. Make style more robust. Use latest CSS features. [:heavy_check_mark:]
+1. Add theme support [:heavy_check_mark:]
 1. Make touch friendly UI for touch devices
 
 <br/>
@@ -323,6 +323,13 @@ Currently, these options are available but I will keep on developing and adding 
             <td>alwaysOpen</td>
             <td>boolean</td>
             <td>Whether to keep the calendars always open. This option removes the main input box where range is shown</td>
+            <td>false</td>
+            <td>true,false</td>
+        </tr>
+        <tr>
+            <td>required</td>
+            <td>boolean</td>
+            <td>Sets required attribute to the input box (makes sense only if used inside form)</td>
             <td>false</td>
             <td>true,false</td>
         </tr>
