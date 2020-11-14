@@ -10,11 +10,9 @@ const dayjs = require("dayjs");
 export class AppComponent {
   isTimePickerEnabled = true;
   daterangepickerOptions = {
-    startDate: dayjs(),
-    endDate: dayjs(),
     format: "DD.MM.YYYY HH:mm",
-    minDate: dayjs().add(-120, "months").format("DD.MM.YYYY HH:mm"),
-    maxDate: dayjs().add(120, "months").format("DD.MM.YYYY HH:mm"),
+    minDate: dayjs().add(-12, "months").format("DD.MM.YYYY HH:mm"),
+    maxDate: dayjs().add(12, "months").format("DD.MM.YYYY HH:mm"),
     inactiveBeforeStart: true,
     autoApply: true,
     showRanges: true,

@@ -2,7 +2,7 @@ name: deploy to surge
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: "12.x"
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
 
-    - name: Build
-      run: |
-        npm install -g @angular/cli@6
-        npm install
-        ng build angular-datetimerangepicker --prod
-        ng build
+      - name: Build
+        run: |
+          npm install -g @angular/cli@6
+          npm install
+          ng build angular-datetimerangepicker
+          ng build --prod
 
-    - name: Install Surge
-      run: npm install -g surge
+      - name: Install Surge
+        run: npm install -g surge
 
-    - name: Deploy to Surge
-      run: |
-        cd dist/angular-components
-        surge . https://angular-datetimerangepicker.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
+      - name: Deploy to Surge
+        run: |
+          cd dist/angular-components
+          surge . https://angular-datetimerangepicker.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
