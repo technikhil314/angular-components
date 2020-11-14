@@ -36,12 +36,12 @@
         <button [class.hidden]="isAutoApply()" class="drp-control cancel" (click)="cancel()" type="button">
           Cancel
         </button>
-        <button [disabled]="!this.range" class="drp-control drp-btn drp-link" (click)="clear()" type="button">
+        <button [disabled]="!this.range" class="drp-control drp-btn drp-outline" (click)="clear()" type="button">
           Clear
         </button>
       </div>
       <div class="drp-flex range-controls" *ngIf="options.showRanges && !options.singleCalendar">
-        <button *ngFor="let range of defaultRanges" class="drp-btn drp-link" (click)="applyPredefinedRange(range)"
+        <button *ngFor="let range of defaultRanges" class="drp-btn drp-outline" (click)="applyPredefinedRange(range)"
           type="button">
           {{ range.name }}
         </button>

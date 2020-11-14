@@ -3,10 +3,10 @@
   --drp-input-border-radius: 4px;
   --drp-background: hsla(0, 0%, 98%);
   --drp-foreground: hsla(0, 0%, 20%);
-  --drp-hover-color: hsla(0, 50%, 90%);
+  --drp-hover-color: hsla(0, 0%, 80%);
   --drp-shadow-color: rgba(0, 0, 0, 0.2);
   --drp-flyout-width: 500px;
-  --drp-link-color: hsl(240deg, 50%, 55%);
+  --drp-outline-color: hsl(240deg, 50%, 55%);
   --drp-flyout-single-calendar-width: 250px;
   --drp-input-border-color: #666;
   --drp-input-disabled-color: #dedede;
@@ -148,6 +148,7 @@
 .drp-date {
   text-align: center;
   padding: 2px 0;
+  transition: background 0.2s;
 }
 
 .drp-date.active {
@@ -189,21 +190,31 @@
   flex-wrap: wrap;
 }
 
-.drp-link {
-  color: var(--drp-link-color);
+.drp-outline {
+  border: 1px solid var(--drp-outline-color);
+  background: var(--drp-background);
   white-space: nowrap;
+  color: var(--drp-foreground);
+  border-radius: 4px;
+  margin: 4px;
+  transition: background 0.2s, color 0.2s;
 }
 
-.drp-link:hover {
-  text-decoration: underline;
+.drp-outline:hover {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 /* main control buttons on bottom of flyout (not ranges) */
+
+.drp-control:hover {
+  filter: invert(1) hue-rotate(180deg);
+}
 
 .drp-control {
   border-radius: 4px;
   padding: 3px 10px;
   margin: 0 5px;
+  transition: transform 0.2s;
 }
 
 .drp-control.apply {
