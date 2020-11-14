@@ -183,8 +183,14 @@
 
 /* range button */
 
+.range-controls {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
 .drp-link {
   color: var(--drp-link-color);
+  white-space: nowrap;
 }
 
 .drp-link:hover {
@@ -234,4 +240,10 @@
 .my-0 {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .mobile-column {
+    flex-direction: column;
+  }
 }

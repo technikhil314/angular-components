@@ -7,7 +7,7 @@
           tooltipChevron: !options.alwaysOpen,
           alwaysOpen: options.alwaysOpen
         }">
-    <div class="drp-flex drp-space-around">
+    <div class="drp-flex drp-space-around mobile-column">
       <div class="drp-calendar-container">
         <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: format" (blur)="formatFromDate($event)"
           readonly type="text" name="daterangepicker_start" />
@@ -40,7 +40,7 @@
           Clear
         </button>
       </div>
-      <div class="drp-flex" *ngIf="options.showRanges && !options.singleCalendar">
+      <div class="drp-flex range-controls" *ngIf="options.showRanges && !options.singleCalendar">
         <button *ngFor="let range of defaultRanges" class="drp-btn drp-link" (click)="applyPredefinedRange(range)"
           type="button">
           {{ range.name }}

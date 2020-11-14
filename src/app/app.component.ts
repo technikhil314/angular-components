@@ -48,6 +48,20 @@ export class AppComponent {
           end: dayjs().add(7, "days"),
         },
       },
+      {
+        name: "This month",
+        value: {
+          start: dayjs(),
+          end: dayjs().add(1, "month"),
+        },
+      },
+      {
+        name: "Next 2 months",
+        value: {
+          start: dayjs(),
+          end: dayjs().add(2, "month"),
+        },
+      },
     ],
     singleCalendar: false,
     displayFormat: "DD.MM.YYYY HH:mm",
