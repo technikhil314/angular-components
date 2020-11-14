@@ -176,13 +176,6 @@
   cursor: pointer;
 }
 
-.drp-date.disabled,
-.drp-date.disabled .drp-btn {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
 /* range button */
 
 .range-controls {
@@ -229,6 +222,13 @@
 }
 
 /* Utility classes */
+
+.disabled,
+[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
 
 .hidden {
   display: none !important;
