@@ -81,9 +81,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     }
   }
   constructor(private elem: ElementRef) {}
-  getThemeName() {
-    return this.derivedOptions.theme === "dark";
-  }
   toggleCalendars(value) {
     this.showCalendars = value;
     if (!value) {

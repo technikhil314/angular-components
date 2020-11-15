@@ -1,6 +1,7 @@
-<div class="drp-wrapper" [ngClass]="{dark: getThemeName()}">
+<div class="drp-wrapper {{derivedOptions.theme}}">
   <input class="{{class}} drp-input" type="text" [ngModel]="range" [disabled]="derivedOptions.disabled"
-    [attr.aria-label]="getAriaLabel()" [ngClass]="{ hidden: derivedOptions.alwaysOpen }" [attr.required]="derivedOptions.required" />
+    [attr.aria-label]="getAriaLabel()" [ngClass]="{ hidden: derivedOptions.alwaysOpen }"
+    [attr.required]="derivedOptions.required" />
   <div class="drp-flyout {{getPositionClass()}}" [ngClass]="{
           hidden: !(showCalendars || derivedOptions.alwaysOpen),
           singledatepicker: derivedOptions.singleCalendar,
