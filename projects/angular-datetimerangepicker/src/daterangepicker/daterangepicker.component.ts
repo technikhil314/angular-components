@@ -1,5 +1,6 @@
 import {
   Component,
+  DoCheck,
   ElementRef,
   EventEmitter,
   HostListener,
@@ -17,7 +18,7 @@ declare var window: any;
   selector: "daterangepicker",
   templateUrl: "./daterangepicker.component.html",
 })
-export class DaterangepickerComponent implements OnInit {
+export class DaterangepickerComponent implements OnInit, DoCheck {
   //inputs
   @Input() options: Options;
   @Input() class: string;
@@ -39,13 +40,14 @@ export class DaterangepickerComponent implements OnInit {
   fromYear: number;
   toYear: number;
   format: string;
+  derivedOptions: Options;
   defaultRanges: {};
   //handle outside/inside click to show rangepicker
   @HostListener("document:mousedown", ["$event"])
   @HostListener("document:mouseup", ["$event"])
   @HostListener("document:keyup", ["$event"])
   handleOutsideClick(event) {
-    if (!this.options.disabled) {
+    if (!this.derivedOptions.disabled) {
       let current: any = event.target;
       let host: any = this.elem.nativeElement;
       if (host.compareDocumentPosition) {
@@ -80,7 +82,7 @@ export class DaterangepickerComponent implements OnInit {
   }
   constructor(private elem: ElementRef) {}
   getThemeName() {
-    return this.options.theme === "dark";
+    return this.derivedOptions.theme === "dark";
   }
   toggleCalendars(value) {
     this.showCalendars = value;
@@ -101,72 +103,98 @@ export class DaterangepickerComponent implements OnInit {
     this.toYear = tDate.get("year");
     this.setRange();
   }
+  ngDoCheck() {
+    this.deriveOptions();
+  }
   ngOnInit(): void {
     //get default options provided by user
+    this.deriveOptions();
     this.setFormat();
     this.validateMinMaxDates();
-    this.setFromDate(this.options.startDate);
-    this.setToDate(this.options.endDate);
+    this.setFromDate(this.derivedOptions.startDate);
+    this.setToDate(this.derivedOptions.endDate);
     this.defaultRanges = this.validatePredefinedRanges(
-      this.options.preDefinedRanges || Defaults.ranges
+      this.derivedOptions.preDefinedRanges || Defaults.ranges
     );
     //update calendar grid
     this.updateCalendar();
   }
+  deriveOptions() {
+    this.derivedOptions = {
+      ...new Options(),
+      ...this.options,
+    };
+  }
   getPositionClass(): string {
     let positionClass = "open-left";
-    if (this.options.position === "right") {
+    if (this.derivedOptions.position === "right") {
       positionClass = "open-right";
     }
-    if (this.options.position === "center" && !this.options.singleCalendar) {
+    if (
+      this.derivedOptions.position === "center" &&
+      !this.derivedOptions.singleCalendar
+    ) {
       positionClass = "open-center";
     }
     return positionClass;
   }
   setFormat() {
-    if (this.options) {
-      this.format = this.options.format || "YYYY-MM-DD";
+    if (this.derivedOptions) {
+      this.format = this.derivedOptions.format || "YYYY-MM-DD";
     } else {
       this.format = "YYYY-MM-DD";
     }
   }
   validateMinMaxDates() {
-    if (this.options) {
+    if (this.derivedOptions) {
       //only mindate is suppplied
-      if (this.options.minDate && !this.options.maxDate) {
-        this.options.minDate = this.getDayjs(this.options.minDate);
+      if (this.derivedOptions.minDate && !this.derivedOptions.maxDate) {
+        this.derivedOptions.minDate = this.getDayjs(
+          this.derivedOptions.minDate
+        );
       }
       //only maxdate is supplied
-      if (!this.options.minDate && this.options.maxDate) {
-        this.options.maxDate = this.getDayjs(this.options.maxDate);
+      if (!this.derivedOptions.minDate && this.derivedOptions.maxDate) {
+        this.derivedOptions.maxDate = this.getDayjs(
+          this.derivedOptions.maxDate
+        );
       }
       //both min and max dates are supplied
-      if (this.options.minDate && this.options.maxDate) {
-        this.options.minDate = this.getDayjs(this.options.minDate);
-        this.options.maxDate = this.getDayjs(this.options.maxDate);
-        if (this.options.maxDate.isBefore(this.options.minDate, "date")) {
-          this.options.minDate = "";
-          this.options.maxDate = "";
+      if (this.derivedOptions.minDate && this.derivedOptions.maxDate) {
+        this.derivedOptions.minDate = this.getDayjs(
+          this.derivedOptions.minDate
+        );
+        this.derivedOptions.maxDate = this.getDayjs(
+          this.derivedOptions.maxDate
+        );
+        if (
+          this.derivedOptions.maxDate.isBefore(
+            this.derivedOptions.minDate,
+            "date"
+          )
+        ) {
+          this.derivedOptions.minDate = "";
+          this.derivedOptions.maxDate = "";
           console.warn(
             "supplied minDate is after maxDate. Discarding options for minDate and maxDate"
           );
         }
       }
       if (
-        this.options.minDate &&
-        this.options.minDate.format("HH:mm") === "00:00"
+        this.derivedOptions.minDate &&
+        this.derivedOptions.minDate.format("HH:mm") === "00:00"
       ) {
-        this.options.minDate.set({
+        this.derivedOptions.minDate.set({
           hour: 0,
           minutes: 0,
           seconds: 0,
         });
       }
       if (
-        this.options.maxDate &&
-        this.options.maxDate.format("HH:mm") === "00:00"
+        this.derivedOptions.maxDate &&
+        this.derivedOptions.maxDate.format("HH:mm") === "00:00"
       ) {
-        this.options.maxDate.set({
+        this.derivedOptions.maxDate.set({
           hour: 23,
           minutes: 59,
           seconds: 59,
@@ -175,7 +203,7 @@ export class DaterangepickerComponent implements OnInit {
     }
   }
   setFromDate(value) {
-    if (this.options.noDefaultRangeSelected && !value) {
+    if (this.derivedOptions.noDefaultRangeSelected && !value) {
       this.fromDate = "";
       this.tempFromDate = this.getActualFromDate(value);
     } else {
@@ -191,48 +219,54 @@ export class DaterangepickerComponent implements OnInit {
     }
   }
   getValidateFromDate(value) {
-    if (!this.options.timePicker) {
+    if (!this.derivedOptions.timePicker) {
       if (
-        this.options.minDate &&
-        this.options.maxDate &&
-        value.isSameOrAfter(this.options.minDate, "date") &&
-        value.isSameOrBefore(this.options.maxDate, "date")
+        this.derivedOptions.minDate &&
+        this.derivedOptions.maxDate &&
+        value.isSameOrAfter(this.derivedOptions.minDate, "date") &&
+        value.isSameOrBefore(this.derivedOptions.maxDate, "date")
       ) {
         return value;
       } else if (
-        this.options.minDate &&
-        !this.options.maxDate &&
-        value.isAfter(this.options.minDate, "date")
+        this.derivedOptions.minDate &&
+        !this.derivedOptions.maxDate &&
+        value.isAfter(this.derivedOptions.minDate, "date")
       ) {
         return value;
-      } else if (this.options.minDate) {
-        return this.options.minDate.clone();
+      } else if (this.derivedOptions.minDate) {
+        return this.derivedOptions.minDate.clone();
       } else {
         return dayjs();
       }
     } else {
       if (
-        this.options.minDate &&
-        this.options.maxDate &&
-        value.isSameOrAfter(this.options.minDate, this.options.format) &&
-        value.isSameOrBefore(this.options.maxDate, this.options.format)
+        this.derivedOptions.minDate &&
+        this.derivedOptions.maxDate &&
+        value.isSameOrAfter(
+          this.derivedOptions.minDate,
+          this.derivedOptions.format
+        ) &&
+        value.isSameOrBefore(
+          this.derivedOptions.maxDate,
+          this.derivedOptions.format
+        )
       ) {
         return value;
       } else if (
-        this.options.minDate &&
-        !this.options.maxDate &&
-        value.isAfter(this.options.minDate, this.options.format)
+        this.derivedOptions.minDate &&
+        !this.derivedOptions.maxDate &&
+        value.isAfter(this.derivedOptions.minDate, this.derivedOptions.format)
       ) {
         return value;
-      } else if (this.options.minDate) {
-        return this.options.minDate.clone();
+      } else if (this.derivedOptions.minDate) {
+        return this.derivedOptions.minDate.clone();
       } else {
         return dayjs();
       }
     }
   }
   setToDate(value) {
-    if (this.options.noDefaultRangeSelected && !value) {
+    if (this.derivedOptions.noDefaultRangeSelected && !value) {
       this.toDate = "";
       this.tempToDate = this.getActualToDate(value);
     } else {
@@ -248,26 +282,30 @@ export class DaterangepickerComponent implements OnInit {
     }
   }
   getValidateToDate(value) {
-    if (!this.options.timePicker) {
+    if (!this.derivedOptions.timePicker) {
       if (
-        (this.options.maxDate && value.isSameOrAfter(this.fromDate, "date"),
-        value.isSameOrBefore(this.options.maxDate, "date"))
+        (this.derivedOptions.maxDate &&
+          value.isSameOrAfter(this.fromDate, "date"),
+        value.isSameOrBefore(this.derivedOptions.maxDate, "date"))
       ) {
         return value;
-      } else if (this.options.maxDate) {
-        return this.options.maxDate.clone();
+      } else if (this.derivedOptions.maxDate) {
+        return this.derivedOptions.maxDate.clone();
       } else {
         return dayjs();
       }
     } else {
       if (
-        (this.options.maxDate &&
-          value.isSameOrAfter(this.fromDate, this.options.format),
-        value.isSameOrBefore(this.options.maxDate, this.options.format))
+        (this.derivedOptions.maxDate &&
+          value.isSameOrAfter(this.fromDate, this.derivedOptions.format),
+        value.isSameOrBefore(
+          this.derivedOptions.maxDate,
+          this.derivedOptions.format
+        ))
       ) {
         return value;
-      } else if (this.options.maxDate) {
-        return this.options.maxDate.clone();
+      } else if (this.derivedOptions.maxDate) {
+        return this.derivedOptions.maxDate.clone();
       } else {
         return dayjs();
       }
@@ -278,7 +316,7 @@ export class DaterangepickerComponent implements OnInit {
     let value = data.day;
     let isLeft = data.isLeft;
     if (isLeft) {
-      if (!this.options.timePicker) {
+      if (!this.derivedOptions.timePicker) {
         value.set({
           hour: 0,
           minute: 0,
@@ -286,17 +324,17 @@ export class DaterangepickerComponent implements OnInit {
         });
       }
       this.fromDate = value;
-      if (!this.options.timePicker) {
+      if (!this.derivedOptions.timePicker) {
         if (value.isAfter(this.toDate, "date")) {
           this.toDate = this.fromDate.clone();
         }
       } else {
-        if (value.isAfter(this.toDate, this.options.format)) {
+        if (value.isAfter(this.toDate, this.derivedOptions.format)) {
           this.toDate = this.fromDate.clone();
         }
       }
     } else {
-      if (!this.options.timePicker) {
+      if (!this.derivedOptions.timePicker) {
         value.set({
           hour: 23,
           minute: 59,
@@ -305,25 +343,25 @@ export class DaterangepickerComponent implements OnInit {
       }
       //this.setToDate(value.format(this.format));
       this.toDate = value;
-      if (!this.options.timePicker) {
+      if (!this.derivedOptions.timePicker) {
         if (value.isBefore(this.fromDate, "date")) {
           this.fromDate = this.toDate.clone();
         }
       } else {
-        if (value.isBefore(this.fromDate, this.options.format)) {
+        if (value.isBefore(this.fromDate, this.derivedOptions.format)) {
           this.fromDate = this.toDate.clone();
         }
       }
     }
     if (this.isAutoApply()) {
-      if (this.options.singleCalendar || !isLeft) {
+      if (this.derivedOptions.singleCalendar || !isLeft) {
         this.toggleCalendars(false);
         this.setRange();
         this.emitRangeSelected();
       }
-    } else if (!this.options.singleCalendar && !isLeft) {
+    } else if (!this.derivedOptions.singleCalendar && !isLeft) {
       this.enableApplyButton = true;
-    } else if (this.options.singleCalendar) {
+    } else if (this.derivedOptions.singleCalendar) {
       this.enableApplyButton = true;
     }
     this.fromMonth = this.fromDate
@@ -342,7 +380,7 @@ export class DaterangepickerComponent implements OnInit {
   }
   emitRangeSelected() {
     let data = {};
-    if (this.options.singleCalendar) {
+    if (this.derivedOptions.singleCalendar) {
       data = {
         start: this.getDayjs(this.fromDate),
       };
@@ -366,10 +404,10 @@ export class DaterangepickerComponent implements OnInit {
   }
   setRange() {
     const displayFormat =
-      this.options.displayFormat !== undefined
-        ? this.options.displayFormat
+      this.derivedOptions.displayFormat !== undefined
+        ? this.derivedOptions.displayFormat
         : this.format;
-    if (this.options.singleCalendar && this.fromDate) {
+    if (this.derivedOptions.singleCalendar && this.fromDate) {
       this.range = this.fromDate.format(displayFormat);
     } else if (this.fromDate && this.toDate) {
       this.range =
@@ -460,14 +498,20 @@ export class DaterangepickerComponent implements OnInit {
         return false;
       }
       if (
-        this.options.minDate &&
-        range.value.start.isBefore(this.options.minDate, this.options.format)
+        this.derivedOptions.minDate &&
+        range.value.start.isBefore(
+          this.derivedOptions.minDate,
+          this.derivedOptions.format
+        )
       ) {
         return false;
       }
       if (
-        this.options.maxDate &&
-        range.value.end.isAfter(this.options.maxDate, this.options.format)
+        this.derivedOptions.maxDate &&
+        range.value.end.isAfter(
+          this.derivedOptions.maxDate,
+          this.derivedOptions.format
+        )
       ) {
         return false;
       }
@@ -475,18 +519,18 @@ export class DaterangepickerComponent implements OnInit {
     });
   }
   isAutoApply() {
-    if (this.options.timePicker) {
+    if (this.derivedOptions.timePicker) {
       return false;
-    } else if (this.options.singleCalendar) {
+    } else if (this.derivedOptions.singleCalendar) {
       return true;
     } else {
-      return this.options.autoApply;
+      return this.derivedOptions.autoApply;
     }
   }
   getAriaLabel() {
     const displayFormat =
-      this.options.displayFormat !== undefined
-        ? this.options.displayFormat
+      this.derivedOptions.displayFormat !== undefined
+        ? this.derivedOptions.displayFormat
         : this.format;
     if (this.fromDate && this.toDate) {
       return (

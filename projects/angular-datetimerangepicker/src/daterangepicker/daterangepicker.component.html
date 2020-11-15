@@ -1,11 +1,11 @@
 <div class="drp-wrapper" [ngClass]="{dark: getThemeName()}">
-  <input class="{{class}} drp-input" type="text" [ngModel]="range" [disabled]="options.disabled"
-    [attr.aria-label]="getAriaLabel()" [ngClass]="{ hidden: options.alwaysOpen }" [attr.required]="options.required" />
+  <input class="{{class}} drp-input" type="text" [ngModel]="range" [disabled]="derivedOptions.disabled"
+    [attr.aria-label]="getAriaLabel()" [ngClass]="{ hidden: derivedOptions.alwaysOpen }" [attr.required]="derivedOptions.required" />
   <div class="drp-flyout {{getPositionClass()}}" [ngClass]="{
-          hidden: !(showCalendars || options.alwaysOpen),
-          singledatepicker: options.singleCalendar,
-          tooltipChevron: !options.alwaysOpen,
-          alwaysOpen: options.alwaysOpen
+          hidden: !(showCalendars || derivedOptions.alwaysOpen),
+          singledatepicker: derivedOptions.singleCalendar,
+          tooltipChevron: !derivedOptions.alwaysOpen,
+          alwaysOpen: derivedOptions.alwaysOpen
         }">
     <div class="drp-calendars-wrapper">
       <div class="drp-calendar-container">
@@ -13,19 +13,19 @@
           readonly type="text" name="daterangepicker_start" />
         <calendar class="calender" [isLeft]="true" [month]="fromMonth" [year]="fromYear"
           (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)" (dateChanged)="dateChanged($event)"
-          [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
-          [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"
-          [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"
-          [singleCalendar]="options.singleCalendar"></calendar>
+          [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
+          [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
+          [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"
+          [singleCalendar]="derivedOptions.singleCalendar"></calendar>
       </div>
-      <div class="drp-calendar-container" *ngIf="!options.singleCalendar">
+      <div class="drp-calendar-container" *ngIf="!derivedOptions.singleCalendar">
         <input class="drp-calendar-input" [ngModel]="toDate | formatDate: format" (blur)="formatToDate($event)" readonly
           name="daterangepicker_end" />
         <calendar class="calender" [month]="toMonth" [year]="toYear" [format]="format"
           (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)"
-          [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="options.minDate"
-          [maxDate]="options.maxDate" [inactiveBeforeStart]="options.inactiveBeforeStart"
-          [disableBeforeStart]="options.disableBeforeStart" [timePicker]="options.timePicker"></calendar>
+          [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
+          [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
+          [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"></calendar>
       </div>
     </div>
     <div class="my-0">
@@ -40,7 +40,7 @@
           Clear
         </button>
       </div>
-      <div class="drp-flex range-controls" *ngIf="options.showRanges && !options.singleCalendar">
+      <div class="drp-flex range-controls" *ngIf="derivedOptions.showRanges && !derivedOptions.singleCalendar">
         <button *ngFor="let range of defaultRanges" class="drp-btn outline" (click)="applyPredefinedRange(range)"
           type="button">
           {{ range.name }}
