@@ -120,19 +120,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       ...new Options(),
       ...this.options,
     };
-  }
-  getPositionClass(): string {
-    let positionClass = "open-left";
-    if (this.derivedOptions.position === "right") {
-      positionClass = "open-right";
-    }
-    if (
-      this.derivedOptions.position === "center" &&
-      !this.derivedOptions.singleCalendar
-    ) {
-      positionClass = "open-center";
-    }
-    return positionClass;
+    // TO DO: handle default format when timepicker is true
+    // TO DO: handle autoapply here only
   }
   validateMinMaxDates() {
     if (this.derivedOptions) {
@@ -330,7 +319,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
           second: 59,
         });
       }
-      //this.setToDate(value.format(this.derivedOptions.format));
       this.toDate = value;
       if (!this.derivedOptions.timePicker) {
         if (value.isBefore(this.fromDate, "date")) {

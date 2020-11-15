@@ -61,15 +61,15 @@
   max-width: min-content;
 }
 
-.drp-flyout.open-right {
+.drp-flyout.right {
   right: 0;
 }
 
-.drp-flyout.open-left {
+.drp-flyout.left {
   left: 0;
 }
 
-.drp-flyout.open-center {
+.drp-flyout.center {
   left: -50%;
 }
 
@@ -104,32 +104,32 @@
   border-width: 12px;
 }
 
-.drp-flyout.open-left.tooltipChevron::after {
+.drp-flyout.left.tooltipChevron::after {
   top: -8px;
   left: 15px;
 }
 
-.drp-flyout.open-left.tooltipChevron::before {
+.drp-flyout.left.tooltipChevron::before {
   top: -10px;
   left: 13px;
 }
 
-.drp-flyout.open-right.tooltipChevron::after {
+.drp-flyout.right.tooltipChevron::after {
   top: -8px;
   right: 15px;
 }
 
-.drp-flyout.open-right.tooltipChevron::before {
+.drp-flyout.right.tooltipChevron::before {
   top: -10px;
   right: 13px;
 }
 
-.drp-flyout.open-center.tooltipChevron::after {
+.drp-flyout.center.tooltipChevron::after {
   top: -8px;
   left: calc(50% - 12px);
 }
 
-.drp-flyout.open-center.tooltipChevron::before {
+.drp-flyout.center.tooltipChevron::before {
   top: -10px;
   left: calc(50% - 13px);
 }
