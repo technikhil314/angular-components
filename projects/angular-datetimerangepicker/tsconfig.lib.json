@@ -13,6 +13,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "removeComments": true,
     "types": [],
     "lib": [
       "dom",
