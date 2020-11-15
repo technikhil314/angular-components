@@ -7,7 +7,7 @@
           tooltipChevron: !options.alwaysOpen,
           alwaysOpen: options.alwaysOpen
         }">
-    <div class="drp-flex drp-space-around mobile-column">
+    <div class="drp-calendars-wrapper">
       <div class="drp-calendar-container">
         <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: format" (blur)="formatFromDate($event)"
           readonly type="text" name="daterangepicker_start" />
@@ -29,19 +29,19 @@
       </div>
     </div>
     <div class="my-0">
-      <div class="drp-flex"><button [class.hidden]="isAutoApply()" class="drp-control apply"
-          [disabled]="!enableApplyButton" (click)="apply()" type="button">
+      <div class="drp-flex"><button [class.hidden]="isAutoApply()" class="drp-btn apply" [disabled]="!enableApplyButton"
+          (click)="apply()" type="button">
           Apply
         </button>
-        <button [class.hidden]="isAutoApply()" class="drp-control cancel" (click)="cancel()" type="button">
+        <button [class.hidden]="isAutoApply()" class="drp-btn cancel" (click)="cancel()" type="button">
           Cancel
         </button>
-        <button [disabled]="!this.range" class="drp-control drp-btn drp-outline" (click)="clear()" type="button">
+        <button [disabled]="!this.range" class="drp-btn flat link" (click)="clear()" type="button">
           Clear
         </button>
       </div>
       <div class="drp-flex range-controls" *ngIf="options.showRanges && !options.singleCalendar">
-        <button *ngFor="let range of defaultRanges" class="drp-btn drp-outline" (click)="applyPredefinedRange(range)"
+        <button *ngFor="let range of defaultRanges" class="drp-btn outline" (click)="applyPredefinedRange(range)"
           type="button">
           {{ range.name }}
         </button>

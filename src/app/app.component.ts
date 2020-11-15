@@ -20,7 +20,7 @@ export class AppComponent {
     required: false,
     preDefinedRanges: [
       {
-        name: "Day After tomorow",
+        name: "Day After tomorrow",
         value: {
           start: dayjs().add(2, "days"),
           end: dayjs().add(2, "days"),

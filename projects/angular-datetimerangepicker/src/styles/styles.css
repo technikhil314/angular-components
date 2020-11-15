@@ -6,7 +6,7 @@
   --drp-hover-color: hsla(0, 0%, 80%);
   --drp-shadow-color: rgba(0, 0, 0, 0.2);
   --drp-flyout-width: 500px;
-  --drp-outline-color: hsl(240deg, 50%, 55%);
+  --drp-outline-color: hsl(240deg, 50%, 30%);
   --drp-flyout-single-calendar-width: 250px;
   --drp-input-border-color: #666;
   --drp-input-disabled-color: #dedede;
@@ -55,6 +55,7 @@
   box-shadow: 0px 0px 5px 1px var(--drp-shadow-color);
   border: 1px solid #aaa;
   padding: 10px;
+  max-width: min-content;
 }
 
 .drp-flyout.open-right {
@@ -134,8 +135,14 @@
 
 .drp-calendars-wrapper {
   display: flex;
+  justify-content: space-around;
 }
 
+@media only screen and (max-width: 600px) {
+  .drp-calendars-wrapper {
+    flex-wrap: wrap;
+  }
+}
 /* wrapper for each calendar and its input box */
 
 .drp-calendar-container {
@@ -143,8 +150,7 @@
   margin-right: 10px;
 }
 
-/* table tbody td */
-
+/* td in tr of tbody */
 .drp-date {
   text-align: center;
   padding: 2px 0;
@@ -164,70 +170,70 @@
   background: var(--drp-hover-color);
 }
 
-/* button in td */
+/* Range buttons wrapper */
+.range-controls {
+  flex-wrap: wrap;
+}
+
+/* all buttons */
 
 .drp-btn {
-  background: transparent;
-  border: none;
-  color: var(--foreground-color);
+  border-radius: 4px;
+  border: 1px solid var(--drp-foreground);
+  color: var(--drp-foreground);
+  background: var(--drp-background);
+  white-space: nowrap;
+  transition: transform 0.3s, background 0.3s;
+  line-height: 1.5;
+  vertical-align: middle;
+  box-shadow: none;
 }
 
 .drp-btn:hover {
   cursor: pointer;
 }
 
-/* range button */
-
-.range-controls {
-  max-width: 100%;
-  flex-wrap: wrap;
+.drp-btn + .drp-btn {
+  margin-left: 5px;
 }
 
-.drp-outline {
-  border: 1px solid var(--drp-outline-color);
+.drp-btn.flat {
+  background: transparent;
+  border: none;
+}
+
+.drp-btn.flat:hover {
+  background: var(--drp-hover-color);
+}
+
+.drp-btn.flat.link:hover {
   background: var(--drp-background);
-  white-space: nowrap;
-  color: var(--drp-foreground);
-  border-radius: 4px;
-  margin: 4px;
-  transition: background 0.2s, color 0.2s;
+  text-decoration: underline;
 }
 
-.drp-outline:hover {
+.drp-btn.outline {
+  border: 1px solid var(--drp-outline-color);
+  margin-bottom: 10px;
+  padding: 0 5px;
+}
+
+.drp-btn.outline:hover {
   filter: invert(1) hue-rotate(180deg);
 }
 
-/* main control buttons on bottom of flyout (not ranges) */
-
-.drp-control:hover {
-  filter: invert(1) hue-rotate(180deg);
-}
-
-.drp-control {
-  border-radius: 4px;
-  padding: 3px 10px;
-  margin: 0 5px;
-  transition: transform 0.2s;
-}
-
-.drp-control.apply {
+.drp-btn.apply {
   color: white;
   background: #129a90;
-  border: 1px solid #129a90;
-}
-
-.drp-control.cancel {
-  background: hsl(0, 0%, 90%);
-  border: 1px solid #129a90;
+  border: 1px solid #125612;
 }
 
 /* Utility classes */
 
 .disabled,
 [disabled] {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.5;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  opacity: 0.5 !important;
 }
 
 .hidden {
@@ -252,10 +258,4 @@
 .my-0 {
   margin-top: 0;
   margin-bottom: 0;
-}
-
-@media only screen and (max-width: 600px) {
-  .mobile-column {
-    flex-direction: column;
-  }
 }
