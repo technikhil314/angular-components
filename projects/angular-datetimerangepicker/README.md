@@ -1,6 +1,6 @@
 # angular-datetimerangepicker
 
-# A neat version of documentation is hosted here [https://technikhil314.netlify.app/docs/daterangepicker/introduction](https://technikhil314.netlify.app/docs/daterangepicker/introduction)
+## [Documentation is hosted here](https://technikhil314.netlify.app/docs/daterangepicker/introduction)
 
 [//]: <> (start placeholder for auto-badger)
 
