@@ -1,4 +1,4 @@
-.drp-wrapper {
+:root {
   --drp-input-height: 33px;
   --drp-input-border-radius: 4px;
   --drp-background: hsla(0, 0%, 98%);
@@ -10,6 +10,9 @@
   --drp-flyout-single-calendar-width: 250px;
   --drp-input-border-color: #666;
   --drp-input-disabled-color: #dedede;
+}
+
+.drp-wrapper {
   position: relative;
   border: none;
 }

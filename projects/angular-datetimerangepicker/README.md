@@ -1,5 +1,7 @@
 # angular-datetimerangepicker
 
+# A neat version of documentation is hosted here [https://technikhil314.netlify.app/docs/daterangepicker/introduction](https://technikhil314.netlify.app/docs/daterangepicker/introduction)
+
 [//]: <> (start placeholder for auto-badger)
 
 [![Build Status](https://img.shields.io/github/workflow/status/technikhil314/angular-components/build?style=flat-square&color=%23007a1f)](https://github.com/technikhil314/angular-components/actions)
@@ -33,6 +35,7 @@
   - [Styling the input](#styling-the-input)
   - [Using Unpkg](#using-unpkg)
   - [from node_modules](#from-node-modules)
+  - [theming](#theming)
 - [How to configure](#how-to-configure)
 - [Options](#options)
   - [Custom Range Option](#custom-range-option)
@@ -112,7 +115,8 @@ $ yarn add angular-datetimerangepicker
 ```ts
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { DatetimerangepickerModule } from "angular-datetimerangepicker"; <--- Add this line
+// add the line below
+import { DatetimerangepickerModule } from "angular-datetimerangepicker";
 import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
 
@@ -120,8 +124,10 @@ import { FormsModule } from "@angular/forms";
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    DatetimerangepickerModule, <---Add this line
-    FormsModule],
+    // add the line below
+    DatetimerangepickerModule,
+    FormsModule,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
@@ -131,23 +137,49 @@ export class AppModule {}
 
 ## Styling
 
-Styling is fully optional. You can override as per your choice
+Styling is fully optional. You can override as per your choice.
 
 ### Styling the input
 
-The input box automatically takes class of the daterangepicker tag
+The main input control automatically takes class of the `<daterangepicker>` tag
 
 ### Using Unpkg
 
 [https://unpkg.com/angular-datetimerangepicker/styles/styles.css](https://unpkg.com/angular-datetimerangepicker/styles/styles.css)
 
-### from node_modules
+### From node_modules
 
 add following path to `angular.json`'s style section if you are already using bootstrap <br/>
 `./node_modules/angular-datetimerangepicker/styles/styles.css`
 
-or add following path to `angular.json`'s style section if you dont want bootstrap <br/>
+or add following path to `angular.json`'s style section if you don't want bootstrap <br/>
 `./node_modules/angular-datetimerangepicker/styles/without-bootstrap.css`
+
+### Theming
+
+The component supports two themes light and dark. See the [Options section below](#options)
+
+If you want custom theme. Feel free to [contribute](#how-to-contribute).
+
+or you can use following css variables to override the style
+
+the styles.css defines following css variables
+
+```css
+:root {
+  --drp-input-height: 33px;
+  --drp-input-border-radius: 4px;
+  --drp-background: hsla(0, 0%, 98%);
+  --drp-foreground: hsla(0, 0%, 20%);
+  --drp-hover-color: hsla(0, 0%, 80%);
+  --drp-shadow-color: rgba(0, 0, 0, 0.2);
+  --drp-flyout-width: 500px;
+  --drp-outline-color: hsl(240deg, 50%, 30%);
+  --drp-flyout-single-calendar-width: 250px;
+  --drp-input-border-color: #666;
+  --drp-input-disabled-color: #dedede;
+}
+```
 
 <br/>
 
@@ -390,11 +422,11 @@ Timepicker options expects an object containing following keys as timepicker opt
 Subscribe to rangeSelected event as
 
 ```html
-<date-range-picker
+<daterangepicker
   [class]="'col-md-12 form-control'"
   [options]="date and time range pickerOptions"
   (rangeSelected)="rangeSelected($event)"
-></date-range-picker>
+></daterangepicker>
 ```
 
 the event listener will receive a javascript object conaining
@@ -455,11 +487,13 @@ Would :heart: to see any contributions.
 
 ### How to contribute
 
+P.S. The code for demo which lies in `src` folder
+P.S. Actual code for npm package lies in `projects/angular-datetimerangepicker` directory
+
 1. Fork this repo
-1. `npm install`
 1. `npm install @angular/cli@6`
+1. `npm install`
 1. `ng build angular-datetimerangepicker --watch`
-1. Actual code for npm package lies in `projects/angular-datetimerangepicker`
-1. The code for demo which lies in `src` folder
-1. `ng serve`
-1. Make changes raise PR
+1. run `ng serve` in another terminal window/shell
+1. Make changes
+1. Raise PR
