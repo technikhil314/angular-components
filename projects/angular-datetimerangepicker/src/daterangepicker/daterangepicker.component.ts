@@ -92,10 +92,10 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     //get month and year to show calendar
     var fromDate = this.fromDate || this.tempFromDate;
     var toDate = this.toDate || this.tempToDate;
-    let tDate = dayjs(fromDate, this.format);
+    let tDate = dayjs(fromDate, this.derivedOptions.format);
     this.fromMonth = tDate.get("month");
     this.fromYear = tDate.get("year");
-    tDate = dayjs(toDate, this.format);
+    tDate = dayjs(toDate, this.derivedOptions.format);
     this.toMonth = tDate.get("month");
     this.toYear = tDate.get("year");
     this.setRange();
@@ -106,7 +106,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     //get default options provided by user
     this.deriveOptions();
-    this.setFormat();
     this.validateMinMaxDates();
     this.setFromDate(this.derivedOptions.startDate);
     this.setToDate(this.derivedOptions.endDate);
@@ -134,13 +133,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       positionClass = "open-center";
     }
     return positionClass;
-  }
-  setFormat() {
-    if (this.derivedOptions) {
-      this.format = this.derivedOptions.format || "YYYY-MM-DD";
-    } else {
-      this.format = "YYYY-MM-DD";
-    }
   }
   validateMinMaxDates() {
     if (this.derivedOptions) {
@@ -338,7 +330,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
           second: 59,
         });
       }
-      //this.setToDate(value.format(this.format));
+      //this.setToDate(value.format(this.derivedOptions.format));
       this.toDate = value;
       if (!this.derivedOptions.timePicker) {
         if (value.isBefore(this.fromDate, "date")) {
@@ -390,12 +382,12 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.rangeSelected.emit(data);
   }
   getDayjs(value) {
-    return dayjs(value, this.format);
+    return dayjs(value, this.derivedOptions.format);
   }
   getValidateDayjs(value) {
     let dayjsValue = null;
-    if (dayjs(value, this.format, true).isValid()) {
-      dayjsValue = dayjs(value, this.format, true);
+    if (dayjs(value, this.derivedOptions.format, true).isValid()) {
+      dayjsValue = dayjs(value, this.derivedOptions.format, true);
     }
     return dayjsValue;
   }
@@ -403,7 +395,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     const displayFormat =
       this.derivedOptions.displayFormat !== undefined
         ? this.derivedOptions.displayFormat
-        : this.format;
+        : this.derivedOptions.format;
     if (this.derivedOptions.singleCalendar && this.fromDate) {
       this.range = this.fromDate.format(displayFormat);
     } else if (this.fromDate && this.toDate) {
@@ -416,7 +408,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     }
   }
   formatFromDate(event) {
-    if (event.target.value !== this.fromDate.format(this.format)) {
+    if (
+      event.target.value !== this.fromDate.format(this.derivedOptions.format)
+    ) {
       this.dateChanged({
         day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
         isLeft: true,
@@ -424,7 +418,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     }
   }
   formatToDate(event) {
-    if (event.target.value !== this.toDate.format(this.format)) {
+    if (event.target.value !== this.toDate.format(this.derivedOptions.format)) {
       this.dateChanged({
         day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
         isLeft: false,
@@ -528,7 +522,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     const displayFormat =
       this.derivedOptions.displayFormat !== undefined
         ? this.derivedOptions.displayFormat
-        : this.format;
+        : this.derivedOptions.format;
     if (this.fromDate && this.toDate) {
       return (
         this.fromDate.format(displayFormat) +
