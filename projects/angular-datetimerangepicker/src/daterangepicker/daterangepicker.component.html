@@ -10,7 +10,7 @@
         }">
     <div class="drp-calendars-wrapper">
       <div class="drp-calendar-container">
-        <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: derivedOptions.format"
+        <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: derivedOptions.displayFormat"
           (blur)="formatFromDate($event)" readonly type="text" name="daterangepicker_start" />
         <calendar class="calender" [isLeft]="true" [month]="fromMonth" [year]="fromYear"
           (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)" (dateChanged)="dateChanged($event)"
@@ -20,7 +20,7 @@
           [singleCalendar]="derivedOptions.singleCalendar"></calendar>
       </div>
       <div class="drp-calendar-container" *ngIf="!derivedOptions.singleCalendar">
-        <input class="drp-calendar-input" [ngModel]="toDate | formatDate: derivedOptions.format"
+        <input class="drp-calendar-input" [ngModel]="toDate | formatDate: derivedOptions.displayFormat"
           (blur)="formatToDate($event)" readonly name="daterangepicker_end" />
         <calendar class="calender" [month]="toMonth" [year]="toYear" [format]="format"
           (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)"
