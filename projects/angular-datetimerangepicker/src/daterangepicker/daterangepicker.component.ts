@@ -101,7 +101,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.setRange();
   }
   ngDoCheck() {
-    this.deriveOptions();
+    this.deriveOptions(true);
   }
   ngOnInit(): void {
     //get default options provided by user
@@ -115,13 +115,30 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     //update calendar grid
     this.updateCalendar();
   }
-  deriveOptions() {
-    this.derivedOptions = {
-      ...new Options(),
-      ...this.options,
-    };
-    // TO DO: handle default format when timepicker is true
-    // TO DO: handle autoapply here only
+  deriveOptions(isUpdate = false) {
+    if (isUpdate) {
+      const {
+        startDate,
+        endDate,
+        minDate,
+        maxDate,
+        ...restOptions
+      } = this.options;
+      this.derivedOptions = {
+        ...new Options(),
+        ...restOptions,
+      };
+    } else {
+      this.derivedOptions = {
+        ...new Options(),
+        ...this.options,
+      };
+    }
+    if (this.derivedOptions.timePicker) {
+      this.derivedOptions.autoApply = false;
+    } else if (this.derivedOptions.singleCalendar) {
+      this.derivedOptions.autoApply = true;
+    }
   }
   validateMinMaxDates() {
     if (this.derivedOptions) {
@@ -320,6 +337,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         });
       }
       this.toDate = value;
+      this.toYear = this.toDate.get("year");
       if (!this.derivedOptions.timePicker) {
         if (value.isBefore(this.fromDate, "date")) {
           this.fromDate = this.toDate.clone();
@@ -346,7 +364,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       : this.fromMonth;
     this.toMonth = this.toDate ? this.toDate.get("month") : this.toMonth;
     this.fromYear = this.fromDate.get("year");
-    this.toYear = this.toDate.get("year");
     if (!this.toDate && this.fromDate) {
       this.toYear = this.fromYear;
       this.toMonth = this.fromMonth;
