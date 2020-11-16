@@ -26,7 +26,10 @@
 
 ## [Playground / configuration generator](https://angular-datetimerangepicker.surge.sh)
 
-## [Coding example](https://angular-datetimerangepicker-demo.stackblitz.io)
+## Coding exmaples
+
+- [With predefined custom ranges](https://angular-datetimerangepicker-demo.stackblitz.io) - This requires dayjs installed
+- [Without predefined custom ranges](https://stackblitz.com/edit/angular-daterangepicker-demo-1) - This does not require any dependency
 
 ## About this package
 
