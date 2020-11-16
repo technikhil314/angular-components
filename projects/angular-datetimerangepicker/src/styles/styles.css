@@ -146,16 +146,20 @@
   justify-content: space-around;
 }
 
-@media only screen and (max-width: 600px) {
-  .drp-calendars-wrapper {
-    flex-wrap: wrap;
-  }
-}
 /* wrapper for each calendar and its input box */
 
 .drp-calendar-container {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .drp-calendars-wrapper {
+    flex-wrap: wrap;
+  }
+  .drp-calendar-container + .drp-calendar-container {
+    margin-top: 10px;
+  }
 }
 
 /* td in tr of tbody */
