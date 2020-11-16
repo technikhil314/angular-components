@@ -109,9 +109,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.validateMinMaxDates();
     this.setFromDate(this.derivedOptions.startDate);
     this.setToDate(this.derivedOptions.endDate);
-    this.defaultRanges = this.validatePredefinedRanges(
-      this.derivedOptions.preDefinedRanges || Defaults.ranges
-    );
     //update calendar grid
     this.updateCalendar();
   }
@@ -126,6 +123,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       } = this.options;
       this.derivedOptions = {
         ...new Options(),
+        ...this.derivedOptions,
         ...restOptions,
       };
     } else {
@@ -487,32 +485,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.setToDate(data.value.end);
     this.toggleCalendars(false);
     this.emitRangeSelected();
-  }
-  validatePredefinedRanges(ranges) {
-    return ranges.filter((range) => {
-      if (range.value.start.isAfter(range.value.end, "date")) {
-        return false;
-      }
-      if (
-        this.derivedOptions.minDate &&
-        range.value.start.isBefore(
-          this.derivedOptions.minDate,
-          this.derivedOptions.format
-        )
-      ) {
-        return false;
-      }
-      if (
-        this.derivedOptions.maxDate &&
-        range.value.end.isAfter(
-          this.derivedOptions.maxDate,
-          this.derivedOptions.format
-        )
-      ) {
-        return false;
-      }
-      return true;
-    });
   }
   isAutoApply() {
     if (this.derivedOptions.timePicker) {

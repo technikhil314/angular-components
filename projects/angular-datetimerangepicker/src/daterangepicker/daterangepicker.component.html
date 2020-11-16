@@ -42,8 +42,8 @@
         </button>
       </div>
       <div class="drp-flex range-controls" *ngIf="derivedOptions.showRanges && !derivedOptions.singleCalendar">
-        <button *ngFor="let range of defaultRanges" class="drp-btn outline" (click)="applyPredefinedRange(range)"
-          type="button">
+        <button *ngFor="let range of derivedOptions.preDefinedRanges" class="drp-btn outline"
+          (click)="applyPredefinedRange(range)" type="button">
           {{ range.name }}
         </button>
       </div>
