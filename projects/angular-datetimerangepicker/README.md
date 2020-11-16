@@ -366,6 +366,7 @@ Currently, these options are available but I will keep on developing and adding 
 ### Custom Range Option
 
 For custom range, Pass options as below. For this you need to pass <a href="https://day.js.org/">dayjs</a> objects.
+:warning: Custom ranges should always be passed in dayjs objects
 
 ```js
 preDefinedRanges: [
