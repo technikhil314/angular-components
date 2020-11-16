@@ -41,7 +41,12 @@
 .drp-calendar-input[disabled],
 .drp-input[disabled] {
   background: var(--drp-input-disabled-color);
+}
+
+.drp-calendar-input[disabled],
+.drp-input[disabled] {
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* the flyout/popup */
@@ -57,7 +62,7 @@
   border-radius: 5px;
   box-shadow: 0px 0px 5px 1px var(--drp-shadow-color);
   border: 1px solid #aaa;
-  padding: 10px;
+  padding: 10px 10px 0;
   max-width: min-content;
 }
 
