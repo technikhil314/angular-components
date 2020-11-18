@@ -310,11 +310,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     let isLeft = data.isLeft;
     if (isLeft) {
       if (!this.derivedOptions.timePicker) {
-        value.set({
-          hour: 0,
-          minute: 0,
-          second: 0,
-        });
+        value = value.hour(0);
+        value = value.minute(0);
+        value = value.second(0);
       }
       this.fromDate = value;
       if (!this.derivedOptions.timePicker) {
@@ -328,11 +326,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       }
     } else {
       if (!this.derivedOptions.timePicker) {
-        value.set({
-          hour: 23,
-          minute: 59,
-          second: 59,
-        });
+        value = value.hour(23);
+        value = value.minute(59);
+        value = value.second(59);
       }
       this.toDate = value;
       this.toYear = this.toDate.get("year");
