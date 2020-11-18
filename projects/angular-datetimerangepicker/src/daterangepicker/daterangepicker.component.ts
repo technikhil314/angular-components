@@ -207,9 +207,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     let temp;
     if ((temp = this.getValidateDayjs(value))) {
       return this.getValidateFromDate(temp);
-    } else {
-      return this.getValidateFromDate(dayjs());
     }
+    return this.getValidateFromDate(dayjs());
   }
   getValidateFromDate(value) {
     if (!this.derivedOptions.timePicker) {
@@ -220,17 +219,18 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         value.isSameOrBefore(this.derivedOptions.maxDate, "date")
       ) {
         return value;
-      } else if (
+      }
+      if (
         this.derivedOptions.minDate &&
         !this.derivedOptions.maxDate &&
         value.isAfter(this.derivedOptions.minDate, "date")
       ) {
         return value;
-      } else if (this.derivedOptions.minDate) {
-        return this.derivedOptions.minDate.clone();
-      } else {
-        return dayjs();
       }
+      if (this.derivedOptions.minDate) {
+        return this.derivedOptions.minDate.clone();
+      }
+      return dayjs();
     } else {
       if (
         this.derivedOptions.minDate &&
@@ -245,17 +245,18 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         )
       ) {
         return value;
-      } else if (
+      }
+      if (
         this.derivedOptions.minDate &&
         !this.derivedOptions.maxDate &&
         value.isAfter(this.derivedOptions.minDate, this.derivedOptions.format)
       ) {
         return value;
-      } else if (this.derivedOptions.minDate) {
-        return this.derivedOptions.minDate.clone();
-      } else {
-        return dayjs();
       }
+      if (this.derivedOptions.minDate) {
+        return this.derivedOptions.minDate.clone();
+      }
+      return dayjs();
     }
   }
   setToDate(value) {
@@ -270,9 +271,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     let temp;
     if ((temp = this.getValidateDayjs(value))) {
       return this.getValidateToDate(temp);
-    } else {
-      return this.getValidateToDate(dayjs());
     }
+    return this.getValidateToDate(dayjs());
   }
   getValidateToDate(value) {
     if (!this.derivedOptions.timePicker) {
@@ -282,11 +282,11 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         value.isSameOrBefore(this.derivedOptions.maxDate, "date"))
       ) {
         return value;
-      } else if (this.derivedOptions.maxDate) {
-        return this.derivedOptions.maxDate.clone();
-      } else {
-        return dayjs();
       }
+      if (this.derivedOptions.maxDate) {
+        return this.derivedOptions.maxDate.clone();
+      }
+      return dayjs();
     } else {
       if (
         (this.derivedOptions.maxDate &&
@@ -297,11 +297,11 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ))
       ) {
         return value;
-      } else if (this.derivedOptions.maxDate) {
-        return this.derivedOptions.maxDate.clone();
-      } else {
-        return dayjs();
       }
+      if (this.derivedOptions.maxDate) {
+        return this.derivedOptions.maxDate.clone();
+      }
+      return dayjs();
     }
   }
   //detects which date to set from or to and validates
