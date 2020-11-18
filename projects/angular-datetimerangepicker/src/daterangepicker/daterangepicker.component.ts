@@ -137,6 +137,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     } else if (this.derivedOptions.singleCalendar) {
       this.derivedOptions.autoApply = true;
     }
+    if (this.derivedOptions.singleCalendar) {
+      this.derivedOptions.endDate = null;
+    }
   }
   validateMinMaxDates() {
     if (this.derivedOptions) {
