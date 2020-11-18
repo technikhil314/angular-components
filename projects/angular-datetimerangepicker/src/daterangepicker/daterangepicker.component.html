@@ -1,6 +1,6 @@
 <div class="drp-wrapper {{derivedOptions.theme}}">
   <input class="{{class}} drp-input" type="text" [ngModel]="range" [disabled]="derivedOptions.disabled"
-    [attr.aria-label]="getAriaLabel()" [ngClass]="{ hidden: derivedOptions.alwaysOpen }"
+    [attr.aria-label]="getAriaLabel()" [class.hidden]="derivedOptions.alwaysOpen"
     [attr.required]="derivedOptions.required" />
   <div class="drp-flyout {{derivedOptions.position}}" [ngClass]="{
           hidden: !(showCalendars || derivedOptions.alwaysOpen),
