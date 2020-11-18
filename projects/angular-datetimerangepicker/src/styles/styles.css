@@ -15,6 +15,7 @@
 .drp-wrapper {
   position: relative;
   border: none;
+  font-feature-settings: "tnum";
 }
 
 .drp-wrapper.dark {
