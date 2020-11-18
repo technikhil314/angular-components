@@ -11,7 +11,8 @@
     <div class="drp-calendars-wrapper">
       <div class="drp-calendar-container">
         <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: derivedOptions.displayFormat"
-          (blur)="formatFromDate($event)" readonly type="text" name="daterangepicker_start" />
+          (blur)="formatFromDate($event)" [class.hidden]="derivedOptions.singleCalendar" readonly type="text"
+          name="daterangepicker_start" />
         <calendar class="calender" [isLeft]="true" [month]="fromMonth" [year]="fromYear"
           (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)" (dateChanged)="dateChanged($event)"
           [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
