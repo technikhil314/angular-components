@@ -15,6 +15,7 @@ const dayjs = require("dayjs");
   templateUrl: "./calendar-component.html",
 })
 export class CalendarComponent implements OnChanges {
+  // #region Components inputs
   @Input() month: string;
   @Input() year: string;
   @Input() selectedFromDate: string;
@@ -27,15 +28,31 @@ export class CalendarComponent implements OnChanges {
   @Input() disableBeforeStart: boolean;
   @Input() timePicker: any;
   @Input() singleCalendar: boolean = false;
-  get monthText() {
-    return dayjs([+this.year, +this.month]).format("MMM");
-  }
+  // #endregion
+
+  // #region component outputs
   @Output() dateChanged = new EventEmitter();
   @Output() monthChanged = new EventEmitter();
   @Output() yearChanged = new EventEmitter();
+  // #endregion
 
+  // #region all component variables
   weekList: any;
+  // #endregion
 
+  // #region setters and getters
+  get monthText() {
+    return dayjs([+this.year, +this.month]).format("MMM");
+  }
+  // #endregion
+
+  // #region Component Life cycle handlers
+  ngOnChanges(changes: SimpleChanges): void {
+    this.createCalendarGridData();
+  }
+  // #endregion
+
+  // #region view manipulations and condition providers
   createCalendarGridData(): void {
     let year = null;
     let month = null;
@@ -97,9 +114,6 @@ export class CalendarComponent implements OnChanges {
     }
     this.weekList = thisMonthweekList;
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    this.createCalendarGridData();
-  }
   isDisabled(day) {
     return (
       day.isBefore(dayjs(this.minDate, this.format)) ||
@@ -141,6 +155,9 @@ export class CalendarComponent implements OnChanges {
   getFormattedDate(day) {
     return day.format(this.format);
   }
+  // #endregion
+
+  // #region self event handlers
   dateSelected(day) {
     this.dateChanged.emit({
       day: day,
@@ -159,4 +176,5 @@ export class CalendarComponent implements OnChanges {
       isLeft: this.isLeft,
     });
   }
+  // #endregion
 }

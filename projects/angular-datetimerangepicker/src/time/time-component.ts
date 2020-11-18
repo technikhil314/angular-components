@@ -7,7 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from "@angular/core";
-import { Timepicker } from "../daterangepicker-options";
+import { Timepicker } from "../types";
 declare var require: any;
 const dayjs = require("dayjs");
 
@@ -16,6 +16,7 @@ const dayjs = require("dayjs");
   templateUrl: "./time-component.html",
 })
 export class TimePickerComponent implements OnInit, OnChanges {
+  // #region all component inputs
   @Input()
   options: Timepicker = new Timepicker();
   @Input()
@@ -30,8 +31,14 @@ export class TimePickerComponent implements OnInit, OnChanges {
   format: string;
   @Input()
   isLeft: boolean;
+  // #endregion
+
+  // #region all components outputs
   @Output()
   timeChanged = new EventEmitter();
+  // #endregion
+
+  // #region Component Life cycle handlers
   ngOnInit(): void {
     if (
       !this.options.minuteInterval ||
@@ -55,6 +62,9 @@ export class TimePickerComponent implements OnInit, OnChanges {
       ? dayjs(changes["minDate"].currentValue, this.format)
       : this["minDate"];
   }
+  // #endregion
+
+  // #region view manipulations and condition providers
   getCurrentHour() {
     let currentHour = this.isLeft
       ? this.selectedFromDate.get("hour")
@@ -74,34 +84,6 @@ export class TimePickerComponent implements OnInit, OnChanges {
       : currentMinute > 9
       ? currentMinute
       : "0" + currentMinute;
-  }
-  addHour(value) {
-    if (this.isLeft) {
-      this.selectedFromDate = this.selectedFromDate.set(
-        "hour",
-        (+this.selectedFromDate.get("hour") + value) % 24
-      );
-    } else {
-      this.selectedToDate = this.selectedToDate.set(
-        "hour",
-        (+this.selectedToDate.get("hour") + value) % 24
-      );
-    }
-    this.triggerTimeChanged();
-  }
-  addMinute(value) {
-    if (this.isLeft) {
-      this.selectedFromDate = this.selectedFromDate.set(
-        "minute",
-        (this.selectedFromDate.get("minute") + value) % 60
-      );
-    } else {
-      this.selectedToDate = this.selectedToDate.set(
-        "minute",
-        (this.selectedToDate.get("minute") + value) % 60
-      );
-    }
-    this.triggerTimeChanged();
   }
   isValidToAddMinute(value) {
     let possibleNewValue, possibleSelectedDate;
@@ -141,10 +123,42 @@ export class TimePickerComponent implements OnInit, OnChanges {
     }
     return retValue;
   }
+  // #endregion
+
+  // #region self event handlers
+  addHour(value) {
+    if (this.isLeft) {
+      this.selectedFromDate = this.selectedFromDate.set(
+        "hour",
+        (+this.selectedFromDate.get("hour") + value) % 24
+      );
+    } else {
+      this.selectedToDate = this.selectedToDate.set(
+        "hour",
+        (+this.selectedToDate.get("hour") + value) % 24
+      );
+    }
+    this.triggerTimeChanged();
+  }
+  addMinute(value) {
+    if (this.isLeft) {
+      this.selectedFromDate = this.selectedFromDate.set(
+        "minute",
+        (this.selectedFromDate.get("minute") + value) % 60
+      );
+    } else {
+      this.selectedToDate = this.selectedToDate.set(
+        "minute",
+        (this.selectedToDate.get("minute") + value) % 60
+      );
+    }
+    this.triggerTimeChanged();
+  }
   triggerTimeChanged() {
     this.isLeft
       ? this.timeChanged.emit(this.selectedFromDate)
       : this.timeChanged.emit(this.selectedToDate);
   }
   toggleAMPM() {}
+  // #endregion
 }

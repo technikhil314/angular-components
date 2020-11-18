@@ -3,7 +3,7 @@ class DateRange {
   end: any;
 }
 
-class DefinedDateRange {
+export class DefinedDateRange {
   name: string;
   value: DateRange;
 }
@@ -13,13 +13,21 @@ export class Timepicker {
   twentyFourHourFormat: boolean = true;
 }
 
+export class YearsGrid {
+  startYear: number;
+  numberOfYearsInOneView: number;
+  yearsPerRow: number;
+  yearsList: number[][];
+  currentYear: number;
+}
+
 export class Options {
   startDate: string | any = null;
   endDate: string | any = null;
   minDate: string | any = null;
   maxDate: string | any = null;
   format: string = "YYYY-MM-DD";
-  displayFormat: string = "YYYY-MM-DD";
+  displayFormat: string;
   inactiveBeforeStart: boolean = false;
   autoApply: boolean = false;
   singleCalendar: boolean = false;
@@ -33,4 +41,5 @@ export class Options {
   alwaysOpen: boolean = false;
   theme: string = "light";
   required: boolean = false;
+  DOB: boolean = false;
 }

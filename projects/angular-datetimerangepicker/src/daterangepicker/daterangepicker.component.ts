@@ -8,8 +8,8 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import { Defaults } from "../daterangepicker-default-ranges";
-import { Options } from "../daterangepicker-options";
+import defaults from "../defaults";
+import { Options } from "../types";
 declare var require: any;
 const dayjs = require("dayjs");
 declare var window: any;
@@ -19,12 +19,16 @@ declare var window: any;
   templateUrl: "./daterangepicker.component.html",
 })
 export class DaterangepickerComponent implements OnInit, DoCheck {
-  //inputs
+  // #region Inputs to component
   @Input() options: Options;
   @Input() class: string;
-  //outputs
+  // #endregion
+
+  // #region output events from component
   @Output() rangeSelected = new EventEmitter();
-  //variables
+  // #endregion
+
+  // #region all component variables
   showCalendars: boolean;
   range: string = "";
   enableApplyButton: boolean = false;
@@ -41,8 +45,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   toYear: number;
   format: string;
   derivedOptions: Options;
-  defaultRanges: {};
-  //handle outside/inside click to show rangepicker
+  // #endregion
+
+  // #region inside out side click handler
   @HostListener("document:mousedown", ["$event"])
   @HostListener("document:mouseup", ["$event"])
   @HostListener("document:keyup", ["$event"])
@@ -80,26 +85,13 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       }
     }
   }
+  // #endregion
+
+  // #region constructor
   constructor(private elem: ElementRef) {}
-  toggleCalendars(value) {
-    this.showCalendars = value;
-    if (!value) {
-      this.areOldDatesStored = false;
-      this.updateCalendar();
-    }
-  }
-  updateCalendar() {
-    //get month and year to show calendar
-    var fromDate = this.fromDate || this.tempFromDate;
-    var toDate = this.toDate || this.tempToDate;
-    let tDate = dayjs(fromDate, this.derivedOptions.format);
-    this.fromMonth = tDate.get("month");
-    this.fromYear = tDate.get("year");
-    tDate = dayjs(toDate, this.derivedOptions.format);
-    this.toMonth = tDate.get("month");
-    this.toYear = tDate.get("year");
-    this.setRange();
-  }
+  // #endregion
+
+  // #region Component Life cycle handlers
   ngDoCheck() {
     this.deriveOptions(true);
   }
@@ -112,6 +104,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     //update calendar grid
     this.updateCalendar();
   }
+  // #endregion
+
+  // #region Options derivator
   deriveOptions(isUpdate = false) {
     if (isUpdate) {
       const {
@@ -132,15 +127,59 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
-    if (this.derivedOptions.timePicker) {
-      this.derivedOptions.autoApply = false;
-    } else if (this.derivedOptions.singleCalendar) {
-      this.derivedOptions.autoApply = true;
-    }
     if (this.derivedOptions.singleCalendar) {
+      this.derivedOptions.autoApply = true;
       this.derivedOptions.endDate = null;
     }
+    if (this.derivedOptions.timePicker) {
+      this.derivedOptions.autoApply = false;
+    }
+    if (!this.derivedOptions.displayFormat) {
+      this.derivedOptions.displayFormat = this.derivedOptions.format;
+    }
+    if (
+      this.derivedOptions.showRanges &&
+      !this.derivedOptions.preDefinedRanges
+    ) {
+      this.derivedOptions.preDefinedRanges = defaults.ranges;
+    }
   }
+  // #endregion
+
+  // #region date setters and getters
+  setFromDate(value) {
+    if (this.derivedOptions.noDefaultRangeSelected && !value) {
+      this.fromDate = "";
+      this.tempFromDate = this.getActualFromDate(value);
+    } else {
+      this.fromDate = this.getActualFromDate(value);
+    }
+  }
+  getActualFromDate(value) {
+    let temp;
+    if ((temp = this.getValidateDayjs(value))) {
+      return this.getValidateFromDate(temp);
+    }
+    return this.getValidateFromDate(dayjs());
+  }
+  setToDate(value) {
+    if (this.derivedOptions.noDefaultRangeSelected && !value) {
+      this.toDate = "";
+      this.tempToDate = this.getActualToDate(value);
+    } else {
+      this.toDate = this.getActualToDate(value);
+    }
+  }
+  getActualToDate(value) {
+    let temp;
+    if ((temp = this.getValidateDayjs(value))) {
+      return this.getValidateToDate(temp);
+    }
+    return this.getValidateToDate(dayjs());
+  }
+  // #endregion
+
+  // #region Validators
   validateMinMaxDates() {
     if (this.derivedOptions) {
       //only mindate is suppplied
@@ -198,21 +237,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       }
     }
   }
-  setFromDate(value) {
-    if (this.derivedOptions.noDefaultRangeSelected && !value) {
-      this.fromDate = "";
-      this.tempFromDate = this.getActualFromDate(value);
-    } else {
-      this.fromDate = this.getActualFromDate(value);
-    }
-  }
-  getActualFromDate(value) {
-    let temp;
-    if ((temp = this.getValidateDayjs(value))) {
-      return this.getValidateFromDate(temp);
-    }
-    return this.getValidateFromDate(dayjs());
-  }
   getValidateFromDate(value) {
     if (!this.derivedOptions.timePicker) {
       if (
@@ -262,21 +286,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       return dayjs();
     }
   }
-  setToDate(value) {
-    if (this.derivedOptions.noDefaultRangeSelected && !value) {
-      this.toDate = "";
-      this.tempToDate = this.getActualToDate(value);
-    } else {
-      this.toDate = this.getActualToDate(value);
-    }
-  }
-  getActualToDate(value) {
-    let temp;
-    if ((temp = this.getValidateDayjs(value))) {
-      return this.getValidateToDate(temp);
-    }
-    return this.getValidateToDate(dayjs());
-  }
   getValidateToDate(value) {
     if (!this.derivedOptions.timePicker) {
       if (
@@ -307,7 +316,43 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       return dayjs();
     }
   }
-  //detects which date to set from or to and validates
+  // #endregion
+
+  // #region util functions
+  getDayjs(value) {
+    return dayjs(value, this.derivedOptions.format);
+  }
+  getValidateDayjs(value) {
+    let dayjsValue = null;
+    if (dayjs(value, this.derivedOptions.format, true).isValid()) {
+      dayjsValue = dayjs(value, this.derivedOptions.format, true);
+    }
+    return dayjsValue;
+  }
+  // #endregion
+
+  // #region date formatters
+  formatFromDate(event) {
+    if (
+      event.target.value !== this.fromDate.format(this.derivedOptions.format)
+    ) {
+      this.dateChanged({
+        day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
+        isLeft: true,
+      });
+    }
+  }
+  formatToDate(event) {
+    if (event.target.value !== this.toDate.format(this.derivedOptions.format)) {
+      this.dateChanged({
+        day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
+        isLeft: false,
+      });
+    }
+  }
+  // #endregion
+
+  // #region Child component event handlers
   dateChanged(data) {
     let value = data.day;
     let isLeft = data.isLeft;
@@ -369,64 +414,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       this.toYear = this.fromYear;
     }
   }
-  emitRangeSelected() {
-    let data = {};
-    if (this.derivedOptions.singleCalendar) {
-      data = {
-        start: this.getDayjs(this.fromDate),
-      };
-    } else {
-      data = {
-        start: this.getDayjs(this.fromDate),
-        end: this.getDayjs(this.toDate),
-      };
-    }
-    this.rangeSelected.emit(data);
-  }
-  getDayjs(value) {
-    return dayjs(value, this.derivedOptions.format);
-  }
-  getValidateDayjs(value) {
-    let dayjsValue = null;
-    if (dayjs(value, this.derivedOptions.format, true).isValid()) {
-      dayjsValue = dayjs(value, this.derivedOptions.format, true);
-    }
-    return dayjsValue;
-  }
-  setRange() {
-    const displayFormat =
-      this.derivedOptions.displayFormat !== undefined
-        ? this.derivedOptions.displayFormat
-        : this.derivedOptions.format;
-    if (this.derivedOptions.singleCalendar && this.fromDate) {
-      this.range = this.fromDate.format(displayFormat);
-    } else if (this.fromDate && this.toDate) {
-      this.range =
-        this.fromDate.format(displayFormat) +
-        " - " +
-        this.toDate.format(displayFormat);
-    } else {
-      this.range = "";
-    }
-  }
-  formatFromDate(event) {
-    if (
-      event.target.value !== this.fromDate.format(this.derivedOptions.format)
-    ) {
-      this.dateChanged({
-        day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
-        isLeft: true,
-      });
-    }
-  }
-  formatToDate(event) {
-    if (event.target.value !== this.toDate.format(this.derivedOptions.format)) {
-      this.dateChanged({
-        day: event.target.value ? this.getDayjs(event.target.value) : dayjs(),
-        isLeft: false,
-      });
-    }
-  }
   monthChanged(data) {
     let temp;
     if (data.isLeft) {
@@ -451,6 +438,23 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       this.toYear = temp.get("year");
     }
   }
+  // #endregion
+
+  // #region side effect handlers of user actions
+  emitRangeSelected() {
+    let data = {};
+    if (this.derivedOptions.singleCalendar) {
+      data = {
+        start: this.getDayjs(this.fromDate),
+      };
+    } else {
+      data = {
+        start: this.getDayjs(this.fromDate),
+        end: this.getDayjs(this.toDate),
+      };
+    }
+    this.rangeSelected.emit(data);
+  }
   storeOldDates() {
     if (!this.areOldDatesStored) {
       this.oldFromDate = this.fromDate;
@@ -462,6 +466,21 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.fromDate = this.oldFromDate;
     this.toDate = this.oldToDate;
   }
+  setRange() {
+    if (this.derivedOptions.singleCalendar && this.fromDate) {
+      this.range = this.fromDate.format(this.derivedOptions.displayFormat);
+    } else if (this.fromDate && this.toDate) {
+      this.range =
+        this.fromDate.format(this.derivedOptions.displayFormat) +
+        " - " +
+        this.toDate.format(this.derivedOptions.displayFormat);
+    } else {
+      this.range = "";
+    }
+  }
+  // #endregion
+
+  // #region all control button handlers
   apply() {
     this.toggleCalendars(false);
     this.setRange();
@@ -475,7 +494,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.fromDate = this.toDate = "";
     this.apply();
     this.enableApplyButton = false;
-    this.emitRangeSelected();
     this.fromYear = this.toYear = dayjs().get("year");
     this.fromMonth = this.toMonth = dayjs().get("month");
   }
@@ -485,18 +503,39 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.toggleCalendars(false);
     this.emitRangeSelected();
   }
+  // #endregion
+
+  // #region view manipulations and condition providers
+  toggleCalendars(value) {
+    this.showCalendars = value;
+    if (!value) {
+      this.areOldDatesStored = false;
+      this.updateCalendar();
+    }
+  }
+  updateCalendar() {
+    //get month and year to show calendar
+    let fromDate = dayjs(this.fromDate).isValid()
+      ? this.fromDate
+      : this.tempFromDate;
+    let toDate = dayjs(this.toDate).isValid() ? this.toDate : this.tempToDate;
+    let tDate = dayjs(fromDate, this.derivedOptions.format);
+    this.fromMonth = tDate.get("month");
+    this.fromYear = tDate.get("year");
+    tDate = dayjs(toDate, this.derivedOptions.format);
+    this.toMonth = tDate.get("month");
+    this.toYear = tDate.get("year");
+    this.setRange();
+  }
   getAriaLabel() {
-    const displayFormat =
-      this.derivedOptions.displayFormat !== undefined
-        ? this.derivedOptions.displayFormat
-        : this.derivedOptions.format;
     if (this.fromDate && this.toDate) {
       return (
-        this.fromDate.format(displayFormat) +
+        this.fromDate.format(this.derivedOptions.displayFormat) +
         " to " +
-        this.toDate.format(displayFormat)
+        this.toDate.format(this.derivedOptions.displayFormat)
       );
     }
     return "Please select a date range";
   }
+  // #endregion
 }

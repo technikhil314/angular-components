@@ -1,7 +1,7 @@
 declare var require: any;
 const dayjs = require("dayjs");
 
-export var Defaults = {
+const defaults = {
   ranges: [
     {
       name: "Today",
@@ -40,3 +40,5 @@ export var Defaults = {
     },
   ],
 };
+
+export default defaults;
