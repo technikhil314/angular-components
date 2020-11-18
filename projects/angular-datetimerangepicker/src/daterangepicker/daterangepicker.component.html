@@ -31,11 +31,11 @@
       </div>
     </div>
     <div class="my-0">
-      <div class="drp-flex"><button [class.hidden]="isAutoApply()" class="drp-btn apply" [disabled]="!enableApplyButton"
-          (click)="apply()" type="button">
+      <div class="drp-flex"><button [class.hidden]="derivedOptions.autoApply" class="drp-btn apply"
+          [disabled]="!enableApplyButton" (click)="apply()" type="button">
           Apply
         </button>
-        <button [class.hidden]="isAutoApply()" class="drp-btn cancel" (click)="cancel()" type="button">
+        <button [class.hidden]="derivedOptions.autoApply" class="drp-btn cancel" (click)="cancel()" type="button">
           Cancel
         </button>
         <button [disabled]="!this.range" class="drp-btn flat link" (click)="clear()" type="button">

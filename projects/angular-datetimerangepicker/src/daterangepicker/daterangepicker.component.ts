@@ -73,7 +73,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         } while (current);
       }
       if (this.showCalendars) {
-        if (!this.isAutoApply()) {
+        if (!this.derivedOptions.autoApply) {
           this.restoreOldDates();
         }
         this.toggleCalendars(false);
@@ -346,7 +346,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         }
       }
     }
-    if (this.isAutoApply()) {
+    if (this.derivedOptions.autoApply) {
       if (this.derivedOptions.singleCalendar || !isLeft) {
         this.toggleCalendars(false);
         this.setRange();
@@ -485,15 +485,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.setToDate(data.value.end);
     this.toggleCalendars(false);
     this.emitRangeSelected();
-  }
-  isAutoApply() {
-    if (this.derivedOptions.timePicker) {
-      return false;
-    } else if (this.derivedOptions.singleCalendar) {
-      return true;
-    } else {
-      return this.derivedOptions.autoApply;
-    }
   }
   getAriaLabel() {
     const displayFormat =
