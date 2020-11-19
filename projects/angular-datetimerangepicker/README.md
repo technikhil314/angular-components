@@ -1,4 +1,4 @@
-# Highly configurable, opinionated, themable, light weight (12kb) date and time range picker for angular
+### Highly configurable, opinionated, themable, light weight (12kb) date and time range picker for angular
 
 [//]: <> (start placeholder for auto-badger)
 
@@ -47,7 +47,10 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
-- Date: 13th Nov 2020
+- Date: 19 Nov 2020 v2.1.9
+  1. Added intelligent position detector to avoid horizontal scroll
+  1. Using css variables to color the previous next chevron arrows
+- Date: 13th Nov 2020 v2.1.8
   1. Using modern css (flexbox)
   1. Removing dependency on bootstrap (now works without bootstrap too)
   1. Adding option for theme
