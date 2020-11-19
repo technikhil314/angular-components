@@ -16,6 +16,7 @@
   position: relative;
   border: none;
   font-feature-settings: "tnum";
+  color: var(--drp-foreground);
 }
 
 .drp-wrapper.dark {
@@ -37,8 +38,6 @@
   color: var(--drp-foreground);
 }
 
-.drp-calendar-input[readonly],
-.drp-input[readonly],
 .drp-calendar-input[disabled],
 .drp-input[disabled] {
   background: var(--drp-input-disabled-color);
@@ -80,8 +79,8 @@
 }
 
 .drp-flyout.alwaysOpen {
-  top: 0;
-  left: 0;
+  width: 100%;
+  position: static;
 }
 
 .drp-flyout.tooltipChevron {
@@ -138,6 +137,23 @@
 .drp-flyout.center.tooltipChevron::before {
   top: -10px;
   left: calc(50% - 13px);
+}
+
+/* chevron / arrows */
+svg {
+  fill: var(--drp-foreground);
+}
+
+.drp-btn.next svg {
+  transform: rotateY(180deg);
+}
+
+.drp-btn.up svg {
+  transform: rotate(90deg);
+}
+
+.drp-btn.down svg {
+  transform: rotate(-90deg);
 }
 
 /* wrapper for both calendars */

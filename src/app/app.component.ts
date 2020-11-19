@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 declare var require: any;
 const dayjs = require("dayjs");
 
@@ -7,8 +7,54 @@ const dayjs = require("dayjs");
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isTimePickerEnabled = true;
+  ngOnInit() {
+    // document.getElementById(
+    //   "background"
+    // ).value = document.documentElement.style.getPropertyValue(
+    //   "--drp-background"
+    // );
+    // document.getElementById(
+    //   "foreground"
+    // ).value = document.documentElement.style.getPropertyValue(
+    //   "--drp-foreground"
+    // );
+    // document.getElementById(
+    //   "hover-color"
+    // ).value = document.documentElement.style.getPropertyValue(
+    //   "--drp-hover-color"
+    // );
+    // document.getElementById(
+    //   "shadow-color"
+    // ).value = document.documentElement.style.getPropertyValue(
+    //   "--drp-shadow-color"
+    // );
+    // document.getElementById(
+    //   "outline-color"
+    // ).value = document.documentElement.style.getPropertyValue(
+    //   "--drp-outline-color"
+    // );
+    // document.getElementById(
+    //   "border-color"
+    // ).value = document.documentElement.style.getPropertyValue(
+    //   "--drp-border-color"
+    // );
+    // document.getElementById(
+    //   "disabled-color"
+    // ).value = document.documentElement.style.getPropertyValue(
+    //   "--drp-disabled-color"
+    // );
+  }
+  themeObject = {
+    "--drp-background": "hsla(0, 0%, 98%);",
+    "--drp-foreground": "hsla(0, 0%, 20%);",
+    "--drp-hover-color": "hsla(0, 0%, 80%);",
+    "--drp-shadow-color": "rgba(0, 0, 0, 0.2);",
+    "--drp-outline-color": "hsl(240deg, 50%, 30%);",
+    "--drp-input-border-color": "#666;",
+    "--drp-input-disabled-color": "#dedede;",
+  };
   daterangepickerOptions = {
     format: "DD.MM.YYYY HH:mm",
     minDate: dayjs().add(-12, "months").format("DD.MM.YYYY HH:mm"),
@@ -74,8 +120,12 @@ export class AppComponent {
     disableBeforeStart: true,
     alwaysOpen: false,
   };
+  selectedRange = {
+    start: null,
+    end: null,
+  };
   rangeSelected(data) {
-    console.log(data);
+    this.selectedRange = data;
   }
   singleCalendar(event) {
     this.daterangepickerOptions.singleCalendar = event.target.checked;
@@ -98,8 +148,15 @@ export class AppComponent {
         }
       : null;
   }
-  setPosition() {}
   prettyPrintJSON(object) {
-    return JSON.stringify(object, null, "  ");
+    return JSON.stringify(object, null, 2);
+  }
+  colorChange(e) {
+    this.daterangepickerOptions.theme = "light";
+    this.themeObject[e.target.dataset.cssPropName] = e.target.value;
+    document.documentElement.style.setProperty(
+      e.target.dataset.cssPropName,
+      e.target.value
+    );
   }
 }

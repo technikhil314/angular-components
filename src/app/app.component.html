@@ -24,7 +24,7 @@
   </div>
 </nav>
 <div class="row main">
-  <div class="col-md-7 col-lg-7 separator-right">
+  <div class="col-xs-12 col-md-4 separator-right">
     <h3>Configuration Options Generator</h3>
     <form>
       <div class="form-group">
@@ -98,22 +98,67 @@
           <label class="label control-label" for="position-center">Center</label>
         </div>
       </div>
-      <div class="col-md-12">
-        <h4>Configuration</h4>
-        <pre>{{prettyPrintJSON(daterangepickerOptions)}}</pre>
-      </div>
     </form>
   </div>
-  <div class="col-md-5 col-lg-5">
+  <div class="col-xs-12 col-md-4">
+    <h4>Configuration</h4>
+    <pre>{{prettyPrintJSON(daterangepickerOptions)}}</pre>
+  </div>
+  <div class="col-xs-12 col-md-4">
     <h3>Live Demo</h3>
-    <div class="col-md-6 flush">
+    <div class="col-xs-12 flush">
       <daterangepicker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)">
       </daterangepicker>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem expedita porro neque doloremque repellendus,
-        eligendi ipsa ut provident cum deleniti molestias, in vero, voluptatum placeat. Distinctio iste quidem est
-        aliquam.
-      </p>
+      <div class="col-xs-12 mt-5">
+        <strong>Selected Range Data</strong>
+        <pre>{{prettyPrintJSON(selectedRange)}}</pre>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <form class="mt-2">
+        <div class="form-group">
+          <h4 class="font-weight-bold">Theming</h4>
+          <div class="form-group">
+            <input type="color" name="background" data-css-prop-name="--drp-background" (input)="colorChange($event)"
+              id="background">
+            <label class="label control-label" for="background">Background</label>
+          </div>
+          <div class="form-group">
+            <input type="color" name="foreground" data-css-prop-name="--drp-foreground" (input)="colorChange($event)"
+              id="foreground">
+            <label class="label control-label" for="foreground">Foreground</label>
+          </div>
+          <div class="form-group">
+            <input type="color" name="hover-color" data-css-prop-name="--drp-hover-color" (input)="colorChange($event)"
+              id="hover-color">
+            <label class="label control-label" for="hover-color">Hover Color</label>
+          </div>
+          <div class="form-group">
+            <input type="color" name="shadow-color" data-css-prop-name="--drp-shadow-color"
+              (input)="colorChange($event)" id="shadow-color">
+            <label class="label control-label" for="shadow-color">Shadow Color</label>
+          </div>
+          <div class="form-group">
+            <input type="color" name="outline-color" data-css-prop-name="--drp-outline-color"
+              (input)="colorChange($event)" id="outline-color">
+            <label class="label control-label" for="outline-color">Outline Color</label>
+          </div>
+          <div class="form-group">
+            <input type="color" name="border-color" data-css-prop-name="--drp-border-color"
+              (input)="colorChange($event)" id="border-color">
+            <label class="label control-label" for="border-color">Border Color</label>
+          </div>
+          <div class="form-group">
+            <input type="color" name="disabled-color" data-css-prop-name="--drp-disabled-color"
+              (input)="colorChange($event)" id="disabled-color">
+            <label class="label control-label" for="disabled-color">Disabled Color</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-12">
+      <b>Theme Config</b>
+      <pre>{{prettyPrintJSON(themeObject)}}</pre>
     </div>
   </div>
 </div>
