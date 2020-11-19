@@ -1,4 +1,4 @@
-# angular-datetimerangepicker
+# Highly configurable, opinionated, themable, light weight (12kb) date and time range picker for angular
 
 [//]: <> (start placeholder for auto-badger)
 

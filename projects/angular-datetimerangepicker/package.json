@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/technikhil314/angular-components"
   },
-  "description": "A Date and time range picker for angular6 and above",
+  "description": "Highly configurable, opinionated, themable, light weight (12kb) date and time range picker for angular",
   "keywords": [
     "angular 6",
     "angular 7",
