@@ -143,6 +143,21 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     ) {
       this.derivedOptions.preDefinedRanges = defaults.ranges;
     }
+    if (window.innerWidth > 600) {
+      if (this.derivedOptions.position === "left") {
+        const spaceToRight =
+          window.innerWidth -
+          this.elem.nativeElement.getBoundingClientRect().left;
+        if (spaceToRight < 500) {
+          console.log("object");
+          this.derivedOptions.position = "right";
+        }
+      } else if (this.derivedOptions.position === "right") {
+        if (this.elem.nativeElement.getBoundingClientRect().right < 500) {
+          this.derivedOptions.position = "left";
+        }
+      }
+    }
   }
   // #endregion
 
