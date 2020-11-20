@@ -57,6 +57,8 @@ export class AppComponent implements OnInit {
   };
   daterangepickerOptions = {
     format: "DD.MM.YYYY HH:mm",
+    startDate: dayjs(),
+    endDate: dayjs().add(10, "days"),
     minDate: dayjs().add(-12, "months").format("DD.MM.YYYY HH:mm"),
     maxDate: dayjs().add(12, "months").format("DD.MM.YYYY HH:mm"),
     inactiveBeforeStart: true,
@@ -112,7 +114,7 @@ export class AppComponent implements OnInit {
     displayFormat: "DD.MM.YYYY HH:mm",
     position: "left",
     disabled: false,
-    noDefaultRangeSelected: true,
+    noDefaultRangeSelected: false,
     timePicker: {
       minuteInterval: 5,
       twentyFourHourFormat: true,
