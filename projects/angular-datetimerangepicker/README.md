@@ -4,13 +4,13 @@
 
 
 [![Build Status](https://img.shields.io/github/workflow/status/technikhil314/angular-components/deploy to surge?style=flat-square&color=%23007a1f)](https://github.com/technikhil314/angular-components/actions)
-[![version](https://img.shields.io/npm/v/angular-components.svg?style=flat-square)](https://npmjs.org/angular-components)
-[![min size](https://img.shields.io/bundlephobia/min/angular-components)](https://bundlephobia.com/result?p=angular-components)
-[![mingzip size](https://img.shields.io/bundlephobia/minzip/angular-components)](https://bundlephobia.com/result?p=angular-components)
-[![license](https://img.shields.io/npm/l/angular-components?color=%23007a1f)](https://github.com/technikhil314/angular-components/blob/master/LICENSE)
+[![version](https://img.shields.io/npm/v/angular-datetimerangepicker.svg?style=flat-square)](https://npmjs.org/angular-datetimerangepicker)
+[![min size](https://img.shields.io/bundlephobia/min/angular-datetimerangepicker)](https://bundlephobia.com/result?p=angular-datetimerangepicker)
+[![mingzip size](https://img.shields.io/bundlephobia/minzip/angular-datetimerangepicker)](https://bundlephobia.com/result?p=angular-datetimerangepicker)
+[![license](https://img.shields.io/npm/l/angular-datetimerangepicker?color=%23007a1f)](https://github.com/technikhil314/angular-components/blob/master/LICENSE)
 
-[![dependancies](https://img.shields.io/librariesio/release/npm/angular-components?color=%23007a1f)](https://libraries.io/npm/angular-components)
-[![downloads](https://img.shields.io/npm/dm/angular-components)](https://npmcharts.com/compare/angular-components)
+[![dependancies](https://img.shields.io/librariesio/release/npm/angular-datetimerangepicker?color=%23007a1f)](https://libraries.io/npm/angular-datetimerangepicker)
+[![downloads](https://img.shields.io/npm/dm/angular-datetimerangepicker)](https://npmcharts.com/compare/angular-datetimerangepicker)
 [![all contributors](https://img.shields.io/github/all-contributors/technikhil314/angular-components)](https://github.com/technikhil314/angular-components/graphs/contributors)
 [![code of conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/technikhil314/angular-components/blob/master/CODE_OF_CONDUCT.md)
 
@@ -21,6 +21,7 @@
 ###### :clap: & :heart: to [auto badger](https://github.com/technikhil314/auto-badger) for making badging simple</small>
 
 [//]: <> (end placeholder for auto-badger)
+
 
 
 
