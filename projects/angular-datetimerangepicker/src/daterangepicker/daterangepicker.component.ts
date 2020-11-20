@@ -508,6 +508,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   cancel() {
     this.restoreOldDates();
     this.toggleCalendars(false);
+    this.fromYear = this.toYear = dayjs().get("year");
+    this.fromMonth = this.toMonth = dayjs().get("month");
   }
   clear() {
     this.fromDate = this.toDate = "";
