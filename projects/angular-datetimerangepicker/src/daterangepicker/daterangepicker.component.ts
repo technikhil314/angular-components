@@ -415,7 +415,13 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         this.setRange();
         this.emitRangeSelected();
       }
-    } else if (!this.derivedOptions.singleCalendar && !isLeft) {
+    } else if (
+      !this.derivedOptions.singleCalendar &&
+      this.fromDate &&
+      this.fromDate.isValid() &&
+      this.toDate &&
+      this.toDate.isValid()
+    ) {
       this.enableApplyButton = true;
     } else if (this.derivedOptions.singleCalendar) {
       this.enableApplyButton = true;
