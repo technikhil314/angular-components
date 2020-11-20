@@ -127,6 +127,10 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
+    if (this.derivedOptions.noDefaultRangeSelected) {
+      this.derivedOptions.startDate = null;
+      this.derivedOptions.endDate = null;
+    }
     if (this.derivedOptions.singleCalendar) {
       this.derivedOptions.autoApply = true;
       this.derivedOptions.endDate = null;
