@@ -2,8 +2,7 @@
 
 [//]: <> (start placeholder for auto-badger)
 
-
-[![Build Status](https://img.shields.io/github/workflow/status/technikhil314/angular-components/deploy to surge?style=flat-square&color=%23007a1f)](https://github.com/technikhil314/angular-components/actions)
+[![Build Status](https://img.shields.io/github/workflow/status/technikhil314/angular-components/deploy%20to%20surge?style=flat-square&color=%23007a1f)](https://github.com/technikhil314/angular-components/actions)
 [![version](https://img.shields.io/npm/v/angular-datetimerangepicker.svg?style=flat-square)](https://npmjs.org/angular-datetimerangepicker)
 [![min size](https://img.shields.io/bundlephobia/min/angular-datetimerangepicker)](https://bundlephobia.com/result?p=angular-datetimerangepicker)
 [![mingzip size](https://img.shields.io/bundlephobia/minzip/angular-datetimerangepicker)](https://bundlephobia.com/result?p=angular-datetimerangepicker)
@@ -21,10 +20,6 @@
 ###### :clap: & :heart: to [auto badger](https://github.com/technikhil314/auto-badger) for making badging simple</small>
 
 [//]: <> (end placeholder for auto-badger)
-
-
-
-
 
 ## [For Documentation, configuration click here](https://technikhil314.netlify.app/docs/daterangepicker/introduction)
 
