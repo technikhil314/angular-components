@@ -27,8 +27,12 @@
 
 ## Coding examples
 
-- [With predefined custom ranges](https://stackblitz.com/edit/angular-datetimerangepicker-demo) - This requires dayjs installed
-- [Without predefined custom ranges](https://stackblitz.com/edit/angular-datetimerangepicker-demo-1) - This does not require any dependency
+1. [With predefined custom ranges](https://stackblitz.com/edit/angular-datetimerangepicker-demo)
+   - This requires dayjs installed
+1. [Without predefined custom ranges](https://stackblitz.com/edit/angular-datetimerangepicker-demo-1)
+   - This does not require any dependency
+1. [Without bootstrap](https://stackblitz.com/edit/angular-datetimerangepicker-demo-without-bootstrap)
+   - Plain css no customizations on styling
 
 ## About this package
 
