@@ -1,13 +1,11 @@
 :root {
   --drp-input-height: 33px;
   --drp-input-border-radius: 4px;
-  --drp-background: hsla(0, 0%, 98%);
-  --drp-foreground: hsla(0, 0%, 20%);
-  --drp-hover-color: hsla(0, 0%, 80%);
+  --drp-bg: hsla(0, 0%, 98%);
+  --drp-fg: hsla(0, 0%, 20%);
   --drp-shadow-color: rgba(0, 0, 0, 0.2);
-  --drp-flyout-width: 500px;
+  --drp-hover-bg: hsla(0, 0%, 80%);
   --drp-outline-color: hsl(240deg, 50%, 30%);
-  --drp-flyout-single-calendar-width: 250px;
   --drp-input-border-color: #666;
   --drp-input-disabled-color: #dedede;
 }
@@ -16,7 +14,7 @@
   position: relative;
   border: none;
   font-feature-settings: "tnum";
-  color: var(--drp-foreground);
+  color: var(--drp-fg);
 }
 
 .drp-wrapper.dark {
@@ -34,8 +32,8 @@
   border-radius: var(--drp-input-border-radius);
   border: 1px solid var(--drp-input-border-color);
   cursor: text;
-  background: var(--drp-background);
-  color: var(--drp-foreground);
+  background: var(--drp-bg);
+  color: var(--drp-fg);
 }
 
 .drp-calendar-input[disabled],
@@ -52,10 +50,9 @@
 /* the flyout/popup */
 
 .drp-flyout {
-  font-size: 14px;
-  font-size: clamp(11px, 2.5vw, 16px);
+  width: var(--drp-flyout-width, auto);
   position: absolute;
-  background: var(--drp-background);
+  background: var(--drp-bg);
   display: flex;
   flex-direction: column;
   z-index: 1000;
@@ -64,6 +61,10 @@
   border: 1px solid #aaa;
   padding: 10px 10px 0;
   max-width: min-content;
+}
+
+.drp-flyout.right {
+  width: var(--drp-flyout-single-calendar-width, auto);
 }
 
 .drp-flyout.right {
@@ -98,8 +99,7 @@
 }
 
 .drp-flyout.tooltipChevron::after {
-  border-color: var(--drp-background) var(--drp-background) transparent
-    transparent;
+  border-color: var(--drp-bg) var(--drp-bg) transparent transparent;
   border-width: 10px;
 }
 
@@ -141,7 +141,7 @@
 
 /* chevron / arrows */
 svg {
-  fill: var(--drp-foreground);
+  fill: var(--drp-fg);
 }
 
 .drp-btn.next svg {
@@ -184,10 +184,11 @@ svg {
   text-align: center;
   padding: 2px 0;
   transition: background 0.2s;
+  border-radius: 2px;
 }
 
 .drp-date.active {
-  background: var(--drp-hover-color);
+  background: var(--drp-hover-bg);
 }
 
 .drp-date.off {
@@ -196,7 +197,11 @@ svg {
 }
 
 .drp-date:hover {
-  background: var(--drp-hover-color);
+  background: var(--drp-hover-bg);
+}
+
+.drp-date:hover .drp-btn {
+  color: var(--drp-hover-fg, var(--drp-fg));
 }
 
 /* Range buttons wrapper */
@@ -208,9 +213,9 @@ svg {
 
 .drp-btn {
   border-radius: 4px;
-  border: 1px solid var(--drp-foreground);
-  color: var(--drp-foreground);
-  background: var(--drp-background);
+  border: 1px solid var(--drp-fg);
+  color: var(--drp-fg);
+  background: var(--drp-bg);
   white-space: nowrap;
   transition: transform 0.3s, background 0.3s;
   line-height: 1.5;
@@ -232,11 +237,11 @@ svg {
 }
 
 .drp-btn.flat:hover {
-  background: var(--drp-hover-color);
+  background: var(--drp-hover-bg);
 }
 
 .drp-btn.flat.link:hover {
-  background: var(--drp-background);
+  background: var(--drp-bg);
   text-decoration: underline;
 }
 
