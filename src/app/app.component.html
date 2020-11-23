@@ -37,19 +37,24 @@
         <div class="form-group">
           <h4 class="font-weight-bold">Theming</h4>
           <div class="form-group">
-            <input type="color" name="background" data-css-prop-name="--drp-background" (input)="colorChange($event)"
+            <input type="color" name="background" data-css-prop-name="--drp-bg" (input)="colorChange($event)"
               id="background">
             <label class="label control-label" for="background">Background</label>
           </div>
           <div class="form-group">
-            <input type="color" name="foreground" data-css-prop-name="--drp-foreground" (input)="colorChange($event)"
+            <input type="color" name="foreground" data-css-prop-name="--drp-fg" (input)="colorChange($event)"
               id="foreground">
-            <label class="label control-label" for="foreground">Foreground</label>
+            <label class="label control-label" for="foreground">Text color</label>
           </div>
           <div class="form-group">
-            <input type="color" name="hover-color" data-css-prop-name="--drp-hover-color" (input)="colorChange($event)"
+            <input type="color" name="hover-color" data-css-prop-name="--drp-hover-bg" (input)="colorChange($event)"
               id="hover-color">
-            <label class="label control-label" for="hover-color">Hover Color</label>
+            <label class="label control-label" for="hover-color">Hover Background Color</label>
+          </div>
+          <div class="form-group">
+            <input type="color" name="hover-text-color" data-css-prop-name="--drp-hover-fg"
+              (input)="colorChange($event)" id="hover-text-color">
+            <label class="label control-label" for="hover-text-color">Hover Text Color</label>
           </div>
           <div class="form-group">
             <input type="color" name="shadow-color" data-css-prop-name="--drp-shadow-color"
