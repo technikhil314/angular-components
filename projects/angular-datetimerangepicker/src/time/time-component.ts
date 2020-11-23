@@ -8,9 +8,14 @@ import {
   SimpleChanges,
 } from "@angular/core";
 import { Timepicker } from "../types";
-declare var require: any;
-const dayjs = require("dayjs");
+import dayjs, { Dayjs } from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import customParser from "dayjs/plugin/customParseFormat";
 
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
+dayjs.extend(customParser);
 @Component({
   selector: "time-picker",
   templateUrl: "./time-component.html",
@@ -20,13 +25,13 @@ export class TimePickerComponent implements OnInit, OnChanges {
   @Input()
   options: Timepicker = new Timepicker();
   @Input()
-  selectedFromDate: any;
+  selectedFromDate: Dayjs;
   @Input()
-  selectedToDate: any;
+  selectedToDate: Dayjs;
   @Input()
-  minDate: any;
+  minDate: Dayjs;
   @Input()
-  maxDate: any;
+  maxDate: Dayjs;
   @Input()
   format: string;
   @Input()
@@ -35,7 +40,7 @@ export class TimePickerComponent implements OnInit, OnChanges {
 
   // #region all components outputs
   @Output()
-  timeChanged = new EventEmitter();
+  timeChanged: EventEmitter<Dayjs> = new EventEmitter();
   // #endregion
 
   // #region Component Life cycle handlers
@@ -85,16 +90,14 @@ export class TimePickerComponent implements OnInit, OnChanges {
       ? currentMinute
       : "0" + currentMinute;
   }
-  isValidToAddMinute(value) {
+  isValidToAddMinute(value: number) {
     let possibleNewValue, possibleSelectedDate;
     if (this.isLeft) {
       possibleNewValue = this.selectedFromDate.get("minute") + value;
-      possibleSelectedDate = this.selectedFromDate
-        .clone()
-        .add(value, "minutes");
+      possibleSelectedDate = this.selectedFromDate.clone().add(value, "minute");
     } else {
       possibleNewValue = this.selectedToDate.get("minute") + value;
-      possibleSelectedDate = this.selectedToDate.clone().add(value, "minutes");
+      possibleSelectedDate = this.selectedToDate.clone().add(value, "minute");
     }
     let retValue = possibleNewValue < 60 && possibleNewValue >= 0;
     if (this.minDate.isValid()) {
@@ -105,7 +108,7 @@ export class TimePickerComponent implements OnInit, OnChanges {
     }
     return retValue;
   }
-  isValidToAddHour(value) {
+  isValidToAddHour(value: number) {
     let possibleNewValue, possibleSelectedDate;
     if (this.isLeft) {
       possibleNewValue = this.selectedFromDate.get("hour") + value;
@@ -126,7 +129,7 @@ export class TimePickerComponent implements OnInit, OnChanges {
   // #endregion
 
   // #region self event handlers
-  addHour(value) {
+  addHour(value: number) {
     if (this.isLeft) {
       this.selectedFromDate = this.selectedFromDate.set(
         "hour",
@@ -140,7 +143,7 @@ export class TimePickerComponent implements OnInit, OnChanges {
     }
     this.triggerTimeChanged();
   }
-  addMinute(value) {
+  addMinute(value: number) {
     if (this.isLeft) {
       this.selectedFromDate = this.selectedFromDate.set(
         "minute",

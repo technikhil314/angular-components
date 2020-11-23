@@ -1,6 +1,21 @@
+import { Dayjs } from "dayjs";
+
+type Theme = "dark" | "light";
+type Position = "left" | "right" | "center";
+
 class DateRange {
-  start: any;
-  end: any;
+  start: Dayjs;
+  end: Dayjs;
+}
+
+export class DateChanged {
+  day: Dayjs;
+  isLeft: boolean;
+}
+
+export class YearMonthChanged {
+  value: number;
+  isLeft: boolean;
 }
 
 export class DefinedDateRange {
@@ -22,24 +37,24 @@ export class YearsGrid {
 }
 
 export class Options {
-  startDate: string | any = null;
-  endDate: string | any = null;
-  minDate: string | any = null;
-  maxDate: string | any = null;
-  format: string = "YYYY-MM-DD";
-  displayFormat: string;
-  inactiveBeforeStart: boolean = false;
-  autoApply: boolean = false;
-  singleCalendar: boolean = false;
-  preDefinedRanges: DefinedDateRange[];
-  noDefaultRangeSelected: boolean = false;
-  showRanges: boolean = false;
-  position: string = "left";
-  disabled: boolean = false;
-  timePicker: Timepicker = null;
-  disableBeforeStart: boolean = false;
-  alwaysOpen: boolean = false;
-  theme: string = "light";
-  required: boolean = false;
-  DOB: boolean = false;
+  startDate?: Dayjs = null;
+  endDate?: Dayjs = null;
+  minDate?: Dayjs = null;
+  maxDate?: Dayjs = null;
+  format?: string = "YYYY-MM-DD";
+  displayFormat?: string;
+  inactiveBeforeStart?: boolean = false;
+  autoApply?: boolean = false;
+  singleCalendar?: boolean = false;
+  preDefinedRanges?: DefinedDateRange[];
+  noDefaultRangeSelected?: boolean = false;
+  showRanges?: boolean = false;
+  position?: Position = "left";
+  disabled?: boolean = false;
+  timePicker?: Timepicker = null;
+  disableBeforeStart?: boolean = false;
+  alwaysOpen?: boolean = false;
+  theme?: Theme = "light";
+  required?: boolean = false;
+  DOB?: boolean = false;
 }

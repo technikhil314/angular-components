@@ -7,8 +7,15 @@ import {
   SimpleChanges,
 } from "@angular/core";
 import calendarize from "calendarize";
-declare var require: any;
-const dayjs = require("dayjs");
+import { DateChanged, Timepicker, YearMonthChanged } from "../types";
+import dayjs, { Dayjs } from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import customParser from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
+dayjs.extend(customParser);
 
 @Component({
   selector: "calendar",
@@ -16,33 +23,36 @@ const dayjs = require("dayjs");
 })
 export class CalendarComponent implements OnChanges {
   // #region Components inputs
-  @Input() month: string;
-  @Input() year: string;
-  @Input() selectedFromDate: string;
-  @Input() selectedToDate: string;
+  @Input() month: number;
+  @Input() year: number;
+  @Input() selectedFromDate: Dayjs;
+  @Input() selectedToDate: Dayjs;
   @Input() isLeft: boolean;
   @Input() format: string;
-  @Input() minDate: string;
-  @Input() maxDate: string;
+  @Input() minDate: Dayjs;
+  @Input() maxDate: Dayjs;
   @Input() inactiveBeforeStart: boolean;
   @Input() disableBeforeStart: boolean;
-  @Input() timePicker: any;
+  @Input() timePicker: Timepicker;
   @Input() singleCalendar: boolean = false;
   // #endregion
 
   // #region component outputs
-  @Output() dateChanged = new EventEmitter();
-  @Output() monthChanged = new EventEmitter();
-  @Output() yearChanged = new EventEmitter();
+  @Output() dateChanged: EventEmitter<DateChanged> = new EventEmitter();
+  @Output() monthChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
+  @Output() yearChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
   // #endregion
 
   // #region all component variables
-  weekList: any;
+  weekList: Dayjs[][];
   // #endregion
 
   // #region setters and getters
   get monthText() {
-    return dayjs([+this.year, +this.month]).format("MMM");
+    return dayjs()
+      .set("year", +this.year)
+      .set("month", +this.month)
+      .format("MMM");
   }
   // #endregion
 
@@ -56,7 +66,10 @@ export class CalendarComponent implements OnChanges {
   createCalendarGridData(): void {
     let year = null;
     let month = null;
-    const thisMonthStartDate = dayjs([this.year, this.month]).startOf("month");
+    const thisMonthStartDate = dayjs()
+      .set("year", +this.year)
+      .set("month", +this.month)
+      .startOf("month");
     const previousMonthStartDate = thisMonthStartDate
       .subtract(1, "month")
       .startOf("month");
@@ -69,7 +82,14 @@ export class CalendarComponent implements OnChanges {
       .pop()
       .filter(Boolean)
       .map((day) => {
-        return dayjs([year, month, day, 0, 0, 0, 0]);
+        return dayjs()
+          .set("year", year)
+          .set("month", month)
+          .set("date", day)
+          .set("hour", 0)
+          .set("minute", 0)
+          .set("second", 0)
+          .set("millisecond", 0);
       });
     year = thisMonthStartDate.get("year");
     month = thisMonthStartDate.get("month");
@@ -79,7 +99,14 @@ export class CalendarComponent implements OnChanges {
           if (day === 0) {
             return null;
           }
-          return dayjs([year, month, day, 0, 0, 0, 0]);
+          return dayjs()
+            .set("year", year)
+            .set("month", month)
+            .set("date", day)
+            .set("hour", 0)
+            .set("minute", 0)
+            .set("second", 0)
+            .set("millisecond", 0);
         });
       }
     );
@@ -89,7 +116,14 @@ export class CalendarComponent implements OnChanges {
       .shift()
       .filter(Boolean)
       .map((day) => {
-        return dayjs([year, month, day, 0, 0, 0, 0]);
+        return dayjs()
+          .set("year", year)
+          .set("month", month)
+          .set("date", day)
+          .set("hour", 0)
+          .set("minute", 0)
+          .set("second", 0)
+          .set("millisecond", 0);
       });
     if (thisMonthweekList[0].length < 7) {
       thisMonthweekList[0] = previousMonthLastWeek.concat(thisMonthweekList[0]);
@@ -108,22 +142,29 @@ export class CalendarComponent implements OnChanges {
         .slice(-2)[0]
         .filter(Boolean)
         .map((day) => {
-          return dayjs([year, month, day, 0, 0, 0, 0]);
+          return dayjs()
+            .set("year", year)
+            .set("month", month)
+            .set("date", day)
+            .set("hour", 0)
+            .set("minute", 0)
+            .set("second", 0)
+            .set("millisecond", 0);
         });
       thisMonthweekList.unshift(previousMonthSecondLastWeek);
     }
     this.weekList = thisMonthweekList;
   }
-  isDisabled(day) {
+  isDisabled(day: Dayjs) {
     return (
-      day.isBefore(dayjs(this.minDate, this.format)) ||
-      day.isAfter(dayjs(this.maxDate, this.format)) ||
-      (day.isBefore(dayjs(this.selectedFromDate, this.format)) &&
+      day.isBefore(this.minDate) ||
+      day.isAfter(this.maxDate) ||
+      (day.isBefore(this.selectedFromDate) &&
         this.disableBeforeStart &&
         !this.isLeft)
     );
   }
-  isDateAvailable(day) {
+  isDateAvailable(day: Dayjs) {
     if (day.get("month") !== this.month) {
       return false;
     }

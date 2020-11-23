@@ -9,9 +9,16 @@ import {
   Output,
 } from "@angular/core";
 import defaults from "../defaults";
-import { Options } from "../types";
-declare var require: any;
-const dayjs = require("dayjs");
+import { DefinedDateRange, Options } from "../types";
+import dayjs, { Dayjs } from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import customParser from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
+dayjs.extend(customParser);
+
 declare var window: any;
 
 @Component({
@@ -33,12 +40,12 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   range: string = "";
   enableApplyButton: boolean = false;
   areOldDatesStored: boolean = false;
-  fromDate: any;
-  toDate: any;
-  tempFromDate: any;
-  tempToDate: any;
-  oldFromDate: any;
-  oldToDate: any;
+  fromDate: Dayjs;
+  toDate: Dayjs;
+  tempFromDate: Dayjs;
+  tempToDate: Dayjs;
+  oldFromDate: Dayjs;
+  oldToDate: Dayjs;
   fromMonth: number;
   toMonth: number;
   fromYear: number;
@@ -107,7 +114,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   // #endregion
 
   // #region Options derivator
-  deriveOptions(isUpdate = false) {
+  deriveOptions(isUpdate: boolean = false) {
     if (isUpdate) {
       const {
         startDate,
@@ -127,6 +134,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
+    console.log(this.derivedOptions.noDefaultRangeSelected);
     if (this.derivedOptions.noDefaultRangeSelected) {
       this.derivedOptions.startDate = null;
       this.derivedOptions.endDate = null;
@@ -166,30 +174,30 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   // #endregion
 
   // #region date setters and getters
-  setFromDate(value) {
+  setFromDate(value: Dayjs) {
     if (this.derivedOptions.noDefaultRangeSelected && !value) {
-      this.fromDate = "";
+      this.fromDate = null;
       this.tempFromDate = this.getActualFromDate(value);
     } else {
       this.fromDate = this.getActualFromDate(value);
     }
   }
-  getActualFromDate(value) {
+  getActualFromDate(value: Dayjs) {
     let temp;
     if ((temp = this.getValidateDayjs(value))) {
       return this.getValidateFromDate(temp);
     }
     return this.getValidateFromDate(dayjs());
   }
-  setToDate(value) {
+  setToDate(value: Dayjs) {
     if (this.derivedOptions.noDefaultRangeSelected && !value) {
-      this.toDate = "";
+      this.toDate = null;
       this.tempToDate = this.getActualToDate(value);
     } else {
       this.toDate = this.getActualToDate(value);
     }
   }
-  getActualToDate(value) {
+  getActualToDate(value: Dayjs) {
     let temp;
     if ((temp = this.getValidateDayjs(value))) {
       return this.getValidateToDate(temp);
@@ -227,8 +235,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
             "date"
           )
         ) {
-          this.derivedOptions.minDate = "";
-          this.derivedOptions.maxDate = "";
+          this.derivedOptions.minDate = null;
+          this.derivedOptions.maxDate = null;
           console.warn(
             "supplied minDate is after maxDate. Discarding options for minDate and maxDate"
           );
@@ -238,25 +246,21 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         this.derivedOptions.minDate &&
         this.derivedOptions.minDate.format("HH:mm") === "00:00"
       ) {
-        this.derivedOptions.minDate.set({
-          hour: 0,
-          minutes: 0,
-          seconds: 0,
-        });
+        this.derivedOptions.minDate.set("hour", 0);
+        this.derivedOptions.minDate.set("minute", 0);
+        this.derivedOptions.minDate.set("second", 0);
       }
       if (
         this.derivedOptions.maxDate &&
         this.derivedOptions.maxDate.format("HH:mm") === "00:00"
       ) {
-        this.derivedOptions.maxDate.set({
-          hour: 23,
-          minutes: 59,
-          seconds: 59,
-        });
+        this.derivedOptions.minDate.set("hour", 23);
+        this.derivedOptions.minDate.set("minute", 59);
+        this.derivedOptions.minDate.set("second", 59);
       }
     }
   }
-  getValidateFromDate(value) {
+  getValidateFromDate(value: Dayjs) {
     if (!this.derivedOptions.timePicker) {
       if (
         this.derivedOptions.minDate &&
@@ -281,21 +285,15 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       if (
         this.derivedOptions.minDate &&
         this.derivedOptions.maxDate &&
-        value.isSameOrAfter(
-          this.derivedOptions.minDate,
-          this.derivedOptions.format
-        ) &&
-        value.isSameOrBefore(
-          this.derivedOptions.maxDate,
-          this.derivedOptions.format
-        )
+        value.isSameOrAfter(this.derivedOptions.minDate, "date") &&
+        value.isSameOrBefore(this.derivedOptions.maxDate, "date")
       ) {
         return value;
       }
       if (
         this.derivedOptions.minDate &&
         !this.derivedOptions.maxDate &&
-        value.isAfter(this.derivedOptions.minDate, this.derivedOptions.format)
+        value.isAfter(this.derivedOptions.minDate, "date")
       ) {
         return value;
       }
@@ -305,7 +303,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       return dayjs();
     }
   }
-  getValidateToDate(value) {
+  getValidateToDate(value: Dayjs) {
     if (!this.derivedOptions.timePicker) {
       if (
         (this.derivedOptions.maxDate &&
@@ -321,11 +319,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     } else {
       if (
         (this.derivedOptions.maxDate &&
-          value.isSameOrAfter(this.fromDate, this.derivedOptions.format),
-        value.isSameOrBefore(
-          this.derivedOptions.maxDate,
-          this.derivedOptions.format
-        ))
+          value.isSameOrAfter(this.fromDate, "date"),
+        value.isSameOrBefore(this.derivedOptions.maxDate, "date"))
       ) {
         return value;
       }
@@ -338,10 +333,10 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   // #endregion
 
   // #region util functions
-  getDayjs(value) {
+  getDayjs(value: string | Dayjs) {
     return dayjs(value, this.derivedOptions.format);
   }
-  getValidateDayjs(value) {
+  getValidateDayjs(value: string | Dayjs) {
     let dayjsValue = null;
     if (dayjs(value, this.derivedOptions.format, true).isValid()) {
       dayjsValue = dayjs(value, this.derivedOptions.format, true);
@@ -442,11 +437,17 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   monthChanged(data) {
     let temp;
     if (data.isLeft) {
-      temp = dayjs([this.fromYear, this.fromMonth]).add(data.value, "months");
+      temp = dayjs()
+        .set("year", this.fromYear)
+        .set("month", this.fromMonth)
+        .add(data.value, "month");
       this.fromMonth = temp.get("month");
       this.fromYear = temp.get("year");
     } else {
-      temp = dayjs([this.toYear, this.toMonth]).add(data.value, "months");
+      temp = dayjs()
+        .set("year", this.toYear)
+        .set("month", this.toYear)
+        .add(data.value, "month");
       this.toMonth = temp.get("month");
       this.toYear = temp.get("year");
     }
@@ -454,11 +455,17 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   yearChanged(data) {
     let temp;
     if (data.isLeft) {
-      temp = dayjs([this.fromYear, this.fromMonth]).add(data.value, "year");
+      temp = dayjs()
+        .set("year", this.fromYear)
+        .set("month", this.fromMonth)
+        .add(data.value, "year");
       this.fromMonth = temp.get("month");
       this.fromYear = temp.get("year");
     } else {
-      temp = dayjs([this.toYear, this.toMonth]).add(data.value, "year");
+      temp = dayjs()
+        .set("year", this.toYear)
+        .set("month", this.toYear)
+        .add(data.value, "year");
       this.toMonth = temp.get("month");
       this.toYear = temp.get("year");
     }
@@ -478,6 +485,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         end: this.getDayjs(this.toDate),
       };
     }
+    this.enableApplyButton = false;
     this.rangeSelected.emit(data);
   }
   storeOldDates() {
@@ -518,13 +526,13 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.fromMonth = this.toMonth = dayjs().get("month");
   }
   clear() {
-    this.fromDate = this.toDate = "";
+    this.fromDate = this.toDate = null;
     this.apply();
     this.enableApplyButton = false;
     this.fromYear = this.toYear = dayjs().get("year");
     this.fromMonth = this.toMonth = dayjs().get("month");
   }
-  applyPredefinedRange(data) {
+  applyPredefinedRange(data: DefinedDateRange) {
     this.setFromDate(data.value.start);
     this.setToDate(data.value.end);
     this.toggleCalendars(false);
@@ -533,7 +541,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   // #endregion
 
   // #region view manipulations and condition providers
-  toggleCalendars(value) {
+  toggleCalendars(value: boolean) {
     this.showCalendars = value;
     if (!value) {
       this.areOldDatesStored = false;

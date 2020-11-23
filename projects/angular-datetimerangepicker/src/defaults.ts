@@ -1,5 +1,4 @@
-declare var require: any;
-const dayjs = require("dayjs");
+import dayjs from "dayjs";
 
 const defaults = {
   ranges: [
@@ -13,14 +12,14 @@ const defaults = {
     {
       name: "Yesterday",
       value: {
-        start: dayjs().subtract(1, "days"),
-        end: dayjs().subtract(1, "days"),
+        start: dayjs().subtract(1, "day"),
+        end: dayjs().subtract(1, "day"),
       },
     },
     {
-      name: "last 7 days",
+      name: "last 7 day",
       value: {
-        start: dayjs().subtract(6, "days"),
+        start: dayjs().subtract(6, "day"),
         end: dayjs(),
       },
     },
