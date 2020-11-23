@@ -36,6 +36,8 @@
       <form class="mt-2">
         <div class="form-group">
           <h4 class="font-weight-bold">Theming</h4>
+          <small>You can theme the component from here</small>
+          <br />
           <div class="form-group">
             <input type="color" name="background" data-css-prop-name="--drp-bg" (input)="colorChange($event)"
               id="background">
@@ -82,7 +84,7 @@
     <div class="col-xs-12">
       <b>Theme Config</b>
       <br />
-      <small>You can theme the component from here</small>
+      <small>Add these css variables to your stylesheet</small>
       <pre>{{prettyPrintJSON(themeObject)}}</pre>
     </div>
   </div>

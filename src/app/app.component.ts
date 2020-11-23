@@ -9,52 +9,23 @@ const dayjs = require("dayjs");
 })
 export class AppComponent implements OnInit {
   isTimePickerEnabled = true;
-  ngOnInit() {
-    // document.getElementById(
-    //   "background"
-    // ).value = document.documentElement.style.getPropertyValue(
-    //   "--drp-background"
-    // );
-    // document.getElementById(
-    //   "foreground"
-    // ).value = document.documentElement.style.getPropertyValue(
-    //   "--drp-foreground"
-    // );
-    // document.getElementById(
-    //   "hover-color"
-    // ).value = document.documentElement.style.getPropertyValue(
-    //   "--drp-hover-color"
-    // );
-    // document.getElementById(
-    //   "shadow-color"
-    // ).value = document.documentElement.style.getPropertyValue(
-    //   "--drp-shadow-color"
-    // );
-    // document.getElementById(
-    //   "outline-color"
-    // ).value = document.documentElement.style.getPropertyValue(
-    //   "--drp-outline-color"
-    // );
-    // document.getElementById(
-    //   "border-color"
-    // ).value = document.documentElement.style.getPropertyValue(
-    //   "--drp-border-color"
-    // );
-    // document.getElementById(
-    //   "disabled-color"
-    // ).value = document.documentElement.style.getPropertyValue(
-    //   "--drp-disabled-color"
-    // );
-  }
   themeObject = {
-    "--drp-background": "hsla(0, 0%, 98%);",
-    "--drp-foreground": "hsla(0, 0%, 20%);",
-    "--drp-hover-color": "hsla(0, 0%, 80%);",
-    "--drp-shadow-color": "rgba(0, 0, 0, 0.2);",
-    "--drp-outline-color": "hsl(240deg, 50%, 30%);",
-    "--drp-input-border-color": "#666;",
-    "--drp-input-disabled-color": "#dedede;",
+    "--drp-bg": null,
+    "--drp-fg": null,
+    "--drp-hover-bg": null,
+    "--drp-hover-fg": null,
+    "--drp-shadow-color": null,
+    "--drp-outline-color": null,
+    "--drp-input-border-color": null,
+    "--drp-input-disabled-color": null,
   };
+  ngOnInit() {
+    for (let prop in this.themeObject) {
+      this.themeObject[prop] = getComputedStyle(
+        document.documentElement
+      ).getPropertyValue(prop);
+    }
+  }
   daterangepickerOptions = {
     format: "DD.MM.YYYY HH:mm",
     startDate: dayjs(),
