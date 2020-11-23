@@ -446,7 +446,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     } else {
       temp = dayjs()
         .set("year", this.toYear)
-        .set("month", this.toYear)
+        .set("month", this.toMonth)
         .add(data.value, "month");
       this.toMonth = temp.get("month");
       this.toYear = temp.get("year");
@@ -464,7 +464,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     } else {
       temp = dayjs()
         .set("year", this.toYear)
-        .set("month", this.toYear)
+        .set("month", this.toMonth)
         .add(data.value, "year");
       this.toMonth = temp.get("month");
       this.toYear = temp.get("year");
