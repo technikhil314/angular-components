@@ -179,28 +179,37 @@ svg {
   }
 }
 
-/* td in tr of tbody */
-.drp-date {
+/* Each row in calendar */
+
+.drp-calendar-row {
+  width: 100%;
+  margin: 0;
+  justify-content: space-between;
+  display: flex;
+}
+
+.drp-calendar-row span {
+  min-width: 14.29%;
   text-align: center;
   padding: 2px 0;
   transition: background 0.2s;
   border-radius: 2px;
 }
 
-.drp-date.active {
+.drp-calendar-row span.active {
   background: var(--drp-hover-bg);
 }
 
-.drp-date.off {
+.drp-calendar-row span.off {
   opacity: 0.65;
   filter: blur(0.05em);
 }
 
-.drp-date:hover {
+.drp-calendar-row span:hover {
   background: var(--drp-hover-bg);
 }
 
-.drp-date:hover .drp-btn {
+.drp-calendar-row span:hover .drp-btn {
   color: var(--drp-hover-fg, var(--drp-fg));
 }
 
