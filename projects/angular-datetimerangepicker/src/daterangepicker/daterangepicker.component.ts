@@ -134,7 +134,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
-    console.log(this.derivedOptions.noDefaultRangeSelected);
     if (this.derivedOptions.noDefaultRangeSelected) {
       this.derivedOptions.startDate = null;
       this.derivedOptions.endDate = null;
@@ -145,6 +144,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     }
     if (this.derivedOptions.timePicker) {
       this.derivedOptions.autoApply = false;
+    }
+    if (this.derivedOptions.alwaysOpen) {
+      this.derivedOptions.position = null;
     }
     if (!this.derivedOptions.displayFormat) {
       this.derivedOptions.displayFormat = this.derivedOptions.format;
