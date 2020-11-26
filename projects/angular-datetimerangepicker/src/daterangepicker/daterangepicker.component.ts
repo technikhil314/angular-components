@@ -134,6 +134,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
+    this.derivedOptions.weekStartsOn =
+      Math.abs(this.derivedOptions.weekStartsOn) % 7;
     if (this.derivedOptions.noDefaultRangeSelected) {
       this.derivedOptions.startDate = null;
       this.derivedOptions.endDate = null;
@@ -150,9 +152,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     }
     if (!this.derivedOptions.displayFormat) {
       this.derivedOptions.displayFormat = this.derivedOptions.format;
-    }
-    if (this.derivedOptions.weekStartsOn > 0) {
-      this.derivedOptions.weekStartsOn = this.derivedOptions.weekStartsOn % 7;
     }
     if (
       this.derivedOptions.showRanges &&
