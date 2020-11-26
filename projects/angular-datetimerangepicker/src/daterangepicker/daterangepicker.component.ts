@@ -151,6 +151,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     if (!this.derivedOptions.displayFormat) {
       this.derivedOptions.displayFormat = this.derivedOptions.format;
     }
+    if (this.derivedOptions.weekStartsOn > 0) {
+      this.derivedOptions.weekStartsOn = this.derivedOptions.weekStartsOn % 7;
+    }
     if (
       this.derivedOptions.showRanges &&
       !this.derivedOptions.preDefinedRanges

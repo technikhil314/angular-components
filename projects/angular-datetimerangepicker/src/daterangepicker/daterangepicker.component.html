@@ -18,7 +18,7 @@
           [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
           [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"
-          [singleCalendar]="derivedOptions.singleCalendar"></calendar>
+          [singleCalendar]="derivedOptions.singleCalendar" [weekStartsOn]="derivedOptions.weekStartsOn"></calendar>
       </div>
       <div class="drp-calendar-container" *ngIf="!derivedOptions.singleCalendar">
         <input class="drp-calendar-input" [ngModel]="toDate | formatDate: derivedOptions.displayFormat"
@@ -27,7 +27,8 @@
           (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)"
           [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
-          [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"></calendar>
+          [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"
+          [weekStartsOn]="derivedOptions.weekStartsOn"></calendar>
       </div>
     </div>
     <div class="my-0">

@@ -7,11 +7,11 @@ import {
   SimpleChanges,
 } from "@angular/core";
 import calendarize from "calendarize";
-import { DateChanged, Timepicker, YearMonthChanged } from "../types";
 import dayjs, { Dayjs } from "dayjs";
+import customParser from "dayjs/plugin/customParseFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import customParser from "dayjs/plugin/customParseFormat";
+import { DateChanged, Timepicker, YearMonthChanged } from "../types";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -34,7 +34,8 @@ export class CalendarComponent implements OnChanges {
   @Input() inactiveBeforeStart: boolean;
   @Input() disableBeforeStart: boolean;
   @Input() timePicker: Timepicker;
-  @Input() singleCalendar: boolean = false;
+  @Input() singleCalendar: boolean;
+  @Input() weekStartsOn: number;
   // #endregion
 
   // #region component outputs
@@ -45,6 +46,7 @@ export class CalendarComponent implements OnChanges {
 
   // #region all component variables
   weekList: Dayjs[][];
+  weekDays: string[];
   // #endregion
 
   // #region setters and getters
@@ -66,6 +68,7 @@ export class CalendarComponent implements OnChanges {
   createCalendarGridData(): void {
     let year = null;
     let month = null;
+    this.setWeekDays();
     const thisMonthStartDate = dayjs()
       .set("year", +this.year)
       .set("month", +this.month)
@@ -78,7 +81,10 @@ export class CalendarComponent implements OnChanges {
       .startOf("month");
     year = previousMonthStartDate.get("year");
     month = previousMonthStartDate.get("month");
-    const previousMonthLastWeek = calendarize(previousMonthStartDate.toDate())
+    const previousMonthLastWeek = calendarize(
+      previousMonthStartDate.toDate(),
+      this.weekStartsOn
+    )
       .pop()
       .filter(Boolean)
       .map((day) => {
@@ -93,26 +99,30 @@ export class CalendarComponent implements OnChanges {
       });
     year = thisMonthStartDate.get("year");
     month = thisMonthStartDate.get("month");
-    const thisMonthweekList = calendarize(thisMonthStartDate.toDate()).map(
-      (week) => {
-        return week.filter(Boolean).map((day) => {
-          if (day === 0) {
-            return null;
-          }
-          return dayjs()
-            .set("year", year)
-            .set("month", month)
-            .set("date", day)
-            .set("hour", 0)
-            .set("minute", 0)
-            .set("second", 0)
-            .set("millisecond", 0);
-        });
-      }
-    );
+    const thisMonthweekList = calendarize(
+      thisMonthStartDate.toDate(),
+      this.weekStartsOn
+    ).map((week) => {
+      return week.filter(Boolean).map((day) => {
+        if (day === 0) {
+          return null;
+        }
+        return dayjs()
+          .set("year", year)
+          .set("month", month)
+          .set("date", day)
+          .set("hour", 0)
+          .set("minute", 0)
+          .set("second", 0)
+          .set("millisecond", 0);
+      });
+    });
     year = nextMonthStartDate.get("year");
     month = nextMonthStartDate.get("month");
-    const nextMonthFirstWeek = calendarize(nextMonthStartDate.toDate())
+    const nextMonthFirstWeek = calendarize(
+      nextMonthStartDate.toDate(),
+      this.weekStartsOn
+    )
       .shift()
       .filter(Boolean)
       .map((day) => {
@@ -154,6 +164,14 @@ export class CalendarComponent implements OnChanges {
       thisMonthweekList.unshift(previousMonthSecondLastWeek);
     }
     this.weekList = thisMonthweekList;
+  }
+  setWeekDays() {
+    let weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+    weekDays = [
+      ...weekDays.slice(this.weekStartsOn, 7),
+      ...weekDays.slice(0, this.weekStartsOn),
+    ];
+    this.weekDays = weekDays;
   }
   isDisabled(day: Dayjs) {
     return (

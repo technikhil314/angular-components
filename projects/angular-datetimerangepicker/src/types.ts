@@ -57,4 +57,5 @@ export class Options {
   theme?: Theme = "light";
   required?: boolean = false;
   DOB?: boolean = false;
+  weekStartsOn: number = 0;
 }
