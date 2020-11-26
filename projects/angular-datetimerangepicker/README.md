@@ -50,6 +50,8 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
+- Date: 26 Nov 2020 v2.2.10
+  1. Added option to set week start day [issue #47](https://github.com/technikhil314/angular-components/issues/47)
 - Date: 19 Nov 2020 v2.1.9
   1. Added intelligent position detector to avoid horizontal scroll
   1. Using css variables to color the previous next chevron arrows
