@@ -92,6 +92,11 @@
     <h3>Configuration Options Generator</h3>
     <form>
       <div class="form-group">
+        <label class="label font-weight-bold control-label mr-3" for="weekStartsOn">Week Starts On</label>
+        <input type="number" class="form-control" name="weekStartsOn" [(ngModel)]=daterangepickerOptions.weekStartsOn
+          id="weekStartsOn">
+      </div>
+      <div class="form-group">
         <input type="checkbox" name="singleCalendar" [(ngModel)]=daterangepickerOptions.singleCalendar
           id="singleCalendar">
         <label class="label font-weight-bold control-label" for="singleCalendar">Single Calendar</label>

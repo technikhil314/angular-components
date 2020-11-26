@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
     showRanges: true,
     theme: "light",
     required: false,
+    weekStartsOn: 0,
     preDefinedRanges: [
       {
         name: "Day After tomorrow",
