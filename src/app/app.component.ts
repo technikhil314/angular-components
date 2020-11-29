@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
     format: "DD.MM.YYYY HH:mm",
     startDate: dayjs(),
     endDate: dayjs().add(10, "days"),
-    minDate: dayjs().add(-12, "months").format("DD.MM.YYYY HH:mm"),
-    maxDate: dayjs().add(12, "months").format("DD.MM.YYYY HH:mm"),
+    minDate: dayjs().add(-4, "months").format("DD.MM.YYYY HH:mm"),
+    maxDate: dayjs().add(4, "months").format("DD.MM.YYYY HH:mm"),
     inactiveBeforeStart: true,
     autoApply: true,
     showRanges: true,
@@ -91,8 +91,9 @@ export class AppComponent implements OnInit {
       minuteInterval: 5,
       twentyFourHourFormat: true,
     },
-    disableBeforeStart: true,
+    disableBeforeStart: false,
     alwaysOpen: false,
+    addTouchSupport: true,
   };
   selectedRange = {
     start: null,

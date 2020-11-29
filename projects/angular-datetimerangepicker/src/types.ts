@@ -58,4 +58,5 @@ export class Options {
   required?: boolean = false;
   DOB?: boolean = false;
   weekStartsOn: number = 0;
+  addTouchSupport: boolean = false;
 }

@@ -42,11 +42,15 @@ export class CalendarComponent implements OnChanges {
   @Output() dateChanged: EventEmitter<DateChanged> = new EventEmitter();
   @Output() monthChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
   @Output() yearChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
+  @Output() scrollTop: EventEmitter<void> = new EventEmitter();
   // #endregion
 
   // #region all component variables
+  isTouch: boolean = !window.matchMedia("(hover: hover)").matches;
   weekList: Dayjs[][];
   weekDays: string[];
+  monthsList: any[] = [];
+  yearsList: number[] = [];
   // #endregion
 
   // #region setters and getters
@@ -65,27 +69,18 @@ export class CalendarComponent implements OnChanges {
   // #endregion
 
   // #region view manipulations and condition providers
-  createCalendarGridData(): void {
-    let year = null;
-    let month = null;
-    this.setWeekDays();
+  getNextMonthFirstWeek(): Dayjs[] {
     const thisMonthStartDate = dayjs()
       .set("year", +this.year)
       .set("month", +this.month)
       .startOf("month");
-    const previousMonthStartDate = thisMonthStartDate
-      .subtract(1, "month")
-      .startOf("month");
     const nextMonthStartDate = thisMonthStartDate
       .add(1, "month")
       .startOf("month");
-    year = previousMonthStartDate.get("year");
-    month = previousMonthStartDate.get("month");
-    const previousMonthLastWeek = calendarize(
-      previousMonthStartDate.toDate(),
-      this.weekStartsOn
-    )
-      .pop()
+    const year = nextMonthStartDate.get("year");
+    const month = nextMonthStartDate.get("month");
+    return calendarize(nextMonthStartDate.toDate(), this.weekStartsOn)
+      .shift()
       .filter(Boolean)
       .map((day) => {
         return dayjs()
@@ -97,9 +92,82 @@ export class CalendarComponent implements OnChanges {
           .set("second", 0)
           .set("millisecond", 0);
       });
+  }
+  getPreviousMonthNthLastWeek(nthLastCount): Dayjs[] {
+    const thisMonthStartDate = dayjs()
+      .set("year", +this.year)
+      .set("month", +this.month)
+      .startOf("month");
+    const previousMonthStartDate = thisMonthStartDate
+      .subtract(1, "month")
+      .startOf("month");
+    const year = previousMonthStartDate.get("year");
+    const month = previousMonthStartDate.get("month");
+    return calendarize(previousMonthStartDate.toDate(), this.weekStartsOn)
+      .slice(-nthLastCount)[0]
+      .filter(Boolean)
+      .map((day) => {
+        return dayjs()
+          .set("year", year)
+          .set("month", month)
+          .set("date", day)
+          .set("hour", 0)
+          .set("minute", 0)
+          .set("second", 0)
+          .set("millisecond", 0);
+      });
+  }
+  createTouchCalendarGridData(): void {
+    const monthsList = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const maxYear = this.maxDate.get("year");
+    const maxMonth = this.maxDate.get("month");
+    const minYear = this.minDate.get("year");
+    const minMonth = this.minDate.get("month");
+    this.yearsList = [];
+    this.monthsList = [];
+    for (let i = 1900; i <= +dayjs().add(100, "year").get("year"); i++) {
+      if (i < minYear || i > maxYear) {
+        continue;
+      }
+      this.yearsList.push(i);
+    }
+    for (let i = 0; i < monthsList.length; i++) {
+      if (this.year === minYear && i < minMonth) {
+        continue;
+      }
+      if (this.year === maxYear && i > maxMonth) {
+        continue;
+      }
+      this.monthsList.push({
+        name: monthsList[i],
+        value: i,
+      });
+    }
+  }
+  createCalendarGridData(): void {
+    let year = null;
+    let month = null;
+    this.setWeekDays();
+    const thisMonthStartDate = dayjs()
+      .set("year", +this.year)
+      .set("month", +this.month)
+      .startOf("month");
     year = thisMonthStartDate.get("year");
     month = thisMonthStartDate.get("month");
-    const thisMonthweekList = calendarize(
+    const thisMonthWeekList = calendarize(
       thisMonthStartDate.toDate(),
       this.weekStartsOn
     ).map((week) => {
@@ -117,53 +185,29 @@ export class CalendarComponent implements OnChanges {
           .set("millisecond", 0);
       });
     });
-    year = nextMonthStartDate.get("year");
-    month = nextMonthStartDate.get("month");
-    const nextMonthFirstWeek = calendarize(
-      nextMonthStartDate.toDate(),
-      this.weekStartsOn
-    )
-      .shift()
-      .filter(Boolean)
-      .map((day) => {
-        return dayjs()
-          .set("year", year)
-          .set("month", month)
-          .set("date", day)
-          .set("hour", 0)
-          .set("minute", 0)
-          .set("second", 0)
-          .set("millisecond", 0);
-      });
-    if (thisMonthweekList[0].length < 7) {
-      thisMonthweekList[0] = previousMonthLastWeek.concat(thisMonthweekList[0]);
+    // if this months first week has less than 7 days then take previous month's last week and merge them
+    // This should be done only for grid view which is shown only on non touch devices
+    if (!this.isTouch) {
+      if (thisMonthWeekList[0].length < 7) {
+        thisMonthWeekList[0] = this.getPreviousMonthNthLastWeek(1).concat(
+          thisMonthWeekList[0]
+        );
+      }
+      // if this months last week has less than 7 days then take next month's first week and merge them
+      if (thisMonthWeekList.slice(-1)[0].length < 7) {
+        thisMonthWeekList[
+          thisMonthWeekList.length - 1
+        ] = thisMonthWeekList.slice(-1)[0].concat(this.getNextMonthFirstWeek());
+      }
+      // if total number of weeks is less than 6 then we need to add one more week
+      // Here we add previous months second last week
+      if (thisMonthWeekList.length < 6) {
+        thisMonthWeekList.unshift(this.getPreviousMonthNthLastWeek(2));
+      }
+    } else {
+      this.createTouchCalendarGridData();
     }
-    if (thisMonthweekList.slice(-1)[0].length < 7) {
-      thisMonthweekList[thisMonthweekList.length - 1] = thisMonthweekList
-        .slice(-1)[0]
-        .concat(nextMonthFirstWeek);
-    }
-    if (thisMonthweekList.length < 6) {
-      year = previousMonthStartDate.get("year");
-      month = previousMonthStartDate.get("month");
-      const previousMonthSecondLastWeek = calendarize(
-        previousMonthStartDate.toDate()
-      )
-        .slice(-2)[0]
-        .filter(Boolean)
-        .map((day) => {
-          return dayjs()
-            .set("year", year)
-            .set("month", month)
-            .set("date", day)
-            .set("hour", 0)
-            .set("minute", 0)
-            .set("second", 0)
-            .set("millisecond", 0);
-        });
-      thisMonthweekList.unshift(previousMonthSecondLastWeek);
-    }
-    this.weekList = thisMonthweekList;
+    this.weekList = thisMonthWeekList;
   }
   setWeekDays() {
     let weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -217,6 +261,9 @@ export class CalendarComponent implements OnChanges {
   // #endregion
 
   // #region self event handlers
+  scrollMeOutTop() {
+    this.scrollTop.emit();
+  }
   dateSelected(day) {
     this.dateChanged.emit({
       day: day,
@@ -230,10 +277,11 @@ export class CalendarComponent implements OnChanges {
     });
   }
   yearSelected(value) {
-    this.yearChanged.emit({
-      value: value,
-      isLeft: this.isLeft,
-    });
+    if (value)
+      this.yearChanged.emit({
+        value: value,
+        isLeft: this.isLeft,
+      });
   }
   // #endregion
 }

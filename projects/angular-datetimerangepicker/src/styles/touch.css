@@ -1,0 +1,96 @@
+@media (hover: none) {
+  .drp-calendar-input,
+  .drp-flyout.tooltipChevron::after,
+  .drp-flyout.tooltipChevron::before {
+    display: none;
+  }
+  .drp-flyout.touch {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100vw;
+    flex-direction: row;
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 300px;
+    overflow: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+  .drp-calendars-wrapper {
+    flex-wrap: wrap;
+  }
+  .drp-calendar-row {
+    flex-direction: column;
+  }
+  .drp-btn {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  .drp-calendar-row span.disabled {
+    display: none;
+  }
+  .drp-calendar-column {
+    max-height: 150px;
+    overscroll-behavior: contain;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    justify-content: flex-start;
+  }
+  .drp-calendar-column .drp-calendar-row {
+    scroll-snap-align: start;
+  }
+  .drp-controls,
+  .drp-calendar-container {
+    width: 100vw;
+    align-self: center;
+  }
+  .drp-next-calendar-cta {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+  }
+}
+@media (hover: none) and (min-width: 700px) {
+  .drp-flyout.touch {
+    display: flex;
+    flex-wrap: nowrap;
+    max-height: 300px;
+    overflow: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+  .drp-controls,
+  .drp-calendar-container {
+    width: auto;
+  }
+  .drp-controls {
+    max-width: 30%;
+  }
+  .drp-next-calendar-cta {
+    display: none;
+  }
+}
+
+@media (hover: none) and (min-width: 800px) {
+  .drp-controls {
+    max-width: 100vw;
+  }
+}
+
+@media (hover: none) and (min-width: 1000px) {
+  .drp-calendar-input,
+  .drp-flyout.tooltipChevron::after,
+  .drp-flyout.tooltipChevron::before {
+    display: block;
+  }
+  .drp-flyout.touch {
+    max-height: auto;
+  }
+  .drp-calendars-wrapper {
+    flex-wrap: nowrap;
+  }
+}

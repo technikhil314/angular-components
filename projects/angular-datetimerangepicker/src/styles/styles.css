@@ -168,6 +168,7 @@ svg {
 .drp-calendar-container {
   margin-left: 10px;
   margin-right: 10px;
+  position: relative;
 }
 
 @media only screen and (max-width: 600px) {

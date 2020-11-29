@@ -6,14 +6,15 @@
           hidden: !(showCalendars || derivedOptions.alwaysOpen),
           singledatepicker: derivedOptions.singleCalendar,
           tooltipChevron: !derivedOptions.alwaysOpen,
-          alwaysOpen: derivedOptions.alwaysOpen
+          alwaysOpen: derivedOptions.alwaysOpen,
+          touch: derivedOptions.addTouchSupport
         }">
     <div class="drp-calendars-wrapper">
       <div class="drp-calendar-container">
         <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: derivedOptions.displayFormat"
           (blur)="formatFromDate($event)" [class.hidden]="derivedOptions.singleCalendar" readonly type="text"
           name="daterangepicker_start" />
-        <calendar class="calender" [isLeft]="true" [month]="fromMonth" [year]="fromYear"
+        <calendar class="calender" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (scrollTop)="scrollTop()"
           (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)" (dateChanged)="dateChanged($event)"
           [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
@@ -23,7 +24,7 @@
       <div class="drp-calendar-container" *ngIf="!derivedOptions.singleCalendar">
         <input class="drp-calendar-input" [ngModel]="toDate | formatDate: derivedOptions.displayFormat"
           (blur)="formatToDate($event)" readonly name="daterangepicker_end" />
-        <calendar class="calender" [month]="toMonth" [year]="toYear" [format]="format"
+        <calendar class="calender" [month]="toMonth" [year]="toYear" [format]="format" (scrollTop)="scrollTop()"
           (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)"
           [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
@@ -31,7 +32,7 @@
           [weekStartsOn]="derivedOptions.weekStartsOn"></calendar>
       </div>
     </div>
-    <div class="my-0">
+    <div class="my-0 drp-controls">
       <div class="drp-flex"><button [class.hidden]="derivedOptions.autoApply" class="drp-btn apply"
           [disabled]="!enableApplyButton" (click)="apply()" type="button">
           Apply

@@ -24,7 +24,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "projects/angular-datetimerangepicker/src/styles/styles.css"
+              "projects/angular-datetimerangepicker/src/styles/styles.css",
+              "projects/angular-datetimerangepicker/src/styles/touch.css"
             ],
             "scripts": []
           },

@@ -95,7 +95,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   // #endregion
 
   // #region constructor
-  constructor(private elem: ElementRef) {}
+  constructor(private elem: ElementRef<HTMLElement>) {}
   // #endregion
 
   // #region Component Life cycle handlers
@@ -152,6 +152,12 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     }
     if (!this.derivedOptions.displayFormat) {
       this.derivedOptions.displayFormat = this.derivedOptions.format;
+    }
+    if (this.derivedOptions.addTouchSupport) {
+      this.derivedOptions.alwaysOpen = false;
+    }
+    if (window.matchMedia("(min-width: 1000px)").matches) {
+      this.derivedOptions.addTouchSupport = false;
     }
     if (
       this.derivedOptions.showRanges &&
@@ -371,9 +377,14 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   // #endregion
 
   // #region Child component event handlers
+  scrollTop() {
+    const flyout = this.elem.nativeElement.querySelector(".drp-flyout");
+    flyout.scrollBy(0, 300);
+  }
   dateChanged(data) {
     let value = data.day;
     let isLeft = data.isLeft;
+    console.log(value);
     if (isLeft) {
       if (!this.derivedOptions.timePicker) {
         value = value.hour(0);
@@ -440,38 +451,35 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   }
   monthChanged(data) {
     let temp;
-    if (data.isLeft) {
-      temp = dayjs()
-        .set("year", this.fromYear)
-        .set("month", this.fromMonth)
-        .add(data.value, "month");
-      this.fromMonth = temp.get("month");
-      this.fromYear = temp.get("year");
+    if ([1, -1].includes(data.value)) {
+      if (data.isLeft) {
+        temp = dayjs()
+          .set("year", this.fromYear)
+          .set("month", this.fromMonth)
+          .add(data.value, "month");
+        this.fromMonth = temp.get("month");
+        this.fromYear = temp.get("year");
+      } else {
+        temp = dayjs()
+          .set("year", this.toYear)
+          .set("month", this.toMonth)
+          .add(data.value, "month");
+        this.toMonth = temp.get("month");
+        this.toYear = temp.get("year");
+      }
     } else {
-      temp = dayjs()
-        .set("year", this.toYear)
-        .set("month", this.toMonth)
-        .add(data.value, "month");
-      this.toMonth = temp.get("month");
-      this.toYear = temp.get("year");
+      if (data.isLeft) {
+        this.fromMonth = data.value;
+      } else {
+        this.toMonth = data.value;
+      }
     }
   }
   yearChanged(data) {
-    let temp;
     if (data.isLeft) {
-      temp = dayjs()
-        .set("year", this.fromYear)
-        .set("month", this.fromMonth)
-        .add(data.value, "year");
-      this.fromMonth = temp.get("month");
-      this.fromYear = temp.get("year");
+      this.fromYear = data.value;
     } else {
-      temp = dayjs()
-        .set("year", this.toYear)
-        .set("month", this.toMonth)
-        .add(data.value, "year");
-      this.toMonth = temp.get("month");
-      this.toYear = temp.get("year");
+      this.toYear = data.value;
     }
   }
   // #endregion
