@@ -28,7 +28,10 @@
       <daterangepicker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)">
       </daterangepicker>
       <div class="col-xs-12 mt-5">
-        <strong>Selected Range Data</strong>
+        <p class="m-0 p-0">
+          <strong class="mr-2">Selected Range Data</strong>
+          <small><em>Shown in UTC time</em></small>
+        </p>
         <pre>{{prettyPrintJSON(selectedRange)}}</pre>
       </div>
     </div>
