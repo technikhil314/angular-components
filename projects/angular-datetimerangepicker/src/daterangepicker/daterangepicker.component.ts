@@ -112,6 +112,9 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     this.setToDate(this.derivedOptions.endDate);
     //update calendar grid
     this.updateCalendar();
+    window.onresize = () => {
+      this.isLargeDesktop = isLargeDesktop();
+    };
   }
   // #endregion
 
@@ -136,7 +139,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
-    this.isLargeDesktop = isLargeDesktop;
+    this.isLargeDesktop = isLargeDesktop();
     if (!this.fromMonth) {
       this.fromMonth = dayjs().get("month");
     }
