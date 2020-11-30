@@ -50,6 +50,9 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
+- Date: 30 Nov 2020 v2.3.0
+  1. Added options hideControls, readOnly, placeholder
+  1. Added touch support too (Behind toggle and WIP) (Open issue on [github](https://github.com/technikhil314/angular-components/issues) if you want to try out touch support)
 - Date: 26 Nov 2020 v2.2.10
   1. Added option to set week start day [issue #47](https://github.com/technikhil314/angular-components/issues/47)
 - Date: 19 Nov 2020 v2.1.9
