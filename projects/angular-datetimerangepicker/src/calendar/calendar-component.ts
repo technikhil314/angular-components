@@ -39,6 +39,10 @@ export class CalendarComponent implements OnChanges {
   // #endregion
 
   // #region component outputs
+  maxYear: number = 0;
+  maxMonth: number = 0;
+  minYear: number = 0;
+  minMonth: number = 0;
   @Output() dateChanged: EventEmitter<DateChanged> = new EventEmitter();
   @Output() monthChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
   @Output() yearChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
@@ -64,6 +68,10 @@ export class CalendarComponent implements OnChanges {
 
   // #region Component Life cycle handlers
   ngOnChanges(changes: SimpleChanges): void {
+    this.maxYear = this.maxDate ? this.maxDate.get("year") : 100000;
+    this.maxMonth = this.maxDate ? this.maxDate.get("month") : 12;
+    this.minYear = this.minDate ? this.minDate.get("year") : 0;
+    this.minMonth = this.minDate ? this.minDate.get("month") : -1;
     this.createCalendarGridData();
   }
   // #endregion
@@ -132,23 +140,19 @@ export class CalendarComponent implements OnChanges {
       "November",
       "December",
     ];
-    const maxYear = this.maxDate.get("year");
-    const maxMonth = this.maxDate.get("month");
-    const minYear = this.minDate.get("year");
-    const minMonth = this.minDate.get("month");
     this.yearsList = [];
     this.monthsList = [];
     for (let i = 1900; i <= +dayjs().add(100, "year").get("year"); i++) {
-      if (i < minYear || i > maxYear) {
+      if (i < this.minYear || i > this.maxYear) {
         continue;
       }
       this.yearsList.push(i);
     }
     for (let i = 0; i < monthsList.length; i++) {
-      if (this.year === minYear && i < minMonth) {
+      if (this.year === this.minYear && i < this.minMonth) {
         continue;
       }
-      if (this.year === maxYear && i > maxMonth) {
+      if (this.year === this.maxYear && i > this.maxMonth) {
         continue;
       }
       this.monthsList.push({
@@ -158,6 +162,14 @@ export class CalendarComponent implements OnChanges {
     }
   }
   createCalendarGridData(): void {
+    if (this.year <= this.minYear && this.month < this.minMonth) {
+      this.year = this.minYear;
+      this.month = this.minMonth;
+    }
+    if (this.year >= this.maxYear && this.month > this.maxMonth) {
+      this.year = this.maxYear;
+      this.month = this.maxMonth;
+    }
     let year = null;
     let month = null;
     this.setWeekDays();

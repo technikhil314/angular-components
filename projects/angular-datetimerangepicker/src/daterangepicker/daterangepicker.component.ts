@@ -134,6 +134,18 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
+    if (!this.fromMonth) {
+      this.fromMonth = dayjs().get("month");
+    }
+    if (!this.toMonth) {
+      this.toMonth = dayjs().get("month");
+    }
+    if (!this.fromYear) {
+      this.fromYear = dayjs().get("year");
+    }
+    if (!this.toYear) {
+      this.toYear = dayjs().get("year");
+    }
     this.derivedOptions.weekStartsOn =
       Math.abs(this.derivedOptions.weekStartsOn) % 7;
     if (this.derivedOptions.noDefaultRangeSelected) {
@@ -171,7 +183,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
           window.innerWidth -
           this.elem.nativeElement.getBoundingClientRect().left;
         if (spaceToRight < 500) {
-          console.log("object");
           this.derivedOptions.position = "right";
         }
       } else if (this.derivedOptions.position === "right") {
@@ -384,7 +395,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   dateChanged(data) {
     let value = data.day;
     let isLeft = data.isLeft;
-    console.log(value);
     if (isLeft) {
       if (!this.derivedOptions.timePicker) {
         value = value.hour(0);
@@ -534,15 +544,11 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   cancel() {
     this.restoreOldDates();
     this.toggleCalendars(false);
-    this.fromYear = this.toYear = dayjs().get("year");
-    this.fromMonth = this.toMonth = dayjs().get("month");
   }
   clear() {
     this.fromDate = this.toDate = null;
     this.apply();
     this.enableApplyButton = false;
-    this.fromYear = this.toYear = dayjs().get("year");
-    this.fromMonth = this.toMonth = dayjs().get("month");
   }
   applyPredefinedRange(data: DefinedDateRange) {
     this.setFromDate(data.value.start);

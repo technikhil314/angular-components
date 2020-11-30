@@ -1,15 +1,19 @@
 <div *ngIf="!isTouch" class="drp-flex drp-space-around">
-  <button class="drp-btn flat" (click)="yearSelected(-1)" title="Previous year" aria-label="Previous year">
+  <button class="drp-btn flat" (click)="yearSelected(year-1)" title="Previous year" aria-label="Previous year"
+    [disabled]="year === minYear">
     <doubleChevronLeft></doubleChevronLeft>
   </button>
-  <button class="drp-btn flat" (click)="monthSelected(-1)" title="Previous month" aria-label="Previous month">
+  <button class="drp-btn flat" (click)="monthSelected(-1)" title="Previous month" aria-label="Previous month"
+    [disabled]="year === minYear && month === minMonth">
     <chevronLeft></chevronLeft>
   </button>
   <label class="mb-0"> {{monthText}} {{year}} </label>
-  <button class="drp-btn flat next" (click)="monthSelected(1)" title="Next month" aria-label="Next month">
+  <button class="drp-btn flat next" (click)="monthSelected(1)" title="Next month" aria-label="Next month"
+    [disabled]="year === maxYear && month === maxMonth">
     <chevronLeft></chevronLeft>
   </button>
-  <button class="drp-btn flat next" (click)="yearSelected(1)" title="Next Year" aria-label="Next Year">
+  <button class="drp-btn flat next" (click)="yearSelected(year+1)" title="Next Year" aria-label="Next Year"
+    [disabled]="year === maxYear">
     <doubleChevronLeft></doubleChevronLeft>
   </button>
 </div>
@@ -23,7 +27,7 @@
     <div class="drp-calendar-row" *ngFor="let week of weekList; let i=index">
       <span *ngFor="let day of weekList[i]" (click)="dateSelected(day)"
         [ngClass]="{'off':!isDateAvailable(day),'active':isSelectedDate(day),'disabled':isDisabled(day)}">
-        <button class="drp-btn flat"
+        <button class="drp-btn flat" [disabled]="isDisabled(day)"
           [attr.aria-label]="day | formatDate: format">{{ !isTouch ? day.format('D') : day.format('ddd D') }}</button>
       </span>
     </div>
