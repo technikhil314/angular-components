@@ -136,7 +136,6 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
-    console.log(isLargeDesktop);
     this.isLargeDesktop = isLargeDesktop;
     if (!this.fromMonth) {
       this.fromMonth = dayjs().get("month");
