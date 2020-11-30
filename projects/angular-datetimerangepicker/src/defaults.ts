@@ -5,22 +5,22 @@ const defaults = {
     {
       name: "Today",
       value: {
-        start: dayjs(),
-        end: dayjs(),
+        start: dayjs().startOf("day"),
+        end: dayjs().endOf("day"),
       },
     },
     {
       name: "Yesterday",
       value: {
-        start: dayjs().subtract(1, "day"),
-        end: dayjs().subtract(1, "day"),
+        start: dayjs().subtract(1, "day").startOf("day"),
+        end: dayjs().subtract(1, "day").endOf("day"),
       },
     },
     {
-      name: "last 7 day",
+      name: "This week",
       value: {
-        start: dayjs().subtract(6, "day"),
-        end: dayjs(),
+        start: dayjs().startOf("week"),
+        end: dayjs().endOf("week"),
       },
     },
     {
