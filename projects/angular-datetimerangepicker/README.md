@@ -17,7 +17,7 @@
 [![number of forks](https://img.shields.io/github/forks/technikhil314/angular-components?style=social)](https://github.com/technikhil314/angular-components/fork)
 [![Follow technikhil314 on twitter](https://img.shields.io/twitter/follow/technikhil314?label=Follow)](https://www.twitter.com/technikhil314)
 
-###### :clap: & :heart: to [auto badger](https://github.com/technikhil314/auto-badger) for making badging simple</small>
+###### :clap: & :heart: to [auto badger](https://github.com/technikhil314/auto-badger) for making badging simple
 
 [//]: <> (end placeholder for auto-badger)
 
