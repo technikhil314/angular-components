@@ -1,7 +1,7 @@
 <div class="drp-wrapper {{derivedOptions.theme}}">
-  <input class="{{class}} drp-input" type="text" [ngModel]="range" [disabled]="derivedOptions.disabled"
-    [attr.aria-label]="getAriaLabel()" [class.hidden]="derivedOptions.alwaysOpen"
-    [attr.required]="derivedOptions.required" />
+  <input class="{{class}} drp-input" [attr.placeholder]="derivedOptions.placeholder" type="text" [ngModel]="range"
+    [disabled]="derivedOptions.disabled" [attr.aria-label]="getAriaLabel()" [class.hidden]="derivedOptions.alwaysOpen"
+    [attr.required]="derivedOptions.required" [attr.readonly]="derivedOptions.readOnly" />
   <div class="drp-flyout {{derivedOptions.position}}" [ngClass]="{
           hidden: !(showCalendars || derivedOptions.alwaysOpen),
           singledatepicker: derivedOptions.singleCalendar,
@@ -33,8 +33,9 @@
       </div>
     </div>
     <div class="my-0 drp-controls">
-      <div class="drp-flex"><button [class.hidden]="derivedOptions.autoApply" class="drp-btn apply"
-          [disabled]="!enableApplyButton" (click)="apply()" type="button">
+      <div class="drp-flex" [hidden]="derivedOptions.hideControls">
+        <button [class.hidden]="derivedOptions.autoApply" class="drp-btn apply" [disabled]="!enableApplyButton"
+          (click)="apply()" type="button">
           Apply
         </button>
         <button [class.hidden]="derivedOptions.autoApply" class="drp-btn cancel" (click)="cancel()" type="button">

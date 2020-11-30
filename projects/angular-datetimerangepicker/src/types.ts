@@ -57,6 +57,9 @@ export class Options {
   theme?: Theme = "light";
   required?: boolean = false;
   DOB?: boolean = false;
-  weekStartsOn: number = 0;
-  addTouchSupport: boolean = false;
+  weekStartsOn?: number = 0;
+  addTouchSupport?: boolean = false;
+  placeholder?: string = "";
+  hideControls?: boolean = false;
+  readOnly?: boolean = false;
 }
