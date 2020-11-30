@@ -140,16 +140,16 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       };
     }
     this.isLargeDesktop = isLargeDesktop();
-    if (!this.fromMonth) {
+    if (isNaN(this.fromMonth)) {
       this.fromMonth = dayjs().get("month");
     }
-    if (!this.toMonth) {
-      this.toMonth = dayjs().get("month");
-    }
-    if (!this.fromYear) {
+    if (isNaN(this.fromYear)) {
       this.fromYear = dayjs().get("year");
     }
-    if (!this.toYear) {
+    if (isNaN(this.toMonth)) {
+      this.toMonth = dayjs().get("month");
+    }
+    if (isNaN(this.toYear)) {
       this.toYear = dayjs().get("year");
     }
     this.derivedOptions.weekStartsOn =
@@ -453,7 +453,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
       ? this.fromDate.get("month")
       : this.fromMonth;
     this.toMonth = this.toDate ? this.toDate.get("month") : this.toMonth;
-    this.fromYear = this.fromDate.get("year");
+    this.fromYear = this.fromDate ? this.fromDate.get("year") : this.fromYear;
     if (!this.toDate && this.fromDate) {
       this.toYear = this.fromYear;
       this.toMonth = this.fromMonth;
@@ -464,19 +464,19 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   }
   monthChanged(data) {
     let temp;
-    if ([1, -1].includes(data.value)) {
+    if ([100, -100].includes(data.value)) {
       if (data.isLeft) {
         temp = dayjs()
           .set("year", this.fromYear)
           .set("month", this.fromMonth)
-          .add(data.value, "month");
+          .add(data.value / 100, "month");
         this.fromMonth = temp.get("month");
         this.fromYear = temp.get("year");
       } else {
         temp = dayjs()
           .set("year", this.toYear)
           .set("month", this.toMonth)
-          .add(data.value, "month");
+          .add(data.value / 100, "month");
         this.toMonth = temp.get("month");
         this.toYear = temp.get("year");
       }

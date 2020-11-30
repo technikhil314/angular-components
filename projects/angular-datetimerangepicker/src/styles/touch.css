@@ -1,5 +1,4 @@
 @media (hover: none) {
-  .drp-flyout.touch .drp-calendar-input,
   .drp-flyout.touch.tooltipChevron::after,
   .drp-flyout.touch.tooltipChevron::before {
     display: none;
@@ -15,7 +14,7 @@
     justify-content: space-around;
     display: flex;
     flex-wrap: wrap;
-    max-height: 300px;
+    max-height: 325px;
     overflow: auto;
     scroll-behavior: smooth;
     overscroll-behavior: contain;
@@ -56,13 +55,9 @@
   }
 }
 @media (hover: none) and (min-width: 700px) {
+  .drp-flyout.touch .drp-calendars-wrapper,
   .drp-flyout.touch.fixed {
-    display: flex;
     flex-wrap: nowrap;
-    max-height: 300px;
-    overflow: auto;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
   }
   .drp-flyout.touch .drp-controls,
   .drp-flyout.touch .drp-calendar-container {
@@ -77,16 +72,12 @@
 }
 
 @media (hover: none) and (min-width: 1000px) {
-  .drp-flyout.touch .drp-calendar-input,
   .drp-flyout.touch .drp-flyout.tooltipChevron::after,
   .drp-flyout.touch .drp-flyout.tooltipChevron::before {
     display: block;
   }
-  .drp-flyout.touch .drp-flyout.touch {
+  .drp-flyout.touch {
     max-height: auto;
-  }
-  .drp-flyout.touch .drp-calendars-wrapper {
-    flex-wrap: nowrap;
   }
   .drp-flyout.touch .drp-controls {
     max-width: 100vw;
