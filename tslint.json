@@ -15,7 +15,6 @@
       "severity": "warn"
     },
     "eofline": true,
-    "forin": true,
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -27,10 +26,6 @@
     ],
     "interface-over-type-literal": true,
     "label-position": true,
-    "max-line-length": [
-      true,
-      140
-    ],
     "member-access": false,
     "member-ordering": [
       true,
@@ -44,7 +39,6 @@
       }
     ],
     "no-arg": true,
-    "no-bitwise": true,
     "no-console": [
       true,
       "debug",
@@ -125,7 +119,6 @@
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
     "directive-class-suffix": true
   }
 }
