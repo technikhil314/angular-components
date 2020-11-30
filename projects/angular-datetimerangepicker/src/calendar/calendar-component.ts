@@ -36,6 +36,7 @@ export class CalendarComponent implements OnChanges {
   @Input() timePicker: Timepicker;
   @Input() singleCalendar: boolean;
   @Input() weekStartsOn: number;
+  @Input() addTouchSupport: boolean;
   // #endregion
 
   // #region component outputs
@@ -50,7 +51,7 @@ export class CalendarComponent implements OnChanges {
   // #endregion
 
   // #region all component variables
-  isTouch: boolean = !window.matchMedia("(hover: hover)").matches;
+  isTouch: boolean = false;
   weekList: Dayjs[][];
   weekDays: string[];
   monthsList: any[] = [];
@@ -67,7 +68,9 @@ export class CalendarComponent implements OnChanges {
   // #endregion
 
   // #region Component Life cycle handlers
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
+    this.isTouch =
+      this.addTouchSupport && !window.matchMedia("(hover: hover)").matches;
     this.maxYear = this.maxDate ? this.maxDate.get("year") : 100000;
     this.maxMonth = this.maxDate ? this.maxDate.get("month") : 12;
     this.minYear = this.minDate ? this.minDate.get("year") : 0;

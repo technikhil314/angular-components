@@ -14,6 +14,7 @@ import dayjs, { Dayjs } from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import customParser from "dayjs/plugin/customParseFormat";
+import { isLargeDesktop, isTouch } from "../helper";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -52,6 +53,7 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   toYear: number;
   format: string;
   derivedOptions: Options;
+  isLargeDesktop: boolean = false;
   // #endregion
 
   // #region inside out side click handler
@@ -134,6 +136,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
         ...this.options,
       };
     }
+    console.log(isLargeDesktop);
+    this.isLargeDesktop = isLargeDesktop;
     if (!this.fromMonth) {
       this.fromMonth = dayjs().get("month");
     }
@@ -165,11 +169,8 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
     if (!this.derivedOptions.displayFormat) {
       this.derivedOptions.displayFormat = this.derivedOptions.format;
     }
-    if (this.derivedOptions.addTouchSupport) {
+    if (this.derivedOptions.addTouchSupport && isTouch) {
       this.derivedOptions.alwaysOpen = false;
-    }
-    if (window.matchMedia("(min-width: 1000px)").matches) {
-      this.derivedOptions.addTouchSupport = false;
     }
     if (
       this.derivedOptions.showRanges &&

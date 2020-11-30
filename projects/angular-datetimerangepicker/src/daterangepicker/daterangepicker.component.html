@@ -1,13 +1,14 @@
 <div class="drp-wrapper {{derivedOptions.theme}}">
   <input class="{{class}} drp-input" [attr.placeholder]="derivedOptions.placeholder" type="text" [ngModel]="range"
     [disabled]="derivedOptions.disabled" [attr.aria-label]="getAriaLabel()" [class.hidden]="derivedOptions.alwaysOpen"
-    [attr.required]="derivedOptions.required" [attr.readonly]="derivedOptions.readOnly" />
+    [attr.required]="derivedOptions.required" [attr.readonly]="derivedOptions.readOnly ? true : null" />
   <div class="drp-flyout {{derivedOptions.position}}" [ngClass]="{
           hidden: !(showCalendars || derivedOptions.alwaysOpen),
           singledatepicker: derivedOptions.singleCalendar,
           tooltipChevron: !derivedOptions.alwaysOpen,
           alwaysOpen: derivedOptions.alwaysOpen,
-          touch: derivedOptions.addTouchSupport
+          touch: derivedOptions.addTouchSupport,
+          fixed: !isLargeDesktop
         }">
     <div class="drp-calendars-wrapper">
       <div class="drp-calendar-container">
@@ -19,7 +20,8 @@
           [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
           [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"
-          [singleCalendar]="derivedOptions.singleCalendar" [weekStartsOn]="derivedOptions.weekStartsOn"></calendar>
+          [singleCalendar]="derivedOptions.singleCalendar" [weekStartsOn]="derivedOptions.weekStartsOn"
+          [addTouchSupport]="derivedOptions.addTouchSupport"></calendar>
       </div>
       <div class="drp-calendar-container" *ngIf="!derivedOptions.singleCalendar">
         <input class="drp-calendar-input" [ngModel]="toDate | formatDate: derivedOptions.displayFormat"
@@ -29,7 +31,7 @@
           [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
           [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"
-          [weekStartsOn]="derivedOptions.weekStartsOn"></calendar>
+          [weekStartsOn]="derivedOptions.weekStartsOn" [addTouchSupport]="derivedOptions.addTouchSupport"></calendar>
       </div>
     </div>
     <div class="my-0 drp-controls">
