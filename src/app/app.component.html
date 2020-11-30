@@ -38,9 +38,8 @@
     <div class="col-xs-12">
       <form class="mt-2">
         <div class="form-group">
-          <h4 class="font-weight-bold">Theming</h4>
-          <small>You can theme the component from here</small>
-          <br />
+          <h4 class="font-weight-bold mb-0">Theming</h4>
+          <small class="mb-4">You can theme the component from here</small>
           <div class="form-group">
             <input type="color" name="background" data-css-prop-name="--drp-bg" (input)="colorChange($event)"
               id="background">
@@ -100,9 +99,35 @@
           id="weekStartsOn">
       </div>
       <div class="form-group">
+        <label class="label font-weight-bold control-label mr-3" for="placeholder">Placeholder</label>
+        <input type="text" class="form-control" name="placeholder" [(ngModel)]=daterangepickerOptions.placeholder
+          id="placeholder">
+      </div>
+      <div class="form-group">
         <input type="checkbox" name="singleCalendar" [(ngModel)]=daterangepickerOptions.singleCalendar
           id="singleCalendar">
         <label class="label font-weight-bold control-label" for="singleCalendar">Single Calendar</label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" name="hideControls" [(ngModel)]=daterangepickerOptions.hideControls id="hideControls">
+        <label class="label font-weight-bold control-label" for="hideControls">Hide Controls</label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" name="addTouchSupport" [(ngModel)]=daterangepickerOptions.addTouchSupport
+          id="addTouchSupport">
+        <label class="label font-weight-bold control-label" for="addTouchSupport">
+          Add touch support * <small>WIP</small>
+        </label>
+        <p>
+          <small>Works only on touch devices and on initial render</small>
+          <br />
+          <small>
+            <em>
+              Check <a href="https://technikhil314.netlify.app/docs/daterangepicker/introduction">Documentation</a> for
+              more details
+            </em>
+          </small>
+        </p>
       </div>
       <div class="form-group">
         <input type="checkbox" name="autoApply" [(ngModel)]=daterangepickerOptions.autoApply id="autoApply">
@@ -117,6 +142,10 @@
         <input type="checkbox" name="disableBeforeStart" [(ngModel)]=daterangepickerOptions.disableBeforeStart
           id="disableBeforeStart">
         <label class="label font-weight-bold control-label" for="disableBeforeStart">Disable Before Start</label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" name="readOnly" [(ngModel)]=daterangepickerOptions.readOnly id="readOnly">
+        <label class="label font-weight-bold control-label" for="readOnly">Read Only</label>
       </div>
       <div class="form-group">
         <input type="checkbox" name="disabled" [(ngModel)]=daterangepickerOptions.disabled id="disabled">

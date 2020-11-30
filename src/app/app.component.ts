@@ -38,6 +38,9 @@ export class AppComponent implements OnInit {
     theme: "light",
     required: false,
     weekStartsOn: 0,
+    placeholder: "demo placeholder",
+    hideControls: false,
+    readOnly: true,
     preDefinedRanges: [
       {
         name: "Day After tomorrow",
