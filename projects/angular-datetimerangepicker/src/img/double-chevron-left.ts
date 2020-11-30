@@ -1,7 +1,7 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: "doubleChevronLeft",
+  selector: 'doublechevronleft',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -4,28 +4,28 @@ import {
   Input,
   OnChanges,
   Output
-} from "@angular/core";
-import calendarize from "calendarize";
-import dayjs, { Dayjs } from "dayjs";
-import customParser from "dayjs/plugin/customParseFormat";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+} from '@angular/core';
+import calendarize from 'calendarize';
+import dayjs, { Dayjs } from 'dayjs';
+import customParser from 'dayjs/plugin/customParseFormat';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import {
   DateChanged,
   MonthNameValue,
   Timepicker,
   YearMonthChanged
-} from "../types";
+} from '../types';
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(customParser);
 
 @Component({
-  selector: "calendar",
-  templateUrl: "./calendar-component.html",
+  selector: 'calendar',
+  templateUrl: './calendar-component.html',
 })
-export class CalendarComponent implements OnChanges {
+export class Calendar implements OnChanges {
   // #region Components inputs
   @Input() month: number;
   @Input() year: number;
@@ -44,10 +44,10 @@ export class CalendarComponent implements OnChanges {
   // #endregion
 
   // #region component outputs
-  maxYear: number = 0;
-  maxMonth: number = 0;
-  minYear: number = 0;
-  minMonth: number = 0;
+  maxYear = 0;
+  maxMonth = 0;
+  minYear = 0;
+  minMonth = 0;
   @Output() dateChanged: EventEmitter<DateChanged> = new EventEmitter();
   @Output() monthChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
   @Output() yearChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
@@ -55,7 +55,7 @@ export class CalendarComponent implements OnChanges {
   // #endregion
 
   // #region all component variables
-  isTouch: boolean = false;
+  isTouch = false;
   weekList: Dayjs[][];
   weekDays: string[];
   monthsList: MonthNameValue[] = [];
@@ -65,20 +65,20 @@ export class CalendarComponent implements OnChanges {
   // #region setters and getters
   get monthText() {
     return dayjs()
-      .set("year", +this.year)
-      .set("month", +this.month)
-      .format("MMM");
+      .set('year', +this.year)
+      .set('month', +this.month)
+      .format('MMM');
   }
   // #endregion
 
   // #region Component Life cycle handlers
   ngOnChanges(): void {
     this.isTouch =
-      this.addTouchSupport && !window.matchMedia("(hover: hover)").matches;
-    this.maxYear = this.maxDate ? this.maxDate.get("year") : 100000;
-    this.maxMonth = this.maxDate ? this.maxDate.get("month") : 12;
-    this.minYear = this.minDate ? this.minDate.get("year") : 0;
-    this.minMonth = this.minDate ? this.minDate.get("month") : -1;
+      this.addTouchSupport && !window.matchMedia('(hover: hover)').matches;
+    this.maxYear = this.maxDate ? this.maxDate.get('year') : 100000;
+    this.maxMonth = this.maxDate ? this.maxDate.get('month') : 12;
+    this.minYear = this.minDate ? this.minDate.get('year') : 0;
+    this.minMonth = this.minDate ? this.minDate.get('month') : -1;
     this.createCalendarGridData();
   }
   // #endregion
@@ -86,70 +86,70 @@ export class CalendarComponent implements OnChanges {
   // #region view manipulations and condition providers
   getNextMonthFirstWeek(): Dayjs[] {
     const thisMonthStartDate = dayjs()
-      .set("year", +this.year)
-      .set("month", +this.month)
-      .startOf("month");
+      .set('year', +this.year)
+      .set('month', +this.month)
+      .startOf('month');
     const nextMonthStartDate = thisMonthStartDate
-      .add(1, "month")
-      .startOf("month");
-    const year = nextMonthStartDate.get("year");
-    const month = nextMonthStartDate.get("month");
+      .add(1, 'month')
+      .startOf('month');
+    const year = nextMonthStartDate.get('year');
+    const month = nextMonthStartDate.get('month');
     return calendarize(nextMonthStartDate.toDate(), this.weekStartsOn)
       .shift()
       .filter(Boolean)
       .map((day) => {
         return dayjs()
-          .set("year", year)
-          .set("month", month)
-          .set("date", day)
-          .set("hour", 0)
-          .set("minute", 0)
-          .set("second", 0)
-          .set("millisecond", 0);
+          .set('year', year)
+          .set('month', month)
+          .set('date', day)
+          .set('hour', 0)
+          .set('minute', 0)
+          .set('second', 0)
+          .set('millisecond', 0);
       });
   }
   getPreviousMonthNthLastWeek(nthLastCount): Dayjs[] {
     const thisMonthStartDate = dayjs()
-      .set("year", +this.year)
-      .set("month", +this.month)
-      .startOf("month");
+      .set('year', +this.year)
+      .set('month', +this.month)
+      .startOf('month');
     const previousMonthStartDate = thisMonthStartDate
-      .subtract(1, "month")
-      .startOf("month");
-    const year = previousMonthStartDate.get("year");
-    const month = previousMonthStartDate.get("month");
+      .subtract(1, 'month')
+      .startOf('month');
+    const year = previousMonthStartDate.get('year');
+    const month = previousMonthStartDate.get('month');
     return calendarize(previousMonthStartDate.toDate(), this.weekStartsOn)
       .slice(-nthLastCount)[0]
       .filter(Boolean)
       .map((day) => {
         return dayjs()
-          .set("year", year)
-          .set("month", month)
-          .set("date", day)
-          .set("hour", 0)
-          .set("minute", 0)
-          .set("second", 0)
-          .set("millisecond", 0);
+          .set('year', year)
+          .set('month', month)
+          .set('date', day)
+          .set('hour', 0)
+          .set('minute', 0)
+          .set('second', 0)
+          .set('millisecond', 0);
       });
   }
   createTouchCalendarGridData(): void {
     const monthsList = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     this.yearsList = [];
     this.monthsList = [];
-    for (let i = 1900; i <= +dayjs().add(100, "year").get("year"); i++) {
+    for (let i = 1900; i <= +dayjs().add(100, 'year').get('year'); i++) {
       if (i < this.minYear || i > this.maxYear) {
         continue;
       }
@@ -181,11 +181,11 @@ export class CalendarComponent implements OnChanges {
     let month = null;
     this.setWeekDays();
     const thisMonthStartDate = dayjs()
-      .set("year", +this.year)
-      .set("month", +this.month)
-      .startOf("month");
-    year = thisMonthStartDate.get("year");
-    month = thisMonthStartDate.get("month");
+      .set('year', +this.year)
+      .set('month', +this.month)
+      .startOf('month');
+    year = thisMonthStartDate.get('year');
+    month = thisMonthStartDate.get('month');
     const thisMonthWeekList = calendarize(
       thisMonthStartDate.toDate(),
       this.weekStartsOn
@@ -195,13 +195,13 @@ export class CalendarComponent implements OnChanges {
           return null;
         }
         return dayjs()
-          .set("year", year)
-          .set("month", month)
-          .set("date", day)
-          .set("hour", 0)
-          .set("minute", 0)
-          .set("second", 0)
-          .set("millisecond", 0);
+          .set('year', year)
+          .set('month', month)
+          .set('date', day)
+          .set('hour', 0)
+          .set('minute', 0)
+          .set('second', 0)
+          .set('millisecond', 0);
       });
     });
     // if this months first week has less than 7 days then take previous month's last week and merge them
@@ -229,7 +229,7 @@ export class CalendarComponent implements OnChanges {
     this.weekList = thisMonthWeekList;
   }
   setWeekDays() {
-    let weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+    let weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     weekDays = [
       ...weekDays.slice(this.weekStartsOn, 7),
       ...weekDays.slice(0, this.weekStartsOn),
@@ -246,13 +246,13 @@ export class CalendarComponent implements OnChanges {
     );
   }
   isDateAvailable(day: Dayjs) {
-    if (day.get("month") !== this.month) {
+    if (day.get('month') !== this.month) {
       return false;
     }
     if (
       !this.singleCalendar &&
       this.inactiveBeforeStart &&
-      day.isBefore(this.selectedFromDate, "date")
+      day.isBefore(this.selectedFromDate, 'date')
     ) {
       return false;
     }
@@ -260,16 +260,16 @@ export class CalendarComponent implements OnChanges {
   }
   isSelectedDate(day) {
     if (
-      day.get("month") === this.month &&
-      day.isSame(this.selectedFromDate, "date")
+      day.get('month') === this.month &&
+      day.isSame(this.selectedFromDate, 'date')
     ) {
       return true;
     }
     if (
       !this.singleCalendar &&
-      day.get("month") === this.month &&
-      day.isSameOrAfter(this.selectedFromDate, "date") &&
-      day.isSameOrBefore(this.selectedToDate, "date")
+      day.get('month') === this.month &&
+      day.isSameOrAfter(this.selectedFromDate, 'date') &&
+      day.isSameOrBefore(this.selectedToDate, 'date')
     ) {
       return true;
     }
@@ -296,11 +296,12 @@ export class CalendarComponent implements OnChanges {
     });
   }
   yearSelected(value) {
-    if (value)
+    if (value) {
       this.yearChanged.emit({
         value: value,
         isLeft: this.isLeft,
       });
+    }
   }
   // #endregion
 }
