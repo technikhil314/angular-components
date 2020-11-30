@@ -23,8 +23,7 @@
 
 /* all input boxes */
 
-.drp-input,
-.drp-calendar-input {
+.drp-input {
   padding: 0px 10px;
   height: var(--drp-input-height);
   width: 100%;
@@ -36,15 +35,19 @@
   color: var(--drp-fg);
 }
 
-.drp-calendar-input[disabled],
 .drp-input[disabled] {
   background: var(--drp-input-disabled-color);
 }
 
-.drp-calendar-input[disabled],
 .drp-input[disabled] {
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* Selected date to be shown on top of each calendar */
+.drp-selected-date {
+  display: inline-block;
+  min-height: 1rem;
 }
 
 /* the flyout/popup */
@@ -169,6 +172,7 @@ svg {
   margin-left: 10px;
   margin-right: 10px;
   position: relative;
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {

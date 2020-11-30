@@ -12,9 +12,7 @@
         }">
     <div class="drp-calendars-wrapper">
       <div class="drp-calendar-container">
-        <input class="drp-calendar-input" [ngModel]="fromDate | formatDate: derivedOptions.displayFormat"
-          (blur)="formatFromDate($event)" [class.hidden]="derivedOptions.singleCalendar" readonly type="text"
-          name="daterangepicker_start" />
+        <span class="drp-selected-date">{{fromDate | formatDate: derivedOptions.displayFormat}}</span>
         <calendar class="calender" [isLeft]="true" [month]="fromMonth" [year]="fromYear" (scrollTop)="scrollTop()"
           (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)" (dateChanged)="dateChanged($event)"
           [format]="format" [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
@@ -24,8 +22,7 @@
           [addTouchSupport]="derivedOptions.addTouchSupport"></calendar>
       </div>
       <div class="drp-calendar-container" *ngIf="!derivedOptions.singleCalendar">
-        <input class="drp-calendar-input" [ngModel]="toDate | formatDate: derivedOptions.displayFormat"
-          (blur)="formatToDate($event)" readonly name="daterangepicker_end" />
+        <span class="drp-selected-date">{{toDate | formatDate: derivedOptions.displayFormat}}</span>
         <calendar class="calender" [month]="toMonth" [year]="toYear" [format]="format" (scrollTop)="scrollTop()"
           (dateChanged)="dateChanged($event)" (monthChanged)="monthChanged($event)" (yearChanged)="yearChanged($event)"
           [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"

@@ -33,16 +33,16 @@
     </div>
   </div>
   <div class="drp-flex drp-column drp-calendar-column months" *ngIf="isTouch">
-    <div class="drp-calendar-row" *ngFor="let month of monthsList;">
-      <span (click)="monthSelected(month.value)">
-        <button class="drp-btn flat" [attr.aria-label]="month.name">{{ month.name }}</button>
+    <div class="drp-calendar-row" *ngFor="let m of monthsList;">
+      <span (click)="monthSelected(m.value)" [class.active]="month === m.value">
+        <button class=" drp-btn flat" [attr.aria-label]="m.name">{{ m.name }}</button>
       </span>
     </div>
   </div>
   <div class="drp-flex drp-column drp-calendar-column years" *ngIf="isTouch">
-    <div class="drp-calendar-row" *ngFor="let year of yearsList; let i=index">
-      <span (click)="yearSelected(year)">
-        <button class="drp-btn flat" [attr.aria-label]="year">{{ year }}</button>
+    <div class="drp-calendar-row" *ngFor="let y of yearsList; let i=index">
+      <span (click)="yearSelected(y)" [class.active]="year === y">
+        <button class="drp-btn flat" [attr.aria-label]="y">{{ y }}</button>
       </span>
     </div>
   </div>
