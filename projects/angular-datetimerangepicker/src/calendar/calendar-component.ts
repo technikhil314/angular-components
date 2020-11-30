@@ -3,15 +3,19 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  Output,
-  SimpleChanges,
+  Output
 } from "@angular/core";
 import calendarize from "calendarize";
 import dayjs, { Dayjs } from "dayjs";
 import customParser from "dayjs/plugin/customParseFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import { DateChanged, Timepicker, YearMonthChanged } from "../types";
+import {
+  DateChanged,
+  MonthNameValue,
+  Timepicker,
+  YearMonthChanged
+} from "../types";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -54,7 +58,7 @@ export class CalendarComponent implements OnChanges {
   isTouch: boolean = false;
   weekList: Dayjs[][];
   weekDays: string[];
-  monthsList: any[] = [];
+  monthsList: MonthNameValue[] = [];
   yearsList: number[] = [];
   // #endregion
 

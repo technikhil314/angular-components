@@ -18,6 +18,11 @@ export class YearMonthChanged {
   isLeft: boolean;
 }
 
+export class MonthNameValue {
+  name: string;
+  value: number;
+}
+
 export class DefinedDateRange {
   name: string;
   value: DateRange;

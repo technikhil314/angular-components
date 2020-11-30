@@ -6,15 +6,15 @@ import {
   HostListener,
   Input,
   OnInit,
-  Output,
+  Output
 } from "@angular/core";
-import defaults from "../defaults";
-import { DefinedDateRange, Options } from "../types";
 import dayjs, { Dayjs } from "dayjs";
+import customParser from "dayjs/plugin/customParseFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import customParser from "dayjs/plugin/customParseFormat";
+import defaults from "../defaults";
 import { isLargeDesktop, isTouch } from "../helper";
+import { DefinedDateRange, Options } from "../types";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -464,19 +464,19 @@ export class DaterangepickerComponent implements OnInit, DoCheck {
   }
   monthChanged(data) {
     let temp;
-    if ([100, -100].includes(data.value)) {
+    if (!isTouch) {
       if (data.isLeft) {
         temp = dayjs()
           .set("year", this.fromYear)
           .set("month", this.fromMonth)
-          .add(data.value / 100, "month");
+          .add(data.value, "month");
         this.fromMonth = temp.get("month");
         this.fromYear = temp.get("year");
       } else {
         temp = dayjs()
           .set("year", this.toYear)
           .set("month", this.toMonth)
-          .add(data.value / 100, "month");
+          .add(data.value, "month");
         this.toMonth = temp.get("month");
         this.toYear = temp.get("year");
       }
