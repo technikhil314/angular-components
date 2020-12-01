@@ -1,7 +1,7 @@
-import { Dayjs } from 'dayjs';
+import { Dayjs } from "dayjs";
 
-export type Theme = 'dark' | 'light';
-export type Position = 'left' | 'right' | 'center';
+export type Theme = "dark" | "light";
+export type Position = "left" | "right" | "center";
 
 export class DateRange {
   start: Dayjs;
@@ -29,8 +29,8 @@ export class DefinedDateRange {
 }
 
 export class Timepicker {
-  minuteInterval = 1;
-  twentyFourHourFormat = true;
+  minuteInterval?: number = 1;
+  twentyFourHourFormat?: boolean = true;
 }
 
 export class YearsGrid {
@@ -46,25 +46,25 @@ export class Options {
   endDate?: Dayjs = null;
   minDate?: Dayjs = null;
   maxDate?: Dayjs = null;
-  format = 'YYYY-MM-DD';
+  format?: string = "YYYY-MM-DD";
   displayFormat?: string;
-  inactiveBeforeStart = false;
-  autoApply = false;
-  singleCalendar = false;
+  inactiveBeforeStart?: boolean = false;
+  autoApply?: boolean = false;
+  singleCalendar?: boolean = false;
   preDefinedRanges?: DefinedDateRange[];
-  noDefaultRangeSelected = false;
-  showRanges = false;
-  position?: Position = 'left';
-  disabled = false;
+  noDefaultRangeSelected?: boolean = false;
+  showRanges?: boolean = false;
+  position?: Position = "left";
+  disabled?: boolean = false;
   timePicker?: Timepicker = null;
-  disableBeforeStart = false;
-  alwaysOpen = false;
-  theme?: Theme = 'light';
-  required ? = false;
-  DOB ? = false;
-  weekStartsOn ? = 0;
-  addTouchSupport ? = false;
-  placeholder ? = '';
-  hideControls ? = false;
-  readOnly ? = false;
+  disableBeforeStart?: boolean = false;
+  alwaysOpen?: boolean = false;
+  theme?: Theme = "light";
+  required?: boolean = false;
+  DOB?: boolean = false;
+  weekStartsOn?: number = 0;
+  addTouchSupport?: boolean = false;
+  placeholder?: string = "";
+  hideControls?: boolean = false;
+  readOnly?: boolean = false;
 }
