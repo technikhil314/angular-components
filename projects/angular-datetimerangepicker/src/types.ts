@@ -1,9 +1,9 @@
 import { Dayjs } from 'dayjs';
 
-type Theme = 'dark' | 'light';
-type Position = 'left' | 'right' | 'center';
+export type Theme = 'dark' | 'light';
+export type Position = 'left' | 'right' | 'center';
 
-class DateRange {
+export class DateRange {
   start: Dayjs;
   end: Dayjs;
 }
@@ -60,11 +60,11 @@ export class Options {
   disableBeforeStart = false;
   alwaysOpen = false;
   theme?: Theme = 'light';
-  required = false;
-  DOB = false;
-  weekStartsOn = 0;
-  addTouchSupport = false;
-  placeholder = '';
-  hideControls = false;
-  readOnly = false;
+  required ? = false;
+  DOB ? = false;
+  weekStartsOn ? = 0;
+  addTouchSupport ? = false;
+  placeholder ? = '';
+  hideControls ? = false;
+  readOnly ? = false;
 }
