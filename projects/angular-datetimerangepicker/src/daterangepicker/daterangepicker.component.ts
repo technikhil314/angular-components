@@ -5,8 +5,9 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import dayjs, { Dayjs } from 'dayjs';
 import customParser from 'dayjs/plugin/customParseFormat';
@@ -26,7 +27,7 @@ declare var window: any;
   selector: 'daterangepicker',
   templateUrl: './daterangepicker.component.html',
 })
-export class Daterangepicker implements OnInit, DoCheck {
+export class Daterangepicker implements OnInit, DoCheck, OnChanges {
   // #region Inputs to component
   @Input() options: Options;
   @Input() class: string;
@@ -104,7 +105,19 @@ export class Daterangepicker implements OnInit, DoCheck {
   ngDoCheck() {
     this.deriveOptions(true);
   }
+  ngOnChanges() {
+    this.initialize();
+  }
   ngOnInit(): void {
+    this.initialize();
+    window.onresize = () => {
+      this.isLargeDesktop = isLargeDesktop();
+    };
+  }
+  // #endregion
+
+  // #region Initilizers / configuration handlers
+  initialize() {
     // get default options provided by user
     this.deriveOptions();
     this.validateMinMaxDates();
@@ -112,13 +125,7 @@ export class Daterangepicker implements OnInit, DoCheck {
     this.setToDate(this.derivedOptions.endDate);
     // update calendar grid
     this.updateCalendar();
-    window.onresize = () => {
-      this.isLargeDesktop = isLargeDesktop();
-    };
   }
-  // #endregion
-
-  // #region Options derivator
   deriveOptions(isUpdate: boolean = false) {
     if (isUpdate) {
       const {
