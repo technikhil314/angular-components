@@ -23,9 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
               "projects/angular-datetimerangepicker/src/styles/styles.css",
-              "projects/angular-datetimerangepicker/src/styles/touch.css"
+              "projects/angular-datetimerangepicker/src/styles/touch.css",
+              "src/styles.css"
             ],
             "scripts": []
           },

@@ -1,3 +1,12 @@
+:root {
+  --drp-input-height: calc(1.5em + 0.75rem + 2px);
+}
+
 .label {
   font-weight: 500;
+}
+
+.configuration {
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
 }

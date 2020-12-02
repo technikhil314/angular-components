@@ -21,8 +21,167 @@
     </a>
   </div>
 </nav>
-<div class="row container-fluid mx-auto main">
-  <div class="col-xs-12 col-md-4">
+<main class="row container-fluid mx-auto main max-vh-100">
+  <div class="col-xs-12 col-md-5">
+    <h3>Configuration Options Generator</h3>
+    <form class="row">
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label mr-3" for="format">Format</label>
+        <input type="text" class="form-control" name="format" (blur)="formatChanged('format', $event)"
+          [ngModel]=daterangepickerOptions.format id="format">
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label mr-3" for="displayFormat">Display Format</label>
+        <input type="text" class="form-control" name="displayFormat" (blur)="formatChanged('displayFormat', $event)"
+          [ngModel]=daterangepickerOptions.displayFormat id="displayFormat">
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label" for="background">Start Date</label>
+        <daterangepicker class="form-control" [options]="startDateConfigDatePickerOptions"
+          (rangeSelected)="optionChanged('startDate', $event)">
+        </daterangepicker>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label" for="background">
+          End Date
+        </label>
+        <daterangepicker class="form-control" [options]="endDateConfigDatePickerOptions"
+          (rangeSelected)="optionChanged('endDate', $event)">
+        </daterangepicker>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label" for="background">Min Date</label>
+        <daterangepicker class="form-control" [options]="minDateConfigDatePickerOptions"
+          (rangeSelected)="optionChanged('minDate', $event)">
+        </daterangepicker>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label" for="background">Max Date</label>
+        <daterangepicker class="form-control" [options]="maxDateConfigDatePickerOptions"
+          (rangeSelected)="optionChanged('maxDate', $event)">
+        </daterangepicker>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label mr-3" for="weekStartsOn">Week Starts On <small>(Sun = 0 / Sat =
+            6)</small></label>
+        <input type="number" class="form-control" name="weekStartsOn" [(ngModel)]=daterangepickerOptions.weekStartsOn
+          id="weekStartsOn">
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label mr-3" for="disabledDays">Disabled Days <small>(Sun = 0 / Sat =
+            6)</small></label>
+        <input type="text" class="form-control" name="disabledDays" (blur)="disabledDaysChanged($event)"
+          [ngModel]=daterangepickerOptions.disabledDays id="disabledDays">
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <label class="label control-label mr-3" for="placeholder">Placeholder</label>
+        <input type="text" class="form-control" name="placeholder" [(ngModel)]=daterangepickerOptions.placeholder
+          id="placeholder">
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="singleCalendar" [(ngModel)]=daterangepickerOptions.singleCalendar
+          id="singleCalendar">
+        <label class="label control-label" for="singleCalendar">Single Calendar</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="disableWeekEnds" [(ngModel)]=daterangepickerOptions.disableWeekEnds
+          id="disableWeekEnds">
+        <label class="label control-label" for="disableWeekEnds">Disable Week Ends</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="hideControls" [(ngModel)]=daterangepickerOptions.hideControls id="hideControls">
+        <label class="label control-label" for="hideControls">Hide Controls</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="autoApply" [(ngModel)]=daterangepickerOptions.autoApply id="autoApply">
+        <label class="label control-label" for="autoApply">Auto Apply</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="inactiveBeforeStart" [(ngModel)]=daterangepickerOptions.inactiveBeforeStart
+          id="inactiveBeforeStart">
+        <label class="label control-label" for="inactiveBeforeStart">Inactive Before Start</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="disableBeforeStart" [(ngModel)]=daterangepickerOptions.disableBeforeStart
+          id="disableBeforeStart">
+        <label class="label control-label" for="disableBeforeStart">Disable Before Start</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="readOnly" [(ngModel)]=daterangepickerOptions.readOnly id="readOnly">
+        <label class="label control-label" for="readOnly">Read Only</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="disabled" [(ngModel)]=daterangepickerOptions.disabled id="disabled">
+        <label class="label control-label" for="disabled">Disabled</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="showRanges" [(ngModel)]="daterangepickerOptions.showRanges" id="showRanges">
+        <label class="label control-label" for="showRanges">Show Ranges</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="noDefaultRangeSelected" (click)="optionChanged('noDefaultRangeSelected', $event)"
+          [ngModel]="daterangepickerOptions.noDefaultRangeSelected" id="noDefaultRangeSelected">
+        <label class="label control-label" for="noDefaultRangeSelected">No Default Range
+          Selected</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="timepicker" [ngModel]="isTimePickerEnabled" (change)="setTimePicker($event)"
+          id="timepicker">
+        <label class="label control-label" for="timepicker">TimePicker</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="alwaysOpen" [(ngModel)]="daterangepickerOptions.alwaysOpen" id="alwaysOpen">
+        <label class="label control-label" for="alwaysOpen">Always Open</label>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <p class="font-weight-bold">Theme</p>
+        <div class="form-group col-12">
+          <input type="radio" name="theme" value="light" [(ngModel)]="daterangepickerOptions.theme" id="theme-light">
+          <label class="label control-label" for="theme-light">Light</label>
+        </div>
+        <div class="form-group col-12">
+          <input type="radio" name="theme" value="dark" [(ngModel)]="daterangepickerOptions.theme" id="theme-dark">
+          <label class="label control-label" for="theme-dark">Dark</label>
+        </div>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <p class="font-weight-bold">Position</p>
+        <div class="form-group col-12">
+          <input type="radio" name="position" value="left" [(ngModel)]="daterangepickerOptions.position"
+            id="position-left" [disabled]="daterangepickerOptions.alwaysOpen">
+          <label class="label control-label" for="position-left">Left</label>
+        </div>
+        <div class="form-group col-12">
+          <input type="radio" name="position" value="right" [(ngModel)]="daterangepickerOptions.position"
+            id="position-right" [disabled]="daterangepickerOptions.alwaysOpen">
+          <label class="label control-label" for="position-right">Right</label>
+        </div>
+        <div class="form-group col-12">
+          <input type="radio" name="position" value="center" [(ngModel)]="daterangepickerOptions.position"
+            id="position-center" [disabled]="daterangepickerOptions.alwaysOpen">
+          <label class="label control-label" for="position-center">Center</label>
+        </div>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <input type="checkbox" name="addTouchSupport" [(ngModel)]=daterangepickerOptions.addTouchSupport
+          id="addTouchSupport">
+        <label class="label control-label" for="addTouchSupport">
+          Add touch support * <small>WIP</small>
+        </label>
+        <p>
+          <small>Works only on touch devices</small>
+          <br />
+          <small>
+            <em>
+              Check <a href="https://technikhil314.netlify.app/docs/daterangepicker/introduction">Documentation</a> for
+              more details
+            </em>
+          </small>
+        </p>
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-12 col-md-3">
     <h3>Live Demo</h3>
     <div class="col-xs-12">
       <daterangepicker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)">
@@ -90,142 +249,8 @@
       <pre>{{prettyPrintJSON(themeObject)}}</pre>
     </div>
   </div>
-  <div class="col-xs-12 col-md-4">
-    <h3>Configuration Options Generator</h3>
-    <form>
-      <div class="form-group">
-        <label class="label control-label" for="background">Start Date</label>
-        <daterangepicker [options]="startDateConfigDatePickerOptions"
-          (rangeSelected)="optionChanged('startDate', $event)">
-        </daterangepicker>
-      </div>
-      <div class="form-group">
-        <label class="label control-label" for="background">
-          End Date
-        </label>
-        <daterangepicker [options]="endDateConfigDatePickerOptions" (rangeSelected)="optionChanged('endDate', $event)">
-        </daterangepicker>
-      </div>
-      <div class="form-group">
-        <label class="label control-label" for="background">Min Date</label>
-        <daterangepicker [options]="minDateConfigDatePickerOptions" (rangeSelected)="optionChanged('minDate', $event)">
-        </daterangepicker>
-      </div>
-      <div class="form-group">
-        <label class="label control-label" for="background">Max Date</label>
-        <daterangepicker [options]="maxDateConfigDatePickerOptions" (rangeSelected)="optionChanged('maxDate', $event)">
-        </daterangepicker>
-      </div>
-      <div class="form-group">
-        <label class="label control-label mr-3" for="weekStartsOn">Week Starts On</label>
-        <input type="number" class="form-control" name="weekStartsOn" [(ngModel)]=daterangepickerOptions.weekStartsOn
-          id="weekStartsOn">
-      </div>
-      <div class="form-group">
-        <label class="label control-label mr-3" for="placeholder">Placeholder</label>
-        <input type="text" class="form-control" name="placeholder" [(ngModel)]=daterangepickerOptions.placeholder
-          id="placeholder">
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="singleCalendar" [(ngModel)]=daterangepickerOptions.singleCalendar
-          id="singleCalendar">
-        <label class="label control-label" for="singleCalendar">Single Calendar</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="hideControls" [(ngModel)]=daterangepickerOptions.hideControls id="hideControls">
-        <label class="label control-label" for="hideControls">Hide Controls</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="addTouchSupport" [(ngModel)]=daterangepickerOptions.addTouchSupport
-          id="addTouchSupport">
-        <label class="label control-label" for="addTouchSupport">
-          Add touch support * <small>WIP</small>
-        </label>
-        <p>
-          <small>Works only on touch devices</small>
-          <br />
-          <small>
-            <em>
-              Check <a href="https://technikhil314.netlify.app/docs/daterangepicker/introduction">Documentation</a> for
-              more details
-            </em>
-          </small>
-        </p>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="autoApply" [(ngModel)]=daterangepickerOptions.autoApply id="autoApply">
-        <label class="label control-label" for="autoApply">Auto Apply</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="inactiveBeforeStart" [(ngModel)]=daterangepickerOptions.inactiveBeforeStart
-          id="inactiveBeforeStart">
-        <label class="label control-label" for="inactiveBeforeStart">Inactive Before Start</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="disableBeforeStart" [(ngModel)]=daterangepickerOptions.disableBeforeStart
-          id="disableBeforeStart">
-        <label class="label control-label" for="disableBeforeStart">Disable Before Start</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="readOnly" [(ngModel)]=daterangepickerOptions.readOnly id="readOnly">
-        <label class="label control-label" for="readOnly">Read Only</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="disabled" [(ngModel)]=daterangepickerOptions.disabled id="disabled">
-        <label class="label control-label" for="disabled">Disabled</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="showRanges" [(ngModel)]="daterangepickerOptions.showRanges" id="showRanges">
-        <label class="label control-label" for="showRanges">Show Ranges</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="noDefaultRangeSelected" (click)="optionChanged('noDefaultRangeSelected', $event)"
-          [ngModel]="daterangepickerOptions.noDefaultRangeSelected" id="noDefaultRangeSelected">
-        <label class="label control-label" for="noDefaultRangeSelected">No Default Range
-          Selected</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="timepicker" [ngModel]="isTimePickerEnabled" (change)="setTimePicker($event)"
-          id="timepicker">
-        <label class="label control-label" for="timepicker">TimePicker</label>
-      </div>
-      <div class="form-group">
-        <input type="checkbox" name="alwaysOpen" [(ngModel)]="daterangepickerOptions.alwaysOpen" id="alwaysOpen">
-        <label class="label control-label" for="alwaysOpen">Always Open</label>
-      </div>
-      <div class="form-group">
-        <p class="font-weight-bold">Theme</p>
-        <div class="form-group">
-          <input type="radio" name="theme" value="light" [(ngModel)]="daterangepickerOptions.theme" id="theme-light">
-          <label class="label control-label" for="theme-light">Light</label>
-        </div>
-        <div class="form-group">
-          <input type="radio" name="theme" value="dark" [(ngModel)]="daterangepickerOptions.theme" id="theme-dark">
-          <label class="label control-label" for="theme-dark">Dark</label>
-        </div>
-      </div>
-      <div class="form-group">
-        <p class="font-weight-bold">Position</p>
-        <div class="form-group">
-          <input type="radio" name="position" value="left" [(ngModel)]="daterangepickerOptions.position"
-            id="position-left" [disabled]="daterangepickerOptions.alwaysOpen">
-          <label class="label control-label" for="position-left">Left</label>
-        </div>
-        <div class="form-group">
-          <input type="radio" name="position" value="right" [(ngModel)]="daterangepickerOptions.position"
-            id="position-right" [disabled]="daterangepickerOptions.alwaysOpen">
-          <label class="label control-label" for="position-right">Right</label>
-        </div>
-        <div class="form-group">
-          <input type="radio" name="position" value="center" [(ngModel)]="daterangepickerOptions.position"
-            id="position-center" [disabled]="daterangepickerOptions.alwaysOpen">
-          <label class="label control-label" for="position-center">Center</label>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="col-xs-12 col-md-4">
+  <div class="col-xs-12 col-md-4 configuration">
     <h4>Configuration</h4>
     <pre>{{prettyPrintJSON(daterangepickerOptions)}}</pre>
   </div>
-</div>
+</main>

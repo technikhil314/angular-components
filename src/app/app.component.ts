@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
     format: this.format,
     displayFormat: this.format,
     autoApply: true,
-    theme: 'light',
+    theme: 'dark',
     weekStartsOn: 0,
     placeholder: 'demo placeholder',
     hideControls: false,
@@ -192,5 +192,16 @@ export class AppComponent implements OnInit {
         maxDate: this.daterangepickerOptions.maxDate,
       };
     }
+  }
+  formatChanged(propValue, event) {
+    this.daterangepickerOptions = {
+      ...this.daterangepickerOptions,
+      [propValue]: event.target.value,
+    };
+  }
+  disabledDaysChanged(event) {
+    this.daterangepickerOptions.disabledDays = event.target.value
+      .split(',')
+      .map((x) => +x);
   }
 }
