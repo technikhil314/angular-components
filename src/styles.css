@@ -10,3 +10,15 @@
   max-height: calc(100vh - 80px);
   overflow-y: auto;
 }
+
+.configDatePicker {
+  --drp-input-height: 33px;
+  --drp-input-border-radius: 4px;
+  --drp-bg: hsla(0, 0%, 98%);
+  --drp-fg: hsla(0, 0%, 20%);
+  --drp-shadow-color: rgba(0, 0, 0, 0.2);
+  --drp-hover-bg: hsla(0, 0%, 80%);
+  --drp-outline-color: hsl(240deg, 50%, 30%);
+  --drp-input-border-color: #666;
+  --drp-input-disabled-color: #dedede;
+}

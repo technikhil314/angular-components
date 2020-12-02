@@ -35,13 +35,13 @@
         <input type="text" class="form-control" name="displayFormat" (blur)="formatChanged('displayFormat', $event)"
           [ngModel]=daterangepickerOptions.displayFormat id="displayFormat">
       </div>
-      <div class="form-group col-12 col-md-6">
+      <div class="form-group col-12 col-md-6 configDatePicker">
         <label class="label control-label" for="background">Start Date</label>
         <daterangepicker class="form-control" [options]="startDateConfigDatePickerOptions"
           (rangeSelected)="optionChanged('startDate', $event)">
         </daterangepicker>
       </div>
-      <div class="form-group col-12 col-md-6">
+      <div class="form-group col-12 col-md-6 configDatePicker">
         <label class="label control-label" for="background">
           End Date
         </label>
@@ -49,13 +49,13 @@
           (rangeSelected)="optionChanged('endDate', $event)">
         </daterangepicker>
       </div>
-      <div class="form-group col-12 col-md-6">
+      <div class="form-group col-12 col-md-6 configDatePicker">
         <label class="label control-label" for="background">Min Date</label>
         <daterangepicker class="form-control" [options]="minDateConfigDatePickerOptions"
           (rangeSelected)="optionChanged('minDate', $event)">
         </daterangepicker>
       </div>
-      <div class="form-group col-12 col-md-6">
+      <div class="form-group col-12 col-md-6 configDatePicker">
         <label class="label control-label" for="background">Max Date</label>
         <daterangepicker class="form-control" [options]="maxDateConfigDatePickerOptions"
           (rangeSelected)="optionChanged('maxDate', $event)">
