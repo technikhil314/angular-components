@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Options } from 'angular-datetimerangepicker/types';
 declare var require: any;
 const dayjs = require('dayjs');
 
@@ -9,6 +10,7 @@ const dayjs = require('dayjs');
 })
 export class AppComponent implements OnInit {
   isTimePickerEnabled = true;
+  format = 'DD.MM.YYYY HH:mm';
   themeObject = {
     '--drp-bg': null,
     '--drp-fg': null,
@@ -19,12 +21,35 @@ export class AppComponent implements OnInit {
     '--drp-input-border-color': null,
     '--drp-input-disabled-color': null,
   };
-  daterangepickerOptions = {
-    format: 'DD.MM.YYYY HH:mm',
+  initialConfigDatePickerOptions: any = {
+    format: this.format,
+    singleCalendar: true,
+    displayFormat: this.format,
+    position: 'left',
+    noDefaultRangeSelected: true,
+    timePicker: {
+      minuteInterval: 1,
+      twentyFourHourFormat: true,
+    },
+  };
+  startDateConfigDatePickerOptions: any = {
+    ...this.initialConfigDatePickerOptions,
+  };
+  endDateConfigDatePickerOptions: any = {
+    ...this.initialConfigDatePickerOptions,
+  };
+  minDateConfigDatePickerOptions: any = {
+    ...this.initialConfigDatePickerOptions,
+  };
+  maxDateConfigDatePickerOptions: any = {
+    ...this.initialConfigDatePickerOptions,
+  };
+  daterangepickerOptions: any = {
+    format: this.format,
     startDate: dayjs(),
     endDate: dayjs().add(10, 'days'),
-    minDate: dayjs().add(-12, 'months').format('DD.MM.YYYY HH:mm'),
-    maxDate: dayjs().add(12, 'months').format('DD.MM.YYYY HH:mm'),
+    minDate: dayjs().add(-12, 'months').format(this.format),
+    maxDate: dayjs().add(12, 'months').format(this.format),
     inactiveBeforeStart: true,
     autoApply: true,
     showRanges: true,
@@ -34,6 +59,18 @@ export class AppComponent implements OnInit {
     placeholder: 'demo placeholder',
     hideControls: false,
     readOnly: true,
+    singleCalendar: false,
+    displayFormat: this.format,
+    position: 'left',
+    disabled: false,
+    noDefaultRangeSelected: false,
+    disableBeforeStart: false,
+    alwaysOpen: false,
+    addTouchSupport: true,
+    timePicker: {
+      minuteInterval: 5,
+      twentyFourHourFormat: true,
+    },
     preDefinedRanges: [
       {
         name: 'Day After tomorrow',
@@ -78,18 +115,6 @@ export class AppComponent implements OnInit {
         },
       },
     ],
-    singleCalendar: false,
-    displayFormat: 'DD.MM.YYYY HH:mm',
-    position: 'left',
-    disabled: false,
-    noDefaultRangeSelected: true,
-    timePicker: {
-      minuteInterval: 5,
-      twentyFourHourFormat: true,
-    },
-    disableBeforeStart: false,
-    alwaysOpen: false,
-    addTouchSupport: true,
   };
   selectedRange = {
     start: null,
@@ -136,5 +161,27 @@ export class AppComponent implements OnInit {
       e.target.dataset.cssPropName,
       e.target.value
     );
+  }
+  optionChanged(propValue, event) {
+    this.daterangepickerOptions = {
+      ...this.daterangepickerOptions,
+      [propValue]: event.start
+        ? event.start.format(this.format)
+        : event.target.checked,
+    };
+    if (['minDate', 'maxDate'].includes(propValue)) {
+      this.endDateConfigDatePickerOptions = {
+        ...this.endDateConfigDatePickerOptions,
+        noDefaultRangeSelected: false,
+        minDate: this.daterangepickerOptions.minDate,
+        maxDate: this.daterangepickerOptions.maxDate,
+      };
+      this.startDateConfigDatePickerOptions = {
+        ...this.startDateConfigDatePickerOptions,
+        noDefaultRangeSelected: false,
+        minDate: this.daterangepickerOptions.minDate,
+        maxDate: this.daterangepickerOptions.maxDate,
+      };
+    }
   }
 }
