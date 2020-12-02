@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { Options } from 'angular-datetimerangepicker/types';
+import { Component, OnInit } from "@angular/core";
+import { Options } from "angular-datetimerangepicker/types";
 declare var require: any;
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
   isTimePickerEnabled = true;
-  format = 'DD.MM.YYYY HH:mm';
+  format = "DD.MM.YYYY HH:mm";
   themeObject = {
-    '--drp-bg': null,
-    '--drp-fg': null,
-    '--drp-hover-bg': null,
-    '--drp-hover-fg': null,
-    '--drp-shadow-color': null,
-    '--drp-outline-color': null,
-    '--drp-input-border-color': null,
-    '--drp-input-disabled-color': null,
+    "--drp-bg": null,
+    "--drp-fg": null,
+    "--drp-hover-bg": null,
+    "--drp-hover-fg": null,
+    "--drp-shadow-color": null,
+    "--drp-outline-color": null,
+    "--drp-input-border-color": null,
+    "--drp-input-disabled-color": null,
   };
   initialConfigDatePickerOptions: any = {
     format: this.format,
     singleCalendar: true,
     displayFormat: this.format,
-    position: 'left',
+    position: "left",
     noDefaultRangeSelected: true,
     timePicker: {
       minuteInterval: 1,
@@ -46,29 +46,29 @@ export class AppComponent implements OnInit {
   };
   daterangepickerOptions: any = {
     startDate: dayjs(),
-    endDate: dayjs().add(10, 'days'),
-    minDate: dayjs().add(-12, 'months').format(this.format),
-    maxDate: dayjs().add(12, 'months').format(this.format),
+    endDate: dayjs().add(10, "days"),
+    minDate: dayjs().add(-12, "months").format(this.format),
+    maxDate: dayjs().add(12, "months").format(this.format),
     format: this.format,
     displayFormat: this.format,
     autoApply: true,
-    theme: 'dark',
+    theme: "dark",
     weekStartsOn: 0,
-    placeholder: 'demo placeholder',
+    placeholder: "demo placeholder",
     hideControls: false,
     singleCalendar: false,
-    position: 'left',
+    position: "left",
     required: false,
     readOnly: true,
     disabled: false,
     disableWeekEnds: true,
     disabledDays: [3],
     disabledDates: [
-      dayjs().add(10, 'day'),
-      dayjs().add(11, 'day'),
-      dayjs().add(12, 'day'),
-      dayjs().add(13, 'day'),
-      dayjs().add(14, 'day'),
+      dayjs().add(10, "day"),
+      dayjs().add(11, "day"),
+      dayjs().add(12, "day"),
+      dayjs().add(13, "day"),
+      dayjs().add(14, "day"),
     ],
     disableBeforeStart: false,
     inactiveBeforeStart: true,
@@ -82,45 +82,45 @@ export class AppComponent implements OnInit {
     },
     preDefinedRanges: [
       {
-        name: 'Day After tomorrow',
+        name: "Day After tomorrow",
         value: {
-          start: dayjs().add(2, 'days'),
-          end: dayjs().add(2, 'days'),
+          start: dayjs().add(2, "days"),
+          end: dayjs().add(2, "days"),
         },
       },
       {
-        name: 'Today',
+        name: "Today",
         value: {
           start: dayjs(),
           end: dayjs(),
         },
       },
       {
-        name: 'Tomorrow',
+        name: "Tomorrow",
         value: {
-          start: dayjs().add(1, 'days'),
-          end: dayjs().add(1, 'days'),
+          start: dayjs().add(1, "days"),
+          end: dayjs().add(1, "days"),
         },
       },
       {
-        name: 'This week',
+        name: "This week",
         value: {
           start: dayjs(),
-          end: dayjs().add(7, 'days'),
+          end: dayjs().add(7, "days"),
         },
       },
       {
-        name: 'This month',
+        name: "This month",
         value: {
           start: dayjs(),
-          end: dayjs().add(1, 'month'),
+          end: dayjs().add(1, "month"),
         },
       },
       {
-        name: 'Next 2 months',
+        name: "Next 2 months",
         value: {
           start: dayjs(),
-          end: dayjs().add(2, 'month'),
+          end: dayjs().add(2, "month"),
         },
       },
     ],
@@ -164,7 +164,7 @@ export class AppComponent implements OnInit {
     return JSON.stringify(object, null, 2);
   }
   colorChange(e) {
-    this.daterangepickerOptions.theme = 'light';
+    this.daterangepickerOptions.theme = "light";
     this.themeObject[e.target.dataset.cssPropName] = e.target.value;
     document.documentElement.style.setProperty(
       e.target.dataset.cssPropName,
@@ -178,7 +178,7 @@ export class AppComponent implements OnInit {
         ? event.start.format(this.format)
         : event.target.checked,
     };
-    if (['minDate', 'maxDate'].includes(propValue)) {
+    if (["minDate", "maxDate"].includes(propValue)) {
       this.endDateConfigDatePickerOptions = {
         ...this.endDateConfigDatePickerOptions,
         noDefaultRangeSelected: false,
@@ -201,7 +201,7 @@ export class AppComponent implements OnInit {
   }
   disabledDaysChanged(event) {
     this.daterangepickerOptions.disabledDays = event.target.value
-      .split(',')
-      .map((x) => +x);
+      ? event.target.value.split(",").map((x) => +x)
+      : null;
   }
 }
