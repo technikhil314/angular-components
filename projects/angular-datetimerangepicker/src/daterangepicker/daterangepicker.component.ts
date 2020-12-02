@@ -113,6 +113,7 @@ export class Daterangepicker implements OnInit, DoCheck, OnChanges {
     window.onresize = () => {
       this.isLargeDesktop = isLargeDesktop();
     };
+    this.elem.nativeElement.setAttribute('class', '');
   }
   // #endregion
 
