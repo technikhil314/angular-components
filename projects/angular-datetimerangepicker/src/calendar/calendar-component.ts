@@ -3,7 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  Output
+  Output,
 } from '@angular/core';
 import calendarize from 'calendarize';
 import dayjs, { Dayjs } from 'dayjs';
@@ -14,7 +14,7 @@ import {
   DateChanged,
   MonthNameValue,
   Timepicker,
-  YearMonthChanged
+  YearMonthChanged,
 } from '../types';
 
 dayjs.extend(isSameOrAfter);
@@ -41,6 +41,9 @@ export class Calendar implements OnChanges {
   @Input() singleCalendar: boolean;
   @Input() weekStartsOn: number;
   @Input() addTouchSupport: boolean;
+  @Input() disabledDates: Dayjs[];
+  @Input() disabledDays: number[];
+  @Input() disableWeekEnds: boolean;
   // #endregion
 
   // #region component outputs
@@ -60,6 +63,7 @@ export class Calendar implements OnChanges {
   weekDays: string[];
   monthsList: MonthNameValue[] = [];
   yearsList: number[] = [];
+  weekEndOn: number[];
   // #endregion
 
   // #region setters and getters
@@ -180,6 +184,7 @@ export class Calendar implements OnChanges {
     let year = null;
     let month = null;
     this.setWeekDays();
+    this.setWeekEnd();
     const thisMonthStartDate = dayjs()
       .set('year', +this.year)
       .set('month', +this.month)
@@ -228,6 +233,9 @@ export class Calendar implements OnChanges {
     }
     this.weekList = thisMonthWeekList;
   }
+  setWeekEnd() {
+    this.weekEndOn = [this.weekStartsOn, this.weekStartsOn + 6];
+  }
   setWeekDays() {
     let weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     weekDays = [
@@ -237,13 +245,22 @@ export class Calendar implements OnChanges {
     this.weekDays = weekDays;
   }
   isDisabled(day: Dayjs) {
-    return (
-      day.isBefore(this.minDate) ||
-      day.isAfter(this.maxDate) ||
-      (day.isBefore(this.selectedFromDate) &&
-        this.disableBeforeStart &&
-        !this.isLeft)
-    );
+    if (this.disableWeekEnds && this.weekEndOn.includes(day.get('day'))) {
+      return true;
+    }
+    if (this.disabledDays && this.disabledDays.includes(day.get('day'))) {
+      return true;
+    }
+    if (
+      this.disabledDates &&
+      this.disabledDates.find((x) => x.isSame(day, 'date'))
+    ) {
+      return true;
+    }
+    if (this.disableBeforeStart && !this.isLeft) {
+      return day.isBefore(this.selectedFromDate);
+    }
+    return day.isBefore(this.minDate) || day.isAfter(this.maxDate);
   }
   isDateAvailable(day: Dayjs) {
     if (day.get('month') !== this.month) {

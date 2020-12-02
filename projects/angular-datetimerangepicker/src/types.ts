@@ -2,7 +2,6 @@ import { Dayjs } from 'dayjs';
 
 export type Theme = 'dark' | 'light';
 export type Position = 'left' | 'right' | 'center';
-
 export class DateRange {
   start: Dayjs;
   end: Dayjs;
@@ -67,4 +66,7 @@ export class Options {
   placeholder?: string = '';
   hideControls?: boolean = false;
   readOnly?: boolean = false;
+  disableWeekEnds: boolean = false;
+  disabledDays: number[] = null;
+  disabledDates: Dayjs[] = null;
 }

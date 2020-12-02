@@ -19,7 +19,8 @@
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
           [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"
           [singleCalendar]="derivedOptions.singleCalendar" [weekStartsOn]="derivedOptions.weekStartsOn"
-          [addTouchSupport]="derivedOptions.addTouchSupport"></calendar>
+          [addTouchSupport]="derivedOptions.addTouchSupport" [disableWeekEnds]="derivedOptions.disableWeekEnds"
+          [disabledDays]="derivedOptions.disabledDays" [disabledDates]="derivedOptions.disabledDates"></calendar>
       </div>
       <div class="drp-calendar-container" *ngIf="!derivedOptions.singleCalendar">
         <span class="drp-selected-date">{{toDate | formatDate: derivedOptions.displayFormat}}</span>
@@ -28,7 +29,9 @@
           [selectedFromDate]="fromDate" [selectedToDate]="toDate" [minDate]="derivedOptions.minDate"
           [maxDate]="derivedOptions.maxDate" [inactiveBeforeStart]="derivedOptions.inactiveBeforeStart"
           [disableBeforeStart]="derivedOptions.disableBeforeStart" [timePicker]="derivedOptions.timePicker"
-          [weekStartsOn]="derivedOptions.weekStartsOn" [addTouchSupport]="derivedOptions.addTouchSupport"></calendar>
+          [weekStartsOn]="derivedOptions.weekStartsOn" [addTouchSupport]="derivedOptions.addTouchSupport"
+          [disableWeekEnds]="derivedOptions.disableWeekEnds" [disabledDays]="derivedOptions.disabledDays"
+          [disabledDates]="derivedOptions.disabledDates"></calendar>
       </div>
     </div>
     <div class="my-0 drp-controls">

@@ -50,6 +50,10 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
+- Date: v2.3.2
+  1. Added disableWeekEnds, disabledDays, disabledDates
+- Date: 01 Dec 2020 v2.3.1
+  1. Handeling onChanges component lifecycle hook
 - Date: 30 Nov 2020 v2.3.0
   1. Added options hideControls, readOnly, placeholder
   1. Added touch support too (Behind toggle and WIP) (Open issue on [github](https://github.com/technikhil314/angular-components/issues) if you want to try out touch support)
