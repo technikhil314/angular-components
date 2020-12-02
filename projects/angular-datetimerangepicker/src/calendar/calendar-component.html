@@ -21,7 +21,7 @@
   'drp-flex': isTouch
 }">
   <div *ngIf="!isTouch" class="drp-calendar-row">
-    <span *ngFor="let day of weekDays">{{ day }}</span>
+    <span *ngFor="let day of weekDays" class="day">{{ day }}</span>
   </div>
   <div class="drp-flex drp-column drp-calendar-column years" *ngIf="isTouch">
     <div class="drp-calendar-row" *ngFor="let y of yearsList; let i=index">

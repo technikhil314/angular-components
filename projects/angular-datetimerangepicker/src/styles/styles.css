@@ -210,7 +210,7 @@ svg {
   filter: blur(0.05em);
 }
 
-.drp-calendar-row span:hover {
+.drp-calendar-row span:not(.day):hover {
   background: var(--drp-hover-bg);
 }
 
