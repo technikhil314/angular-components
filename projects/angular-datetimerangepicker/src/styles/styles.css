@@ -18,7 +18,13 @@
 }
 
 .drp-wrapper.dark {
-  filter: invert(1) hue-rotate(180deg);
+  --drp-fg: hsla(0, 0%, 99%);
+  --drp-bg: hsla(0, 0%, 20%);
+  --drp-shadow-color: rgba(255, 255, 255, 0.2);
+  --drp-hover-bg: hsla(0, 0%, 40%);
+  --drp-outline-color: hsl(240deg, 30%, 90%);
+  --drp-input-border-color: #666;
+  --drp-input-disabled-color: #2d2d2d;
 }
 
 /* all input boxes */
