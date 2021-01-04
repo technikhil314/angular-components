@@ -43,8 +43,13 @@ export class TimePicker implements OnInit, OnChanges {
   timeChanged: EventEmitter<Dayjs> = new EventEmitter();
   // #endregion
 
+  meridiem: string;
+
   // #region Component Life cycle handlers
   ngOnInit(): void {
+    this.meridiem = this.isLeft
+      ? this.selectedFromDate.format('A')
+      : this.selectedToDate.format('A');
     if (
       !this.options.minuteInterval ||
       this.options.minuteInterval % 60 === 0
@@ -66,14 +71,19 @@ export class TimePicker implements OnInit, OnChanges {
     this.minDate = changes['minDate']
       ? dayjs(changes['minDate'].currentValue, this.format)
       : this['minDate'];
+    this.meridiem = this.isLeft
+      ? this.selectedFromDate.format('A')
+      : this.selectedToDate.format('A');
   }
   // #endregion
 
   // #region view manipulations and condition providers
   getCurrentHour() {
-    const currentHour = this.isLeft
-      ? this.selectedFromDate.get('hour')
-      : this.selectedToDate.get('hour');
+    const modFactor: number = this.options.twentyFourHourFormat ? 24 : 12;
+    const currentHour =
+      (this.isLeft
+        ? this.selectedFromDate.get('hour')
+        : this.selectedToDate.get('hour')) % modFactor;
     return isNaN(currentHour)
       ? '&mdash;'
       : currentHour > 9
@@ -130,15 +140,16 @@ export class TimePicker implements OnInit, OnChanges {
 
   // #region self event handlers
   addHour(value: number) {
+    const extraPadding: number = this.meridiem === 'AM' ? -12 : 12;
     if (this.isLeft) {
       this.selectedFromDate = this.selectedFromDate.set(
         'hour',
-        (+this.selectedFromDate.get('hour') + value) % 24
+        (+this.selectedFromDate.get('hour') + value + extraPadding) % 24
       );
     } else {
       this.selectedToDate = this.selectedToDate.set(
         'hour',
-        (+this.selectedToDate.get('hour') + value) % 24
+        (+this.selectedToDate.get('hour') + value + extraPadding) % 24
       );
     }
     this.triggerTimeChanged();
@@ -162,6 +173,13 @@ export class TimePicker implements OnInit, OnChanges {
       ? this.timeChanged.emit(this.selectedFromDate)
       : this.timeChanged.emit(this.selectedToDate);
   }
-  toggleAMPM() {}
+  toggleAMPM() {
+    if (this.meridiem === 'AM') {
+      this.meridiem = 'PM';
+    } else if (this.meridiem === 'PM') {
+      this.meridiem = 'AM';
+    }
+    this.addHour(0);
+  }
   // #endregion
 }

@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     minDate: dayjs().add(-12, 'months'),
     maxDate: dayjs().add(12, 'months'),
     format: this.format,
-    displayFormat: this.format,
+    displayFormat: 'DD.MM.YYYY hh:mm a',
     autoApply: true,
     theme: 'dark',
     weekStartsOn: 0,
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
     showRanges: true,
     timePicker: {
       minuteInterval: 5,
-      twentyFourHourFormat: true,
+      twentyFourHourFormat: false,
     },
     preDefinedRanges: [
       {

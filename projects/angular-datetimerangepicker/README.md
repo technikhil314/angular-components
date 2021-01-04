@@ -50,7 +50,9 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
-- Date: v2.3.2
+- Date: 31st Dec 2020 v2.4.0
+  1. Added 12 hours time format support
+- Date: 01 Dec 2020 v2.3.2
   1. Added disableWeekEnds, disabledDays, disabledDates
 - Date: 01 Dec 2020 v2.3.1
   1. Handeling onChanges component lifecycle hook
@@ -98,6 +100,7 @@ Would :heart: to see any contributions.
 ### How to contribute
 
 P.S. The code for demo which lies in `src` folder
+
 P.S. Actual code for npm package lies in `projects/angular-datetimerangepicker` directory
 
 1. Fork this repo

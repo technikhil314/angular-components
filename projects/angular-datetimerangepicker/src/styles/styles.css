@@ -313,3 +313,7 @@ svg {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.ml-2 {
+  margin-left: 0.5rem;
+}

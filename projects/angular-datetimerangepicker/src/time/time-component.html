@@ -29,11 +29,11 @@
   <sub>
     <b>m</b>
   </sub>
-  <div class="drp-flex drp-flex-column" *ngIf="!options.twentyFourHourFormat">
+  <div class="drp-flex drp-column ml-2" *ngIf="!options.twentyFourHourFormat">
     <button class="drp-btn flat up" (click)="toggleAMPM()">
       <chevronleft></chevronleft>
     </button>
-    <span><b>AM</b></span>
+    <span><b>{{meridiem}}</b></span>
     <button class="drp-btn flat down" (click)="toggleAMPM()">
       <chevronleft></chevronleft>
     </button>
