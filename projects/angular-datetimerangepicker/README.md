@@ -50,6 +50,8 @@ No offence here. These are good libraries but with modern frameworks they add mo
 
 ## Announcements
 
+- Date: 10th Mar 2021 v2.4.1
+  1. Making dates on calendar more screen reader friendly
 - Date: 31st Dec 2020 v2.4.0
   1. Added 12 hours time format support
 - Date: 01 Dec 2020 v2.3.2
