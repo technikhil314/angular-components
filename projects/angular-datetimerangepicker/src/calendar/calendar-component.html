@@ -42,7 +42,7 @@
       <span *ngFor="let day of weekList[i]" (click)="dateSelected(day)"
         [ngClass]="{'off':!isDateAvailable(day),'active':isSelectedDate(day),'disabled':isDisabled(day)}">
         <button class="drp-btn flat" [disabled]="isDisabled(day)"
-          [attr.aria-label]="day | formatDate: format">{{ !isTouch ? day.format('D') : day.format('ddd D') }}</button>
+          [attr.aria-label]="day | formatDate: srFormat">{{ !isTouch ? day.format('D') : day.format('ddd D') }}</button>
       </span>
     </div>
   </div>

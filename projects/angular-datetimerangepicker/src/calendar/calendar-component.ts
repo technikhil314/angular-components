@@ -46,11 +46,12 @@ export class Calendar implements OnChanges {
   @Input() disableWeekEnds: boolean;
   // #endregion
 
-  // #region component outputs
-  maxYear = 0;
   maxMonth = 0;
+  maxYear = 0;
   minYear = 0;
   minMonth = 0;
+  srFormat = 'DD MMMM YYYY hh:mm a';
+  // #region component outputs
   @Output() dateChanged: EventEmitter<DateChanged> = new EventEmitter();
   @Output() monthChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
   @Output() yearChanged: EventEmitter<YearMonthChanged> = new EventEmitter();
