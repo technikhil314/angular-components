@@ -62,36 +62,25 @@ export class Daterangepicker implements OnInit, DoCheck, OnChanges {
   @HostListener('document:mouseup', ['$event'])
   @HostListener('document:keyup', ['$event'])
   handleOutsideClick(event) {
+    console.log(event);
     if (!this.derivedOptions.disabled) {
-      let current: any = event.target;
+      const current: any = event.target;
       const host: any = this.elem.nativeElement;
-      if (host.compareDocumentPosition) {
-        if (
-          host.compareDocumentPosition(current) &
-          window.Node.DOCUMENT_POSITION_CONTAINED_BY
-        ) {
-          this.storeOldDates();
-          return this.toggleCalendars(true);
+      if (
+        host.compareDocumentPosition(current) &
+        window.Node.DOCUMENT_POSITION_CONTAINED_BY
+      ) {
+        if (event.key === 'Escape') {
+          return this.toggleCalendars(false);
         }
-      } else if (host.contains) {
-        if (host.contains(current)) {
-          this.storeOldDates();
-          return this.toggleCalendars(true);
-        }
-      } else {
-        do {
-          if (current === host) {
-            this.storeOldDates();
-            return this.toggleCalendars(true);
-          }
-          current = current.parentNode;
-        } while (current);
+        this.storeOldDates();
+        return this.toggleCalendars(true);
       }
       if (this.showCalendars) {
         if (!this.derivedOptions.autoApply) {
           this.restoreOldDates();
         }
-        this.toggleCalendars(false);
+        return this.toggleCalendars(false);
       }
     }
   }
