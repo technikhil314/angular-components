@@ -80,10 +80,13 @@ export class TimePicker implements OnInit, OnChanges {
   // #region view manipulations and condition providers
   getCurrentHour() {
     const modFactor: number = this.options.twentyFourHourFormat ? 24 : 12;
-    const currentHour =
+    let currentHour =
       (this.isLeft
         ? this.selectedFromDate.get('hour')
         : this.selectedToDate.get('hour')) % modFactor;
+    if (currentHour === 0 && !this.options.twentyFourHourFormat) {
+      currentHour = 12;
+    }
     return isNaN(currentHour)
       ? '&mdash;'
       : currentHour > 9
@@ -140,16 +143,15 @@ export class TimePicker implements OnInit, OnChanges {
 
   // #region self event handlers
   addHour(value: number) {
-    const extraPadding: number = this.meridiem === 'AM' ? -12 : 12;
     if (this.isLeft) {
       this.selectedFromDate = this.selectedFromDate.set(
         'hour',
-        (+this.selectedFromDate.get('hour') + value + extraPadding) % 24
+        (+this.selectedFromDate.get('hour') + value) % 24
       );
     } else {
       this.selectedToDate = this.selectedToDate.set(
         'hour',
-        (+this.selectedToDate.get('hour') + value + extraPadding) % 24
+        (+this.selectedToDate.get('hour') + value) % 24
       );
     }
     this.triggerTimeChanged();
@@ -176,8 +178,30 @@ export class TimePicker implements OnInit, OnChanges {
   toggleAMPM() {
     if (this.meridiem === 'AM') {
       this.meridiem = 'PM';
+      if (this.isLeft) {
+        this.selectedFromDate = this.selectedFromDate.set(
+          'hour',
+          (this.selectedFromDate.get('hour') + 12) % 24
+        );
+      } else {
+        this.selectedToDate = this.selectedToDate.set(
+          'hour',
+          (this.selectedToDate.get('hour') + 12) % 24
+        );
+      }
     } else if (this.meridiem === 'PM') {
       this.meridiem = 'AM';
+      if (this.isLeft) {
+        this.selectedFromDate = this.selectedFromDate.set(
+          'hour',
+          (this.selectedFromDate.get('hour') - 12) % 24
+        );
+      } else {
+        this.selectedToDate = this.selectedToDate.set(
+          'hour',
+          (this.selectedToDate.get('hour') - 12) % 24
+        );
+      }
     }
     this.addHour(0);
   }
