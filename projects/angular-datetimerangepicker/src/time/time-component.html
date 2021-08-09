@@ -1,13 +1,13 @@
 <div class="drp-flex"
   [ngClass]="{'col-md-offset-4': options.twentyFourHourFormat, 'col-md-offset-3': !options.twentyFourHourFormat}">
   <div class="drp-flex drp-column">
-    <button aria-label="Increment hour by 1" class="drp-btn flat up" [ngClass]="{'disabled': !isValidToAddHour(1)}"
-      (click)="addHour(1)">
+    <button type="button" aria-label="Increment hour by 1" class="drp-btn flat up"
+      [ngClass]="{'disabled': !isValidToAddHour(1)}" (click)="addHour(1)">
       <chevronleft></chevronleft>
     </button>
     <span><b [innerHTML]="getCurrentHour()"></b></span>
-    <button aria-label="Decrement hour by 1" class="drp-btn flat down" [ngClass]="{'disabled': !isValidToAddHour(-1)}"
-      (click)="addHour(-1)">
+    <button type="button" aria-label="Decrement hour by 1" class="drp-btn flat down"
+      [ngClass]="{'disabled': !isValidToAddHour(-1)}" (click)="addHour(-1)">
       <chevronleft></chevronleft>
     </button>
   </div>
@@ -15,12 +15,12 @@
     <b>h</b>
   </sub>
   <div class="drp-flex drp-column">
-    <button aria-label="increment minute by one step" class="drp-btn flat up"
+    <button type="button" aria-label="increment minute by one step" class="drp-btn flat up"
       [ngClass]="{'disabled': !isValidToAddMinute(options.minuteInterval)}" (click)="addMinute(options.minuteInterval)">
       <chevronleft></chevronleft>
     </button>
     <span><b [innerHTML]="getCurrentMinute()" (mouseWheelUp)="addMinute(options.minuteInterval)"></b></span>
-    <button aria-label="decrement minute by one step" class="drp-btn flat down"
+    <button type="button" aria-label="decrement minute by one step" class="drp-btn flat down"
       [ngClass]="{'disabled': !isValidToAddMinute(-1 * options.minuteInterval)}"
       (click)="addMinute(-1 * options.minuteInterval)">
       <chevronleft></chevronleft>
@@ -30,11 +30,11 @@
     <b>m</b>
   </sub>
   <div class="drp-flex drp-column ml-2" *ngIf="!options.twentyFourHourFormat">
-    <button class="drp-btn flat up" (click)="toggleAMPM()">
+    <button type="button" class="drp-btn flat up" (click)="toggleAMPM()">
       <chevronleft></chevronleft>
     </button>
     <span><b>{{meridiem}}</b></span>
-    <button class="drp-btn flat down" (click)="toggleAMPM()">
+    <button type="button" class="drp-btn flat down" (click)="toggleAMPM()">
       <chevronleft></chevronleft>
     </button>
   </div>

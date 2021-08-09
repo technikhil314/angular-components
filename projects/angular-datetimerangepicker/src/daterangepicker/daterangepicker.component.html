@@ -36,19 +36,20 @@
     </div>
     <div class="my-0 drp-controls">
       <div class="drp-flex" [hidden]="derivedOptions.hideControls">
-        <button [class.hidden]="derivedOptions.autoApply" class="drp-btn apply" [disabled]="!enableApplyButton"
-          (click)="apply()" type="button">
+        <button type="button" [class.hidden]="derivedOptions.autoApply" class="drp-btn apply"
+          [disabled]="!enableApplyButton" (click)="apply()" type="button">
           Apply
         </button>
-        <button [class.hidden]="derivedOptions.autoApply" class="drp-btn cancel" (click)="cancel()" type="button">
+        <button type="button" [class.hidden]="derivedOptions.autoApply" class="drp-btn cancel" (click)="cancel()"
+          type="button">
           Cancel
         </button>
-        <button [disabled]="!this.range" class="drp-btn flat link" (click)="clear()" type="button">
+        <button type="button" [disabled]="!this.range" class="drp-btn flat link" (click)="clear()" type="button">
           Clear
         </button>
       </div>
       <div class="drp-flex range-controls" *ngIf="derivedOptions.showRanges && !derivedOptions.singleCalendar">
-        <button *ngFor="let range of derivedOptions.preDefinedRanges" class="drp-btn outline"
+        <button type="button" *ngFor="let range of derivedOptions.preDefinedRanges" class="drp-btn outline"
           (click)="applyPredefinedRange(range)" type="button">
           {{ range.name }}
         </button>

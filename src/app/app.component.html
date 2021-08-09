@@ -184,8 +184,10 @@
   <div class="col-xs-12 col-md-3">
     <h3>Live Demo</h3>
     <div class="col-xs-12">
-      <daterangepicker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)">
-      </daterangepicker>
+      <form action="/">
+        <daterangepicker [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)">
+        </daterangepicker>
+      </form>
       <div class="col-xs-12 mt-5">
         <p class="m-0 p-0">
           <strong class="mr-2">Selected Range Data</strong>
