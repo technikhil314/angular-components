@@ -62,7 +62,6 @@ export class Daterangepicker implements OnInit, DoCheck, OnChanges {
   @HostListener('document:mouseup', ['$event'])
   @HostListener('document:keyup', ['$event'])
   handleOutsideClick(event) {
-    console.log(event);
     if (!this.derivedOptions.disabled) {
       const current: any = event.target;
       const host: any = this.elem.nativeElement;
