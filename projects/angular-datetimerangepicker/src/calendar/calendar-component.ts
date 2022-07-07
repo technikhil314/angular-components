@@ -10,6 +10,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import customParser from 'dayjs/plugin/customParseFormat';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import localeData from 'dayjs/plugin/localeData';
 import {
   DateChanged,
   MonthNameValue,
@@ -20,7 +21,7 @@ import {
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(customParser);
-
+dayjs.extend(localeData);
 @Component({
   selector: 'calendar',
   templateUrl: './calendar-component.html',
@@ -138,20 +139,7 @@ export class Calendar implements OnChanges {
       });
   }
   createTouchCalendarGridData(): void {
-    const monthsList = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
+    const monthsList = dayjs.months();
     this.yearsList = [];
     this.monthsList = [];
     for (let i = 1900; i <= +dayjs().add(100, 'year').get('year'); i++) {
@@ -220,9 +208,9 @@ export class Calendar implements OnChanges {
       }
       // if this months last week has less than 7 days then take next month's first week and merge them
       if (thisMonthWeekList.slice(-1)[0].length < 7) {
-        thisMonthWeekList[
-          thisMonthWeekList.length - 1
-        ] = thisMonthWeekList.slice(-1)[0].concat(this.getNextMonthFirstWeek());
+        thisMonthWeekList[thisMonthWeekList.length - 1] = thisMonthWeekList
+          .slice(-1)[0]
+          .concat(this.getNextMonthFirstWeek());
       }
       // if total number of weeks is less than 6 then we need to add one more week
       // Here we add previous months second last week
@@ -238,7 +226,9 @@ export class Calendar implements OnChanges {
     this.weekEndOn = [this.weekStartsOn, this.weekStartsOn + 6];
   }
   setWeekDays() {
-    let weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    let weekDays: string[] = dayjs
+      .weekdaysShort()
+      .map((x) => x.replace(/[a-zA-Z]{1}$/, ''));
     weekDays = [
       ...weekDays.slice(this.weekStartsOn, 7),
       ...weekDays.slice(0, this.weekStartsOn),
