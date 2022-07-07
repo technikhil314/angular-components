@@ -2,7 +2,8 @@ name: deploy to surge
 
 on:
   push:
-    branches: [master]
+    tags:
+      - "*"
 
 jobs:
   build:
